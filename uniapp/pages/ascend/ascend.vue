@@ -70,22 +70,60 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
+import { getSave } from '@/utils/api.js';
 
-const currentChar = { name: '冬阴功', rarity: '5星SSR', star: 3 };
-const stages = [
+const currentChar = ref({ name: '冬阴功', rarity: '5星SSR', star: 1 });
+const stages = ref([
   { name: '1星→2星', desc: '基础属性提升', rewards: ['食灵精华 × 1000', '金币 × 100000'], active: true, locked: false, completed: false },
   { name: '2星→3星', desc: '解锁新技能槽位', rewards: ['食灵精华 × 3000', '升星石 × 5'], active: false, locked: false, completed: false },
   { name: '3星→4星', desc: '属性上限突破', rewards: ['食灵精华 × 8000', '升星石 × 15'], active: false, locked: true, completed: false },
   { name: '4星→5星', desc: '觉醒隐藏潜能', rewards: ['食灵精华 × 20000', '升星石 × 50'], active: false, locked: true, completed: false }
-];
+]);
 const costs = [
   { icon: '⚡', value: '食灵精华 × 5000' },
   { icon: '💰', value: '金币 × 500000' },
   { icon: '💎', value: '升星石 × 10' }
 ];
+
+// 从后端存档获取角色星级（替换模拟数据）
+const loadAscend = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const stars = save.stars || {};
+    const charNames = Object.keys(stars);
+    if (charNames.length > 0) {
+      const firstChar = charNames[0];
+      currentChar.value = {
+        name: firstChar,
+        rarity: '5星SSR',
+        star: stars[firstChar] || 1,
+      };
+    }
+    // 根据当前星级更新阶段完成状态
+    const currentStar = currentChar.value.star || 1;
+    stages.value = stages.value.map((s, idx) => {
+      const targetStar = idx + 2;
+      return {
+        ...s,
+        completed: currentStar >= targetStar,
+        locked: currentStar < targetStar - 1,
+        active: currentStar === targetStar - 1,
+      };
+    });
+  } catch (e) {
+    console.warn('load ascend failed', e);
+  }
+};
+
+onMounted(() => {
+  loadAscend();
+});
+
 const onBack = () => uni.navigateBack();
 const onStage = (s) => {
   if (s.locked) { uni.showToast({ title: '阶段锁定，需先完成前置升星', icon: 'none' }); return; }

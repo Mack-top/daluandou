@@ -92,10 +92,14 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref, computed } from 'vue';
+import { guestLogin } from '@/utils/api.js';
+
+const store = useStore();
 
 const playerName = ref('');
 const selectedGender = ref('male');
@@ -125,7 +129,7 @@ const onNameInput = (e) => {
   }
 };
 
-const onConfirm = () => {
+const onConfirm = async () => {
   const name = playerName.value.trim();
   if (!name) {
     uni.showToast({ title: '请输入角色名称', icon: 'none' });
@@ -135,11 +139,23 @@ const onConfirm = () => {
     uni.showToast({ title: '名称至少2个字符', icon: 'none' });
     return;
   }
+  const savedServer = uni.getStorageSync('selected_server');
+  const serverNum = savedServer ? Number(savedServer.replace('美食', '').replace('服', '')) : 17;
   uni.showLoading({ title: '创建中...' });
-  setTimeout(() => {
+  try {
+    const result = await guestLogin({
+      nickname: name,
+      gender: selectedGender.value,
+      server: serverNum,
+    });
     uni.hideLoading();
+    store.commit('SET_USER', { token: result.token, player: result.player });
+    store.commit('SET_SAVE', result.save);
     uni.redirectTo({ url: '/pages/guide/guide' });
-  }, 800);
+  } catch (e) {
+    uni.hideLoading();
+    uni.showToast({ title: e.message || '创建失败', icon: 'none' });
+  }
 };
 
 const onBack = () => {
