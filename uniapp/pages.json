@@ -1,0 +1,3278 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "启动",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/server-list/server-list",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "选择服务器",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/notice/notice",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "开服公告",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/create/create",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "初识灵界",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/lobby/lobby",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "主城",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/contract/contract",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "契约特惠",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/level/level",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "等级礼包",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/first/first",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "首充赠礼",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/record/record",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战斗回放",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/friend/friend",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "好友",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/hero/hero",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "主角",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/assistant/assistant",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "主城助手",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battle-hall/battle-hall",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "主线关卡大厅",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/world-map/world-map",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界地图",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chapter-detail/chapter-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "章节详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ranking-mainline/ranking-mainline",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "主线剧情排行榜",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/player-detail/player-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "玩家详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/skill-up/skill-up",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食灵提升",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/daily/daily",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "每日充值",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/seven/seven",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "七日之约",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/seven-extra/seven-extra",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "七日之约-限时追加",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/celebration-summon/celebration-summon",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "开服庆典-百抽献礼",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/celebration-mainline/celebration-mainline",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "开服庆典-主线通关奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/resource-get/resource-get",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资源获取",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/team-recommend/team-recommend",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "阵容推荐",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/team-detail/team-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "阵容说明",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/clear-reward/clear-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "通关奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/speed-up/speed-up",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "补给加速",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/idle-reward/idle-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "补给收益",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/level-up/level-up",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "恭喜升级",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battle-prep/battle-prep",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战斗准备",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battle-play/battle-play",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战斗进行中",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battle-result/battle-result",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战斗结果",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/bag/bag",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "背包",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/equip-detail/equip-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "装备详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/summon/summon",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食灵召唤",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/collection/collection",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食灵图鉴",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/manor/manor",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "灵界庄园",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-hall/guild-hall",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食灵协会",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-members/guild-members",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会成员",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-checkin/guild-checkin",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会签到",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-donate/guild-donate",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会捐献",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-vault/guild-vault",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会宝库",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/shop-home/shop-home",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "商店",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/shop-spice/shop-spice",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "香料商店",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/shop-treasure/shop-treasure",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "藏宝阁",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/shop-talent/shop-talent",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "天赋商店",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-center/activity-center",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动中心",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/trade/trade",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "交易坊",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/astrology/astrology",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "占星",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/worldtree/worldtree",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界树",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chronicle/chronicle",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "街巷食神记",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/gem-shop/gem-shop",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "灵晶商城",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ascend/ascend",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "升星豪礼",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/events-open/events-open",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "开服活动",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/quest-daily/quest-daily",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "每日任务",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/achievement/achievement",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "成就系统",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena/arena",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "竞技场",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tower/tower",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "爬塔",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/world-boss/world-boss",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界BOSS",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-daily/dungeon-daily",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "日常副本",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-resource/dungeon-resource",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资源副本",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/friend-apply/friend-apply",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "好友申请",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chat/chat",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "聊天",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/mail/mail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "邮件",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/settings/settings",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "设置",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-space/personal-space",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人空间",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ranking-hall/ranking-hall",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "排行榜",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/artifact/artifact",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "圣器系统",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/halo/halo",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "光环系统",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/bond/bond",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "羁绊系统",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/char-detail/char-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食灵详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/char-skill/char-skill",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食灵技能",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/char-evolve/char-evolve",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食灵进阶",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-qual/arena-qual",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资格赛排行榜",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-main/arena-main",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "主线排行榜",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-fight/arena-fight",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "竞技场战斗",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-rank/arena-rank",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "竞技场排名",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tower-reward/tower-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "爬塔奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tower-rank/tower-rank",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "爬塔排行",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/boss-dmg/boss-dmg",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界BOSS伤害",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/boss-rank/boss-rank",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界BOSS排名",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/boss-award/boss-award",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界BOSS奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass/battlepass",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令系统",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-task/battlepass-task",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令任务",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-award/battlepass-award",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund/fund",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金系统",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund-award/fund-award",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/month-card/month-card",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "月卡界面",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/week-card/week-card",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "周卡界面",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/cum-recharge/cum-recharge",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "累计充值",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/daily-tier/daily-tier",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "每日充值档位",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/first-detail/first-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "首充礼包详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/seven-detail/seven-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "七日登录详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin/signin",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "签到系统",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-award/signin-award",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "签到奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/bp-task/bp-task",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令每期任务",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-detail/activity-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动中心详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/limit-activity/limit-activity",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "限时活动详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-award/activity-award",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动奖励预览",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/trade-detail/trade-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "交易坊兑换详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/trade-record/trade-record",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "交易记录",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/astro-detail/astro-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "占星详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/astro-result/astro-result",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "占星结果",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tree-upgrade/tree-upgrade",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界树升级详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tree-output/tree-output",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界树产出详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chronicle-prog/chronicle-prog",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食神记进度",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chronicle-award/chronicle-award",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食神记奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chronicle-mat/chronicle-mat",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食神记食材",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ancient-tree/ancient-tree",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "古树参天",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund-ui/fund-ui",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金界面",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/limit-shop/limit-shop",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "限时商店",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/cross-shop/cross-shop",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "跨服商店",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/honor-shop/honor-shop",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "荣誉商店",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-coin-shop/arena-coin-shop",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "竞技币商店",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-coin-shop/guild-coin-shop",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会币商店",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/limit-shop-extra/limit-shop-extra",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "限时商店扩展",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-war/guild-war",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会战",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-activity/guild-activity",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会活动",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-tech/guild-tech",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会科技",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-shop-detail/guild-shop-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会商店详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/shop-daily/shop-daily",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "每日商店",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/shop-weekly/shop-weekly",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "每周商店",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/shop-cross/shop-cross",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "跨服商店详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/shop-honor/shop-honor",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "荣誉商店详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/friend-detail/friend-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "好友详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/friend-gift/friend-gift",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "好友送礼",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/friend-blacklist/friend-blacklist",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "黑名单",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chat-detail/chat-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "聊天详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/mail-detail/mail-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "邮件详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/mail-system/mail-system",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "系统邮件",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/mail-reward/mail-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "奖励邮件",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/settings-account/settings-account",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "账号设置",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/settings-notify/settings-notify",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "通知设置",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/settings-language/settings-language",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "语言设置",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/settings-customer/settings-customer",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "客服中心",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-collection/personal-collection",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人收藏",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-achievement/personal-achievement",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人成就",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-medal/personal-medal",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人勋章",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-region/personal-region",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "地区设置详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ranking-power/ranking-power",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战力排行榜",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ranking-level/ranking-level",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "等级排行榜",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ranking-guild/ranking-guild",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会排行榜",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ranking-arena/ranking-arena",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "竞技场排行榜",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ranking-collection/ranking-collection",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "图鉴排行榜",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-elite/dungeon-elite",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "精英副本",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-event/dungeon-event",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动副本",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-challenge/dungeon-challenge",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "挑战副本",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-trial/dungeon-trial",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "试炼副本",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-limited/activity-limited",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "限时活动详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-cumulative/activity-cumulative",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "累计活动",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-login/activity-login",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "登录活动",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-recharge/activity-recharge",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "充值活动",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-consumption/activity-consumption",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "消费活动",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-season/battlepass-season",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令赛季",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-level/battlepass-level",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令等级详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund-detail/fund-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund-return/fund-return",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金返利",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/month-card-detail/month-card-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "月卡详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/week-card-detail/week-card-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "周卡详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-first/recharge-first",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "首充详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-daily/recharge-daily",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "每日充值详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-cum/recharge-cum",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "累充详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-month/signin-month",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "月签到",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-cumulative/signin-cumulative",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "累签奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/skill-detail/skill-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "技能详情弹窗",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/skill-upgrade/skill-upgrade",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "技能升级",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/artifact-detail/artifact-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "圣器详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/artifact-upgrade/artifact-upgrade",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "圣器升级",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/halo-detail/halo-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "光环详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/halo-activate/halo-activate",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "光环激活",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/bond-detail/bond-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "羁绊详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/bond-activate/bond-activate",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "羁绊激活",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/char-awaken/char-awaken",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食灵觉醒",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/char-skin/char-skin",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食灵皮肤",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/char-constellation/char-constellation",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食灵星座",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-qual-detail/arena-qual-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资格赛详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-qual-reward/arena-qual-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资格赛奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-qual-rank/arena-qual-rank",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资格赛排名",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-season/arena-season",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "竞技场赛季",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-reward/arena-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "竞技场奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tower-floor-detail/tower-floor-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "塔层详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tower-sweep/tower-sweep",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "爬塔扫荡",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tower-record/tower-record",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "爬塔记录",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/boss-detail/boss-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界BOSS详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/boss-history/boss-history",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界BOSS历史",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-buy/battlepass-buy",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令购买",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-free/battlepass-free",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令免费奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-paid/battlepass-paid",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令付费奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund-buy/fund-buy",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金购买",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund-level/fund-level",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金等级奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/month-card-buy/month-card-buy",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "月卡购买",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/month-card-benefit/month-card-benefit",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "月卡特权",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/week-card-buy/week-card-buy",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "周卡购买",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/week-card-benefit/week-card-benefit",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "周卡特权",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-tier/recharge-tier",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "充值档位",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-first-double/recharge-first-double",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "首充双倍",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-continuous/signin-continuous",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "连续签到",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-vip/signin-vip",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "VIP签到",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-reward-detail/activity-reward-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动奖励详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-rank/activity-rank",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动排行榜",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-exchange/activity-exchange",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动兑换",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/trade-offer/trade-offer",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "交易出价",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/trade-history/trade-history",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "交易历史",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/astro-constellation/astro-constellation",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "占星星座",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/astro-zodiac/astro-zodiac",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "占星黄道十二宫",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tree-facility/tree-facility",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界树设施",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tree-blessing/tree-blessing",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界树祝福",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chronicle-ingredient/chronicle-ingredient",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食神记食材详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chronicle-dish/chronicle-dish",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食神记菜品",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chronicle-milestone/chronicle-milestone",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食神记里程碑",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ancient-tree-detail/ancient-tree-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "古树参天详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ancient-tree-reward/ancient-tree-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "古树参天奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-war-detail/guild-war-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会战详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-war-reward/guild-war-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会战奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-tech-detail/guild-tech-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会科技详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-tech-upgrade/guild-tech-upgrade",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会科技升级",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/world-boss-detail/world-boss-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界BOSS详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/world-boss-history/world-boss-history",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界BOSS历史记录",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/world-boss-reward/world-boss-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界BOSS奖励详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/world-boss-rank-detail/world-boss-rank-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界BOSS排名详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-elite-detail/dungeon-elite-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "精英副本详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-elite-reward/dungeon-elite-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "精英副本奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-event-detail/dungeon-event-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动副本详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-event-reward/dungeon-event-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动副本奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-challenge-detail/dungeon-challenge-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "挑战副本详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-challenge-reward/dungeon-challenge-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "挑战副本奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-trial-detail/dungeon-trial-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "试炼副本详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-trial-reward/dungeon-trial-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "试炼副本奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-resource-detail/dungeon-resource-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资源副本详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/dungeon-resource-reward/dungeon-resource-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资源副本奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-limited-detail/activity-limited-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "限时活动详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-limited-reward/activity-limited-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "限时活动奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-cumulative-detail/activity-cumulative-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "累计活动详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-cumulative-reward/activity-cumulative-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "累计活动奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-login-detail/activity-login-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "登录活动详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-login-reward/activity-login-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "登录活动奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-recharge-detail/activity-recharge-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "充值活动详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-recharge-reward/activity-recharge-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "充值活动奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-consumption-detail/activity-consumption-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "消费活动详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-consumption-reward/activity-consumption-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "消费活动奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-season-detail/battlepass-season-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令赛季详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-season-reward/battlepass-season-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令赛季奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-level-detail/battlepass-level-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令等级详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/battlepass-level-reward/battlepass-level-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "战令等级奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund-detail-page/fund-detail-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund-return-page/fund-return-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金返利页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund-level-detail/fund-level-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金等级详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/fund-level-reward/fund-level-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "基金等级奖励",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/month-card-detail-page/month-card-detail-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "月卡详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/month-card-benefit-page/month-card-benefit-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "月卡特权页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/week-card-detail-page/week-card-detail-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "周卡详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/week-card-benefit-page/week-card-benefit-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "周卡特权页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-first-detail/recharge-first-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "首充详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-first-double-page/recharge-first-double-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "首充双倍页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-daily-detail/recharge-daily-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "每日充值详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-daily-tier/recharge-daily-tier",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "每日充值档位页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-cum-detail/recharge-cum-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "累充详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/recharge-cum-tier/recharge-cum-tier",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "累充档位页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-month-detail/signin-month-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "月签到详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-month-reward/signin-month-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "月签到奖励页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-cumulative-detail/signin-cumulative-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "累签详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-cumulative-reward/signin-cumulative-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "累签奖励页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-continuous-detail/signin-continuous-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "连续签到详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-continuous-reward/signin-continuous-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "连续签到奖励页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-vip-detail/signin-vip-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "VIP签到详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/signin-vip-reward/signin-vip-reward",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "VIP签到奖励页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-award-detail/activity-award-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动奖励详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-rank-detail/activity-rank-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动排行榜详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/activity-exchange-detail/activity-exchange-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "活动兑换详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/trade-offer-detail/trade-offer-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "交易出价详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/trade-history-detail/trade-history-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "交易历史详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/astro-constellation-detail/astro-constellation-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "占星星座详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/astro-zodiac-detail/astro-zodiac-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "占星黄道十二宫详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tree-facility-detail/tree-facility-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界树设施详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/tree-blessing-detail/tree-blessing-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "世界树祝福详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chronicle-ingredient-detail/chronicle-ingredient-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食神记食材详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chronicle-dish-detail/chronicle-dish-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食神记菜品详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/chronicle-milestone-detail/chronicle-milestone-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "食神记里程碑详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ancient-tree-detail-page/ancient-tree-detail-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "古树参天详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/ancient-tree-reward-page/ancient-tree-reward-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "古树参天奖励页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-war-detail-page/guild-war-detail-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会战详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-war-reward-page/guild-war-reward-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会战奖励页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-tech-detail-page/guild-tech-detail-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会科技详情页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guild-tech-upgrade-page/guild-tech-upgrade-page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "协会科技升级页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-space-home/personal-space-home",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人空间主页",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-space-settings/personal-space-settings",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人空间设置",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-space-region/personal-space-region",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人空间地区设置",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-collection-detail/personal-collection-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人收藏详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-achievement-detail/personal-achievement-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人成就详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/personal-medal-detail/personal-medal-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人勋章详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-qual-reward-detail/arena-qual-reward-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资格赛奖励详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-qual-rank-detail/arena-qual-rank-detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资格赛排名详情",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/arena-qual-main/arena-qual-main",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "资格赛主界面",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/cross-shop-extra/cross-shop-extra",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "跨服商店扩展",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "美食大乱斗",
+    "navigationBarBackgroundColor": "#0F0E1D",
+    "backgroundColor": "#0F0E1D",
+    "backgroundTextStyle": "light",
+    "navigationStyle": "custom",
+    "app-plus": {
+      "background": "#0F0E1D"
+    },
+    "h5": {
+      "background": "#0F0E1D",
+      "titleBar": {
+        "backgroundColor": "#0F0E1D",
+        "color": "#FFFFFF"
+      }
+    }
+  },
+  "tabBar": {
+    "color": "#8A8A9E",
+    "selectedColor": "#E0D3A1",
+    "backgroundColor": "#1A192E",
+    "borderStyle": "black",
+    "list": []
+  },
+  "condition": {
+    "current": 0,
+    "list": []
+  }
+}
