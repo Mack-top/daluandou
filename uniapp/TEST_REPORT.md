@@ -180,3 +180,51 @@
 2. **鉴权拦截**：在更多页面添加 isLoggedIn 检查，实现未授权访问拦截与跳转到登录页
 3. **页面互通**：290 个页面目前为孤立页面（无法从 UI 跳转到达），可考虑添加底部标签栏或侧边菜单
 4. **构建环境**：安装完整的 @dcloudio 系列依赖，实现 H5/小程序构建
+
+---
+
+## 【11. 美术资源管理】✓ 已建立规范
+
+| 项目 | 状态 | 说明 |
+|------|------|------|
+| 资源目录结构 | ✓ 已创建 | `static/images/{characters,items,ui,backgrounds,battle}/`、`static/icons/`、`static/fonts/` |
+| 命名规范 | ✓ 已定义 | `static/README.md` 详细定义命名格式与引用方式 |
+| 路径辅助函数 | ✓ 已创建 | `utils/resource.js` 提供 `getCharacterAvatar`、`getItemIcon`、`getStaticUrl` 等 12 个函数 |
+| CSS 占位样式 | ✓ 已添加 | `uni.scss` 新增头像/道具/品质/图片容器等占位样式 |
+| 当前资源文件 | ◐ 空目录 | 等待美术资源交付后填充，目前页面均使用纯 CSS 绘制 |
+
+### 资源目录结构
+
+```
+static/
+├── images/
+│   ├── characters/     # 食灵头像/立绘/图标
+│   ├── items/          # 道具/装备图标 + 品质框
+│   ├── ui/             # 按钮/卡片/边框等 UI 元素
+│   ├── backgrounds/    # 页面背景图
+│   └── battle/         # 战斗特效
+├── icons/              # 导航/功能/状态图标
+└── fonts/              # 自定义字体
+```
+
+### 引用示例
+
+```js
+import { getCharacterAvatar, getItemIcon, getStaticUrl } from '@/utils/resource.js'
+
+const avatar = getCharacterAvatar('qing')        // /static/images/characters/qing_avatar.png
+const icon = getItemIcon('starter_book')         // /static/images/items/starter_book.png
+const url = getStaticUrl('images/ui/btn_start.png')
+```
+
+```html
+<!-- 占位头像（无图片时显示） -->
+<view class="avatar-placeholder">Q</view>
+
+<!-- 实际头像（资源到位后启用） -->
+<image class="avatar-image" src="/static/images/characters/qing_avatar.png" />
+
+<!-- 品质标签 -->
+<view class="rarity-badge SSR">SSR</view>
+```
+
