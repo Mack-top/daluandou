@@ -68,6 +68,17 @@ function request(url, options = {}) {
       success: (res) => {
         const { statusCode, data } = res;
 
+        // 未授权拦截：401 清除本地 token 并跳转登录/选服页
+        if (statusCode === 401) {
+          clearToken();
+          uni.showToast({ title: '登录已过期，请重新登录', icon: 'none', duration: 2500 });
+          setTimeout(() => {
+            uni.redirectTo({ url: '/pages/index/index' });
+          }, 1500);
+          reject(new Error('未授权：token 已过期'));
+          return;
+        }
+
         // 网络层异常
         if (statusCode < 200 || statusCode >= 300) {
           const msg = (data && data.error && data.error.message) || `请求失败 (${statusCode})`;

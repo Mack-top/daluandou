@@ -1,21 +1,34 @@
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">升星豪礼</text>
-      <view class="navbar-spacer"></view>
-    </view>
+    <!-- 自定义导航栏（组件化） -->
+    <custom-navbar
+      title="升星豪礼"
+      :show-back="true"
+      @back="onBack"
+    />
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <view class="section-title">食灵升星</text>
         <text class="section-sub">提升食星等级，解锁更高属性上限</text>
         <!-- 当前选中的食灵 -->
         <view class="select-card">
-          <text class="select-label">当前食灵：</text>
-          <text class="select-name">{{ currentChar.name }}</text>
-          <text class="select-star">{{ currentChar.rarity }} · 当前 {{ currentChar.star }} 星</text>
+          <!-- 美术资源接入：当前食灵头像 -->
+          <view class="select-avatar">
+            <avatar-icon
+              :placeholder-char="currentChar.name.charAt(0)"
+              :size="'xl'"
+              :shape="'circle'"
+              rarity="SSR"
+            />
+          </view>
+          <view class="select-info">
+            <text class="select-label">当前食灵：</text>
+            <text class="select-name">{{ currentChar.name }}</text>
+            <text class="select-star">{{ currentChar.rarity }} · 当前 {{ currentChar.star }} 星</text>
+          </view>
         </view>
         <!-- 升星阶段 -->
+        <view class="section-title">升星阶段</text>
         <view class="stage-list">
           <view v-for="(s, i) in stages" :key="i" class="stage-card" :class="{active: s.active, locked: s.locked, completed: s.completed}" @tap="onStage(s)">
             <view class="stage-info">
@@ -28,22 +41,28 @@
             <view class="stage-action">
               <text v-if="s.completed" class="status-done">已完成</text>
               <text v-else-if="s.locked" class="status-lock">锁定</text>
-              <button v-else class="btn-ascend">升星</button>
+              <base-button v-else btn-type="primary" @tap="() => onStage(s)">升星</base-button>
             </view>
           </view>
         </view>
-        <!-- 升星消耗 -->
+        <!-- 升星消耗（使用 AvatarIcon 美术资源） -->
         <view class="cost-card">
           <text class="cost-title">升星消耗：</text>
           <view class="cost-items">
             <view v-for="(c, i) in costs" :key="i" class="cost-item">
-              <text class="cost-icon">{{ c.icon }}</text>
+              <view class="cost-icon-wrapper">
+                <avatar-icon
+                  :placeholder-char="c.icon"
+                  :size="'sm'"
+                  :shape="'square'"
+                />
+              </view>
               <text class="cost-value">{{ c.value }}</text>
             </view>
           </view>
         </view>
         <view class="action-section">
-          <button class="btn-ascend-main" @tap="onAscendMain">执行升星</button>
+          <base-button btn-type="primary" @tap="onAscendMain">执行升星</base-button>
         </view>
       </view>
     </scroll-view>
@@ -51,6 +70,10 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
+
 const currentChar = { name: '冬阴功', rarity: '5星SSR', star: 3 };
 const stages = [
   { name: '1星→2星', desc: '基础属性提升', rewards: ['食灵精华 × 1000', '金币 × 100000'], active: true, locked: false, completed: false },
@@ -73,20 +96,27 @@ const onAscendMain = () => uni.showToast({ title: '升星开发中', icon: 'none
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .section-title { font-size: 32rpx; color: #FFFFFF; font-weight: 700; margin: 40rpx 0 12rpx 0; }
 .section-sub { font-size: 24rpx; color: #8A8A9E; margin-bottom: 30rpx; }
-.select-card { background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; margin-bottom: 30rpx; display: flex; justify-content: space-between; align-items: center; }
+.select-card {
+  background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; margin-bottom: 30rpx; display: flex; justify-content: space-between; align-items: center;
+}
+.select-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  flex-shrink: 0;
+}
+.select-info { flex: 1; margin-left: 24rpx; }
 .select-label { font-size: 24rpx; color: #8A8A9E; }
 .select-name { font-size: 30rpx; color: #E0D3A1; font-weight: 700; margin-bottom: 6rpx; display: block; }
 .select-star { font-size: 24rpx; color: #B8B8C8; }
 .stage-list { display: flex; flex-direction: column; gap: 16rpx; margin-bottom: 30rpx; }
-.stage-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
+.stage-card {
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx;
+}
 .stage-card.active { border-color: #E0D3A1; background: rgba(224,211,161,0.1); }
 .stage-card.locked { opacity: 0.6; }
 .stage-card.completed { border-color: #4CAF50; background: rgba(76,175,80,0.08); }
@@ -99,15 +129,15 @@ const onAscendMain = () => uni.showToast({ title: '升星开发中', icon: 'none
 .stage-action { display: flex; align-items: center; gap: 12rpx; flex-shrink: 0; }
 .status-done { font-size: 24rpx; color: #4CAF50; font-weight: 600; }
 .status-lock { font-size: 24rpx; color: #8A8A9E; font-weight: 600; }
-.btn-ascend { width: 120rpx; height: 56rpx; line-height: 56rpx; background: linear-gradient(135deg, #E0D3A1 0%, #C9B87E 100%); color: #0F0E1D; font-size: 22rpx; font-weight: 700; border-radius: 28rpx; flex-shrink: 0; }
-.btn-ascend:active { transform: scale(0.96); opacity: 0.85; }
 .cost-card { background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; margin-bottom: 30rpx; }
 .cost-title { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 16rpx; }
 .cost-items { display: flex; gap: 24rpx; flex-wrap: wrap; }
 .cost-item { display: flex; align-items: center; gap: 8rpx; }
-.cost-icon { font-size: 28rpx; flex-shrink: 0; }
+.cost-icon-wrapper {
+  width: 56rpx;
+  height: 56rpx;
+  flex-shrink: 0;
+}
 .cost-value { font-size: 24rpx; color: #E0D3A1; font-weight: 600; }
 .action-section { text-align: center; }
-.btn-ascend-main { width: 600rpx; height: 96rpx; line-height: 96rpx; background: linear-gradient(135deg, #E0D3A1 0%, #C9B87E 100%); color: #0F0E1D; font-size: 34rpx; font-weight: 700; border-radius: 48rpx; box-shadow: 0 8rpx 24rpx rgba(224,211,161,0.3); }
-.btn-ascend-main:active { transform: scale(0.96); opacity: 0.85; }
 </style>

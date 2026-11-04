@@ -1,10 +1,11 @@
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">竞技场</text>
-      <view class="navbar-spacer"></view>
-    </view>
+    <!-- 自定义导航栏（组件化） -->
+    <custom-navbar
+      title="竞技场"
+      :show-back="true"
+      @back="onBack"
+    />
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <!-- 排位信息 -->
@@ -28,7 +29,7 @@
               <text class="opponent-power">战力 {{ o.power }}</text>
             </view>
             <view class="opponent-action">
-              <button class="btn-fight">挑战</button>
+              <base-button btn-type="primary" @tap="() => onChallenge(o)">挑战</base-button>
             </view>
           </view>
         </view>
@@ -38,7 +39,10 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
+
 const currentRank = ref('白银 I');
 const points = ref(1450);
 const challengeUsed = ref(2);
@@ -62,10 +66,6 @@ const onChallenge = (o) => {
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .rank-card { background: linear-gradient(135deg, rgba(224,211,161,0.15) 0%, rgba(201,184,126,0.08) 100%); border: 1rpx solid rgba(224,211,161,0.3); border-radius: 24rpx; padding: 32rpx; margin-bottom: 30rpx; text-align: center; }
@@ -84,6 +84,4 @@ const onChallenge = (o) => {
 .opponent-server { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }
 .opponent-power { font-size: 24rpx; color: #E0D3A1; font-weight: 600; }
 .opponent-action { flex-shrink: 0; }
-.btn-fight { width: 120rpx; height: 56rpx; line-height: 56rpx; background: linear-gradient(135deg, #E0D3A1 0%, #C9B87E 100%); color: #0F0E1D; font-size: 22rpx; font-weight: 700; border-radius: 28rpx; flex-shrink: 0; }
-.btn-fight:active { transform: scale(0.96); opacity: 0.85; }
 </style>
