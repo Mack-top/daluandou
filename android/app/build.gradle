@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.meishi.daluandou'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.meishi.daluandou'
+        minSdk 26          // Android 8.0：仅使用自适应图标，覆盖绝大多数设备
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('keystore/meishi-release.keystore')
+            storePassword 'MeiShi2026Release'
+            keyAlias 'meishi'
+            keyPassword 'MeiShi2026Release'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // 零第三方依赖：纯 android.webkit WebView 壳
+}

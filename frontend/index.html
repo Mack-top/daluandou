@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a1025" />
+    <meta name="description" content="食灵月城 · 灵界幻想前端演示：启动、角色创建、主城、限时活动、装备养成，以及可回放的本地远征战斗，共 30 个可直达界面。" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:title" content="食灵月城 · 万千滋味，皆有灵魂" />
+    <meta property="og:description" content="与命定食灵相遇的幻想游戏界面演示，含主城、限时活动、装备养成与本地远征战斗回放。" />
+    <!-- 资源迁移（v22）：单文件构建后 images/ 不再落盘，og:image 复用内联的 SVG data URI。
+         注意：部分社交平台不解析 data URI 预览图；若需正式对外分享，请在部署时把
+         下面的占位符替换为可公开访问的绝对 URL（语义保留，不影响单文件运行）。 -->
+    <meta property="og:image" content="__INLINE_FAVICON__" />
+    <!-- 字体与背景图已内联为 data URI，data URI 不需要预加载，故移除原有的
+         font / image preload 标签，避免请求不存在的外链文件。 -->
+    <!-- 站点图标：构建插件把 __INLINE_FAVICON__ 替换为 data:image/svg+xml,... -->
+    <link rel="icon" type="image/svg+xml" href="__INLINE_FAVICON__" />
+    <title>食灵月城 · 万千滋味，皆有灵魂</title>
+  </head>
+  <body>
+    <noscript>
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px;background:#080e1d;color:#f1e8de;font-family:system-ui,sans-serif;text-align:center;line-height:1.9">
+        <p>《食灵月城》界面演示需要启用 JavaScript 才能查看。<br />请在浏览器设置中开启后刷新页面。</p>
+      </div>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

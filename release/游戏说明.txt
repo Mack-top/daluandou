@@ -1,0 +1,11 @@
+食灵月城 · 单文件服（MeiShiServer.exe）
+
+【启动】双击 MeiShiServer.exe，浏览器会自动打开游戏（http://127.0.0.1:8787/）。
+【数据】首次运行自动在 data/ 目录创建数据库并写入配置；删除 data/ 即完全重置。
+【端口】如 8787 被占用，把 配置示例.env.example 复制为 .env 并修改 PORT 后重启。
+【GM 台】浏览器访问 http://127.0.0.1:8787/admin/（默认仅本机可访问；
+  首次使用需配置 GM_SEED_PASSWORD 后重启一次以创建 GM 账号，见配置示例）。
+【端口暴露】默认只监听 127.0.0.1，仅本机可玩；局域网联机需改 HOST=0.0.0.0 并自行注意安全。
+
+目录结构：MeiShiServer.exe + webapp/（index.html + admin.html，资源已内联）+ data/（存档数据库）。
+说明：游戏所需的图片、字体、图标均已内联进 index.html，webapp/ 下无需任何额外静态资源目录。

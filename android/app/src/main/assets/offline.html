@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>食灵月城 · 网络暂不可用</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 32px;
+    background: #0a1025; color: #f1e8de;
+    font-family: system-ui, sans-serif; text-align: center; line-height: 1.9;
+  }
+  .box { max-width: 420px; }
+  h1 { font-size: 22px; letter-spacing: 6px; margin-bottom: 14px; color: #efd8a8; }
+  p  { font-size: 14px; color: #b9b0a2; margin-bottom: 10px; }
+  .hint { font-size: 11px; color: #7d7668; margin-bottom: 26px; }
+  button {
+    padding: 11px 42px; border: 1px solid #b19b73; border-radius: 999px;
+    background: transparent; color: #efd8a8; font-size: 15px; letter-spacing: 4px;
+  }
+  button:active { background: #b19b7322; }
+  .spinner {
+    width: 14px; height: 14px; display: inline-block; vertical-align: -2px; margin-right: 6px;
+    border: 2px solid #b19b7355; border-top-color: #efd8a8; border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+  <div class="box">
+    <h1>灵界信号中断</h1>
+    <p>无法连接食灵月城的服务器。<br />正在自动重试，通常几秒内即可恢复。</p>
+    <p class="hint" id="hint">信号搜寻中…</p>
+    <button onclick="enterNow()"><span class="spinner"></span>重新连接</button>
+  </div>
+  <script>
+    // 自动重连：探测 /api/health 成功即自动进站，无需手动反复点击。
+    var SITE = 'https://940608.site/';
+    var attempts = 0;
+    function hint(text) {
+      var el = document.getElementById('hint');
+      if (el) el.textContent = text;
+    }
+    function probe() {
+      attempts += 1;
+      hint('第 ' + attempts + ' 次尝试连接灵界…');
+      var ctrl = ('AbortController' in window) ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 8000) : null;
+      fetch(SITE + 'api/health?ts=' + Date.now(), { cache: 'no-store', signal: ctrl ? ctrl.signal : undefined })
+        .then(function (res) {
+          if (res.ok) { hint('连接成功，正在进入月城…'); location.replace(SITE); }
+        })
+        .catch(function () { /* 继续下一轮 */ })
+        .finally(function () { if (timer) clearTimeout(timer); });
+    }
+    function enterNow() { location.replace(SITE); }
+    setTimeout(probe, 600);
+    setInterval(probe, 3000);
+  </script>
+</body>
+</html>

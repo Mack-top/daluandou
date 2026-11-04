@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>食灵月城 · GM 管理台</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #181c23;
+    --panel-2: #1f242e;
+    --line: #2a303c;
+    --text: #e6e9ef;
+    --muted: #8b93a3;
+    --accent: #4f8cff;
+    --accent-2: #2f6ae0;
+    --ok: #3fb96f;
+    --warn: #e0a83a;
+    --danger: #e05a5a;
+    --mono: 'SFMono-Regular', Consolas, 'Courier New', monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.6 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
+  }
+  .hidden { display: none !important; }
+  code, .mono { font-family: var(--mono); font-size: 12px; color: #b7c2d4; }
+
+  /* ---------- 登录 ---------- */
+  #login-view {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  }
+  .login-card {
+    width: 340px; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 28px;
+  }
+  .login-card h1 { font-size: 18px; margin: 0 0 4px; }
+  .login-card p { color: var(--muted); margin: 0 0 18px; font-size: 12px; }
+
+  /* ---------- 主布局 ---------- */
+  #main-view { display: flex; min-height: 100vh; }
+  .sidebar {
+    width: 200px; background: var(--panel); border-right: 1px solid var(--line);
+    padding: 16px 12px; flex-shrink: 0;
+  }
+  .sidebar .brand { font-weight: 600; margin: 4px 8px 18px; }
+  .nav-item {
+    display: block; width: 100%; text-align: left; padding: 9px 12px; margin: 2px 0;
+    background: none; border: 0; border-radius: 8px; color: var(--muted);
+    cursor: pointer; font-size: 14px;
+  }
+  .nav-item:hover { background: var(--panel-2); color: var(--text); }
+  .nav-item.active { background: var(--accent-2); color: #fff; }
+  .gm-bar {
+    margin-top: 22px; padding: 10px 12px; border-top: 1px solid var(--line);
+    font-size: 12px; color: var(--muted);
+  }
+  .content { flex: 1; padding: 22px 26px; max-width: 980px; }
+  .content h2 { margin: 0 0 4px; font-size: 17px; }
+  .content .desc { color: var(--muted); font-size: 12px; margin: 0 0 18px; }
+
+  /* ---------- 组件 ---------- */
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 16px 18px; margin-bottom: 16px;
+  }
+  .card h3 { margin: 0 0 12px; font-size: 14px; }
+  label { display: block; color: var(--muted); font-size: 12px; margin: 10px 0 4px; }
+  input, select, textarea {
+    width: 100%; background: #12151b; color: var(--text); border: 1px solid var(--line);
+    border-radius: 7px; padding: 8px 10px; font: inherit;
+  }
+  textarea { min-height: 74px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  .row { display: flex; gap: 10px; }
+  .row > * { flex: 1; }
+  button.btn {
+    background: var(--accent); color: #fff; border: 0; border-radius: 7px;
+    padding: 9px 16px; cursor: pointer; font: inherit; margin-top: 12px;
+  }
+  button.btn:hover { background: var(--accent-2); }
+  button.btn.ghost { background: var(--panel-2); color: var(--text); }
+  button.btn.danger { background: var(--danger); }
+  button.btn:disabled { opacity: .5; cursor: not-allowed; }
+  .badge {
+    display: inline-block; padding: 1px 9px; border-radius: 999px;
+    font-size: 11px; border: 1px solid var(--line); color: var(--muted);
+  }
+  .badge.super, .badge.ok { color: var(--ok); border-color: var(--ok); }
+  .badge.ops, .badge.warn { color: var(--warn); border-color: var(--warn); }
+  .badge.failed, .badge.denied, .badge.danger { color: var(--danger); border-color: var(--danger); }
+  .msg { margin: 12px 0 0; font-size: 13px; min-height: 18px; }
+  .msg.err { color: var(--danger); }
+  .msg.good { color: var(--ok); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; }
+  td.wrap { max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .kv { display: grid; grid-template-columns: 130px 1fr; gap: 4px 14px; font-size: 13px; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; font-family: var(--mono); font-size: 12px; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 12px; }
+  .att-row { display: flex; gap: 8px; margin-top: 8px; align-items: center; }
+  .att-row select { flex: 1.4; }
+  .att-row input { flex: 1; }
+  .att-row .del { flex: 0 0 auto; }
+
+  /* ---------- 配置管理 ---------- */
+  .cfg-feedback-bar {
+    padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--panel-2); margin: 0 0 14px; font-size: 13px; min-height: 0;
+  }
+  .cfg-feedback-bar.good { border-color: var(--ok); }
+  .cfg-feedback-bar.err { border-color: var(--danger); }
+  .cfg-version-card { padding: 12px 16px; }
+  .cfg-version-card h3 { margin: 0 0 8px; }
+  .cfg-version-card h3 button.btn { margin-top: 0; padding: 4px 10px; }
+  .cfg-version-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cfg-version-chip {
+    font-family: var(--mono); font-size: 11px; padding: 2px 9px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--muted); background: var(--panel-2);
+  }
+  .cfg-version-chip.current { border-color: var(--accent); color: var(--text); }
+  .cfg-version-chip.flash { border-color: var(--ok); color: var(--ok); box-shadow: 0 0 0 2px rgba(63,185,111,.18); }
+  .cfg-layout { display: flex; gap: 16px; align-items: flex-start; }
+  .cfg-side { width: 216px; flex-shrink: 0; }
+  .cfg-main { flex: 1; min-width: 0; }
+  .cfg-group-title { color: var(--muted); font-size: 11px; letter-spacing: .04em; margin: 14px 4px 6px; }
+  .cfg-group-title:first-child { margin-top: 2px; }
+  .cfg-domain-item {
+    display: flex; align-items: center; gap: 6px; width: 100%; text-align: left;
+    padding: 7px 9px; margin: 2px 0; background: none; border: 1px solid transparent;
+    border-radius: 8px; color: var(--muted); cursor: pointer; font: inherit; font-size: 13px;
+  }
+  .cfg-domain-item:hover { background: var(--panel-2); color: var(--text); }
+  .cfg-domain-item.active { background: var(--accent-2); color: #fff; border-color: var(--accent); }
+  .cfg-domain-item .cfg-domain-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cfg-domain-item .badge { flex-shrink: 0; font-size: 10px; padding: 0 6px; }
+  .cfg-domain-item.active .badge { color: #fff; border-color: rgba(255,255,255,.5); }
+  .cfg-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .cfg-toolbar .cfg-title { font-size: 14px; font-weight: 600; }
+  .cfg-toolbar .grow { flex: 1; }
+  .cfg-toolbar button.btn { margin-top: 0; padding: 7px 13px; }
+  .cfg-readonly-note { color: var(--warn); font-size: 12px; margin-top: 10px; }
+  .cfg-search-row { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+  .cfg-search-row input { flex: 1; min-width: 180px; }
+  .cfg-table-wrap { overflow-x: auto; }
+  .cfg-table-wrap table { min-width: 100%; }
+  .cfg-table-wrap td.wrap { max-width: 280px; }
+  .cfg-cell-json { font-family: var(--mono); font-size: 12px; color: #b7c2d4; }
+  .cfg-null { color: var(--muted); font-style: italic; }
+  .cfg-ops { white-space: nowrap; }
+  .cfg-ops button { margin: 0 4px 0 0; padding: 3px 9px; font-size: 12px; }
+  .cfg-pager { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 12px; color: var(--muted); }
+  .cfg-pager button { margin-top: 0; padding: 5px 12px; }
+  .cfg-empty { color: var(--muted); padding: 18px 4px; text-align: center; }
+  .cfg-field { margin-bottom: 12px; }
+  .cfg-field-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .cfg-field-head label { margin: 0; color: var(--text); font-size: 12px; font-weight: 600; }
+  .cfg-field-head .cfg-field-name { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .cfg-field-head .badge { font-size: 10px; padding: 0 6px; }
+  .cfg-field input[disabled], .cfg-field textarea[disabled], .cfg-field select[disabled] { opacity: .6; cursor: not-allowed; }
+  .cfg-form-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .cfg-form-head h3 { margin: 0; }
+  .cfg-form-note { color: var(--muted); font-size: 12px; margin: 0 0 12px; }
+  .badge.cfg-bool-1 { color: var(--ok); border-color: var(--ok); }
+</style>
+</head>
+<body>
+
+<!-- 登录 -->
+<div id="login-view">
+  <form class="login-card" id="login-form">
+    <h1>GM 管理台</h1>
+    <p>食灵月城 · 运营管理（仅限白名单 IP 访问）</p>
+    <label for="login-username">用户名</label>
+    <input id="login-username" autocomplete="username" required />
+    <label for="login-password">口令</label>
+    <input id="login-password" type="password" autocomplete="current-password" required />
+    <button class="btn" type="submit" style="width:100%">登录</button>
+    <div class="msg" id="login-msg"></div>
+  </form>
+</div>
+
+<!-- 主界面 -->
+<div id="main-view" class="hidden">
+  <nav class="sidebar">
+    <div class="brand">GM 管理台</div>
+    <button class="nav-item active" data-tab="player">玩家管理</button>
+    <button class="nav-item" data-tab="mail">邮件 · 补偿</button>
+    <button class="nav-item" data-tab="audit">审计日志</button>
+    <button class="nav-item" data-tab="leaderboard">排行榜</button>
+    <button class="nav-item" data-tab="config">配置管理</button>
+    <div class="gm-bar">
+      <div id="gm-identity">—</div>
+      <button class="btn ghost" id="logout-btn" style="width:100%;margin-top:8px">退出登录</button>
+    </div>
+  </nav>
+
+  <main class="content">
+    <!-- 玩家管理 -->
+    <section id="tab-player">
+      <h2>玩家管理</h2>
+      <p class="desc">查询玩家资料、发放资源、封禁与解封。所有操作写入审计日志。</p>
+      <div class="card">
+        <h3>查询玩家</h3>
+        <label for="player-id">玩家 ID（players.id，UUID）</label>
+        <div class="row">
+          <input id="player-id" class="mono" placeholder="例：b3f1c9e0-…" />
+          <button class="btn" id="player-lookup" style="flex:0 0 auto;margin-top:0">查询</button>
+        </div>
+        <h3 style="margin-top:18px">按服检索（v16）</h3>
+        <div class="row">
+          <select id="player-filter-server" style="flex:0 0 auto;margin-top:0">
+            <option value="">全部服</option>
+          </select>
+          <input id="player-filter-keyword" placeholder="昵称 / ID 关键字（可空）" />
+          <button class="btn" id="player-search" style="flex:0 0 auto;margin-top:0">检索</button>
+        </div>
+        <div id="player-search-results" style="margin-top:10px"></div>
+      </div>
+      <div class="card hidden" id="player-card">
+        <h3>玩家资料 <span class="badge" id="player-ban-badge">正常</span></h3>
+        <dl class="kv" id="player-kv"></dl>
+        <div class="row" style="margin-top:14px">
+          <div>
+            <h3>发放资源</h3>
+            <label for="grant-currency">货币类型</label>
+            <select id="grant-currency"></select>
+            <label for="grant-amount">数量（整数，可为负以回收）</label>
+            <input id="grant-amount" type="number" step="1" value="100" />
+            <button class="btn" id="grant-btn">发放</button>
+            <div class="msg" id="grant-msg"></div>
+          </div>
+          <div>
+            <h3>封禁 / 解封</h3>
+            <label for="ban-reason">封禁原因（必填）</label>
+            <input id="ban-reason" placeholder="例：使用外挂" />
+            <label for="ban-days">天数（留空 = 永久）</label>
+            <input id="ban-days" type="number" min="1" max="3650" placeholder="永久" />
+            <button class="btn danger" id="ban-btn">封禁</button>
+            <button class="btn ghost" id="unban-btn">解封</button>
+            <div class="msg" id="ban-msg"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 邮件 / 补偿 -->
+    <section id="tab-mail" class="hidden">
+      <h2>邮件 · 补偿</h2>
+      <p class="desc">批量发放个性化系统邮件（玩家在游戏内邮件中领取，走统一发奖流水）。收件人每行一个玩家 ID。</p>
+      <div class="card">
+        <h3>系统邮件</h3>
+        <label for="mail-players">收件人（每行一个玩家 ID）</label>
+        <textarea id="mail-players" class="mono" placeholder="player-id-1&#10;player-id-2"></textarea>
+        <div class="row">
+          <div>
+            <label for="mail-title">标题（≤60 字）</label>
+            <input id="mail-title" maxlength="60" placeholder="维护补偿通知" />
+          </div>
+          <div>
+            <label for="mail-expire">有效期（天，0 = 永不过期）</label>
+            <input id="mail-expire" type="number" min="0" max="30" value="7" />
+          </div>
+        </div>
+        <label for="mail-body">正文（≤500 字，可留空）</label>
+        <textarea id="mail-body" maxlength="500" placeholder="亲爱的玩家……"></textarea>
+        <label>附件</label>
+        <div id="mail-atts"></div>
+        <button class="btn ghost" id="mail-add-att" style="margin-top:8px">＋ 添加附件</button>
+        <button class="btn" id="mail-send">发送邮件</button>
+        <div class="msg" id="mail-msg"></div>
+      </div>
+      <div class="card">
+        <h3>运营补偿</h3>
+        <label for="comp-players">收件人（每行一个玩家 ID）</label>
+        <textarea id="comp-players" class="mono"></textarea>
+        <label for="comp-reason">补偿原因（必填，写入邮件正文）</label>
+        <input id="comp-reason" maxlength="200" placeholder="例：11-03 掉线事故补偿" />
+        <label>附件</label>
+        <div id="comp-atts"></div>
+        <button class="btn ghost" id="comp-add-att" style="margin-top:8px">＋ 添加附件</button>
+        <button class="btn" id="comp-send">发放补偿</button>
+        <div class="msg" id="comp-msg"></div>
+      </div>
+    </section>
+
+    <!-- 审计日志 -->
+    <section id="tab-audit" class="hidden">
+      <h2>审计日志</h2>
+      <p class="desc">append-only，含越权 denied 记录。需 edit_config 权限。</p>
+      <div class="card">
+        <div class="row">
+          <div>
+            <label for="audit-action">操作类型</label>
+            <select id="audit-action">
+              <option value="">全部</option>
+              <option>login</option><option>send_mail</option><option>send_compensation</option>
+              <option>grant_resource</option><option>ban</option><option>unban</option>
+              <option>kick</option><option>edit_config</option>
+            </select>
+          </div>
+          <div>
+            <label for="audit-gm">GM 账号 ID（可留空）</label>
+            <input id="audit-gm" class="mono" />
+          </div>
+          <div>
+            <label for="audit-limit">条数（≤500）</label>
+            <input id="audit-limit" type="number" min="1" max="500" value="100" />
+          </div>
+        </div>
+        <button class="btn" id="audit-refresh">刷新</button>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th>时间</th><th>GM</th><th>操作</th><th>对象</th><th>结果</th><th>IP</th><th>详情</th></tr></thead>
+          <tbody id="audit-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 排行榜 -->
+    <section id="tab-leaderboard" class="hidden">
+      <h2>排行榜</h2>
+      <p class="desc">公开只读端点（分数仅由服务端在结算/战力事务内写入）。</p>
+      <button class="btn" id="lb-refresh">刷新榜单</button>
+      <div id="lb-list" style="margin-top:16px"></div>
+    </section>
+
+    <!-- 配置管理 -->
+    <section id="tab-config" class="hidden">
+      <h2>配置管理</h2>
+      <p class="desc">查看与维护游戏全部配置域。配置变更写入数据库后版本自增，客户端下次拉取 catalog 即生效；不影响玩家存档。写操作需 edit_config 权限并计入审计日志。</p>
+
+      <div class="msg cfg-feedback-bar hidden" id="cfg-feedback"></div>
+
+      <div class="card cfg-version-card">
+        <h3>生效版本 <span class="badge" id="cfg-version-total">—</span>
+          <button class="btn ghost" id="cfg-refresh-versions" style="margin-top:0;padding:4px 10px;float:right">刷新版本</button>
+        </h3>
+        <div class="cfg-version-list" id="cfg-version-list"></div>
+        <p class="desc" style="margin:10px 0 0">任一写操作成功后对应域版本号自增；客户端下次拉取 catalog 时读取新版本，无需重启服务、不触碰玩家存档。</p>
+      </div>
+
+      <div class="cfg-layout">
+        <div class="card cfg-side">
+          <h3>配置域</h3>
+          <div id="cfg-domain-list"></div>
+        </div>
+
+        <div class="cfg-main">
+          <div class="card">
+            <div class="cfg-toolbar">
+              <span class="cfg-title" id="cfg-current-name">请选择左侧配置域</span>
+              <span class="badge ok" id="cfg-current-version">v—</span>
+              <span class="badge" id="cfg-current-table"></span>
+              <span class="grow"></span>
+              <button class="btn ghost" id="cfg-refresh">刷新</button>
+              <button class="btn" id="cfg-create">＋ 新建一行</button>
+            </div>
+            <div class="cfg-readonly-note hidden" id="cfg-readonly-note"></div>
+          </div>
+
+          <div class="card hidden" id="cfg-form-card">
+            <div class="cfg-form-head">
+              <h3 id="cfg-form-title">编辑配置</h3>
+              <span class="badge" id="cfg-form-domain"></span>
+            </div>
+            <p class="cfg-form-note" id="cfg-form-note"></p>
+            <div id="cfg-form-fields"></div>
+            <button class="btn" id="cfg-save">保存</button>
+            <button class="btn ghost" id="cfg-cancel" style="margin-left:8px">取消</button>
+            <div class="msg" id="cfg-form-msg"></div>
+          </div>
+
+          <div class="card">
+            <div class="cfg-search-row">
+              <input id="cfg-search" placeholder="按主键 / 关键字过滤当前域数据…" />
+              <span class="badge" id="cfg-row-count">— 行</span>
+            </div>
+            <div class="cfg-table-wrap">
+              <table>
+                <thead><tr id="cfg-table-head"></tr></thead>
+                <tbody id="cfg-table-body"></tbody>
+              </table>
+            </div>
+            <div class="cfg-pager" id="cfg-pager"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+'use strict';
+/* ------------------------------ 基础设施 ------------------------------ */
+const $ = (sel) => document.querySelector(sel);
+const TOKEN_KEY = 'gm-admin-token';
+
+const CURRENCY_LABELS = {
+  coin: '金币', gem: '灵晶', book: '书卷', leaf: '灵叶',
+  potion: '药剂', chest: '宝箱', medal: '勋章',
+};
+
+/** 统一响应包装：{ok:true,data} / {ok:false,error:{message}}；401 回登录页。 */
+async function api(path, { method = 'GET', body } = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  const token = sessionStorage.getItem(TOKEN_KEY);
+  if (token) headers.Authorization = 'Bearer ' + token;
+  const res = await fetch(path, { method, headers, body: body ? JSON.stringify(body) : undefined });
+  let json = null;
+  try { json = await res.json(); } catch { /* 非 JSON（如静态页）按状态码处理 */ }
+  if (res.status === 401 && sessionStorage.getItem(TOKEN_KEY)) {
+    showLogin('会话已过期，请重新登录');
+    throw new Error('会话已过期');
+  }
+  if (!res.ok || (json && json.ok === false)) {
+    throw new Error(json?.error?.message || ('请求失败（HTTP ' + res.status + '）'));
+  }
+  return json ? json.data : null;
+}
+
+function setMsg(id, text, good) {
+  const el = $(id);
+  el.textContent = text || '';
+  el.className = 'msg' + (good ? ' good' : text ? ' err' : '');
+}
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) =>
+  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+/* ------------------------------ 视图切换 ------------------------------ */
+function showLogin(message) {
+  sessionStorage.removeItem(TOKEN_KEY);
+  $('#main-view').classList.add('hidden');
+  $('#login-view').classList.remove('hidden');
+  if (message) setMsg('#login-msg', message);
+}
+
+function showMain() {
+  $('#login-view').classList.add('hidden');
+  $('#main-view').classList.remove('hidden');
+  const raw = sessionStorage.getItem('gm-admin-info');
+  if (raw) {
+    const gm = JSON.parse(raw);
+    $('#gm-identity').innerHTML = esc(gm.username) + ' <span class="badge ' + esc(gm.role) + '">' +
+      esc(gm.role) + '</span>';
+  }
+}
+
+document.querySelectorAll('.nav-item').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach((b) => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('.content section').forEach((s) =>
+      s.classList.toggle('hidden', s.id !== 'tab-' + btn.dataset.tab));
+  });
+});
+
+/* ------------------------------ 登录 / 登出 ------------------------------ */
+$('#login-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  try {
+    const data = await api('/api/admin/login', {
+      method: 'POST',
+      body: { username: $('#login-username').value.trim(), password: $('#login-password').value },
+    });
+    sessionStorage.setItem(TOKEN_KEY, data.token);
+    sessionStorage.setItem('gm-admin-info', JSON.stringify(data.gm));
+    setMsg('#login-msg', '');
+    showMain();
+  } catch (error) {
+    setMsg('#login-msg', error.message);
+  }
+});
+
+$('#logout-btn').addEventListener('click', async () => {
+  try { await api('/api/admin/logout', { method: 'POST' }); } catch { /* 令牌失效也无妨 */ }
+  showLogin('已退出');
+});
+
+/* ------------------------------ 玩家管理 ------------------------------ */
+const currencySelect = $('#grant-currency');
+Object.entries(CURRENCY_LABELS).forEach(([code, label]) => {
+  const option = document.createElement('option');
+  option.value = code;
+  option.textContent = label + '（' + code + '）';
+  currencySelect.appendChild(option);
+});
+
+let currentPlayerId = null;
+
+/* 按服检索（v16）：服务器下拉 1-99，支持昵称/ID 关键字 */
+const serverSelect = $('#player-filter-server');
+for (let number = 1; number <= 99; number += 1) {
+  const option = document.createElement('option');
+  option.value = String(number);
+  option.textContent = '美食 ' + number + ' 服';
+  serverSelect.appendChild(option);
+}
+
+$('#player-search').addEventListener('click', async () => {
+  const params = new URLSearchParams();
+  const server = serverSelect.value;
+  const keyword = $('#player-filter-keyword').value.trim();
+  if (server) params.set('server', server);
+  if (keyword) params.set('keyword', keyword);
+  try {
+    const data = await api('/api/admin/players?' + params.toString());
+    const players = data.players ?? [];
+    if (!players.length) {
+      $('#player-search-results').innerHTML = '<p class="desc">没有符合条件的玩家。</p>';
+      return;
+    }
+    $('#player-search-results').innerHTML =
+      '<table style="width:100%;border-collapse:collapse;font-size:13px">' +
+      '<tr style="text-align:left;opacity:.65"><th style="padding:4px 8px">昵称</th><th style="padding:4px 8px">区服</th><th style="padding:4px 8px">玩家 ID</th><th style="padding:4px 8px">操作</th></tr>' +
+      players.map(p =>
+        '<tr>' +
+        '<td style="padding:4px 8px">' + esc(p.nickname) + '</td>' +
+        '<td style="padding:4px 8px">' + esc(p.server) + '</td>' +
+        '<td style="padding:4px 8px" class="mono">' + esc(p.id) + '</td>' +
+        '<td style="padding:4px 8px"><button class="btn ghost" data-fill-player="' + esc(p.id) + '">载入</button></td>' +
+        '</tr>'
+      ).join('') +
+      '</table>';
+    document.querySelectorAll('[data-fill-player]').forEach(button => {
+      button.addEventListener('click', () => {
+        $('#player-id').value = button.getAttribute('data-fill-player');
+        $('#player-lookup').click();
+      });
+    });
+  } catch (error) {
+    $('#player-search-results').innerHTML = '<p class="desc">检索失败：' + esc(error.message) + '</p>';
+  }
+});
+
+$('#player-lookup').addEventListener('click', async () => {
+  const id = $('#player-id').value.trim();
+  if (!id) { setMsg('#player-kv', ''); return; }
+  try {
+    const data = await api('/api/admin/players/' + encodeURIComponent(id));
+    currentPlayerId = data.player.id;
+    const p = data.player;
+    const ban = data.activeBan;
+    $('#player-ban-badge').textContent = ban ? '已封禁' : '正常';
+    $('#player-ban-badge').className = 'badge ' + (ban ? 'danger' : 'ok');
+    $('#player-kv').innerHTML =
+      '<dt>玩家 ID</dt><dd>' + esc(p.id) + '</dd>' +
+      '<dt>昵称</dt><dd>' + esc(p.nickname) + '</dd>' +
+      '<dt>区服</dt><dd>' + esc(p.server) + '</dd>' +
+      '<dt>世界树等级</dt><dd>' + esc(p.worldtree_level) + '</dd>' +
+      '<dt>注册时间</dt><dd>' + esc(p.created_at) + '</dd>' +
+      '<dt>更新时间</dt><dd>' + esc(p.updated_at) + '</dd>' +
+      (ban ? '<dt>封禁原因</dt><dd>' + esc(ban.reason) + '</dd>' +
+             '<dt>封禁到期</dt><dd>' + esc(ban.expires_at ?? '永久') + '</dd>' : '');
+    $('#player-card').classList.remove('hidden');
+  } catch (error) {
+    $('#player-card').classList.add('hidden');
+    currentPlayerId = null;
+    alert(error.message);
+  }
+});
+
+$('#grant-btn').addEventListener('click', async () => {
+  if (!currentPlayerId) return;
+  try {
+    await api('/api/admin/players/' + encodeURIComponent(currentPlayerId) + '/grant', {
+      method: 'POST',
+      body: {
+        currency: $('#grant-currency').value,
+        amount: Math.trunc(Number($('#grant-amount').value)),
+      },
+    });
+    setMsg('#grant-msg', '发放成功（已写流水与审计）', true);
+  } catch (error) { setMsg('#grant-msg', error.message); }
+});
+
+$('#ban-btn').addEventListener('click', async () => {
+  if (!currentPlayerId) return;
+  const daysRaw = $('#ban-days').value.trim();
+  const body = { reason: $('#ban-reason').value.trim() };
+  if (daysRaw) body.days = Math.trunc(Number(daysRaw));
+  if (!body.reason) { setMsg('#ban-msg', '请填写封禁原因'); return; }
+  try {
+    const data = await api('/api/admin/players/' + encodeURIComponent(currentPlayerId) + '/ban',
+      { method: 'POST', body });
+    setMsg('#ban-msg', '封禁成功，已踢下线 ' + data.revokedSessions + ' 个会话', true);
+    $('#player-lookup').click();
+  } catch (error) { setMsg('#ban-msg', error.message); }
+});
+
+$('#unban-btn').addEventListener('click', async () => {
+  if (!currentPlayerId) return;
+  try {
+    const data = await api('/api/admin/players/' + encodeURIComponent(currentPlayerId) + '/unban',
+      { method: 'POST' });
+    setMsg('#ban-msg', '解封成功，解除 ' + data.lifted + ' 条封禁', true);
+    $('#player-lookup').click();
+  } catch (error) { setMsg('#ban-msg', error.message); }
+});
+
+/* ------------------------------ 附件构造器 ------------------------------ */
+function addAttachmentRow(container) {
+  const row = document.createElement('div');
+  row.className = 'att-row';
+  row.innerHTML =
+    '<select class="att-kind">' +
+    Object.entries(CURRENCY_LABELS).map(([c, l]) => '<option value="' + c + '">' + l + '（' + c + '）</option>').join('') +
+    '<option value="item">物品（item）</option></select>' +
+    '<input class="att-amount" type="number" min="1" step="1" placeholder="数量" />' +
+    '<input class="att-item-id mono hidden" placeholder="物品 ID（item_defs.id）" />' +
+    '<input class="att-label" placeholder="备注（可选）" />' +
+    '<button type="button" class="btn ghost del" style="margin:0">✕</button>';
+  row.querySelector('.del').addEventListener('click', () => row.remove());
+  row.querySelector('.att-kind').addEventListener('change', (event) => {
+    row.querySelector('.att-item-id').classList.toggle('hidden', event.target.value !== 'item');
+  });
+  container.appendChild(row);
+}
+
+function collectAttachments(container) {
+  return Array.from(container.querySelectorAll('.att-row')).map((row) => {
+    const kind = row.querySelector('.att-kind').value;
+    const att = { kind, amount: Math.trunc(Number(row.querySelector('.att-amount').value)) };
+    if (kind === 'item') att.itemId = row.querySelector('.att-item-id').value.trim();
+    const label = row.querySelector('.att-label').value.trim();
+    if (label) att.label = label;
+    return att;
+  }).filter((att) => Number.isInteger(att.amount) && att.amount > 0);
+}
+
+function parsePlayerIds(text) {
+  return Array.from(new Set(text.split(/[\s,;]+/).map((s) => s.trim()).filter(Boolean)));
+}
+
+$('#mail-add-att').addEventListener('click', () => addAttachmentRow($('#mail-atts')));
+$('#comp-add-att').addEventListener('click', () => addAttachmentRow($('#comp-atts')));
+addAttachmentRow($('#mail-atts'));
+addAttachmentRow($('#comp-atts'));
+
+$('#mail-send').addEventListener('click', async () => {
+  try {
+    const data = await api('/api/admin/mail', {
+      method: 'POST',
+      body: {
+        playerIds: parsePlayerIds($('#mail-players').value),
+        title: $('#mail-title').value.trim(),
+        body: $('#mail-body').value.trim(),
+        attachments: collectAttachments($('#mail-atts')),
+        expireDays: Math.trunc(Number($('#mail-expire').value) || 0),
+      },
+    });
+    setMsg('#mail-msg', '已发送 ' + data.sent + ' 封系统邮件', true);
+  } catch (error) { setMsg('#mail-msg', error.message); }
+});
+
+$('#comp-send').addEventListener('click', async () => {
+  try {
+    const data = await api('/api/admin/compensation', {
+      method: 'POST',
+      body: {
+        playerIds: parsePlayerIds($('#comp-players').value),
+        reason: $('#comp-reason').value.trim(),
+        attachments: collectAttachments($('#comp-atts')),
+      },
+    });
+    setMsg('#comp-msg', '已发放 ' + data.sent + ' 份补偿', true);
+  } catch (error) { setMsg('#comp-msg', error.message); }
+});
+
+/* ------------------------------ 审计日志 ------------------------------ */
+$('#audit-refresh').addEventListener('click', async () => {
+  try {
+    const params = new URLSearchParams();
+    const action = $('#audit-action').value;
+    const gmId = $('#audit-gm').value.trim();
+    const limit = $('#audit-limit').value || '100';
+    if (action) params.set('action', action);
+    if (gmId) params.set('gmId', gmId);
+    params.set('limit', limit);
+    const data = await api('/api/admin/audit-logs?' + params.toString());
+    $('#audit-body').innerHTML = (data.logs ?? []).map((log) => {
+      let payload = '';
+      try { payload = JSON.stringify(JSON.parse(log.payload_json)); } catch { payload = log.payload_json; }
+      return '<tr>' +
+        '<td class="mono">' + esc(log.created_at?.replace('T', ' ').slice(0, 19)) + '</td>' +
+        '<td class="mono">' + esc(log.gm_id?.slice(0, 8)) + '…</td>' +
+        '<td>' + esc(log.action) + '</td>' +
+        '<td class="mono wrap" title="' + esc(log.target_id ?? '') + '">' +
+          esc(log.target_type) + ':' + esc(log.target_id ?? '—') + '</td>' +
+        '<td><span class="badge ' + esc(log.result) + '">' + esc(log.result) + '</span></td>' +
+        '<td class="mono">' + esc(log.ip) + '</td>' +
+        '<td class="mono wrap" title="' + esc(payload) + '">' + esc(payload) + '</td>' +
+        '</tr>';
+    }).join('') || '<tr><td colspan="7" style="color:var(--muted)">暂无记录</td></tr>';
+  } catch (error) { alert(error.message); }
+});
+
+/* ------------------------------ 排行榜 ------------------------------ */
+$('#lb-refresh').addEventListener('click', async () => {
+  try {
+    const data = await api('/api/leaderboards');
+    $('#lb-list').innerHTML = (data.leaderboards ?? []).map((board) =>
+      '<div class="card"><h3>' + esc(board.name) +
+      ' <span class="badge">' + esc(board.metric) + '</span>' +
+      ' <span class="badge">' + esc(board.period) + (board.season_key ? ' · ' + esc(board.season_key) : '') + '</span>' +
+      ' <span class="badge">容量 ' + esc(board.capacity) + '</span></h3>' +
+      '<table><thead><tr><th>#</th><th>玩家</th><th>分数</th><th>更新时间</th></tr></thead><tbody>' +
+      (board.entries ?? []).map((entry) =>
+        '<tr><td>' + esc(entry.rank) + '</td>' +
+        '<td>' + esc(entry.nickname ?? entry.player_id) + '</td>' +
+        '<td class="mono">' + esc(entry.score) + '</td>' +
+        '<td class="mono">' + esc(entry.updated_at?.replace('T', ' ').slice(0, 19)) + '</td></tr>').join('') +
+      '</tbody></table></div>').join('') || '<p style="color:var(--muted)">暂无榜单</p>';
+  } catch (error) { alert(error.message); }
+});
+
+/* ------------------------------ 配置管理（T-ADMIN-UI） ------------------------------ */
+(function () {
+  'use strict';
+  const PAGE_SIZE = 50;
+  const GROUPS = ['配置表', '系统表', '运行时参数'];
+  const state = {
+    domains: [], versions: {}, current: null,
+    columns: [], rows: [], version: 0, readOnly: false,
+    primaryKey: '', label: '', table: '',
+    page: 0, keyword: '', edit: null, saving: false, loading: false, inited: false,
+  };
+
+  const curDomain = () => state.domains.find((d) => d.key === state.current) || {};
+
+  /* 全局反馈：后端返回的 message 一律经 esc() 后再插入，杜绝 XSS */
+  function feedback(text, good) {
+    const el = $('#cfg-feedback');
+    el.innerHTML = esc(text || '');
+    el.className = 'msg cfg-feedback-bar' + (text ? (good ? ' good' : ' err') : ' hidden');
+  }
+
+  function groupOf(d) {
+    if (d.group) return String(d.group);
+    if (!d.readOnly) return '配置表';
+    return /runtime|param|setting/i.test(String(d.key || '')) ? '运行时参数' : '系统表';
+  }
+
+  function readOnlyReason(d) {
+    const g = groupOf(d);
+    const k = String(d.key || '').toLowerCase();
+    if (g === '运行时参数') return '只读：运行时参数由服务端进程维护，需走发布流程变更，GM 台禁止写入。';
+    if (/migration/.test(k)) return '只读：数据库迁移记录由迁移脚本自动维护，禁止手动增删改。';
+    if (/meta|catalog/.test(k)) return '只读：目录元数据由发布 / 构建流程生成，禁止手动增删改。';
+    return '只读：该域被标记为 readOnly，仅提供查看，禁止写入。';
+  }
+
+  /* 把后端错误翻译成 GM 看得懂的提示，始终保留后端 message 原文 */
+  function explainError(error, ctx) {
+    const raw = (error && error.message) ? String(error.message) : '未知错误';
+    const m = raw.toLowerCase();
+    if (/denied|permission|forbidden|权限|未授权|无权|not allowed|edit_config/.test(m)) {
+      return '没有配置编辑权限（edit_config），本次操作未生效，已记入审计日志。请联系管理员授权后再试。后端原文：' + raw;
+    }
+    if (ctx === 'delete' && /foreign|fk|引用|被.*使用|关联|referenc|constraint|仍被|依赖|被其它|被其他/.test(m)) {
+      return '该配置仍被其它数据引用，未删除。后端原因：' + raw;
+    }
+    if (ctx === 'delete') return '删除未成功，该行未被删除。后端原因：' + raw;
+    return raw;
+  }
+
+  function reportError(error, ctx, silent) {
+    if (!silent) feedback(explainError(error, ctx), false);
+  }
+
+  function jsonText(v, pretty) {
+    let obj = v;
+    if (typeof v === 'string') {
+      try { obj = JSON.parse(v); } catch { return v; }
+    }
+    try {
+      const out = pretty ? JSON.stringify(obj, null, 2) : JSON.stringify(obj);
+      return out == null ? '' : out;
+    } catch { return String(v); }
+  }
+
+  function isTrue(v) {
+    return v === true || v === 1 || v === '1' || v === 't' || v === 'true' || v === 'TRUE';
+  }
+
+  /* ---------------- 域列表 / 生效版本 ---------------- */
+  function renderDomains() {
+    const el = $('#cfg-domain-list');
+    if (!state.domains.length) {
+      el.innerHTML = '<p class="cfg-empty">未加载到配置域</p>';
+      return;
+    }
+    const order = GROUPS.slice();
+    state.domains.forEach((d) => { const g = groupOf(d); if (!order.includes(g)) order.push(g); });
+    el.innerHTML = order.map((g) => {
+      const list = state.domains.filter((d) => groupOf(d) === g);
+      if (!list.length) return '';
+      return '<div class="cfg-group-title">' + esc(g) + ' · ' + list.length + '</div>' +
+        list.map((d) =>
+          '<button class="cfg-domain-item' + (d.key === state.current ? ' active' : '') +
+          '" data-cfg-domain="' + esc(d.key) + '" title="' + esc(d.table || d.key) + '">' +
+          '<span class="cfg-domain-label">' + esc(d.label || d.key) + '</span>' +
+          '<span class="badge">' + esc(d.rowCount ?? 0) + ' 行</span>' +
+          '<span class="badge">v' + esc(state.versions[d.key] ?? d.version ?? 0) + '</span>' +
+          (d.readOnly ? '<span class="badge warn">只读</span>' : '') +
+          '</button>'
+        ).join('');
+    }).join('');
+  }
+
+  function renderVersions(flashKey) {
+    const el = $('#cfg-version-list');
+    if (!state.domains.length) {
+      el.innerHTML = '<span class="cfg-null">尚未加载配置域</span>';
+      $('#cfg-version-total').textContent = '—';
+      return;
+    }
+    el.innerHTML = state.domains.map((d) =>
+      '<span class="cfg-version-chip' + (d.key === state.current ? ' current' : '') +
+      (d.key === flashKey ? ' flash' : '') + '" title="' + esc(d.table || d.key) + '">' +
+      esc(d.label || d.key) + ' · v' + esc(state.versions[d.key] ?? d.version ?? 0) + '</span>'
+    ).join('');
+    $('#cfg-version-total').textContent = '共 ' + state.domains.length + ' 域';
+    if (flashKey) setTimeout(() => renderVersions(), 2200);
+  }
+
+  function renderToolbar() {
+    $('#cfg-current-name').textContent = state.current ? state.label : '请选择左侧配置域';
+    $('#cfg-current-version').textContent = 'v' + (state.versions[state.current] ?? state.version ?? 0);
+    $('#cfg-current-table').textContent = state.table || '';
+    $('#cfg-create').disabled = !state.current || state.readOnly || state.saving;
+    $('#cfg-refresh').disabled = !state.current || state.loading;
+    $('#cfg-refresh-versions').disabled = state.loading;
+    const note = $('#cfg-readonly-note');
+    if (state.current && state.readOnly) {
+      note.textContent = readOnlyReason(curDomain());
+      note.classList.remove('hidden');
+    } else {
+      note.textContent = '';
+      note.classList.add('hidden');
+    }
+  }
+
+  /* ---------------- 表格 ---------------- */
+  function cellHtml(c, v) {
+    if (v === null || v === undefined || v === '') {
+      return '<td class="wrap"><span class="cfg-null">—</span></td>';
+    }
+    if (c.type === 'boolean') {
+      return '<td>' + (isTrue(v)
+        ? '<span class="badge cfg-bool-1">✓ 1</span>'
+        : '<span class="badge">✗ 0</span>') + '</td>';
+    }
+    const isJson = c.type === 'json';
+    const text = isJson ? jsonText(v, false)
+      : (c.type === 'datetime' ? String(v).replace('T', ' ').slice(0, 19) : String(v));
+    const full = isJson ? jsonText(v, false) : String(v);
+    const short = text.length > 90 ? text.slice(0, 90) + '…' : text;
+    return '<td class="' + (isJson ? 'wrap cfg-cell-json' : 'wrap') + '" title="' + esc(full) + '">' + esc(short) + '</td>';
+  }
+
+  function rowText(r) {
+    return state.columns.map((c) => {
+      const v = r[c.name];
+      return c.type === 'json' ? jsonText(v, false) : (v == null ? '' : String(v));
+    }).join(' ');
+  }
+
+  function renderPager(total, pages) {
+    const el = $('#cfg-pager');
+    if (!total) { el.innerHTML = ''; return; }
+    el.innerHTML =
+      '<span>第 ' + (state.page + 1) + ' / ' + pages + ' 页 · 共 ' + total + ' 行 · 每页 ' + PAGE_SIZE + '</span>' +
+      '<span style="flex:1"></span>' +
+      '<button class="btn ghost" data-cfg-page="prev"' + (state.page <= 0 ? ' disabled' : '') + '>上一页</button>' +
+      '<button class="btn ghost" data-cfg-page="next"' + (state.page >= pages - 1 ? ' disabled' : '') + '>下一页</button>';
+  }
+
+  function renderTable() {
+    const head = $('#cfg-table-head');
+    const body = $('#cfg-table-body');
+    if (!state.current) {
+      head.innerHTML = '';
+      body.innerHTML = '<tr><td class="cfg-empty">请从左侧选择一个配置域</td></tr>';
+      $('#cfg-pager').innerHTML = '';
+      $('#cfg-row-count').textContent = '— 行';
+      return;
+    }
+    const cols = state.columns;
+    head.innerHTML = cols.map((c) =>
+      '<th title="' + esc(c.name + ' · ' + c.type) + '">' + esc(c.label || c.name) + '</th>'
+    ).join('') + (state.readOnly ? '' : '<th>操作</th>');
+    const kw = state.keyword.trim().toLowerCase();
+    const filtered = kw ? state.rows.filter((r) => rowText(r).toLowerCase().includes(kw)) : state.rows.slice();
+    const total = filtered.length;
+    const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    if (state.page >= pages) state.page = pages - 1;
+    if (state.page < 0) state.page = 0;
+    const pageRows = filtered.slice(state.page * PAGE_SIZE, (state.page + 1) * PAGE_SIZE);
+    $('#cfg-row-count').textContent = kw
+      ? '匹配 ' + total + ' / ' + state.rows.length + ' 行'
+      : state.rows.length + ' 行';
+    if (!pageRows.length) {
+      body.innerHTML = '<tr><td class="cfg-empty" colspan="' + (cols.length + (state.readOnly ? 0 : 1)) + '">' +
+        (kw ? '没有匹配的配置行，试试其它关键字。' : '该域暂无数据。') + '</td></tr>';
+    } else {
+      body.innerHTML = pageRows.map((r) => {
+        const id = r[state.primaryKey];
+        const cells = cols.map((c) => cellHtml(c, r[c.name])).join('');
+        const ops = state.readOnly ? '' :
+          '<td class="cfg-ops">' +
+          '<button class="btn ghost" data-cfg-act="edit" data-cfg-id="' + esc(id) + '">编辑</button>' +
+          '<button class="btn danger" data-cfg-act="delete" data-cfg-id="' + esc(id) + '">删除</button>' +
+          '</td>';
+        return '<tr>' + cells + ops + '</tr>';
+      }).join('');
+    }
+    renderPager(total, pages);
+  }
+
+  /* ---------------- 编辑 / 新建表单 ---------------- */
+  function fieldInitial(c, v, mode) {
+    if (mode === 'create' || v === null || v === undefined) return '';
+    if (c.type === 'json') return jsonText(v, true);
+    if (c.type === 'boolean') return isTrue(v) ? '1' : '0';
+    return String(v);
+  }
+
+  function renderFields(mode, row) {
+    $('#cfg-form-fields').innerHTML = state.columns.map((c) => {
+      const isPk = c.name === state.primaryKey;
+      const locked = (mode === 'edit' && isPk) || (c.editable === false && !isPk);
+      const val = fieldInitial(c, row[c.name], mode);
+      const attr = 'data-cfg-input="1"' + (locked ? ' disabled' : '');
+      let control;
+      if (c.type === 'boolean') {
+        control = '<select ' + attr + '>' +
+          (c.nullable ? '<option value=""' + (val === '' ? ' selected' : '') + '>（NULL · 留空）</option>' : '') +
+          '<option value="1"' + (val === '1' ? ' selected' : '') + '>1 · 是 / 开</option>' +
+          '<option value="0"' + (val === '0' ? ' selected' : '') + '>0 · 否 / 关</option>' +
+          '</select>';
+      } else if (c.type === 'int' || c.type === 'number') {
+        control = '<input type="number" ' + (c.type === 'number' ? 'step="any"' : 'step="1"') +
+          ' ' + attr + ' value="' + esc(val) + '" />';
+      } else if (c.type === 'text' || c.type === 'json') {
+        control = '<textarea ' + attr +
+          (c.type === 'json' ? ' class="mono" rows="5" placeholder="请填写合法 JSON（对象 / 数组 / 数字 / null）"' : ' rows="3"') +
+          '>' + esc(val) + '</textarea>';
+      } else {
+        control = '<input type="text" ' + attr + ' value="' + esc(val) + '"' +
+          (c.type === 'datetime' ? ' placeholder="YYYY-MM-DD HH:mm:ss / ISO 8601"' : '') + ' />';
+      }
+      return '<div class="cfg-field" data-cfg-col="' + esc(c.name) + '" data-cfg-type="' + esc(c.type) +
+        '" data-cfg-nullable="' + (c.nullable ? '1' : '0') + '">' +
+        '<div class="cfg-field-head">' +
+        '<label>' + esc(c.label || c.name) + '</label>' +
+        '<span class="cfg-field-name">' + esc(c.name) + '</span>' +
+        '<span class="badge">' + esc(c.type) + '</span>' +
+        (isPk ? '<span class="badge ok">主键</span>' : '') +
+        (c.nullable ? '<span class="badge">可空</span>' : '') +
+        (locked ? '<span class="badge warn">' + (isPk && mode === 'edit' ? '主键不可改' : '只读') + '</span>' : '') +
+        '</div>' + control + '</div>';
+    }).join('');
+  }
+
+  function openForm(mode, row, id) {
+    if (!state.current) { feedback('请先从左侧选择一个配置域。', false); return; }
+    if (state.readOnly) { feedback(readOnlyReason(curDomain()), false); return; }
+    state.edit = { mode, row: row || null, id: id != null ? id : (row ? row[state.primaryKey] : null) };
+    $('#cfg-form-card').classList.remove('hidden');
+    $('#cfg-form-title').textContent = mode === 'create' ? '＋ 新建配置行' : '编辑配置行';
+    $('#cfg-form-domain').textContent = state.label + ' · ' + (mode === 'create' ? 'POST' : 'PATCH');
+    $('#cfg-form-note').textContent = mode === 'create'
+      ? '按字段类型填写；可空字段留空写入 NULL；不可空字段留空表示使用后端默认值；json 字段需合法 JSON；新建时请填写主键（若主键由后端自动生成可留空）。'
+      : '仅可编辑字段会提交（PATCH 部分字段）；主键不可修改；可空字段留空写入 NULL；json 字段需合法 JSON。';
+    setMsg('#cfg-form-msg', '', false);
+    renderFields(mode, row || {});
+    try { $('#cfg-form-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch { /* 老浏览器忽略 */ }
+  }
+
+  function closeForm() {
+    state.edit = null;
+    $('#cfg-form-card').classList.add('hidden');
+    $('#cfg-form-fields').innerHTML = '';
+    setMsg('#cfg-form-msg', '', false);
+  }
+
+  function collectForm() {
+    const body = {};
+    const fields = $('#cfg-form-fields').querySelectorAll('.cfg-field');
+    for (const f of fields) {
+      const input = f.querySelector('[data-cfg-input]');
+      if (!input || input.disabled) continue;
+      const name = f.getAttribute('data-cfg-col');
+      const type = f.getAttribute('data-cfg-type');
+      const nullable = f.getAttribute('data-cfg-nullable') === '1';
+      const value = String(input.value);
+      if (value.trim() === '') {
+        if (nullable) body[name] = null;
+        continue;
+      }
+      const raw = type === 'text' ? value : value.trim();
+      if (type === 'int' || type === 'number') {
+        const n = type === 'int' ? Number.parseInt(raw, 10) : Number(raw);
+        if (!Number.isFinite(n) || (type === 'int' && !Number.isInteger(n))) {
+          throw new Error('字段「' + name + '」需要' + (type === 'int' ? '整数' : '数字') + '，当前值：' + raw);
+        }
+        body[name] = n;
+      } else if (type === 'boolean') {
+        body[name] = raw === '1' ? 1 : 0;
+      } else if (type === 'json') {
+        try { body[name] = JSON.parse(raw); }
+        catch (e) { throw new Error('字段「' + name + '」不是合法 JSON：' + e.message); }
+      } else {
+        body[name] = raw;
+      }
+    }
+    if (state.edit.mode === 'create') {
+      const pk = state.primaryKey;
+      const pkCol = state.columns.find((c) => c.name === pk);
+      const pkFilled = body[pk] !== undefined && body[pk] !== null && body[pk] !== '';
+      // 主键列标记为 editable:false 或 nullable 时视为由后端生成，允许留空
+      if (!pkFilled && pkCol && pkCol.editable !== false && !pkCol.nullable) {
+        throw new Error('新建必须填写主键「' + pk + '」');
+      }
+    }
+    return body;
+  }
+
+  /* ---------------- 数据加载 ---------------- */
+  async function loadVersions(silent) {
+    try {
+      const data = await api('/api/admin/config/versions');
+      state.versions = (data && data.versions) || {};
+      state.domains.forEach((d) => { if (state.versions[d.key] != null) d.version = state.versions[d.key]; });
+      return true;
+    } catch (e) { reportError(e, 'load', silent); return false; }
+  }
+
+  async function loadDomains(keep, silent) {
+    try {
+      const data = await api('/api/admin/config/domains');
+      state.domains = (data && data.domains) || [];
+      state.domains.forEach((d) => { if (state.versions[d.key] != null) d.version = state.versions[d.key]; });
+      if (!keep) {
+        const pref = state.domains.find((d) => !d.readOnly) || state.domains[0];
+        state.current = pref ? pref.key : null;
+      }
+      if (state.current && !state.domains.some((d) => d.key === state.current)) {
+        state.current = state.domains.length ? state.domains[0].key : null;
+      }
+      return true;
+    } catch (e) { reportError(e, 'load', silent); return false; }
+  }
+
+  async function loadRows(silent, resetPage) {
+    if (!state.current) return false;
+    try {
+      const data = await api('/api/admin/config/' + encodeURIComponent(state.current));
+      state.columns = (data && data.columns) || [];
+      state.rows = (data && data.rows) || [];
+      state.version = (data && data.version) || 0;
+      state.readOnly = !!(data && data.readOnly);
+      const meta = curDomain();
+      state.label = (data && data.label) || meta.label || state.current;
+      state.table = meta.table || '';
+      state.primaryKey = meta.primaryKey || (state.columns.length ? state.columns[0].name : 'id');
+      if (data && data.version != null) state.versions[state.current] = data.version;
+      if (resetPage) state.page = 0;
+      renderTable();
+      return true;
+    } catch (e) {
+      reportError(e, 'load', silent);
+      $('#cfg-table-head').innerHTML = '';
+      $('#cfg-table-body').innerHTML = '<tr><td class="cfg-empty">加载失败：' + esc(e.message) + '</td></tr>';
+      return false;
+    }
+  }
+
+  async function ensureInit() {
+    if (state.inited) { await loadVersions(true); renderVersions(); renderToolbar(); return; }
+    state.inited = true;
+    state.loading = true;
+    renderToolbar();
+    await loadVersions(true);
+    const ok = await loadDomains(false);
+    renderDomains();
+    renderVersions();
+    if (ok && state.current) await loadRows(false, true);
+    state.loading = false;
+    renderToolbar();
+    if (ok) {
+      feedback(state.domains.length
+        ? '已加载 ' + state.domains.length + ' 个配置域 · 各域生效版本已同步，从左侧选择域开始查看。'
+        : '配置域列表为空，请确认后端已注册配置表。', !!state.domains.length);
+    }
+  }
+
+  async function selectDomain(key) {
+    if (!key) return;
+    state.current = key;
+    state.keyword = '';
+    state.page = 0;
+    $('#cfg-search').value = '';
+    closeForm();
+    feedback('', false);
+    const meta = curDomain();
+    state.label = meta.label || key;
+    state.table = meta.table || '';
+    state.primaryKey = meta.primaryKey || '';
+    state.readOnly = !!meta.readOnly;
+    state.loading = true;
+    renderDomains();
+    renderVersions();
+    renderToolbar();
+    $('#cfg-table-head').innerHTML = '';
+    $('#cfg-table-body').innerHTML = '<tr><td class="cfg-empty">正在加载「' + esc(state.label) + '」…</td></tr>';
+    $('#cfg-pager').innerHTML = '';
+    await loadRows(false, true);
+    state.loading = false;
+    renderToolbar();
+    renderVersions();
+  }
+
+  async function refreshAfterWrite(domain, okText) {
+    try { await Promise.all([loadVersions(true), loadDomains(true, true), loadRows(true, false)]); }
+    catch { /* 写入已成功，刷新失败不覆盖结果 */ }
+    renderDomains();
+    renderVersions(domain);
+    renderToolbar();
+    feedback(okText, true);
+  }
+
+  /* ---------------- 写操作 ---------------- */
+  async function save() {
+    if (!state.edit || state.saving) return;
+    const domain = state.current;
+    const before = state.versions[domain] ?? state.version ?? 0;
+    let body;
+    try { body = collectForm(); }
+    catch (e) { setMsg('#cfg-form-msg', e.message, false); feedback(e.message, false); return; }
+    state.saving = true;
+    const btn = $('#cfg-save');
+    const oldText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = '保存中…';
+    $('#cfg-cancel').disabled = true;
+    renderToolbar();
+    feedback('正在保存「' + state.label + '」…', true);
+    try {
+      const mode = state.edit.mode;
+      const path = mode === 'create'
+        ? '/api/admin/config/' + encodeURIComponent(domain)
+        : '/api/admin/config/' + encodeURIComponent(domain) + '/' + encodeURIComponent(String(state.edit.id));
+      const data = await api(path, { method: mode === 'create' ? 'POST' : 'PATCH', body });
+      const after = (data && data.version != null) ? data.version : before;
+      state.version = after;
+      state.versions[domain] = after;
+      const okText = (mode === 'create' ? '已新建并生效' : '已保存并生效') + ' · 版本 v' + after + '（原 v' + before + '）';
+      closeForm();
+      await refreshAfterWrite(domain, okText);
+    } catch (error) {
+      const text = explainError(error, 'edit');
+      setMsg('#cfg-form-msg', text, false);
+      feedback(text, false);
+    } finally {
+      state.saving = false;
+      btn.disabled = false;
+      btn.textContent = oldText;
+      $('#cfg-cancel').disabled = false;
+      renderToolbar();
+    }
+  }
+
+  async function removeRow(id) {
+    if (state.readOnly) { feedback(readOnlyReason(curDomain()), false); return; }
+    const domain = state.current;
+    if (!confirm('确认删除配置行？\n配置域：' + state.label + '（' + domain + '）\n主键 ' + state.primaryKey + ' = ' + id + '\n\n此操作不可撤销；若该配置仍被其它数据引用，后端会拒绝删除并给出原因。')) return;
+    const before = state.versions[domain] ?? state.version ?? 0;
+    feedback('正在删除「' + state.label + '」主键为 ' + id + ' 的配置行…', true);
+    try {
+      const data = await api('/api/admin/config/' + encodeURIComponent(domain) + '/' + encodeURIComponent(String(id)), { method: 'DELETE' });
+      const after = (data && data.version != null) ? data.version : before;
+      state.version = after;
+      state.versions[domain] = after;
+      await refreshAfterWrite(domain, '已删除 · 版本 v' + after + '（原 v' + before + '）');
+    } catch (error) {
+      feedback(explainError(error, 'delete'), false);
+    }
+  }
+
+  /* ---------------- 事件绑定 ---------------- */
+  $('#cfg-domain-list').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-cfg-domain]');
+    if (btn) selectDomain(btn.getAttribute('data-cfg-domain'));
+  });
+  $('#cfg-table-body').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-cfg-act]');
+    if (!btn) return;
+    const id = btn.getAttribute('data-cfg-id');
+    if (btn.getAttribute('data-cfg-act') === 'edit') {
+      const row = state.rows.find((r) => String(r[state.primaryKey]) === String(id));
+      openForm('edit', row || {}, id);
+    } else {
+      removeRow(id);
+    }
+  });
+  $('#cfg-pager').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-cfg-page]');
+    if (!btn || btn.disabled) return;
+    state.page += btn.getAttribute('data-cfg-page') === 'prev' ? -1 : 1;
+    renderTable();
+  });
+  $('#cfg-search').addEventListener('input', (e) => {
+    state.keyword = e.target.value;
+    state.page = 0;
+    renderTable();
+  });
+  $('#cfg-refresh').addEventListener('click', async () => {
+    if (!state.current || state.loading) return;
+    state.loading = true;
+    renderToolbar();
+    await loadRows(false, true);
+    await loadVersions(true);
+    renderDomains();
+    renderVersions();
+    state.loading = false;
+    renderToolbar();
+    feedback('已刷新「' + state.label + '」· 当前生效版本 v' + (state.versions[state.current] ?? state.version), true);
+  });
+  $('#cfg-refresh-versions').addEventListener('click', async () => {
+    await loadVersions();
+    renderDomains();
+    renderVersions();
+    renderToolbar();
+    feedback('已刷新各域生效版本。', true);
+  });
+  $('#cfg-create').addEventListener('click', () => openForm('create', null));
+  $('#cfg-save').addEventListener('click', save);
+  $('#cfg-cancel').addEventListener('click', () => { closeForm(); feedback('', false); });
+  const configNav = document.querySelector('.nav-item[data-tab="config"]');
+  if (configNav) configNav.addEventListener('click', ensureInit);
+})();
+
+/* ------------------------------ 启动恢复 ------------------------------ */
+if (sessionStorage.getItem(TOKEN_KEY)) showMain();
+</script>
+</body>
+</html>

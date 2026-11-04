@@ -1,0 +1,317 @@
+.equipment-art { width: 64px; height: 64px; flex-shrink: 0; filter: drop-shadow(0 5px 3px #0b16283b); }
+.gear-rare { --gear: #829faf; --gear-soft: #83a1b413; }
+.gear-epic { --gear: #ac8bb5; --gear-soft: #b08cba15; }
+.gear-legendary { --gear: #bf9956; --gear-soft: #c6a26218; }
+.game-dialog.hero-dialog { width: 1000px; border: 1px solid #b7a173; background: #f3eddf; scrollbar-color: #b29b70 #efe7d7; }
+.traveler-wardrobe { display: grid; grid-template-columns: 32% 1fr; min-height: 675px; color: #6a604f; }
+.wardrobe-portrait {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 28%, rgba(112, 176, 255, .24), transparent 52%),
+    linear-gradient(160deg, #172333 0%, #29405c 48%, #172333 100%);
+}
+.wardrobe-portrait > img { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: 73% center; z-index: -2; animation: wardrobe-unveil 1.1s ease-out both; }
+.wardrobe-portrait-shade { position: absolute; inset: 0; background: linear-gradient(0deg, #0a1929f5, #14283e00 60%, #0c1a2d70); z-index: -1; }
+.wardrobe-seal { width: 38px; height: 38px; position: absolute; left: 28px; top: 29px; color: #d0bd94; opacity: .7; }
+.wardrobe-identity { position: absolute; bottom: 43px; left: 25px; right: 25px; text-align: center; }
+.wardrobe-identity .eyebrow { color: #b3ac9a; letter-spacing: 3px; font-size: 8px; }
+.wardrobe-identity h2 { color: #eddfc0; font-family: var(--serif); font-size: 32px; font-weight: 500; letter-spacing: 5px; margin-top: 13px; overflow-wrap: anywhere; }
+.wardrobe-identity .ornament { margin: 18px auto; color: #b4a175; }
+.wardrobe-identity > span { color: #a5b1b1; font-size: 10px; letter-spacing: 2px; line-height: 1.9; }
+.wardrobe-content { padding: 37px 36px 24px; }
+.wardrobe-heading .eyebrow { color: #a9916b; font-size: 7px; letter-spacing: 1.6px; padding-right: 9px; }
+.wardrobe-heading h2 { color: #584b35; font-family: var(--serif); font-size: 29px; font-weight: 600; letter-spacing: 4px; margin-top: 10px; }
+.wardrobe-heading > p:last-child { color: #968770; font-size: 11px; letter-spacing: 1px; margin-top: 9px; }
+.wardrobe-power { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 25px 0 18px; padding-bottom: 19px; border-bottom: 1px solid #b19a7044; }
+.wardrobe-power > span { display: flex; gap: 7px; align-items: center; font-size: 10px; color: #9a8663; }
+.wardrobe-power > span > svg { color: #a48a5d; stroke-width: 1.2; }
+.wardrobe-power strong { color: #7d6238; font-family: var(--english); font-weight: 500; font-size: 25px; margin-left: 6px; }
+.wardrobe-power b { color: #7c956f; font-family: var(--english); font-size: 16px; font-weight: 500; }
+.wardrobe-power small { font-size: 8px; color: #b0a28a; }
+.wardrobe-stats.hero-stats { grid-template-columns: repeat(3, 1fr); gap: 15px 18px; margin: 0 0 25px; }
+.wardrobe-stats.hero-stats > div { border: 0; border-bottom: 1px solid #c5b59435; background: none; padding: 1px 0 11px; text-align: left; }
+.wardrobe-stats small { color: #96866d; font-size: 10px; letter-spacing: 2px; }
+.wardrobe-stats strong { color: #716040; font-family: var(--english); font-size: 18px; font-weight: 500; margin-top: 5px; }
+.wardrobe-stats > div > span { display: block; color: #8e8b6e; font-size: 9px; margin-top: 6px; }
+.wardrobe-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 13px; }
+.wardrobe-section-heading h3 { font-family: var(--serif); font-size: 14px; font-weight: 500; letter-spacing: 2px; color: #776548; }
+.wardrobe-section-heading h3 > span { font-family: var(--english); font-size: 9px; color: #ad9a78; margin-left: 8px; letter-spacing: 1px; }
+.wardrobe-section-heading > button { display: flex; gap: 5px; align-items: center; color: #9b8053; font-size: 9px; }
+.wardrobe-section-heading > button:disabled { color: #b6aa94; }
+.wardrobe-slots.hero-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.wardrobe-slot.hero-slot { display: flex; align-items: center; text-align: left; gap: 9px; position: relative; min-height: 74px; padding: 11px 10px; border: 1px solid var(--gear, #c2b28f65); background: var(--gear-soft, transparent); }
+.wardrobe-slot.hero-slot.selected { outline: 1px solid #aa8a5680; outline-offset: 2px; }
+.wardrobe-slot.hero-slot:hover { background: #d7c79f20; border-color: #b89c65; }
+.wardrobe-slot.hero-slot > .equipment-art { width: 33px; height: 40px; margin: 0; color: inherit; }
+.wardrobe-slot.vacant > .equipment-art { opacity: .32; filter: grayscale(.7); }
+.wardrobe-slot > span { display: flex; flex-direction: column; min-width: 0; gap: 5px; }
+.wardrobe-slot > span > small { margin: 0; color: #9a8665; font-size: 9px; }
+.wardrobe-slot > span > strong { font-family: var(--serif); font-size: 12px; color: #7c6846; font-weight: 500; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.wardrobe-slot.vacant > span > strong { font-size: 9px; color: #b2a38a; }
+.wardrobe-slot > b { color: #9b8050; position: absolute; right: 7px; top: 5px; font-family: var(--english); font-size: 8px; font-weight: 500; }
+.wardrobe-selection { display: flex; align-items: center; gap: 11px; margin-top: 20px; padding: 15px 0; border-block: 1px solid #b8a57d47; }
+.selected-gear-mark { width: 45px; height: 49px; display: flex; align-items: center; justify-content: center; background: var(--gear-soft, #d7c79f17); border: 1px solid var(--gear, #c8b58f6b); flex-shrink: 0; }
+.selected-gear-mark > .equipment-art { width: 37px; height: 37px; }
+.wardrobe-selection > div:nth-child(2) { flex: 1; min-width: 0; }
+.wardrobe-selection p { font-family: var(--english); font-size: 7px; letter-spacing: 1px; color: #b29b74; }
+.wardrobe-selection h3 { font-family: var(--serif); font-size: 13px; color: #736044; font-weight: 500; margin: 5px 0; }
+.wardrobe-selection span { font-size: 8px; color: #a59983; line-height: 1.8; }
+.wardrobe-selection > button { display: flex; align-items: center; gap: 3px; font-size: 9px; color: #9c7c49; white-space: nowrap; }
+.wardrobe-selection > .wardrobe-unequip { color: #a68e79; border-left: 1px solid #bca7814d; padding-left: 10px; margin-left: 1px; font-size: 8px; }
+.wardrobe-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; gap: 12px; }
+.wardrobe-footer > button { display: flex; align-items: center; gap: 6px; color: #9b8054; font-size: 9px; }
+.wardrobe-note { color: #b1a58f; font-size: 7px; line-height: 1.8; margin-top: 17px; }
+
+.game-dialog.bag-dialog { width: 900px; }
+.inventory-intro { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 19px; }
+.inventory-intro > p { color: #9b8b72; font-size: 11px; line-height: 1.9; }
+.inventory-intro > button { display: flex; align-items: center; gap: 5px; color: #a18453; font-size: 10px; white-space: nowrap; }
+.inventory-tabs.simple-tabs > button { display: flex; align-items: center; justify-content: center; gap: 11px; padding: 12px; }
+.inventory-tabs > button > small { font-family: var(--english); font-size: 10px; color: #baa47f; }
+.inventory-resources > .rewards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px 16px; margin: 29px 20px; }
+.inventory-resources .reward-tile { width: 75px; justify-self: center; }
+.inventory-resources .reward-name { color: #9a815a; font-size: 10px; }
+.inventory-resource-actions > button { display: flex; gap: 14px; align-items: center; width: 100%; text-align: left; padding: 17px 9px; border-block: 1px solid #bda67b44; color: #9b8158; }
+.inventory-resource-actions > button > span { flex: 1; font-family: var(--serif); font-size: 13px; }
+.inventory-resource-actions small { display: block; color: #b0a087; font-family: system-ui, sans-serif; font-size: 9px; margin-top: 6px; }
+.inventory-note { font-size: 9px; color: #ab9c84; text-align: center; line-height: 1.8; margin-top: 21px; }
+.chest-panel { padding-top: 20px; }
+.starter-equipment { display: flex; align-items: center; gap: 15px; border-left: 2px solid #be9a5e; padding: 13px 16px; background: linear-gradient(90deg, #dbc99f38, transparent); }
+.starter-equipment > svg { color: #b99a64; stroke-width: 1.2; }
+.starter-equipment > div { flex: 1; }
+.starter-equipment strong { font-family: var(--serif); font-size: 13px; font-weight: 500; color: #887048; }
+.starter-equipment span { display: block; color: #aa9777; font-size: 9px; margin-top: 6px; }
+.starter-equipment > button { display: inline-flex; align-items: center; gap: 5px; color: #9b7640; font-size: 10px; white-space: nowrap; }
+.chest-showcase { display: grid; grid-template-columns: 210px 1fr; gap: 10px; align-items: center; padding: 25px 15px 22px 0; }
+.chest-visual { position: relative; min-height: 184px; display: flex; align-items: center; justify-content: center; isolation: isolate; }
+.chest-visual > .item-art { width: 133px; height: 133px; transform: rotate(-7deg); filter: drop-shadow(0 12px 15px #7f5f432f); animation: chest-presence 4s ease-in-out infinite; }
+.chest-halo { position: absolute; z-index: -2; inset: 0; background: radial-gradient(ellipse, #cba37a25, transparent 65%); }
+.chest-floor-sigil { position: absolute; width: 145px; height: 145px; color: #ad9564; z-index: -1; opacity: .2; transform: rotateX(65deg) translateY(70px); }
+.chest-showcase-copy .eyebrow { font-size: 7px; letter-spacing: 1.4px; color: #ad9470; }
+.chest-showcase-copy h3 { font-family: var(--serif); font-size: 24px; font-weight: 500; letter-spacing: 3px; color: #705a39; margin-top: 9px; }
+.chest-showcase-copy > p:not(.eyebrow) { font-size: 10px; line-height: 2; color: #aa997d; margin-top: 13px; }
+.chest-showcase-copy > span { display: flex; align-items: baseline; gap: 6px; color: #aa9879; font-size: 9px; margin-top: 17px; }
+.chest-showcase-copy > span > b { color: #9a7947; font-family: var(--english); font-size: 19px; font-weight: 500; }
+.chest-showcase-copy > span > i { display: block; width: 1px; height: 10px; background: #c7b48e88; margin: 0 6px; }
+.chest-open-actions { display: flex; align-items: center; gap: 12px; margin-top: 17px; }
+.chest-open-actions .gold-button { font-size: 16px; min-height: 47px; padding: 11px 35px; flex: 1; }
+.chest-open-actions .outline-button { min-height: 43px; font-size: 13px; padding: 10px 25px; }
+.chest-open-actions .outline-button:disabled { opacity: .5; }
+.chest-rules { display: flex; align-items: center; gap: 6px; color: #a99d87; font-size: 8px; padding-top: 14px; border-top: 1px solid #bba6813b; line-height: 1.9; flex-wrap: wrap; }
+.chest-rules > strong { font-size: 9px; color: #af7961; width: 100%; font-weight: 400; }
+.chest-receipt { margin-top: 23px; padding-top: 2px; }
+.chest-receipt-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 13px; }
+.chest-receipt-heading > p { display: flex; align-items: center; gap: 7px; font-family: var(--serif); font-size: 12px; color: #9e8252; }
+.chest-receipt-heading > span { font-size: 9px; color: #a4a080; }
+.chest-drops { display: grid; grid-template-columns: repeat(5, 1fr); gap: 13px; }
+.chest-drops .gear-tile { animation: gear-arrive .55s ease-out both; }
+.chest-drops .gear-tile:nth-child(2) { animation-delay: .06s; }
+.chest-drops .gear-tile:nth-child(3) { animation-delay: .12s; }
+.chest-drops .gear-tile:nth-child(4) { animation-delay: .18s; }
+.chest-drops .gear-tile:nth-child(5) { animation-delay: .24s; }
+.chest-see-equipment { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 17px auto 0; font-size: 10px; color: #a18351; }
+.inventory-empty-route { display: flex; align-items: center; justify-content: center; gap: 4px; margin: 19px auto 0; font-size: 9px; color: #a7916c; }
+
+.equipment-toolbar { display: flex; gap: 11px; align-items: center; justify-content: flex-start; padding: 18px 0; }
+.equipment-toolbar label { display: flex; align-items: center; gap: 7px; font-size: 9px; color: #ac9a7b; }
+.equipment-toolbar select { border: 1px solid #bca77f66; background: #fffaf245; padding: 8px 25px 8px 10px; color: #8d7956; font-size: 10px; min-width: 107px; cursor: pointer; outline-offset: 2px; }
+.equipment-toolbar > button { display: flex; gap: 5px; align-items: center; color: #a08350; font-size: 10px; margin-left: auto; }
+.equipment-toolbar > button:disabled { color: #b9ac94; }
+.equipment-browser { display: grid; grid-template-columns: minmax(0, 1fr) 255px; gap: 24px; align-items: start; }
+.equipment-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; max-height: 510px; overflow-y: auto; padding: 2px; align-content: start; scrollbar-width: thin; scrollbar-color: #bda781 #e5dac6; }
+.gear-tile { position: relative; min-width: 0; display: flex; flex-direction: column; align-items: center; min-height: 144px; padding: 9px 6px 18px; border: 1px solid var(--gear, #bca780); background: linear-gradient(145deg, var(--gear-soft), transparent); text-align: center; transition: box-shadow .2s, transform .2s, background .2s; }
+.gear-tile:hover { box-shadow: 0 3px 12px #b6a0781f; transform: translateY(-2px); }
+.gear-tile.selected { box-shadow: 0 0 0 1px var(--gear), inset 0 0 22px var(--gear-soft); }
+.gear-tile-top { width: 100%; display: flex; align-items: center; justify-content: space-between; color: var(--gear); font-family: var(--english); }
+.gear-tile-top > small { font-size: 6px; letter-spacing: .8px; }
+.gear-tile-top > b { font-size: 9px; font-weight: 500; }
+.gear-tile > .equipment-art { width: 55px; height: 58px; margin: 7px 0 6px; }
+.gear-tile > strong { font-family: var(--serif); font-size: 12px; font-weight: 500; color: #806946; line-height: 1.7; }
+.gear-tile-score { display: block; font-family: var(--english); font-size: 11px; color: #ab9370; margin-top: 6px; }
+.gear-tile-score > small { font-family: system-ui, sans-serif; font-size: 7px; color: #b8a98d; margin-left: 3px; }
+.gear-worn { position: absolute; bottom: 4px; right: 4px; display: flex; align-items: center; gap: 2px; color: #8e9c78; font-size: 6px; }
+.gear-worn > svg { width: 8px; height: 8px; }
+.gear-upgrade { position: absolute; right: 5px; top: 25px; color: #8d9e78; }
+.gear-detail { position: relative; padding: 20px 19px 16px; border: 1px solid var(--gear); background: linear-gradient(155deg, var(--gear-soft), #fffcf54d); }
+.gear-detail-art { position: relative; display: flex; flex-direction: column; align-items: center; padding: 6px 0 18px; isolation: isolate; }
+.gear-detail-art > .equipment-art { width: 84px; height: 88px; }
+.gear-detail-art > span { font-family: var(--english); font-size: 6px; letter-spacing: 2px; color: var(--gear); margin-top: 8px; }
+.gear-orbit { position: absolute; z-index: -1; height: 105px; width: 105px; top: 0; left: 50%; transform: translateX(-50%) rotate(45deg); border: 1px solid var(--gear); opacity: .2; }
+.gear-orbit::after { content: ''; position: absolute; inset: 11px; border: 1px solid var(--gear); border-radius: 50%; }
+.gear-rarity { font-size: 8px; color: var(--gear); letter-spacing: 1px; }
+.gear-detail > h3 { font-family: var(--serif); font-size: 21px; font-weight: 500; letter-spacing: 2px; color: #7c6542; margin-top: 7px; }
+.gear-detail > h3 > small { font-family: var(--english); font-size: 13px; margin-left: 7px; color: #aa8b56; }
+.gear-story { font-size: 9px; color: #aa9b82; line-height: 1.9; margin-top: 10px; }
+.gear-comparison { display: flex; align-items: center; gap: 8px; margin-top: 18px; padding-block: 11px; border-block: 1px solid #c5b08a4d; }
+.gear-comparison > span { display: flex; align-items: center; gap: 3px; font-size: 8px; color: #a2987d; }
+.gear-comparison > strong { margin-left: auto; font-family: var(--english); font-size: 17px; color: #8a6a39; font-weight: 500; }
+.gear-comparison > strong > small { font-size: 7px; color: #b09b79; font-family: system-ui, sans-serif; margin-left: 4px; }
+.gear-comparison > b { display: flex; align-items: center; font-size: 8px; font-weight: 500; }
+.equipment-inventory .gain { color: #809b77; }
+.equipment-inventory .loss { color: #b58170; }
+.gear-stat-list { padding: 0; margin: 13px 0 17px; display: flex; flex-direction: column; gap: 10px; }
+.gear-stat-list > div { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 10px; }
+.gear-stat-list dt { color: #a29273; }
+.gear-stat-list dd { color: #8c7857; font-family: var(--english); font-size: 11px; }
+.gear-stat-list dd > small { font-size: 8px; display: inline-block; width: 43px; text-align: right; }
+.gear-equip-button.gold-button { min-height: 44px; font-size: 14px; width: 100%; padding: 10px 25px; }
+.gear-enhancement { padding-top: 16px; margin-top: 18px; border-top: 1px solid #c5b08a4d; }
+.gear-enhancement > div { display: flex; justify-content: space-between; gap: 5px; font-size: 10px; color: #9b835b; }
+.gear-enhancement strong { font-size: 8px; color: #8e9c76; font-weight: 500; }
+.gear-enhancement > p { font-size: 8px; color: #b09f83; margin-top: 8px; line-height: 1.8; }
+.gear-enhancement .outline-button { min-height: 34px; padding: 7px 13px; margin-top: 12px; font-size: 10px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 5px; }
+.gear-enhancement .outline-button:disabled { color: #bcae94; border-color: #c6b99f55; background: transparent; }
+.gear-salvage-button { display: flex; align-items: center; justify-content: center; gap: 5px; color: #ad9684; font-size: 8px; margin: 17px auto 0; }
+.gear-salvage-button:disabled { color: #c0b6a3; }
+.gear-salvage-confirm { padding-top: 15px; text-align: center; }
+.gear-salvage-confirm > p { font-size: 8px; line-height: 1.9; color: #b48b75; }
+.gear-salvage-confirm > button { font-size: 9px; padding: 6px 8px; margin: 8px 2px 0; border: 1px solid #bda0805c; color: #a28a69; }
+.gear-salvage-confirm > button:last-child { color: #ac7763; border-color: #b2867066; }
+.equipment-empty { padding: 36px 15px 25px; text-align: center; }
+.equipment-empty > svg { color: #b6a17b; stroke-width: 1.2; margin: 0 auto 19px; }
+.equipment-empty > h3 { font-family: var(--serif); font-size: 20px; font-weight: 500; letter-spacing: 2px; color: #8f7750; }
+.equipment-empty > p { color: #b1a28a; line-height: 1.9; font-size: 11px; max-width: 350px; margin: 14px auto 22px; }
+.equipment-empty .gold-button { font-size: 15px; min-height: 47px; }
+
+@keyframes gear-arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes chest-presence { 0%, 100% { transform: translateY(0) rotate(-7deg); } 50% { transform: translateY(-5px) rotate(-5deg); } }
+@keyframes wardrobe-unveil { from { opacity: .5; transform: scale(1.025); } to { opacity: 1; transform: scale(1); } }
+
+@media (max-width: 700px) {
+  .traveler-wardrobe { display: block; }
+  .wardrobe-portrait { height: 180px; }
+  .wardrobe-portrait > img { object-position: 71% 28%; }
+  .wardrobe-portrait-shade { background: linear-gradient(90deg, #0a1929cb, #13253238 80%), linear-gradient(0deg, #0e1f30a8, transparent 55%); }
+  .wardrobe-seal { width: 26px; height: 26px; left: 24px; top: 24px; }
+  .wardrobe-identity { text-align: left; left: 24px; bottom: 22px; right: 24px; }
+  .wardrobe-identity .eyebrow { font-size: 6px; letter-spacing: 1.8px; }
+  .wardrobe-identity h2 { font-size: 26px; letter-spacing: 3px; margin-top: 9px; }
+  .wardrobe-identity .ornament { display: none; }
+  .wardrobe-identity > span { display: block; font-size: 8px; letter-spacing: 1px; margin-top: 9px; }
+  .wardrobe-content { padding: 24px 23px 22px; }
+  .wardrobe-heading .eyebrow { font-size: 5px; letter-spacing: 1px; }
+  .wardrobe-heading h2 { font-size: 24px; letter-spacing: 3px; margin-top: 9px; }
+  .wardrobe-heading > p:last-child { font-size: 10px; letter-spacing: .5px; margin-top: 9px; }
+  .wardrobe-power { margin-top: 20px; padding-bottom: 16px; flex-wrap: wrap; gap: 11px; }
+  .wardrobe-power > span { font-size: 9px; gap: 5px; }
+  .wardrobe-power strong { font-size: 22px; margin-left: 5px; }
+  .wardrobe-power b { font-size: 14px; }
+  .wardrobe-power small { font-size: 7px; }
+  .wardrobe-stats.hero-stats { gap: 14px 17px; margin-bottom: 20px; }
+  .wardrobe-stats strong { font-size: 17px; }
+  .wardrobe-stats small { font-size: 10px; letter-spacing: 1px; }
+  .wardrobe-stats > div > span { font-size: 9px; }
+  .wardrobe-section-heading h3 { font-size: 12px; letter-spacing: 1px; }
+  .wardrobe-section-heading h3 > span { font-size: 8px; margin-left: 4px; }
+  .wardrobe-section-heading > button { font-size: 8px; }
+  .wardrobe-slots.hero-slots { gap: 8px; }
+  .wardrobe-slot.hero-slot { padding: 11px 5px 10px; gap: 6px; flex-direction: column; text-align: center; min-height: 106px; }
+  .wardrobe-slot.hero-slot > .equipment-art { width: 32px; height: 37px; }
+  .wardrobe-slot > span { align-items: center; gap: 5px; max-width: 100%; }
+  .wardrobe-slot > span > small { font-size: 9px; }
+  .wardrobe-slot > span > strong { font-size: 11px; max-width: 100%; }
+  .wardrobe-slot.vacant > span > strong { font-size: 8px; }
+  .wardrobe-slot > b { font-size: 7px; }
+  .wardrobe-selection { gap: 9px; padding-block: 12px; margin-top: 17px; flex-wrap: wrap; }
+  .selected-gear-mark { width: 36px; height: 43px; }
+  .selected-gear-mark > .equipment-art { width: 30px; height: 33px; }
+  .wardrobe-selection p { font-size: 6px; }
+  .wardrobe-selection h3 { font-size: 13px; margin-block: 5px; }
+  .wardrobe-selection span { font-size: 9px; }
+  .wardrobe-selection > button { font-size: 10px; gap: 2px; }
+  .wardrobe-selection > .wardrobe-unequip { font-size: 8px; padding-left: 8px; }
+  .wardrobe-footer { gap: 11px; flex-wrap: wrap; margin-top: 16px; }
+  .wardrobe-footer > button { font-size: 10px; gap: 5px; }
+  .wardrobe-note { font-size: 6.5px; margin-top: 15px; }
+  .inventory-intro { align-items: flex-start; margin-bottom: 15px; gap: 8px; flex-direction: column; }
+  .inventory-intro > p { font-size: 11px; }
+  .inventory-intro > button { font-size: 10px; }
+  .inventory-tabs.simple-tabs > button { font-size: 13px; gap: 8px; }
+  .inventory-tabs > button > small { font-size: 9px; }
+  .inventory-resources > .rewards { grid-template-columns: repeat(3, 1fr); gap: 23px 12px; margin: 25px 0; }
+  .inventory-resources .reward-tile { width: 67px; }
+  .inventory-resources .reward-name { font-size: 9px; }
+  .inventory-resource-actions > button { gap: 10px; padding: 15px 1px; }
+  .inventory-resource-actions > button > span { font-size: 11px; }
+  .inventory-resource-actions small { font-size: 8px; line-height: 1.7; }
+  .inventory-note { font-size: 8px; margin-top: 18px; }
+  .starter-equipment { gap: 10px; padding: 12px 10px; flex-wrap: wrap; }
+  .starter-equipment > svg { width: 19px; height: 19px; }
+  .starter-equipment strong { font-size: 11px; }
+  .starter-equipment span { font-size: 8px; line-height: 1.8; margin-top: 5px; }
+  .starter-equipment > button { font-size: 9px; margin-left: auto; }
+  .chest-showcase { grid-template-columns: 1fr; text-align: center; padding: 15px 0 20px; gap: 0; }
+  .chest-visual { min-height: 140px; }
+  .chest-visual > .item-art { width: 113px; height: 113px; }
+  .chest-floor-sigil { width: 120px; height: 120px; transform: rotateX(65deg) translateY(65px); }
+  .chest-showcase-copy .eyebrow { font-size: 6px; letter-spacing: 1px; }
+  .chest-showcase-copy h3 { font-size: 22px; letter-spacing: 2px; margin-top: 8px; }
+  .chest-showcase-copy > p:not(.eyebrow) { font-size: 11px; line-height: 1.9; margin-top: 12px; }
+  .chest-showcase-copy > span { justify-content: center; font-size: 8px; margin-top: 13px; gap: 5px; }
+  .chest-showcase-copy > span > b { font-size: 17px; }
+  .chest-open-actions { margin-top: 16px; gap: 10px; }
+  .chest-open-actions .gold-button { min-height: 45px; font-size: 15px; padding-inline: 27px; }
+  .chest-open-actions .outline-button { font-size: 12px; min-height: 41px; padding-inline: 20px; }
+  .chest-rules { font-size: 7px; align-items: flex-start; gap: 5px; }
+  .chest-rules > svg { margin-top: 2px; }
+  .chest-receipt { margin-top: 21px; }
+  .chest-receipt-heading > p { font-size: 10px; gap: 5px; }
+  .chest-receipt-heading > span { font-size: 7px; }
+  .chest-drops { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .chest-drops .gear-tile { min-height: 135px; }
+  .chest-see-equipment { font-size: 9px; margin-top: 16px; }
+  .inventory-empty-route { font-size: 8px; line-height: 1.8; }
+  .equipment-toolbar { gap: 7px; padding-block: 15px; flex-wrap: wrap; }
+  .equipment-toolbar > label > span:not(.sr-only) { display: none; }
+  .equipment-toolbar select { padding: 8px 19px 8px 8px; font-size: 10px; min-width: 92px; }
+  .equipment-toolbar > button { font-size: 8px; gap: 4px; }
+  .equipment-browser { grid-template-columns: 1fr; gap: 23px; }
+  .equipment-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; max-height: 315px; }
+  .gear-tile { padding: 8px 5px 17px; min-height: 139px; }
+  .gear-tile-top > small { font-size: 5.5px; letter-spacing: .6px; }
+  .gear-tile-top > b { font-size: 8px; }
+  .gear-tile > .equipment-art { width: 50px; height: 53px; }
+  .gear-tile > strong { font-size: 11px; }
+  .gear-tile-score { font-size: 10px; }
+  .gear-worn { font-size: 6px; }
+  .gear-detail { padding: 20px 21px; }
+  .gear-detail-art { padding-bottom: 18px; }
+  .gear-detail-art > .equipment-art { width: 81px; height: 83px; }
+  .gear-detail > h3 { font-size: 23px; }
+  .gear-story { font-size: 11px; }
+  .gear-rarity { font-size: 8px; }
+  .gear-comparison { margin-top: 17px; }
+  .gear-comparison > span { font-size: 9px; }
+  .gear-comparison > strong { font-size: 19px; }
+  .gear-stat-list > div { font-size: 11px; }
+  .gear-equip-button.gold-button { min-height: 46px; font-size: 15px; }
+  .gear-enhancement > div { font-size: 11px; }
+  .gear-enhancement strong { font-size: 9px; }
+  .gear-enhancement .outline-button { min-height: 38px; font-size: 11px; }
+  .gear-salvage-button { font-size: 9px; }
+  .equipment-empty { padding: 28px 3px 21px; }
+  .equipment-empty > h3 { font-size: 17px; letter-spacing: 1px; }
+  .equipment-empty > p { font-size: 10px; max-width: 280px; }
+  .equipment-empty .gold-button { font-size: 14px; }
+}
+
+@media (max-width: 360px) {
+  .wardrobe-content { padding-inline: 18px; }
+  .wardrobe-power { gap: 9px; }
+  .wardrobe-power > span { font-size: 8px; }
+  .wardrobe-power strong { font-size: 20px; }
+  .wardrobe-power b { font-size: 13px; }
+  .wardrobe-slot.hero-slot { padding-inline: 4px; }
+  .wardrobe-section-heading > button { font-size: 7px; }
+  .equipment-toolbar > button { width: 100%; justify-content: flex-end; margin-top: 4px; }
+  .gear-tile > strong { font-size: 10px; }
+  .chest-receipt-heading > p { font-size: 9px; }
+  .chest-receipt-heading > span { font-size: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wardrobe-portrait > img, .chest-visual > .item-art, .chest-drops .gear-tile { animation: none !important; }
+  .gear-tile { transition: none; }
+}

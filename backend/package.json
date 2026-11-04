@@ -1,0 +1,31 @@
+{
+  "name": "@food-fantasy/backend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc -p tsconfig.json && node scripts/copy-assets.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:reset": "tsx src/db/reset.ts",
+    "smoke": "tsx scripts/smoke.ts",
+    "live-check": "tsx scripts/live-check.ts",
+    "test": "node --import tsx --test tests/battle.test.ts tests/battle-parity.test.ts tests/battle-charges.test.ts tests/db.test.ts tests/crud.test.ts tests/equipment.test.ts tests/isolation.test.ts tests/save-sync.test.ts tests/session-cookie.test.ts tests/payment.test.ts tests/account-password.test.ts tests/combat-config.test.ts tests/item-activity.test.ts tests/gm.test.ts tests/leaderboard-logs.test.ts tests/quest-main.test.ts tests/growth-dims.test.ts tests/pacing.test.ts tests/server-isolation.test.ts tests/dungeon.test.ts tests/admin-config.test.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.19.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.3"
+  }
+}

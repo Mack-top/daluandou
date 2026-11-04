@@ -1,0 +1,47 @@
+node_modules/
+# ---- 构建产物 ----
+dist/
+.artifacts/
+.gitee-publish/
+test-results/
+test-results-*/
+playwright-report/
+.workbuddy-test-results/
+# Playwright 手工跑批的输出目录（历史遗留，体积巨大）
+frontend/test-out-*/
+frontend/test-out-*
+frontend/test-results*/
+# 构建期内联的静态资源表（由 frontend/scripts/gen-assets.mjs 生成，勿手工编辑）
+frontend/src/assets.generated.json
+# SEA 打包时保留的历史 exe 备份（体积大，不入库）
+release/*.old
+release/*.old.*
+# 打包出来的可执行文件 / 安装包不入库（源码可重新构建）
+release/*.exe
+release/*.apk
+release/webapp/
+release/data/
+# 前端构建期自动生成的资源内联表（每次 build/gen:assets 重算，体积 ~5MB）
+frontend/src/generated/
+# 将来若把单文件 index.html 打进 APK assets，则该文件为生成物，不入库
+android/app/src/main/assets/index.html
+# 本机助手会话数据
+.workbuddy/
+
+# ---- Android 构建中间产物与本地配置（不入库）----
+android/.gradle/
+android/app/build/
+android/local.properties
+# 签名密钥库含私密密钥，且密码明文写在 build.gradle；严禁入库（已在公仓暴露，需轮换）
+android/app/keystore/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+
+# ---- 后端数据库 ----
+# 本地 SQLite 数据文件（含 WAL/SHM）不入库
+backend/data/*.db
+backend/data/*.db-wal
+backend/data/*.db-shm
