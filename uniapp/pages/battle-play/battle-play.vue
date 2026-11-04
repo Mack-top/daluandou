@@ -114,10 +114,9 @@ const onSkip = () => {
     return;
   }
   uni.showLoading({ title: '计算结果中...' });
-  uni.setStorageSync('battle_result_id', battleId.value);
   setTimeout(() => {
     uni.hideLoading();
-    uni.redirectTo({ url: '/pages/battle-result/battle-result' });
+    uni.redirectTo({ url: `/pages/battle-result/battle-result?battleId=${encodeURIComponent(battleId.value)}` });
   }, 1000);
 };
 </script>

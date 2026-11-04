@@ -34,9 +34,10 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref } from 'vue';
+import { getSave } from '@/utils/api.js';
 
 const steps = [
   { name: '食灵召唤', desc: '通过召唤获得稀有食灵，组建你的梦幻战队' },
@@ -45,6 +46,22 @@ const steps = [
   { name: '协会玩法', desc: '加入协会，与协会成员一起参与协会活动' },
   { name: '竞技场', desc: '与其他玩家实时对战，争夺排名和荣誉' }
 ];
+const guideCompleted = ref(false);
+
+// 从后端存档获取引导完成状态（替换模拟数据）
+const loadGuide = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    guideCompleted.value = save.guideCompleted === true || save.guideCompleted === 1;
+  } catch (e) {
+    console.warn('load guide failed', e);
+  }
+};
+
+onMounted(() => {
+  loadGuide();
+});
 
 const onBack = () => uni.navigateBack();
 

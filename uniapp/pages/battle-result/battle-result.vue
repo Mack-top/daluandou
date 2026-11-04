@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, getCurrentInstance } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
@@ -50,9 +50,17 @@ const rewards = ref([]);
 const stageName = ref('');
 const rounds = ref(0);
 
+// 从页面查询参数获取 battleId（替换 uni.setStorageSync 传参）
+const battleId = ref('');
+onMounted(() => {
+  const instance = getCurrentInstance();
+  const pageQuery = instance?.proxy?.$page?.query || {};
+  battleId.value = pageQuery?.battleId || '';
+});
+
 // 从后端结算战斗（替换模拟结果）
 const loadResult = async () => {
-  const id = uni.getStorageSync('battle_result_id');
+  const id = battleId.value;
   if (!id) {
     uni.showToast({ title: '未找到战斗记录', icon: 'none' });
     setTimeout(() => uni.navigateBack(), 1500);
