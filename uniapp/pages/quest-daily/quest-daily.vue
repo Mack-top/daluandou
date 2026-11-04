@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">日常委托</text>
+        <view class="section-title">日常委托</view>
         <view class="quest-list">
           <view v-for="(q, i) in quests" :key="i" class="quest-card" :class="{completed: q.completed}" @tap="onClaim(q)">
             <view class="quest-info">
@@ -17,15 +17,17 @@
               <text v-if="q.completed" class="status-done">已完成</text>
               <base-button v-else class="btn-go">前往</base-button>
             </view>
-            <view class="quest-reward">{{ q.reward }}</text>
+            <view class="quest-reward">{{ q.reward }}</view>
           </view>
         </view>
         <!-- 活跃宝箱 -->
-        <view class="section-title">活跃宝箱</text>
+        <view class="section-title">活跃宝箱</view>
         <view class="chest-list">
           <view v-for="(c, i) in chests" :key="i" class="chest-card" :class="{claimed: c.claimed, active: c.active}">
             <text class="chest-label">活跃度 {{ c.threshold }}</text>
-            <text class="chest-icon">📦</text>
+            <view class="chest-icon-wrapper">
+              <avatar-icon placeholder-char="📦" :size="'md'" :shape="'circle'" />
+            </view>
             <text class="chest-status">{{ c.claimed ? '已领取' : (c.active ? '可领取' : '锁定') }}</text>
           </view>
         </view>
@@ -37,6 +39,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 const quests = [
   { name: '食灵召唤', desc: '今日召唤1次食灵', progress: '0/1', reward: '金币 × 50000', completed: false },
   { name: '领取每日礼遇', desc: '在每日充值中领取任意档位奖励', progress: '0/1', reward: '灵晶 × 20', completed: false },
@@ -79,7 +82,7 @@ const onClaim = (q) => {
 .chest-card { display: flex; flex-direction: column; align-items: center; gap: 10rpx; padding: 24rpx; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; flex: 1; max-width: 220rpx; }
 .chest-card.active { border-color: #E0D3A1; background: rgba(224,211,161,0.1); }
 .chest-card.claimed { border-color: #4CAF50; background: rgba(76,175,80,0.08); }
-.chest-icon { font-size: 56rpx; margin-bottom: 4rpx; }
+.chest-icon-wrapper { width: 56rpx; height: 56rpx; flex-shrink: 0; margin-bottom: 4rpx; }
 .chest-label { font-size: 22rpx; color: #E0D3A1; font-weight: 600; }
 .chest-status { font-size: 20rpx; font-weight: 600; }
 .chest-card.active .chest-status { color: #4CAF50; }

@@ -7,7 +7,9 @@
       <view class="content">
         <!-- BOSS信息 -->
         <view class="boss-card">
-          <view class="boss-icon">🐉</view>
+          <view class="boss-icon-wrapper">
+            <avatar-icon placeholder-char="🐉" :size="'md'" :shape="'circle'" />
+          </view>
           <view class="boss-info">
             <text class="boss-name">{{ boss.name }}</text>
             <text class="boss-hp">HP: {{ boss.hp }}</text>
@@ -23,7 +25,7 @@
           <text class="cd-time">{{ countdown }}</text>
         </view>
         <!-- 排行榜 -->
-        <view class="section-title">伤害排行榜</text>
+        <view class="section-title">伤害排行榜</view>
         <view class="rank-list">
           <view v-for="(r, i) in rankings" :key="i" class="rank-card">
             <text class="rank-no">{{ i + 1 }}</text>
@@ -40,6 +42,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 const boss = { name: '远古食神', hp: '98%', desc: '全服协作挑战，造成伤害越高奖励越丰厚' };
 const countdown = ref('02:34:12');
@@ -51,7 +54,7 @@ const rankings = [
   { name: '灵界旅人', damage: 2900000, reward: '食灵契约 × 10' }
 ];
 const onBack = () => uni.navigateBack();
-const onFight = () => uni.showToast({ title = '世界BOSS挑战开发中', icon: 'none' });
+const onFight = () => uni.showToast({ title: '世界BOSS挑战开发中', icon: 'none' });
 </script>
 
 <style scoped>
@@ -59,7 +62,7 @@ const onFight = () => uni.showToast({ title = '世界BOSS挑战开发中', icon:
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .boss-card { background: linear-gradient(135deg, rgba(229,72,77,0.15) 0%, rgba(180,40,45,0.08) 100%); border: 1rpx solid rgba(229,72,77,0.3); border-radius: 24rpx; padding: 32rpx; margin-bottom: 30rpx; display: flex; justify-content: space-between; align-items: center; }
-.boss-icon { font-size: 80rpx; flex-shrink: 0; }
+.boss-icon-wrapper { width: 80rpx; height: 80rpx; flex-shrink: 0; }
 .boss-info { flex: 1; margin: 0 32rpx; }
 .boss-name { font-size: 36rpx; color: #FFFFFF; font-weight: 700; margin-bottom: 8rpx; }
 .boss-hp { font-size: 30rpx; color: #E5484D; font-weight: 700; margin-bottom: 8rpx; }

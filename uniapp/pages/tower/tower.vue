@@ -12,10 +12,10 @@
           <view class="progress-bar"><view class="progress-fill" :style="{ width: progressPct + '%' }"></view></view>
         </view>
         <!-- 塔层列表 -->
-        <view class="section-title">塔层奖励</text>
+        <view class="section-title">塔层奖励</view>
         <view class="floor-list">
           <view v-for="(f, i) in floors" :key="i" class="floor-card" :class="{cleared: f.cleared, current: f.current, locked: f.locked}" @tap="onFloor(f)">
-            <view class="floor-number">第{{ f.floor }}层</text>
+            <view class="floor-number">第{{ f.floor }}层</view>
             <view class="floor-info">
               <text class="floor-name">{{ f.name }}</text>
               <text class="floor-desc">{{ f.desc }}</text>
@@ -52,7 +52,7 @@ const floors = [
 const onBack = () => uni.navigateBack();
 const onFloor = (f) => {
   if (f.locked) { uni.showToast({ title: '塔层未解锁', icon: 'none' }); return; }
-  uni.showToast({ title = f.name, icon: 'none' });
+    uni.showToast({ title: f.name, icon: 'none' });
 };
 </script>
 

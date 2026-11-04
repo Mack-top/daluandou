@@ -24,7 +24,7 @@
         </view>
 
         <!-- 首充礼包 -->
-        <view class="section-title">首充赠礼</text>
+        <view class="section-title">首充赠礼</view>
         <view class="gift-card">
           <text class="gift-name">蓝纹奶酪</text>
           <text class="gift-rarity">5星SSR</text>
@@ -36,7 +36,7 @@
         </view>
 
         <!-- 三日礼遇 -->
-        <view class="section-title">三日礼遇</text>
+        <view class="section-title">三日礼遇</view>
         <view class="daily-card" v-for="(d, i) in dayGifts" :key="i" @tap="onClaimDay(d)">
           <text class="day-label">第{{ d.day }}天</text>
           <view class="day-rewards">

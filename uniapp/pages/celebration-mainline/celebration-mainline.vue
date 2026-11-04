@@ -15,7 +15,7 @@
         </view>
 
         <!-- 主线章节进度 -->
-        <view class="section-title">主线章节</text>
+        <view class="section-title">主线章节</view>
         <view class="chapter-list">
           <view
             v-for="(c, i) in chapters"

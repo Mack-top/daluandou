@@ -7,7 +7,7 @@
       <view class="content">
 
         <!-- 召唤卡池 -->
-        <view class="section-title">召唤卡池</text>
+        <view class="section-title">召唤卡池</view>
         <view class="pool-list">
           <view v-for="(p, i) in pools" :key="i" class="pool-card" :class="{active: activePool === i}" @tap="activePool = i">
             <!-- 卡池美术资源（占位头像，资源到位后自动替换为真实图片） -->
@@ -87,11 +87,6 @@ const getPoolAvatar = (characterId) => {
 const hasAvatar = (characterId) => {
   // 实际项目中可通过 uni.getImageInfo 检查资源是否存在
   return false;
-};
-
-// 获取角色头像路径
-const getCharacterAvatar = (characterId) => {
-  return getCharacterAvatar(characterId);
 };
 
 const onBack = () => uni.navigateBack();

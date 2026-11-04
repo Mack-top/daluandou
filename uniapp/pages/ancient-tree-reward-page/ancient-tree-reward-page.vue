@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">古树参天奖励页</text>
+        <view class="section-title">古树参天奖励页</view>
         <view class="card">
           <text class="card-desc">该界面对应参考图 282，视觉与交互逻辑将严格还原设计图。</text>
         </view>

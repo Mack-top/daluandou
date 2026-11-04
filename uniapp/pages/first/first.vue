@@ -28,7 +28,7 @@
         </view>
 
         <!-- 豪华赠礼 -->
-        <view class="section-title">豪华赠礼</text>
+        <view class="section-title">豪华赠礼</view>
         <view class="deluxe-card" v-for="(d, i) in deluxeGifts" :key="i" @tap="onBuyDeluxe(d)">
           <text class="deluxe-label">{{ d.label }}</text>
           <view class="deluxe-rewards">

@@ -25,7 +25,7 @@
         </view>
 
         <!-- 累计登录奖励 -->
-        <view class="section-title">累计登录奖励</text>
+        <view class="section-title">累计登录奖励</view>
         <view class="cum-card" v-for="(c, i) in cumulative" :key="i" @tap="onClaimCumulative(c)">
           <text class="cum-label">累计登录 {{ c.day }} 天</text>
           <view class="cum-rewards">

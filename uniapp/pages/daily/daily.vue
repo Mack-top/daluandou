@@ -9,7 +9,7 @@
       <view class="content">
 
         <!-- 每日充值标题 -->
-        <view class="section-title">每日礼遇</text>
+        <view class="section-title">每日礼遇</view>
         <text class="section-sub">每日可领取一次任意档位奖励</text>
 
         <!-- 档位选择 -->

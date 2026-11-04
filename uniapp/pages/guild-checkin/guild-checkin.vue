@@ -16,7 +16,7 @@
           <base-button :class="{claimed: isClaimed}" class="btn-checkin" @tap="onCheckin">{{ isClaimed ? '已签到' : '立即签到' }}</base-button>
         </view>
         <!-- 签到奖励 -->
-        <view class="section-title">签到奖励预览</text>
+        <view class="section-title">签到奖励预览</view>
         <view class="reward-list">
           <view v-for="(r, i) in rewards" :key="i" class="reward-card" :class="{claimed: i < claimedCount, today: i === streakDays}">
             <text class="reward-day">第{{ i + 1 }}天</text>

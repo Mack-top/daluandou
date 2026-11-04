@@ -22,10 +22,12 @@
           </view>
         </view>
         <!-- 兑换商品 -->
-        <view class="section-title">宝库兑换</text>
+        <view class="section-title">宝库兑换</view>
         <view class="exchange-list">
           <view v-for="(e, i) in exchangeItems" :key="i" class="exchange-card" :class="{locked: e.locked}" @tap="onExchange(e)">
-            <view class="exchange-icon">{{ e.icon }}</text>
+            <view class="exchange-icon-wrapper">
+              <avatar-icon :placeholder-char="e.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="exchange-info">
               <text class="exchange-name">{{ e.name }}</text>
               <text class="exchange-desc">{{ e.desc }}</text>
@@ -78,7 +80,7 @@ const onExchange = (e) => {
 .exchange-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
 .exchange-card.locked { opacity: 0.6; border-color: #2A293E; }
 .exchange-card:active { background: rgba(255,255,255,0.08); }
-.exchange-icon { font-size: 40rpx; flex-shrink: 0; }
+.exchange-icon-wrapper { width: 40rpx; height: 40rpx; flex-shrink: 0; }
 .exchange-info { flex: 1; margin: 0 24rpx; }
 .exchange-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 4rpx; }
 .exchange-desc { font-size: 22rpx; color: #8A8A9E; }

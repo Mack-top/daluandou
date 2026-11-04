@@ -9,7 +9,7 @@
       <view class="content">
 
         <!-- 榜单标题 -->
-        <view class="section-title">主线剧情进度排行</text>
+        <view class="section-title">主线剧情进度排行</view>
         <text class="section-sub">按主线通关章节数排名</text>
 
         <!-- 榜单列表 -->
@@ -30,7 +30,7 @@
               <text class="score-label">已通关</text>
             </view>
             <view class="rank-action">
-              <base-button class="btn-like" @tap.stop="onLike(i)">👍 {{ r.likes }}</base-button>
+              <base-button class="btn-like" @tap.stop="onLike(i)"><avatar-icon placeholder-char="👍" :size="'sm'" :shape="'circle'" /> {{ r.likes }}</base-button>
             </view>
           </view>
         </view>
@@ -43,6 +43,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 
 const rankings = ref([

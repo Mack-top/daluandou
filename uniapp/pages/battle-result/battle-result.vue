@@ -8,7 +8,7 @@
         <view class="result-banner" :class="{victory: isVictory}">
           <text class="result-text">{{ isVictory ? '胜利' : '失败' }}</text>
         </view>
-        <view class="section-title">战斗结算</text>
+        <view class="section-title">战斗结算</view>
         <view class="mvp-card">
           <text class="mvp-label">MVP</text>
           <view class="mvp-avatar-wrapper">

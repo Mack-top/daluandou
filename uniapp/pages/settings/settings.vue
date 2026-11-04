@@ -9,7 +9,7 @@
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <!-- 音频设置 -->
-        <view class="section-title">音频设置</text>
+        <view class="section-title">音频设置</view>
         <view class="setting-item">
           <text class="setting-label">音乐</text>
           <view class="switch" :class="{on: musicOn}" @tap="toggleMusic"></view>
@@ -19,7 +19,7 @@
           <view class="switch" :class="{on: sfxOn}" @tap="toggleSfx"></view>
         </view>
         <!-- 语言设置 -->
-        <view class="section-title">语言设置</text>
+        <view class="section-title">语言设置</view>
         <view class="setting-item">
           <text class="setting-label">界面语言</text>
           <text class="setting-value">{{ language }}</text>

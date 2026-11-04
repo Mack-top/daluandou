@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">每日可挑战副本</text>
+        <view class="section-title">每日可挑战副本</view>
         <view class="dungeon-list">
           <view v-for="(d, i) in dungeons" :key="i" class="dungeon-card" :class="{locked: d.locked, cleared: d.cleared}" @tap="onEnter(d)">
             <view class="dungeon-icon-wrapper">
@@ -41,8 +41,8 @@ const dungeons = [
 ];
 const onBack = () => uni.navigateBack();
 const onEnter = (d) => {
-  if (d.locked) { uni.showToast({ title = '副本未解锁', icon: 'none' }); return; }
-  uni.showToast({ title = `进入${d.name}`, icon: 'none' });
+  if (d.locked) { uni.showToast({ title: '副本未解锁', icon: 'none' }); return; }
+  uni.showToast({ title: `进入${d.name}`, icon: 'none' });
 };
 </script>
 

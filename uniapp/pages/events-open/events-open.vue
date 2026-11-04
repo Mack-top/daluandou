@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">开服限时活动</text>
+        <view class="section-title">开服限时活动</view>
         <view class="activity-list">
           <view v-for="(a, i) in activities" :key="i" class="activity-card" :class="{ended: a.ended}" @tap="onEnter(a)">
             <view class="activity-icon-wrapper">

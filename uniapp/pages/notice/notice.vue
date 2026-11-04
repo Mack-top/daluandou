@@ -58,7 +58,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { onLoad } from 'vue';
+import { onMounted } from 'vue';
 
 // 公告内容（与003图OCR识别内容一致，后续可替换为后端接口获取）
 const announceContent = [
@@ -75,7 +75,7 @@ const rewardInfo = {
   detail: '助您在冒险之路上乘风破浪'
 };
 
-onLoad(() => {
+onMounted(() => {
   // 页面加载时可在此获取后端公告列表
   // uni.request({ url: '/api/announce/latest', ... })
 });

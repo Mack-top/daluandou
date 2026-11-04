@@ -15,7 +15,7 @@
         </view>
 
         <!-- 收益与掉落 -->
-        <view class="section-title">收益与掉落</text>
+        <view class="section-title">收益与掉落</view>
         <view class="reward-grid">
           <view
             v-for="(r, i) in rewards"

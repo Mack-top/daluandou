@@ -12,10 +12,12 @@
           <base-button class="btn-refresh" @tap="onRefresh">手动刷新</base-button>
         </view>
         <!-- 商品列表 -->
-        <view class="section-title">限时商品</text>
+        <view class="section-title">限时商品</view>
         <view class="product-list">
           <view v-for="(p, i) in products" :key="i" class="product-card">
-            <view class="product-icon">{{ p.icon }}</text>
+            <view class="product-icon-wrapper">
+              <avatar-icon :placeholder-char="p.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="product-info">
               <text class="product-name">{{ p.name }}</text>
               <text class="product-desc">{{ p.desc }}</text>
@@ -35,6 +37,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 const countdown = ref('04:12:30');
 const products = [
@@ -69,7 +72,7 @@ const onBuy = (p) => {
 .product-list { display: flex; flex-direction: column; gap: 16rpx; }
 .product-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
 .product-card:active { background: rgba(255,255,255,0.08); }
-.product-icon { font-size: 40rpx; flex-shrink: 0; }
+.product-icon-wrapper { width: 40rpx; height: 40rpx; flex-shrink: 0; }
 .product-info { flex: 1; margin: 0 24rpx; }
 .product-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 4rpx; }
 .product-desc { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }

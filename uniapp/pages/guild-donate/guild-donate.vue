@@ -5,17 +5,21 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">资源捐献</text>
+        <view class="section-title">资源捐献</view>
         <text class="section-sub">捐献资源可获得协会币和个人贡献度</text>
         <view class="donate-list">
           <view v-for="(d, i) in donateItems" :key="i" class="donate-card" @tap="onDonate(d)">
-            <view class="donate-icon">{{ d.icon }}</text>
+            <view class="donate-icon-wrapper">
+              <avatar-icon :placeholder-char="d.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="donate-info">
               <text class="donate-name">{{ d.name }}</text>
               <text class="donate-desc">{{ d.desc }}</text>
             </view>
             <view class="donate-reward">
-              <text class="reward-icon">🪙</text>
+              <view class="reward-icon-wrapper">
+                <avatar-icon placeholder-char="🪙" :size="'sm'" :shape="'circle'" />
+              </view>
               <text class="reward-value">+{{ d.guildCoin }} 协会币</text>
             </view>
           </view>
@@ -34,6 +38,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 const donateItems = [
   { name: '金币', desc: '捐献 100 万金币', icon: '💰', guildCoin: 100, cost: 1000000 },
@@ -58,12 +63,12 @@ const onDonate = (d) => uni.showToast({ title: `捐献${d.name}成功，获得${
 .donate-list { display: flex; flex-direction: column; gap: 16rpx; }
 .donate-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
 .donate-card:active { background: rgba(255,255,255,0.08); }
-.donate-icon { font-size: 40rpx; flex-shrink: 0; }
+.donate-icon-wrapper { width: 40rpx; height: 40rpx; flex-shrink: 0; }
 .donate-info { flex: 1; margin: 0 24rpx; }
 .donate-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 4rpx; }
 .donate-desc { font-size: 22rpx; color: #8A8A9E; }
 .donate-reward { display: flex; align-items: center; gap: 8rpx; flex-shrink: 0; }
-.reward-icon { font-size: 24rpx; flex-shrink: 0; }
+.reward-icon-wrapper { width: 24rpx; height: 24rpx; flex-shrink: 0; }
 .reward-value { font-size: 24rpx; color: #E0D3A1; font-weight: 700; }
 .contribution-card { background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 24rpx; padding: 32rpx; margin-top: 40rpx; }
 .contribution-title { font-size: 28rpx; color: #E0D3A1; font-weight: 700; margin-bottom: 20rpx; }

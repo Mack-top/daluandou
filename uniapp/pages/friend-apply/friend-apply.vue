@@ -6,10 +6,12 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">好友申请列表</text>
+        <view class="section-title">好友申请列表</view>
         <view class="apply-list">
           <view v-for="(a, i) in applies" :key="i" class="apply-card">
-            <view class="apply-avatar">{{ a.icon }}</text>
+            <view class="apply-avatar-wrapper">
+              <avatar-icon :placeholder-char="a.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="apply-info">
               <text class="apply-name">{{ a.name }}</text>
               <text class="apply-server">{{ a.server }}</text>
@@ -43,10 +45,10 @@ const applies = [
 ];
 const onBack = () => uni.navigateBack();
 const onAccept = (a) => {
-  uni.showToast({ title = `已接受${a.name}的好友申请`, icon: 'success' });
+  uni.showToast({ title: `已接受${a.name}的好友申请`, icon: 'success' });
 };
 const onReject = (a) => {
-  uni.showToast({ title = `已拒绝${a.name}`, icon: 'none' });
+  uni.showToast({ title: `已拒绝${a.name}`, icon: 'none' });
 };
 </script>
 
@@ -58,7 +60,7 @@ const onReject = (a) => {
 .apply-list { display: flex; flex-direction: column; gap: 16rpx; }
 .apply-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
 .apply-card:active { background: rgba(255,255,255,0.08); }
-.apply-avatar { font-size: 48rpx; flex-shrink: 0; }
+.apply-avatar-wrapper { width: 48rpx; height: 48rpx; flex-shrink: 0; }
 .apply-info { flex: 1; margin: 0 24rpx; }
 .apply-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 4rpx; }
 .apply-server { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }
@@ -73,7 +75,7 @@ const onReject = (a) => {
 .btn-accept:active, .btn-reject:active { background: rgba(255,255,255,0.12); }
 .empty-state { display: flex; flex-direction: column; align-items: center; gap: 16rpx; margin-top: 100rpx; text-align: center; }
 .empty-icon { font-size: 64rpx; }
-..empty-icon-wrapper { width: 64rpx; height: 64rpx; flex-shrink: 0; }
+.empty-icon-wrapper { width: 64rpx; height: 64rpx; flex-shrink: 0; }
 
 .empty-text { font-size: 28rpx; color: #8A8A9E; }
 </style>

@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">资源获取副本</text>
+        <view class="section-title">资源获取副本</view>
         <view class="resource-list">
           <view v-for="(r, i) in resources" :key="i" class="resource-card" @tap="onEnter(r)">
             <view class="resource-icon-wrapper">
@@ -38,7 +38,7 @@ const resources = [
   { name: '经验药水矿', desc: '掉落经验药水', icon: '🧪', drops: '经验药水 × 中量' }
 ];
 const onBack = () => uni.navigateBack();
-const onEnter = (r) => uni.showToast({ title = `进入${r.name}`, icon: 'none' });
+const onEnter = (r) => uni.showToast({ title: `进入${r.name}`, icon: 'none' });
 </script>
 
 <style scoped>

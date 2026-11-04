@@ -5,10 +5,12 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">邮件列表</text>
+        <view class="section-title">邮件列表</view>
         <view class="mail-list">
           <view v-for="(m, i) in mails" :key="i" class="mail-card" :class="{read: m.read, hasAttachment: m.hasAttachment}" @tap="onOpen(m)">
-            <view class="mail-icon">{{ m.icon }}</text>
+            <view class="mail-icon-wrapper">
+              <avatar-icon :placeholder-char="m.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="mail-info">
               <text class="mail-title">{{ m.title }}</text>
               <text class="mail-desc">{{ m.desc }}</text>
@@ -17,7 +19,9 @@
             <view class="mail-status">
               <text v-if="m.read" class="status-read">已读</text>
               <text v-else class="status-unread">未读</text>
-              <text v-if="m.hasAttachment" class="status-attachment">📎</text>
+              <view v-if="m.hasAttachment" class="status-attachment-wrapper">
+                <avatar-icon placeholder-char="📎" :size="'sm'" :shape="'circle'" />
+              </view>
             </view>
           </view>
         </view>
@@ -32,6 +36,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 const mails = [
   { title: '欢迎邮件', desc: '欢迎来到美食大乱斗，祝您游戏愉快！', icon: '📬', time: '2024-01-15 10:00', read: true, hasAttachment: false },
   { title: '系统奖励', desc: '您获得了新手礼包奖励，请查收附件。', icon: '🎁', time: '2024-01-15 09:30', read: false, hasAttachment: true },
@@ -43,14 +48,14 @@ const onBack = () => uni.navigateBack();
 const onOpen = (m) => {
   if (!m.read) {
     m.read = true;
-    uni.showToast({ title = `查看${m.title}`, icon: 'none' });
+    uni.showToast({ title: `查看${m.title}`, icon: 'none' });
   }
   if (m.hasAttachment) {
-    uni.showToast({ title = '附件已发放到背包', icon: 'success' });
+    uni.showToast({ title: '附件已发放到背包', icon: 'success' });
   }
 };
 const onClaimAll = () => {
-  uni.showToast({ title = '所有邮件附件已领取', icon: 'success' });
+  uni.showToast({ title: '所有邮件附件已领取', icon: 'success' });
 };
 </script>
 
@@ -63,7 +68,7 @@ const onClaimAll = () => {
 .mail-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
 .mail-card:active { background: rgba(255,255,255,0.08); }
 .mail-card.read { opacity: 0.7; }
-.mail-icon { font-size: 40rpx; flex-shrink: 0; }
+.mail-icon-wrapper { width: 40rpx; height: 40rpx; flex-shrink: 0; }
 .mail-info { flex: 1; margin: 0 24rpx; }
 .mail-title { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 6rpx; }
 .mail-desc { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }
@@ -71,7 +76,7 @@ const onClaimAll = () => {
 .mail-status { display: flex; flex-direction: column; align-items: flex-end; gap: 6rpx; flex-shrink: 0; }
 .status-read { font-size: 20rpx; color: #8A8A9E; }
 .status-unread { font-size: 20rpx; color: #E0D3A1; font-weight: 600; }
-.status-attachment { font-size: 24rpx; margin-top: 4rpx; }
+.status-attachment-wrapper { width: 24rpx; height: 24rpx; flex-shrink: 0; margin-top: 4rpx; }
 .action-section { text-align: center; margin-top: 40rpx; }
 .btn-claim-all { width: 500rpx; height: 96rpx; line-height: 96rpx; background: linear-gradient(135deg, #E0D3A1 0%, #C9B87E 100%); color: #0F0E1D; font-size: 32rpx; font-weight: 700; border-radius: 48rpx; box-shadow: 0 8rpx 24rpx rgba(224,211,161,0.3); }
 .btn-claim-all:active { transform: scale(0.96); opacity: 0.85; }

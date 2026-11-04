@@ -8,7 +8,7 @@
     />
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">商店分类</text>
+        <view class="section-title">商店分类</view>
         <view class="shop-grid">
           <!-- 美术资源接入：商店分类图标使用 AvatarIcon 组件 -->
           <view class="shop-item" @tap="onEnter('spice')">

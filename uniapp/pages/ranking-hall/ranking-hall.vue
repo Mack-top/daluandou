@@ -10,7 +10,7 @@
           <view v-for="(t, i) in tabs" :key="i" class="tab-item" :class="{active: activeTab === i}" @tap="activeTab = i">{{ t }}</view>
         </view>
         <!-- 榜单内容 -->
-        <view class="section-title">{{ tabs[activeTab] }}</text>
+        <view class="section-title">{{ tabs[activeTab] }}</view>
         <view class="rank-list">
           <view v-for="(r, i) in rankings" :key="i" class="rank-card" :class="{top3: i < 3}">
             <text class="rank-no">{{ i + 1 }}</text>

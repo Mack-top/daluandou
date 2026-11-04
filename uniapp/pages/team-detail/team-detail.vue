@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">圣器 / 光环 / 羁绊说明</text>
+        <view class="section-title">圣器 / 光环 / 羁绊说明</view>
         <view class="card-grid">
           <view v-for="(c, i) in cards" :key="i" class="detail-card">
             <text class="card-title">{{ c.title }}</text>

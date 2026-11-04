@@ -9,7 +9,7 @@
       <view class="content">
 
         <!-- 页面标题 -->
-        <view class="section-title">看板娘选择</text>
+        <view class="section-title">看板娘选择</view>
         <text class="section-sub">选择主城助手形象</text>
 
         <!-- 助手列表 -->

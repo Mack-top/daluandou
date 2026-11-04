@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">补给加速</text>
+        <view class="section-title">补给加速</view>
         <text class="section-sub">消耗碎钻立即完成补给，获取收益</text>
         <view class="speed-card">
           <text class="speed-time">{{ remaining }}</text>

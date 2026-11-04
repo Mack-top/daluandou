@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">推荐阵容</text>
+        <view class="section-title">推荐阵容</view>
         <view class="team-list">
           <view v-for="(t, i) in teams" :key="i" class="team-card" @tap="onDetail(t)">
             <view class="team-info">

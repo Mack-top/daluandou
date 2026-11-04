@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-flex="false">
       <view class="content">
-        <view class="section-title">稀有商品</text>
+        <view class="section-title">稀有商品</view>
         <view class="product-list">
           <view v-for="(p, i) in products" :key="i" class="product-card">
             <view class="product-icon-wrapper">

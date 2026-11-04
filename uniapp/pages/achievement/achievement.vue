@@ -8,7 +8,7 @@
     />
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">成就列表</text>
+        <view class="section-title">成就列表</view>
         <text class="section-sub">完成成就获取成就点数与奖励</text>
         <view class="achievement-list">
           <view v-for="(a, i) in achievements" :key="i" class="ach-card" :class="{unlocked: a.unlocked, claimed: a.claimed}" @tap="onClaim(a)">

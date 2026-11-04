@@ -23,7 +23,9 @@
             :class="{unlocked: r.unlocked, current: r.current, locked: r.locked}"
             @tap="() => onRegionTap(r)"
           >
-            <view class="region-icon">{{ r.icon }}</text>
+            <view class="region-icon-wrapper">
+              <avatar-icon :placeholder-char="r.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="region-info">
               <text class="region-name">{{ r.name }}</text>
               <text class="region-desc">{{ r.desc }}</text>
@@ -31,7 +33,9 @@
                 {{ r.locked ? '未解锁' : (r.current ? '当前区域' : '可探索') }}
               </text>
             </view>
-            <view class="region-arrow">▶</view>
+            <view class="region-arrow-wrapper">
+              <avatar-icon placeholder-char="▶" :size="'sm'" :shape="'circle'" />
+            </view>
           </view>
         </view>
 
@@ -43,6 +47,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 
 const regions = ref([
@@ -83,7 +88,7 @@ const onRegionTap = (r) => {
 .region-card:active { background: rgba(255,255,255,0.08); }
 .region-card.current { border-color: #E0D3A1; background: rgba(224,211,161,0.1); }
 .region-card.locked { opacity: 0.6; }
-.region-icon { font-size: 48rpx; flex-shrink: 0; }
+.region-icon-wrapper { width: 48rpx; height: 48rpx; flex-shrink: 0; }
 .region-info { flex: 1; margin: 0 24rpx; }
 .region-name { font-size: 30rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 8rpx; }
 .region-desc { font-size: 24rpx; color: #8A8A9E; margin-bottom: 8rpx; }
@@ -92,5 +97,5 @@ const onRegionTap = (r) => {
 }
 .region-status.unlocked { color: #E0D3A1; }
 .region-status.locked { color: #8A8A9E; }
-.region-arrow { font-size: 24rpx; color: #E0D3A1; flex-shrink: 0; }
+.region-arrow-wrapper { width: 24rpx; height: 24rpx; flex-shrink: 0; }
 </style>

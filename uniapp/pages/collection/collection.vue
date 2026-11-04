@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">已收录食灵 {{ ownedCount }} / {{ totalCount }}</text>
+        <view class="section-title">已收录食灵 {{ ownedCount }} / {{ totalCount }}</view>
         <view class="collection-grid">
           <view v-for="(c, i) in collections" :key="i" class="collection-card" :class="{owned: c.owned}" @tap="onTap(c)">
             <!-- 食灵头像：美术资源接入，资源到位后自动显示真实图片 -->
@@ -27,7 +27,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref, computed, onLoad, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 import { getCharacterAvatar, getStaticUrl } from '@/utils/resource.js';
 import { eventBus } from '@/utils/event-bus.js';
@@ -44,11 +44,6 @@ const collections = ref([
 
 const ownedCount = computed(() => collections.value.filter(c => c.owned).length);
 const totalCount = computed(() => collections.value.length);
-
-// 获取角色头像路径
-const getCharacterAvatar = (id) => {
-  return getCharacterAvatar(id);
-};
 
 // 检查是否有真实头像资源
 const hasAvatar = (id) => {
@@ -91,7 +86,7 @@ const onTap = (c) => {
   });
 };
 
-onLoad(() => {
+onMounted(() => {
   // 恢复页面间通信状态
   store.dispatch('restorePageComm');
 });

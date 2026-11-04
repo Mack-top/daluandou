@@ -12,7 +12,7 @@
           <base-button class="btn-recharge" @tap="onRecharge">充值</base-button>
         </view>
         <!-- 商品列表 -->
-        <view class="section-title">灵晶礼包</text>
+        <view class="section-title">灵晶礼包</view>
         <view class="product-list">
           <view v-for="(p, i) in products" :key="i" class="product-card" :class="{first: p.first}">
             <view class="product-icon-wrapper">

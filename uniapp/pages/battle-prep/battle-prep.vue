@@ -5,10 +5,10 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">出战阵容</text>
+        <view class="section-title">出战阵容</view>
         <view class="team-grid">
           <view v-for="(s, i) in slots" :key="i" class="slot-card" @tap="onSelectSlot(i)">
-            <view class="slot-pos">{{ s.pos }}</text>
+            <view class="slot-pos">{{ s.pos }}</view>
             <view v-if="s.member" class="slot-member-wrapper">
               <avatar-icon :placeholder-char="s.member.icon" :size="'md'" :shape="'circle'" />
             </view>

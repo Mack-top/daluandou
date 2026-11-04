@@ -14,7 +14,7 @@
         </view>
 
         <!-- 在线好友 -->
-        <view class="section-title" v-if="activeTab === '好友列表'">好友列表</text>
+        <view class="section-title" v-if="activeTab === '好友列表'">好友列表</view>
         <view class="friend-list">
           <view v-for="(f, i) in friends" :key="i" class="friend-card" :class="{online: f.online}" @tap="() => onFriendTap(f)">
             <!-- 美术资源接入：好友头像使用 AvatarIcon 组件 -->
@@ -31,7 +31,7 @@
               <text class="friend-name">{{ f.name }}</text>
               <text class="friend-status" :class="{online: f.online}">{{ f.online ? '在线' : '离线' }}</text>
             </view>
-            <view class="friend-power">战力 {{ f.power }}</text>
+            <view class="friend-power">战力 {{ f.power }}</view>
             <view class="friend-action">
               <base-button btn-type="primary" @tap.stop="() => onMessage(f)">私聊</base-button>
             </view>

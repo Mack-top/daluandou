@@ -5,7 +5,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">首充详情</text>
+        <view class="section-title">首充详情</view>
         <view class="card">
           <text class="card-desc">该界面对应参考图 162，视觉与交互逻辑将严格还原设计图。</text>
         </view>

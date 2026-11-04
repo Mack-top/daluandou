@@ -19,14 +19,14 @@
             <text class="equip-slot">{{ equipSlot }}</text>
           </view>
         </view>
-        <view class="section-title">属性加成</text>
+        <view class="section-title">属性加成</view>
         <view class="attr-list">
           <view v-for="(a, i) in equipAttrs" :key="i" class="attr-row">
             <text class="attr-name">{{ a.name }}</text>
             <text class="attr-value">+{{ a.value }}</text>
           </view>
         </view>
-        <view class="section-title">装备说明</text>
+        <view class="section-title">装备说明</view>
         <text class="equip-desc">{{ equipDesc }}</text>
         <view class="action-section">
           <base-button class="btn-strengthen" @tap="onStrengthen">强化</base-button>
@@ -46,7 +46,7 @@
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref, onLoad, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 import { getItemIcon, getStaticUrl } from '@/utils/resource.js';
 import { eventBus } from '@/utils/event-bus.js';
@@ -66,11 +66,6 @@ const equipAttrs = ref([
   { name: '防御', value: 120 },
   { name: '速度', value: 15 },
 ]);
-
-// 获取装备图标路径
-const getItemIcon = (id) => {
-  return getItemIcon(id);
-};
 
 onLoad((options) => {
   // 接收页面跳转参数（页面间通信）

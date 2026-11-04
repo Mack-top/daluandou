@@ -11,7 +11,9 @@
         <!-- 玩家主信息 -->
         <view class="player-header">
           <view class="player-avatar">
-            <text class="avatar-icon">👤</text>
+            <view class="avatar-icon-wrapper">
+              <avatar-icon placeholder-char="👤" :size="'md'" :shape="'circle'" />
+            </view>
           </view>
           <view class="player-info">
             <text class="player-name">{{ player.name }}</text>
@@ -22,7 +24,7 @@
         </view>
 
         <!-- 属性面板 -->
-        <view class="section-title">属性面板</text>
+        <view class="section-title">属性面板</view>
         <view class="attr-grid">
           <view class="attr-card">
             <text class="attr-label">生命</text>
@@ -43,14 +45,16 @@
         </view>
 
         <!-- 食灵阵容 -->
-        <view class="section-title">主力食灵阵容</text>
+        <view class="section-title">主力食灵阵容</view>
         <view class="team-list">
           <view
             v-for="(c, i) in team"
             :key="i"
             class="team-card"
           >
-            <view class="team-avatar">{{ c.icon }}</text>
+            <view class="team-avatar-wrapper">
+              <avatar-icon :placeholder-char="c.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="team-info">
               <text class="team-name">{{ c.name }}</text>
               <text class="team-rarity">{{ c.rarity }} · {{ c.element }} · {{ c.role }}</text>
@@ -73,6 +77,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 
 const player = ref({
@@ -115,7 +120,7 @@ const onSendMail = () => {
   background: #1A192E; border: 1rpx solid #2A293E;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.avatar-icon { font-size: 56rpx; }
+.avatar-icon-wrapper { width: 56rpx; height: 56rpx; flex-shrink: 0; }
 .player-info { flex: 1; }
 .player-name { font-size: 34rpx; color: #FFFFFF; font-weight: 700; margin-bottom: 6rpx; }
 .player-server { font-size: 24rpx; color: #8A8A9E; margin-bottom: 8rpx; }
@@ -139,7 +144,7 @@ const onSendMail = () => {
   background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E;
   border-radius: 20rpx; padding: 20rpx 32rpx;
 }
-.team-avatar { font-size: 40rpx; flex-shrink: 0; }
+.team-avatar-wrapper { width: 40rpx; height: 40rpx; flex-shrink: 0; }
 .team-info { flex: 1; margin: 0 24rpx; }
 .team-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 6rpx; }
 .team-rarity { font-size: 22rpx; color: #E0D3A1; }

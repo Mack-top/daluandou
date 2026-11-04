@@ -10,7 +10,9 @@
 
         <!-- 食灵信息 -->
         <view class="skill-header">
-          <view class="skill-avatar">{{ currentSkill.avatar }}</text>
+          <view class="skill-avatar-wrapper">
+            <avatar-icon :placeholder-char="currentSkill.avatar" :size="'xl'" :shape="'circle'" />
+          </view>
           <view class="skill-info">
             <text class="skill-name">{{ currentSkill.name }}</text>
             <text class="skill-rarity">{{ currentSkill.rarity }}</text>
@@ -18,11 +20,11 @@
         </view>
 
         <!-- 技能详情 -->
-        <view class="section-title">技能详情</text>
+        <view class="section-title">技能详情</view>
         <view class="skill-detail-card">
           <text class="skill-title">{{ currentSkill.skillName }}</text>
           <text class="skill-desc">{{ currentSkill.skillDesc }}</text>
-          <view class="skill-cd">冷却时间：{{ currentSkill.cooldown }}秒</text>
+          <view class="skill-cd">冷却时间：{{ currentSkill.cooldown }}秒</view>
           <view class="skill-unlock">
             <text class="unlock-label">升星解锁：</text>
             <text class="unlock-value">{{ currentSkill.unlockStar }}星</text>
@@ -42,6 +44,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 
 const currentSkill = ref({
@@ -70,7 +73,7 @@ const onUpgrade = () => {
   background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E;
   border-radius: 24rpx; padding: 32rpx; margin-bottom: 30rpx;
 }
-.skill-avatar {
+.skill-avatar-wrapper {
   width: 110rpx; height: 110rpx; border-radius: 55rpx;
   background: #1A192E; border: 1rpx solid #2A293E;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;

@@ -21,7 +21,7 @@
           <base-button class="btn-upgrade" @tap="onUpgrade">升级世界树</base-button>
         </view>
         <!-- 产出预览 -->
-        <view class="section-title">当前产出加成</text>
+        <view class="section-title">当前产出加成</view>
         <view class="bonus-list">
           <view v-for="(b, i) in bonuses" :key="i" class="bonus-item">
             <text class="bonus-name">{{ b.name }}</text>

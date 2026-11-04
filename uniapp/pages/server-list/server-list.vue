@@ -48,7 +48,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref, onLoad } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
@@ -68,7 +68,7 @@ const selectedServerId = ref(null);
 // 当前选中的服务器（供提交用）
 const selectedServer = ref(null);
 
-onLoad(() => {
+onMounted(() => {
   // 恢复之前选择的服务器
   const saved = uni.getStorageSync('selected_server');
   if (saved) {

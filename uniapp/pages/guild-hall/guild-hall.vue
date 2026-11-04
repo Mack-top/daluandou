@@ -7,7 +7,9 @@
       <view class="content">
         <!-- 协会头部 -->
         <view class="guild-header">
-          <view class="guild-icon">🏛️</view>
+          <view class="guild-icon-wrapper">
+            <avatar-icon placeholder-char="🏛️" :size="'md'" :shape="'circle'" />
+          </view>
           <view class="guild-info">
             <text class="guild-name">{{ guild.name }}</text>
             <text class="guild-id">协会ID：{{ guild.id }}</text>
@@ -32,12 +34,12 @@
           </view>
         </view>
         <!-- 协会公告 -->
-        <view class="section-title">协会公告</text>
+        <view class="section-title">协会公告</view>
         <view class="notice-card">
           <text class="notice-text">{{ guild.notice }}</text>
         </view>
         <!-- 快捷入口 -->
-        <view class="section-title">快捷入口</text>
+        <view class="section-title">快捷入口</view>
         <view class="quick-menu">
           <view class="menu-item" @tap="onMembers">成员列表</view>
           <view class="menu-item" @tap="onCheckin">协会签到</view>
@@ -52,6 +54,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 const guild = {
   id: '8821',
   name: '美食之巅',
@@ -74,7 +77,7 @@ const onVault = () => uni.showToast({ title: '打开宝库页面', icon: 'none' 
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .guild-header { display: flex; align-items: center; gap: 24rpx; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 24rpx; padding: 28rpx 32rpx; margin-bottom: 30rpx; }
-.guild-icon { font-size: 56rpx; flex-shrink: 0; }
+.guild-icon-wrapper { width: 56rpx; height: 56rpx; flex-shrink: 0; }
 .guild-info { flex: 1; }
 .guild-name { font-size: 34rpx; color: #FFFFFF; font-weight: 700; margin-bottom: 8rpx; }
 .guild-id { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }

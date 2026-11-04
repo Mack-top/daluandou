@@ -5,10 +5,12 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">庄园建筑</text>
+        <view class="section-title">庄园建筑</view>
         <view class="manor-grid">
           <view v-for="(b, i) in buildings" :key="i" class="building-card" :class="{locked: b.locked}" @tap="onBuildingTap(b)">
-            <view class="building-icon">{{ b.icon }}</text>
+            <view class="building-icon-wrapper">
+              <avatar-icon :placeholder-char="b.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="building-info">
               <text class="building-name">{{ b.name }}</text>
               <text class="building-level">Lv.{{ b.level }}</text>
@@ -30,6 +32,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 const buildings = [
   { name: '研制坊', level: 3, icon: '🔧', locked: false },
   { name: '时光屋', level: 2, icon: '⏳', locked: false },
@@ -55,7 +58,7 @@ const onUpgrade = (b) => uni.showToast({ title: `${b.name}升级开发中`, icon
 .building-card { background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx; text-align: center; position: relative; }
 .building-card.locked { opacity: 0.6; border-color: #2A293E; }
 .building-card:active { background: rgba(255,255,255,0.08); }
-.building-icon { font-size: 48rpx; margin-bottom: 10rpx; }
+.building-icon-wrapper { width: 48rpx; height: 48rpx; flex-shrink: 0; margin-bottom: 10rpx; }
 .building-info { flex: 1; }
 .building-name { font-size: 24rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 4rpx; }
 .building-level { font-size: 20rpx; color: #E0D3A1; }

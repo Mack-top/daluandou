@@ -18,7 +18,7 @@
           </view>
         </view>
         <!-- 里程碑奖励 -->
-        <view class="section-title">里程碑奖励</text>
+        <view class="section-title">里程碑奖励</view>
         <view class="milestone-list">
           <view v-for="(m, i) in milestones" :key="i" class="milestone-card" :class="{claimed: m.claimed, reached: collected >= m.threshold}">
             <text class="milestone-target">收集 {{ m.threshold }} 种食材</text>

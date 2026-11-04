@@ -8,7 +8,7 @@
     />
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">食灵升星</text>
+        <view class="section-title">食灵升星</view>
         <text class="section-sub">提升食星等级，解锁更高属性上限</text>
         <!-- 当前选中的食灵 -->
         <view class="select-card">
@@ -28,7 +28,7 @@
           </view>
         </view>
         <!-- 升星阶段 -->
-        <view class="section-title">升星阶段</text>
+        <view class="section-title">升星阶段</view>
         <view class="stage-list">
           <view v-for="(s, i) in stages" :key="i" class="stage-card" :class="{active: s.active, locked: s.locked, completed: s.completed}" @tap="onStage(s)">
             <view class="stage-info">

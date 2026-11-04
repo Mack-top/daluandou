@@ -7,7 +7,9 @@
       <view class="content">
         <!-- 个人主页 -->
         <view class="profile-card">
-          <view class="profile-avatar">{{ avatar }}</text>
+          <view class="profile-avatar-wrapper">
+            <avatar-icon :placeholder-char="avatar" :size="'xl'" :shape="'circle'" />
+          </view>
           <view class="profile-info">
             <text class="profile-name">{{ profile.name }}</text>
             <text class="profile-id">ID: {{ profile.id }}</text>
@@ -19,18 +21,22 @@
           </view>
         </view>
         <!-- 收藏/勋章 -->
-        <view class="section-title">我的收藏</text>
+        <view class="section-title">我的收藏</view>
         <view class="collection-grid">
           <view class="collection-item" v-for="(c, i) in collections" :key="i">
-            <text class="collection-icon">{{ c.icon }}</text>
+            <view class="collection-icon-wrapper">
+              <avatar-icon :placeholder-char="c.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <text class="collection-name">{{ c.name }}</text>
           </view>
         </view>
         <!-- 地区设置 -->
-        <view class="section-title">地区设置</text>
+        <view class="section-title">地区设置</view>
         <view class="setting-item" @tap="onRegion">
           <text class="setting-label">当前地区：{{ region }}</text>
-          <text class="setting-arrow">▶</text>
+          <view class="setting-arrow-wrapper">
+            <avatar-icon placeholder-char="▶" :size="'sm'" :shape="'circle'" />
+          </view>
         </view>
       </view>
     </scroll-view>
@@ -40,6 +46,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 const avatar = ref('👤');
 const profile = { name: '食神小助手', id: '8821001', level: 42, power: 125000 };
@@ -50,8 +57,8 @@ const collections = [
   { name: '首充勋章', icon: '💎' }
 ];
 const onBack = () => uni.navigateBack();
-const onEdit = () => uni.showToast({ title = '编辑资料开发中', icon: 'none' });
-const onRegion = () => uni.showToast({ title = '地区设置开发中', icon: 'none' });
+const onEdit = () => uni.showToast({ title: '编辑资料开发中', icon: 'none' });
+const onRegion = () => uni.showToast({ title: '地区设置开发中', icon: 'none' });
 </script>
 
 <style scoped>
@@ -59,7 +66,7 @@ const onRegion = () => uni.showToast({ title = '地区设置开发中', icon: 'n
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .profile-card { background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 24rpx; padding: 32rpx; margin-bottom: 30rpx; display: flex; justify-content: space-between; align-items: center; }
-.profile-avatar { font-size: 96rpx; flex-shrink: 0; }
+.profile-avatar-wrapper { width: 96rpx; height: 96rpx; flex-shrink: 0; }
 .profile-info { flex: 1; margin: 0 32rpx; }
 .profile-name { font-size: 34rpx; color: #FFFFFF; font-weight: 700; margin-bottom: 8rpx; }
 .profile-id { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }
@@ -71,10 +78,10 @@ const onRegion = () => uni.showToast({ title = '地区设置开发中', icon: 'n
 .section-title { font-size: 32rpx; color: #FFFFFF; font-weight: 700; margin: 30rpx 0 24rpx 0; }
 .collection-grid { display: flex; gap: 24rpx; margin-bottom: 40rpx; }
 .collection-item { background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx; text-align: center; flex: 1; }
-.collection-icon { font-size: 48rpx; margin-bottom: 8rpx; display: block; }
+.collection-icon-wrapper { width: 48rpx; height: 48rpx; flex-shrink: 0; margin-bottom: 8rpx; }
 .collection-name { font-size: 22rpx; color: #B8B8C8; }
 .setting-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 20rpx 32rpx; margin-bottom: 16rpx; }
 .setting-item:active { background: rgba(255,255,255,0.08); }
 .setting-label { font-size: 26rpx; color: #FFFFFF; }
-.setting-arrow { font-size: 24rpx; color: #8A8A9E; flex-shrink: 0; }
+.setting-arrow-wrapper { width: 24rpx; height: 24rpx; flex-shrink: 0; }
 </style>

@@ -6,12 +6,12 @@
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <!-- 星图 -->
-        <view class="section-title">星图属性加成</text>
+        <view class="section-title">星图属性加成</view>
         <view class="zodiac-grid">
           <view v-for="(z, i) in zodiacs" :key="i" class="zodiac-card" :class="{active: z.active}">
             <text class="zodiac-name">{{ z.name }}</text>
             <text class="zodiac-effect">{{ z.effect }}</text>
-            <view class="zodiac-status">{{ z.active ? '已激活' : '未激活' }}</text>
+            <view class="zodiac-status">{{ z.active ? '已激活' : '未激活' }}</view>
           </view>
         </view>
         <!-- 占星抽取 -->

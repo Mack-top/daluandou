@@ -20,7 +20,7 @@
           <text class="challenge-value">{{ challengeUsed }} / {{ challengeLimit }}</text>
         </view>
         <!-- 对手列表 -->
-        <view class="section-title">推荐对手</text>
+        <view class="section-title">推荐对手</view>
         <view class="opponent-list">
           <view v-for="(o, i) in opponents" :key="i" class="opponent-card" @tap="onChallenge(o)">
             <view class="opponent-info">

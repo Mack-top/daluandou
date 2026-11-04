@@ -23,7 +23,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref, onLoad } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const props = defineProps([]);
 const title = ref('用户协议');

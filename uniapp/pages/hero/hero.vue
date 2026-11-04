@@ -13,7 +13,9 @@
           <!-- 主角头像：美术资源接入，资源到位后自动显示真实图片 -->
           <view class="hero-avatar-container">
             <image class="hero-avatar" :src="getCharacterAvatar(characterId)" mode="aspectFill" />
-            <view class="avatar-placeholder" v-if="!hasAvatar">{{ characterName.charAt(0) }}</view>
+            <view class="avatar-placeholder-wrapper" v-if="!hasAvatar">
+              <avatar-icon :placeholder-char="characterName.charAt(0)" :size="'xl'" :shape="'circle'" />
+            </view>
           </view>
           <view class="hero-info">
             <text class="hero-name">{{ characterName }}</text>
@@ -23,7 +25,7 @@
         </view>
 
         <!-- 属性面板 -->
-        <view class="section-title">属性面板</text>
+        <view class="section-title">属性面板</view>
         <view class="attr-grid">
           <view class="attr-card">
             <text class="attr-label">生命</text>
@@ -44,7 +46,7 @@
         </view>
 
         <!-- 装备栏 -->
-        <view class="section-title">装备栏</text>
+        <view class="section-title">装备栏</view>
         <view class="equip-list">
           <view
             v-for="(e, i) in equipSlots"
@@ -56,7 +58,9 @@
             <!-- 装备图标：美术资源接入 -->
             <view class="equip-slot-container">
               <image class="equip-icon" :src="getItemIcon(e.item?.iconId)" mode="aspectFill" v-if="e.item && e.item.iconId" />
-              <view class="avatar-placeholder" v-if="e.item && !e.item.iconId">{{ e.item.icon }}</view>
+              <view class="avatar-placeholder-wrapper" v-if="e.item && !e.item.iconId">
+                <avatar-icon :placeholder-char="e.item.icon" :size="'md'" :shape="'circle'" />
+              </view>
               <text v-if="!e.item" class="equip-empty">+</text>
             </view>
             <view class="equip-info">
@@ -87,7 +91,8 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref, computed, onLoad, onUnmounted } from 'vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 import { getCharacterAvatar, getItemIcon, getStaticUrl } from '@/utils/resource.js';
 import { eventBus } from '@/utils/event-bus.js';
@@ -112,16 +117,6 @@ const equipSlots = ref([
   { slot: '衣服', item: { name: '灵界法袍', desc: '生命+500', icon: '👕', iconId: 'robe_spirit' } },
   { slot: '饰品', item: null },
 ]);
-
-// 获取角色头像路径（资源到位后自动显示真实图片）
-const getCharacterAvatar = (id) => {
-  return getCharacterAvatar(id);
-};
-
-// 获取物品图标路径
-const getItemIcon = (iconId) => {
-  return getItemIcon(iconId);
-};
 
 // 检查是否有真实头像资源
 const hasAvatar = ref(false);
@@ -222,11 +217,10 @@ const onViewCollection = () => {
 .hero-avatar {
   width: 100%; height: 100%; object-fit: cover; display: block;
 }
-.avatar-placeholder {
+.avatar-placeholder-wrapper {
   width: 100%; height: 100%; border-radius: 60rpx;
   background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
   display: flex; align-items: center; justify-content: center;
-  font-size: 56rpx; font-weight: 700; color: #E0D3A1;
 }
 .hero-info { flex: 1; }
 .hero-name { font-size: 34rpx; color: #FFFFFF; font-weight: 700; margin-bottom: 8rpx; }

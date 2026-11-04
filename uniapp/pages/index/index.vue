@@ -28,13 +28,15 @@
 
       <!-- 开始游戏按钮 -->
       <base-button btn-type="primary" :disabled="!agreed" @tap="onStartGame">开始游戏</base-button>
-    </main-content>
+    </view>
 
     <!-- 底部：协议勾选 -->
     <view class="bottom-area">
       <view class="agreement-row">
         <view class="checkbox" :class="{checked: isAgreed}" @tap="toggleAgree">
-          <view class="check-icon" v-if="isAgreed">✓</view>
+          <view class="check-icon-wrapper" v-if="isAgreed">
+            <avatar-icon placeholder-char="✓" :size="'sm'" :shape="'circle'" />
+          </view>
         </view>
         <text class="agreement-text">
           我已经详细阅读并同意
@@ -58,10 +60,11 @@
 </template>
 
 <script setup>
-import { ref, onLoad } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { guestLogin, fetchServerList } from '../../utils/api.js';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 
 const store = useStore();
 
@@ -171,7 +174,7 @@ const onPrivacyPolicy = () => {
   uni.navigateTo({ url: '/pages/protocol/protocol?type=privacy&fromIndex=true' });
 };
 
-onLoad(() => {
+onMounted(() => {
   // 恢复之前选择的服务器显示
   const saved = uni.getStorageSync('selected_server');
   if (saved) {
@@ -336,6 +339,10 @@ onLoad(() => {
 .checkbox.checked {
   border-color: #E0D3A1;
   background-color: #E0D3A1;
+}
+
+.check-icon-wrapper {
+  width: 28rpx; height: 28rpx; flex-shrink: 0;
 }
 
 .check-icon {

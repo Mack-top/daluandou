@@ -9,7 +9,7 @@
       <view class="content">
 
         <!-- 页面标题 -->
-        <view class="section-title">战斗录像列表</text>
+        <view class="section-title">战斗录像列表</view>
         <text class="section-sub">查看历史战斗回放与战报</text>
 
         <!-- 录像列表 -->
@@ -30,15 +30,21 @@
               </view>
             </view>
             <view class="record-thumb">
-              <text class="thumb-icon">⚔️</text>
+              <view class="thumb-icon-wrapper">
+                <avatar-icon placeholder-char="⚔️" :size="'md'" :shape="'circle'" />
+              </view>
             </view>
-            <view class="record-arrow">▶</view>
+            <view class="record-arrow-wrapper">
+              <avatar-icon placeholder-char="▶" :size="'sm'" :shape="'circle'" />
+            </view>
           </view>
         </view>
 
         <!-- 空状态 -->
         <view v-if="records.length === 0" class="empty-state">
-          <text class="empty-icon">📭</text>
+          <view class="empty-icon-wrapper">
+            <avatar-icon placeholder-char="📭" :size="'lg'" :shape="'circle'" />
+          </view>
           <text class="empty-text">暂无战斗录像</text>
         </view>
 
@@ -50,6 +56,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 
 const records = ref([
@@ -93,12 +100,12 @@ const onPlay = (record) => {
   background: #1A192E; border: 1rpx solid #2A293E;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.thumb-icon { font-size: 40rpx; }
-.record-arrow { font-size: 24rpx; color: #E0D3A1; flex-shrink: 0; }
+.thumb-icon-wrapper { width: 40rpx; height: 40rpx; flex-shrink: 0; }
+.record-arrow-wrapper { width: 24rpx; height: 24rpx; flex-shrink: 0; }
 .empty-state {
   display: flex; flex-direction: column; align-items: center; gap: 16rpx;
   margin-top: 100rpx; text-align: center;
 }
-.empty-icon { font-size: 64rpx; }
+.empty-icon-wrapper { width: 64rpx; height: 64rpx; flex-shrink: 0; }
 .empty-text { font-size: 28rpx; color: #8A8A9E; }
 </style>

@@ -120,11 +120,11 @@ const nextGuide = () => {
 };
 
 const onLeftTap = (item) => {
-  uni.showToast({ title: `功能【${item.label】开发中`, icon: 'none' });
+  uni.showToast({ title: `功能[${item.label}]开发中]`, icon: 'none' });
 };
 
 const onRightTap = (item) => {
-  uni.showToast({ title: `功能【${item.label】开发中`, icon: 'none' });
+  uni.showToast({ title: `功能[${item.label}]开发中]`, icon: 'none' });
 };
 </script>
 

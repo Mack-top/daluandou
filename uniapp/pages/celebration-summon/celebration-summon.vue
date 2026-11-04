@@ -23,7 +23,7 @@
         </view>
 
         <!-- 阶段奖励 -->
-        <view class="section-title">阶段奖励</text>
+        <view class="section-title">阶段奖励</view>
         <view class="stage-list">
           <view
             v-for="(s, i) in stages"

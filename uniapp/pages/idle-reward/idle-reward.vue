@@ -6,7 +6,7 @@
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
-        <view class="section-title">挂机收益结算</text>
+        <view class="section-title">挂机收益结算</view>
         <view class="idle-card">
           <text class="idle-time">{{ offlineTime }}</text>
           <text class="idle-label">离线挂机时长</text>

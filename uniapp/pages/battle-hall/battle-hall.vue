@@ -21,7 +21,7 @@
         </view>
 
         <!-- 关卡列表 -->
-        <view class="section-title">主线关卡</text>
+        <view class="section-title">主线关卡</view>
         <view class="stage-list">
           <view
             v-for="(s, i) in stages"
