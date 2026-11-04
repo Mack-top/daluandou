@@ -28,9 +28,6 @@ android/app/src/main/assets/index.html
 # 本机助手会话数据
 .workbuddy/
 
-# 后端运行时数据库（生成物，勿入库）
-backend/data/
-
 # ---- Android 构建中间产物与本地配置（不入库）----
 android/.gradle/
 android/app/build/
@@ -47,4 +44,4 @@ android/app/keystore/
 # 本地 SQLite 数据文件（含 WAL/SHM）不入库
 backend/data/*.db
 backend/data/*.db-wal
-backend/data/*.db-shmbackend/.npmrc
+backend/data/*.db-shm
