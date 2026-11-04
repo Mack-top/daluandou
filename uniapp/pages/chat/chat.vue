@@ -35,24 +35,60 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref } from 'vue';
+import { listChat, sendChat } from '@/utils/api.js';
+import { useStore } from 'vuex';
+
+const store = useStore();
 const tabs = ['世界', '协会', '私聊'];
 const activeTab = ref(0);
 const inputText = ref('');
-const messages = ref([
-  { name: '系统', icon: '📢', text: '欢迎来到美食大乱斗世界！', time: '10:00', type: 'system' },
-  { name: '灵界旅人', icon: '🧙‍♂️', text: '大家好，新手报到！', time: '10:05', self: false },
-  { name: '食神小助手', icon: '👼', text: '欢迎新朋友，有问题可以问我。', time: '10:06', self: false },
-  { name: '我', icon: '👤', text: '谢谢欢迎！', time: '10:07', self: true }
-]);
+const messages = ref([]);
+
+// 从后端获取聊天消息（替换模拟数据）
+const loadChat = async () => {
+  try {
+    const result = await listChat();
+    const list = Array.isArray(result) ? result : (result.messages || []);
+    messages.value = list.map((m) => ({
+      name: m.playerName || m.name || '未知',
+      icon: '👤',
+      text: m.content || m.text || '',
+      time: m.createdAt ? new Date(m.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '',
+      self: m.playerId === (store.state.user?.player?.id || ''),
+      type: m.type || 'normal',
+    }));
+    if (messages.value.length === 0) {
+      messages.value = [
+        { name: '系统', icon: '📢', text: '欢迎来到美食大乱斗世界！', time: '10:00', type: 'system' },
+      ];
+    }
+  } catch (e) {
+    console.warn('load chat failed', e);
+    messages.value = [
+      { name: '系统', icon: '📢', text: '欢迎来到美食大乱斗世界！', time: '10:00', type: 'system' },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadChat();
+});
 const onBack = () => uni.navigateBack();
-const onSend = () => {
+const onSend = async () => {
   if (!inputText.value.trim()) return;
-  messages.value.push({ name: '我', icon: '👤', text: inputText.value, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), self: true });
+  const text = inputText.value;
   inputText.value = '';
+  try {
+    await sendChat({ content: text, type: 'normal' });
+    messages.value.push({ name: '我', icon: '👤', text, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), self: true, type: 'normal' });
+  } catch (e) {
+    uni.showToast({ title: e.message || '发送失败', icon: 'none' });
+    inputText.value = text;
+  }
 };
 </script>
 

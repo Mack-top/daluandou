@@ -316,6 +316,16 @@ export function guildCheckin() {
   return request('/social/guilds/checkin', { method: 'POST' });
 }
 
+/** 获取聊天消息 */
+export function listChat() {
+  return request('/social/chat', { method: 'GET' });
+}
+
+/** 发送聊天消息 */
+export function sendChat(data) {
+  return request('/social/chat', { method: 'POST', data });
+}
+
 /* ==================== 支付模块 ==================== */
 
 /** 创建支付订单 */
@@ -354,6 +364,8 @@ export default {
   getLeaderboards,
   listFriends,
   guildCheckin,
+  listChat,
+  sendChat,
   createPayment,
   clearToken,
   getToken,
