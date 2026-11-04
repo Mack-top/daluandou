@@ -35,17 +35,60 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref } from 'vue';
+import { getCatalog } from '@/utils/api.js';
+
 const countdown = ref('04:12:30');
-const products = [
-  { name: '5星食灵自选箱', desc: '可选任意一名 5 星食灵', icon: '👑', price: '灵晶 × 8000', limit: 1, bought: 0 },
-  { name: '史诗随机装备', desc: '随机获得一件史诗装备', icon: '⚔️', price: '灵晶 × 1500', limit: 3, bought: 1 },
-  { name: '食灵契约 × 50', desc: '大量召唤券', icon: '📖', price: '金币 × 1000000', limit: 5, bought: 2 },
-  { name: '经验药水（大）', desc: '大量主角经验', icon: '🧪', price: '金币 × 500000', limit: 10, bought: 5 }
-];
+const products = ref([]);
+
+// 商品图标映射（按稀有度）
+const productIcon = (rarity) => {
+  if (rarity === 'SSR') return '👑';
+  if (rarity === 'SR') return '🌟';
+  return '⭐';
+};
+
+// 从后端 catalog 获取角色作为商店商品（替换模拟数据）
+const loadProducts = async () => {
+  try {
+    const result = await getCatalog();
+    const characters = result.characters || [];
+    products.value = characters.map((c, idx) => ({
+      id: c.id,
+      name: c.name,
+      desc: `${c.title} · ${c.element} ${c.role}`,
+      icon: productIcon(c.rarity),
+      price: c.rarity === 'SSR' ? '灵晶 × 8000' : '灵晶 × 3000',
+      limit: 1,
+      bought: 0,
+      basePower: c.basePower,
+    }));
+    if (products.value.length === 0) {
+      products.value = [
+        { name: '5星食灵自选箱', desc: '可选任意一名 5 星食灵', icon: '👑', price: '灵晶 × 8000', limit: 1, bought: 0 },
+        { name: '史诗随机装备', desc: '随机获得一件史诗装备', icon: '⚔️', price: '灵晶 × 1500', limit: 3, bought: 1 },
+        { name: '食灵契约 × 50', desc: '大量召唤券', icon: '📖', price: '金币 × 1000000', limit: 5, bought: 2 },
+        { name: '经验药水（大）', desc: '大量主角经验', icon: '🧪', price: '金币 × 500000', limit: 10, bought: 5 },
+      ];
+    }
+  } catch (e) {
+    console.warn('load products failed', e);
+    products.value = [
+      { name: '5星食灵自选箱', desc: '可选任意一名 5 星食灵', icon: '👑', price: '灵晶 × 8000', limit: 1, bought: 0 },
+      { name: '史诗随机装备', desc: '随机获得一件史诗装备', icon: '⚔️', price: '灵晶 × 1500', limit: 3, bought: 1 },
+      { name: '食灵契约 × 50', desc: '大量召唤券', icon: '📖', price: '金币 × 1000000', limit: 5, bought: 2 },
+      { name: '经验药水（大）', desc: '大量主角经验', icon: '🧪', price: '金币 × 500000', limit: 10, bought: 5 },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadProducts();
+});
+
 const onBack = () => uni.navigateBack();
 const onRefresh = () => {
   uni.showModal({ title: '提示', content: '确定消耗 50 灵晶手动刷新商品吗？', success: (res) => { if (res.confirm) uni.showToast({ title: '刷新成功', icon: 'success' }); } });
