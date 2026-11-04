@@ -30,17 +30,41 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const buildings = [
+import { getSave } from '@/utils/api.js';
+
+const buildings = ref([
   { name: '研制坊', level: 3, icon: '🔧', locked: false },
   { name: '时光屋', level: 2, icon: '⏳', locked: false },
   { name: '集市', level: 1, icon: '🏪', locked: false },
   { name: '占星', level: 1, icon: '🔮', locked: false },
-  { name: '世界树', level: 2, icon: '🌳', locked: false },
+  { name: '世界树', level: 1, icon: '🌳', locked: false },
   { name: '交易坊', level: 1, icon: '💱', locked: true }
-];
+]);
+
+// 从后端存档获取世界树等级（替换模拟数据）
+const loadManor = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const worldtreeLevel = save.worldtree || 1;
+    // 更新世界树建筑等级
+    const treeIdx = buildings.value.findIndex((b) => b.name === '世界树');
+    if (treeIdx >= 0) {
+      buildings.value[treeIdx].level = worldtreeLevel;
+    }
+  } catch (e) {
+    console.warn('load manor failed', e);
+  }
+};
+
+onMounted(() => {
+  loadManor();
+});
+
 const onBack = () => uni.navigateBack();
 const onBuildingTap = (b) => {
   if (b.locked) { uni.showToast({ title: '建筑未解锁', icon: 'none' }); return; }

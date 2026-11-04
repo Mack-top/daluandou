@@ -44,10 +44,13 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-const vault = { gold: 5200000, contract: 850, essence: 45000 };
+import { getSave } from '@/utils/api.js';
+
+const vault = ref({ gold: 0, contract: 0, essence: 0 });
 const exchangeItems = [
   { name: '食灵契约 × 5', desc: '协会成员专属兑换', icon: '📖', cost: 500, locked: false, level: 0 },
   { name: '食灵精华 × 5000', desc: '大量食灵精华兑换', icon: '⚡', cost: 1000, locked: false, level: 0 },
@@ -55,6 +58,28 @@ const exchangeItems = [
   { name: '协会专属头像框', desc: '彰显协会身份', icon: '🖼️', cost: 20000, locked: true, level: 8 },
   { name: '5星SSR随机食灵', desc: '极品食灵随机获取', icon: '👑', cost: 100000, locked: true, level: 15 }
 ];
+
+const loadVault = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const social = save.social || {};
+    const contribution = social.contribution || 0;
+    vault.value = {
+      gold: Math.floor(contribution * 100),
+      contract: Math.floor(contribution / 10),
+      essence: Math.floor(contribution / 5),
+    };
+  } catch (e) {
+    console.warn('load vault failed', e);
+    vault.value = { gold: 5200000, contract: 850, essence: 45000 };
+  }
+};
+
+onMounted(() => {
+  loadVault();
+});
+
 const onBack = () => uni.navigateBack();
 const onExchange = (e) => {
   if (e.locked) {

@@ -24,13 +24,47 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-const teams = [
-  { name: '新手基础阵容', desc: '适合前期过渡，获取容易', members: ['青团', '蓝纹奶酪', '冬阴功'] },
-  { name: '输出爆发阵容', desc: '高 burst 伤害，适合推图', members: ['冬阴功', '拉菲', '咖喱'] },
-  { name: '生存控制阵容', desc: '高坦度与控制，适合高难副本', members: ['咖喱', '青团', '蓝纹奶酪'] }
-];
+import { getCatalog } from '@/utils/api.js';
+
+const teams = ref([]);
+
+// 从后端 /catalog 获取角色作为推荐阵容成员（替换模拟数据）
+const loadTeams = async () => {
+  try {
+    const result = await getCatalog();
+    const characters = result.characters || [];
+    const ssrChars = characters.filter((c) => c.rarity === 'SSR').map((c) => c.name);
+    const srChars = characters.filter((c) => c.rarity === 'SR').map((c) => c.name);
+    teams.value = [
+      { name: '新手基础阵容', desc: '适合前期过渡，获取容易', members: srChars.slice(0, 3) },
+      { name: '输出爆发阵容', desc: '高 burst 伤害，适合推图', members: ssrChars.slice(0, 3) },
+      { name: '生存控制阵容', desc: '高坦度与控制，适合高难副本', members: srChars.slice(0, 3) },
+    ];
+    // 如果没有足够角色，降级到模拟数据
+    if (teams.value.some((t) => t.members.length === 0)) {
+      teams.value = [
+        { name: '新手基础阵容', desc: '适合前期过渡，获取容易', members: ['青团', '蓝纹奶酪', '冬阴功'] },
+        { name: '输出爆发阵容', desc: '高 burst 伤害，适合推图', members: ['冬阴功', '拉菲', '咖喱'] },
+        { name: '生存控制阵容', desc: '高坦度与控制，适合高难副本', members: ['咖喱', '青团', '蓝纹奶酪'] },
+      ];
+    }
+  } catch (e) {
+    console.warn('load teams failed', e);
+    teams.value = [
+      { name: '新手基础阵容', desc: '适合前期过渡，获取容易', members: ['青团', '蓝纹奶酪', '冬阴功'] },
+      { name: '输出爆发阵容', desc: '高 burst 伤害，适合推图', members: ['冬阴功', '拉菲', '咖喱'] },
+      { name: '生存控制阵容', desc: '高坦度与控制，适合高难副本', members: ['咖喱', '青团', '蓝纹奶酪'] },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadTeams();
+});
+
 const onBack = () => uni.navigateBack();
 const onDetail = (t) => uni.showToast({ title: `查看${t.name}详情`, icon: 'none' });
 </script>

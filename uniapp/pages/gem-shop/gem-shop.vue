@@ -38,11 +38,13 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref } from 'vue';
-const gems = ref(100);
+import { getSave } from '@/utils/api.js';
+
+const gems = ref(0);
 const products = [
   { name: '新手礼包', desc: '食灵契约 × 10，金币 × 100000', price: '灵晶 × 68', first: true },
   { name: '成长基金', desc: '投资返还，累计获得大量灵晶', price: '灵晶 × 300', first: false },
@@ -50,6 +52,23 @@ const products = [
   { name: '周卡', desc: '每日领取灵晶，持续 7 天', price: '灵晶 × 30', first: false },
   { name: '大额礼包', desc: '灵晶 × 6480，赠送稀有道具', price: '灵晶 × 6480', first: false }
 ];
+
+// 从后端存档获取灵晶余额（替换模拟数据）
+const loadGems = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    gems.value = save.gems || 0;
+  } catch (e) {
+    console.warn('load gems failed', e);
+    gems.value = 100;
+  }
+};
+
+onMounted(() => {
+  loadGems();
+});
+
 const onBack = () => uni.navigateBack();
 const onRecharge = () => uni.showToast({ title: '前往充值页面', icon: 'none' });
 const onBuy = (p) => uni.showToast({ title: `购买${p.name}`, icon: 'none' });

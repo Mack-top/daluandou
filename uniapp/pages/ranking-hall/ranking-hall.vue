@@ -27,19 +27,54 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref } from 'vue';
+import { getLeaderboards } from '@/utils/api.js';
+
 const tabs = ['战力榜', '等级榜', '协会榜', '竞技场榜'];
 const activeTab = ref(0);
-const rankings = [
-  { name: '剑圣小助手', server: '美食17服', value: '185,000' },
-  { name: '食神传说', server: '美食1服', value: '158,000' },
-  { name: '深夜食堂', server: '美食2服', value: '142,000' },
-  { name: '甜点魔法', server: '美食3服', value: '134,000' },
-  { name: '灵界旅人', server: '美食5服', value: '125,000' },
-  { name: '初学者', server: '美食17服', value: '98,000' }
-];
+const rankings = ref([]);
+
+// 从后端 /leaderboards 获取排行榜（替换模拟数据）
+const loadRankings = async () => {
+  try {
+    const result = await getLeaderboards();
+    const lbs = Array.isArray(result) ? result : (result.leaderboards || []);
+    const lb = lbs[activeTab.value] || lbs[0];
+    const entries = Array.isArray(lb.entries) ? lb.entries : [];
+    rankings.value = entries.map((e, i) => ({
+      name: e.playerName || `玩家${i + 1}`,
+      server: `美食${e.serverId || 17}服`,
+      value: e.score ? e.score.toLocaleString() : '0',
+    }));
+    if (rankings.value.length === 0) {
+      rankings.value = [
+        { name: '剑圣小助手', server: '美食17服', value: '185,000' },
+        { name: '食神传说', server: '美食1服', value: '158,000' },
+        { name: '深夜食堂', server: '美食2服', value: '142,000' },
+        { name: '甜点魔法', server: '美食3服', value: '134,000' },
+        { name: '灵界旅人', server: '美食5服', value: '125,000' },
+        { name: '初学者', server: '美食17服', value: '98,000' },
+      ];
+    }
+  } catch (e) {
+    console.warn('load rankings failed', e);
+    rankings.value = [
+      { name: '剑圣小助手', server: '美食17服', value: '185,000' },
+      { name: '食神传说', server: '美食1服', value: '158,000' },
+      { name: '深夜食堂', server: '美食2服', value: '142,000' },
+      { name: '甜点魔法', server: '美食3服', value: '134,000' },
+      { name: '灵界旅人', server: '美食5服', value: '125,000' },
+      { name: '初学者', server: '美食17服', value: '98,000' },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadRankings();
+});
+
 const onBack = () => uni.navigateBack();
 </script>
 

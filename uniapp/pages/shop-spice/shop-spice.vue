@@ -28,15 +28,57 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const products = [
-  { name: '食灵契约大礼包', rarity: '传说', desc: '必出 5 星食灵', icon: '📦', price: '灵晶 × 5000' },
-  { name: '史诗装备宝箱', rarity: '史诗', desc: '开启获得随机史诗装备', icon: '📦', price: '灵晶 × 1200' },
-  { name: '食灵精华大礼', rarity: '稀有', desc: '食灵精华 × 10000', icon: '⚡', price: '金币 × 500000' },
-  { name: '升星石 × 20', rarity: '稀有', desc: '用于食灵升星', icon: '💎', price: '金币 × 200000' }
-];
+import { getCatalog } from '@/utils/api.js';
+
+const products = ref([]);
+
+// 商品图标映射（按稀有度）
+const productIcon = (rarity) => {
+  if (rarity === 'SSR') return '👑';
+  if (rarity === 'SR') return '🌟';
+  return '⭐';
+};
+
+// 从后端 /catalog 获取角色作为稀有商品（替换模拟数据）
+const loadProducts = async () => {
+  try {
+    const result = await getCatalog();
+    const characters = result.characters || [];
+    products.value = characters.map((c) => ({
+      id: c.id,
+      name: c.name,
+      rarity: c.rarity,
+      desc: `${c.title} · ${c.element} ${c.role}`,
+      icon: productIcon(c.rarity),
+      price: c.rarity === 'SSR' ? '灵晶 × 5000' : '灵晶 × 1500',
+    }));
+    if (products.value.length === 0) {
+      products.value = [
+        { name: '食灵契约大礼包', rarity: '传说', desc: '必出 5 星食灵', icon: '📦', price: '灵晶 × 5000' },
+        { name: '史诗装备宝箱', rarity: '史诗', desc: '开启获得随机史诗装备', icon: '📦', price: '灵晶 × 1200' },
+        { name: '食灵精华大礼', rarity: '稀有', desc: '食灵精华 × 10000', icon: '⚡', price: '金币 × 500000' },
+        { name: '升星石 × 20', rarity: '稀有', desc: '用于食灵升星', icon: '💎', price: '金币 × 200000' },
+      ];
+    }
+  } catch (e) {
+    console.warn('load spice shop products failed', e);
+    products.value = [
+      { name: '食灵契约大礼包', rarity: '传说', desc: '必出 5 星食灵', icon: '📦', price: '灵晶 × 5000' },
+      { name: '史诗装备宝箱', rarity: '史诗', desc: '开启获得随机史诗装备', icon: '📦', price: '灵晶 × 1200' },
+      { name: '食灵精华大礼', rarity: '稀有', desc: '食灵精华 × 10000', icon: '⚡', price: '金币 × 500000' },
+      { name: '升星石 × 20', rarity: '稀有', desc: '用于食灵升星', icon: '💎', price: '金币 × 200000' },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadProducts();
+});
+
 const onBack = () => uni.navigateBack();
 const onBuy = (p) => uni.showToast({ title: `购买${p.name}`, icon: 'none' });
 </script>

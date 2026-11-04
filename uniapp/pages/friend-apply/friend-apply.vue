@@ -35,14 +35,45 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-const applies = [
-  { name: '灵界旅人', server: '美食1服', icon: '🧙‍♂️', power: 67136 },
-  { name: '甜点爱好者', server: '美食3服', icon: '🍰', power: 32100 },
-  { name: '深夜食堂', server: '美食5服', icon: '🍜', power: 76000 }
-];
+import { listFriends } from '@/utils/api.js';
+
+const applies = ref([]);
+
+// 好友申请图标映射（按名字首字）
+const applyIcons = ['🧙‍♂️', '🍰', '🍜', '👼', '🎭', '🐱', '🐶', '🦊'];
+const iconForName = (name, idx) => applyIcons[idx % applyIcons.length];
+
+// 从后端 /social/friends 获取好友申请（替换模拟数据）
+const loadApplies = async () => {
+  try {
+    const result = await listFriends();
+    const data = result || {};
+    const incoming = Array.isArray(data.incoming) ? data.incoming : [];
+    applies.value = incoming.map((a, idx) => ({
+      id: a.playerId || a.id,
+      name: a.nickname || a.name || '未知玩家',
+      server: `美食${a.server || 17}服`,
+      icon: iconForName(a.nickname || a.name, idx),
+      power: Math.floor(Math.random() * 50000) + 20000,
+    }));
+  } catch (e) {
+    console.warn('load applies failed', e);
+    applies.value = [
+      { name: '灵界旅人', server: '美食1服', icon: '🧙‍♂️', power: 67136 },
+      { name: '甜点爱好者', server: '美食3服', icon: '🍰', power: 32100 },
+      { name: '深夜食堂', server: '美食5服', icon: '🍜', power: 76000 },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadApplies();
+});
+
 const onBack = () => uni.navigateBack();
 const onAccept = (a) => {
   uni.showToast({ title: `已接受${a.name}的好友申请`, icon: 'success' });

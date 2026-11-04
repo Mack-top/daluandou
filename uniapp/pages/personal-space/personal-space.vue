@@ -44,18 +44,43 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref } from 'vue';
+import { getSave } from '@/utils/api.js';
+
 const avatar = ref('👤');
-const profile = { name: '食神小助手', id: '8821001', level: 42, power: 125000 };
+const profile = ref({ name: '食神小助手', id: '8821001', level: 1, power: 0 });
 const region = ref('中国·香港');
-const collections = [
+const collections = ref([
   { name: '美食之王勋章', icon: '👑' },
   { name: '七日登录勋章', icon: '📅' },
   { name: '首充勋章', icon: '💎' }
-];
+]);
+
+// 从后端存档获取玩家个人资料（替换模拟数据）
+const loadProfile = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const profileData = save.profile || {};
+    profile.value = {
+      name: profileData.name || '食神小助手',
+      id: save._id || '8821001',
+      level: save.stars && Object.keys(save.stars).length > 0 ? Object.values(save.stars).reduce((a, b) => Math.max(a, b), 1) : 1,
+      power: Math.floor((save.coins || 0) / 1000) + (save.gems || 0) * 10,
+    };
+    avatar.value = profileData.name ? profileData.name.charAt(0) : '👤';
+  } catch (e) {
+    console.warn('load profile failed', e);
+  }
+};
+
+onMounted(() => {
+  loadProfile();
+});
+
 const onBack = () => uni.navigateBack();
 const onEdit = () => uni.showToast({ title: '编辑资料开发中', icon: 'none' });
 const onRegion = () => uni.showToast({ title: '地区设置开发中', icon: 'none' });
