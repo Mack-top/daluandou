@@ -62,6 +62,7 @@
 <script setup>
 import { ref, onLoad } from 'vue';
 import { useStore } from 'vuex';
+import { guestLogin, fetchServerList } from '../../utils/api.js';
 
 const store = useStore();
 
@@ -87,17 +88,35 @@ const onNotice = () => {
   uni.navigateTo({ url: '/pages/notice/notice' });
 };
 
-// 选择服务器（打开服务器列表）
-const onSelectServer = () => {
-  uni.showActionSheet({
-    itemList: ['美食1服（推荐）', '美食2服', '美食3服', '美食4服', '美食5服（爆满）', '美食17服（推荐）'],
-    success: (res) => {
-      const serverNames = ['美食1服', '美食2服', '美食3服', '美食4服', '美食5服', '美食17服'];
-      const selected = serverNames[res.tapIndex];
-      uni.setStorageSync('selected_server', selected);
-      uni.showToast({ title: `已选择：${selected}`, icon: 'none' });
-    }
-  });
+// 选择服务器（从后端获取列表）
+const onSelectServer = async () => {
+  try {
+    uni.showLoading({ title: '加载中...' });
+    const list = await store.dispatch('fetchServerList');
+    uni.hideLoading();
+
+    const itemList = list.map((s, i) => {
+      const statusTag = s.maintenance ? '（维护）' : s.status === '爆满' ? '（爆满）' : s.status === '推荐' ? '（推荐）' : '';
+      return `美食${s.id}服${statusTag}`;
+    });
+
+    uni.showActionSheet({
+      itemList,
+      success: (res) => {
+        const selected = list[res.tapIndex];
+        if (selected.maintenance) {
+          uni.showToast({ title: '该服务器维护中，请选择其他服务器', icon: 'none' });
+          return;
+        }
+        uni.setStorageSync('selected_server', `美食${selected.id}服`);
+        store.commit('SET_SELECTED_SERVER', selected);
+        uni.showToast({ title: `已选择：美食${selected.id}服`, icon: 'none' });
+      }
+    });
+  } catch (e) {
+    uni.hideLoading();
+    uni.showToast({ title: '获取服务器列表失败', icon: 'none' });
+  }
 };
 
 // 点击换服
@@ -105,21 +124,37 @@ const onChangeServer = () => {
   uni.navigateTo({ url: '/pages/server-list/server-list' });
 };
 
-// 开始游戏
-const onStartGame = () => {
+// 开始游戏（调用后端游客登录 API）
+const onStartGame = async () => {
   if (!isAgreed.value) {
     uni.showToast({ title: '请先勾选同意用户协议和隐私保护指引', icon: 'none' });
     return;
   }
-  uni.showLoading({ title: '加载中...' });
-  setTimeout(() => {
+
+  uni.showLoading({ title: '登录中...' });
+  try {
+    const savedServer = uni.getStorageSync('selected_server');
+    const serverNum = savedServer ? Number(savedServer.replace('美食', '').replace('服', '')) : 17;
+
+    const result = await guestLogin({
+      nickname: '旅人',
+      gender: 'male',
+      server: serverNum,
+    });
+
     uni.hideLoading();
-    if (store.state.isLoggedIn) {
-      uni.redirectTo({ url: '/pages/lobby/lobby' });
-    } else {
-      uni.redirectTo({ url: '/pages/create/create' });
-    }
-  }, 1000);
+
+    store.commit('SET_USER', {
+      token: result.token,
+      player: result.player,
+    });
+    store.commit('SET_SAVE', result.save);
+
+    uni.redirectTo({ url: '/pages/lobby/lobby' });
+  } catch (e) {
+    uni.hideLoading();
+    uni.showToast({ title: e.message || '登录失败', icon: 'none' });
+  }
 };
 
 // 切换勾选状态
@@ -138,10 +173,11 @@ const onPrivacyPolicy = () => {
 };
 
 onLoad(() => {
-  // 恢复之前选择的服务器
+  // 恢复之前选择的服务器显示
   const saved = uni.getStorageSync('selected_server');
   if (saved) {
-    // 可在此更新显示
+    const serverSelect = document.querySelector('.server-label');
+    if (serverSelect) serverSelect.textContent = saved;
   }
 });
 </script>
