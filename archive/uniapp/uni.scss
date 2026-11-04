@@ -1,0 +1,217 @@
+/* 全局通用样式 - 美食大乱斗 uniapp 项目 */
+:root {
+  --bg-color: #0F0E1D;
+  --card-bg: #1A192E;
+  --text-main: #FFFFFF;
+  --text-sub: #B8B8C8;
+  --accent: #E0D3A1;
+  --accent-hover: #F0E3B5;
+  --danger: #E5484D;
+  --success: #4CAF50;
+  --border: #2A293E;
+}
+
+html, body, uni-page, uni-page-body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+view {
+  box-sizing: border-box;
+}
+
+/* 清除uni-app默认间距 */
+uni-page-body {
+  padding: 0 !important;
+}
+
+/* 响应式容器 */
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-color);
+}
+
+/* 自定义导航栏 */
+.custom-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+  height: 88rpx;
+  background-color: #16152A;
+  border-bottom: 1rpx solid var(--border);
+  z-index: 100;
+}
+.custom-navbar-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* 页面容器 */
+.page-container {
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 60rpx;
+  box-sizing: border-box;
+}
+
+/* 卡片基础样式 */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin: 0 24rpx 24rpx 24rpx;
+  border: 1rpx solid var(--border);
+}
+
+/* 按钮基础样式 */
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  transition: all 0.2s;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.btn:active {
+  transform: scale(0.96);
+}
+.btn-primary {
+  background: linear-gradient(135deg, #E0D3A1 0%, #C9B87E 100%);
+  color: #0F0E1D;
+}
+.btn-primary:active {
+  opacity: 0.85;
+}
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  border: 1rpx solid var(--border);
+}
+.btn-secondary:active {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+.btn-danger {
+  background-color: var(--danger);
+  color: var(--text-main);
+}
+.btn-danger:active {
+  opacity: 0.85;
+}
+.btn-full {
+  width: 100%;
+}
+
+/* 表单输入框 */
+.input-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32rpx;
+}
+.input-label {
+  font-size: 28rpx;
+  color: var(--text-sub);
+  margin-bottom: 12rpx;
+}
+.input-box {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1rpx solid var(--border);
+  border-radius: 20rpx;
+  padding: 0 24rpx;
+  height: 88rpx;
+}
+.input-box input {
+  flex: 1;
+  color: var(--text-main);
+  font-size: 30rpx;
+  height: 100%;
+  line-height: 88rpx;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+/* 复选框 */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin: 32rpx 0;
+  font-size: 28rpx;
+  color: var(--text-sub);
+}
+.checkbox-box {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid var(--border);
+  border-radius: 8rpx;
+  margin-right: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.checkbox-box.checked {
+  border-color: var(--accent);
+  background-color: var(--accent);
+}
+.checkbox-box.checked::after {
+  content: '✓';
+  color: #0F0E1D;
+  font-weight: bold;
+  font-size: 28rpx;
+}
+
+/* 文本 */
+.text-main {
+  color: var(--text-main);
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.text-sub {
+  color: var(--text-sub);
+  font-size: 26rpx;
+}
+.text-center {
+  text-align: center;
+}
+
+/* 阴影 */
+.shadow {
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.3);
+}
+
+/* 响应式：移动端优先，桌面端适配 */
+@media (min-width: 768px) {
+  .card {
+    max-width: 600rpx;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .page-container {
+    padding-bottom: 100rpx;
+  }
+}
+
+/* 设备适配 */
+@media (max-width: 375px) {
+  .text-main {
+    font-size: 28rpx;
+  }
+  .text-sub {
+    font-size: 24rpx;
+  }
+}
