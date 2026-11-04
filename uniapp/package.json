@@ -4,13 +4,17 @@
   "description": "美食大乱斗 - uniapp 前端项目，基于参考截图逐页还原",
   "private": true,
   "scripts": {
-    "dev:h5": "vue-cli-service uni:serve --platform h5",
-    "dev:mp-weixin": "vue-cli-service uni:serve --platform mp-weixin",
-    "build:h5": "vue-cli-service uni:build --platform h5",
-    "build:mp-weixin": "vue-cli-service uni:build --platform mp-weixin"
+    "dev:h5": "vite --mode h5",
+    "dev:mp-weixin": "vite --mode mp-weixin",
+    "build:h5": "vite build --mode h5",
+    "build:mp-weixin": "vite build --mode mp-weixin"
   },
   "dependencies": {
     "vue": "^3.3.4",
     "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@dcloudio/vite-plugin-uni": "^1.0.7",
+    "vite": "^4.5.0"
   }
 }

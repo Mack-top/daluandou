@@ -1,10 +1,8 @@
+<!-- componentized -->
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">聊天</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="聊天" :show-back="true" @back="onBack" />
+
     <view class="content">
       <!-- 频道标签 -->
       <view class="tab-bar">
@@ -28,13 +26,15 @@
         <view class="input-box">
           <input v-model="inputText" placeholder="输入聊天内容..." class="chat-input" />
         </view>
-        <button class="btn-send" @tap="onSend">发送</button>
+        <base-button class="btn-send" @tap="onSend">发送</base-button>
       </view>
     </view>
   </view>
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
 const tabs = ['世界', '协会', '私聊'];
 const activeTab = ref(0);
@@ -55,10 +55,6 @@ const onSend = () => {
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; display: flex; flex-direction: column; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .tab-bar { display: flex; justify-content: center; gap: 40rpx; margin: 16rpx 0; border-bottom: 1rpx solid #2A293E; padding-bottom: 16rpx; }
 .tab-item { font-size: 28rpx; color: #8A8A9E; padding-bottom: 16rpx; }
 .tab-item.active { color: #E0D3A1; border-bottom: 2rpx solid #E0D3A1; font-weight: 600; }

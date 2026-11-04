@@ -1,11 +1,9 @@
+<!-- componentized -->
 <template>
   <view class="page">
     <!-- 自定义导航栏 -->
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">开服公告</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="开服公告" :show-back="true" @back="onBack" />
+
 
     <!-- 页面主体 -->
     <scroll-view class="scroll-content" scroll-y="true" show-scrollbar="false">
@@ -49,7 +47,7 @@
 
         <!-- 底部按钮 -->
         <view class="bottom-action">
-          <button class="btn-close" @tap="onBack">我知道了</button>
+          <base-button class="btn-close" @tap="onBack">我知道了</base-button>
         </view>
 
       </view>
@@ -58,6 +56,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { onLoad } from 'vue';
 
 // 公告内容（与003图OCR识别内容一致，后续可替换为后端接口获取）
@@ -92,37 +92,6 @@ const onBack = () => {
   min-height: 100vh;
   background-color: #0F0E1D;
   position: relative;
-}
-
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 88rpx;
-  display: flex;
-  align-items: center;
-  padding: 0 32rpx;
-  background-color: #16152A;
-  border-bottom: 1rpx solid #2A293E;
-  z-index: 100;
-  box-sizing: border-box;
-}
-
-.navbar-back {
-  font-size: 36rpx;
-  color: #FFFFFF;
-}
-
-.navbar-title {
-  font-size: 34rpx;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin-left: 40rpx;
-}
-
-.navbar-spacer {
-  flex: 1;
 }
 
 .scroll-content {

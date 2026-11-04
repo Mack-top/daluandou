@@ -1,10 +1,8 @@
+<!-- componentized -->
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">排行榜</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="排行榜" :show-back="true" @back="onBack" />
+
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <!-- 榜单标签 -->
@@ -29,6 +27,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
 const tabs = ['战力榜', '等级榜', '协会榜', '竞技场榜'];
 const activeTab = ref(0);
@@ -45,10 +45,6 @@ const onBack = () => uni.navigateBack();
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .tab-bar { display: flex; justify-content: center; gap: 40rpx; margin: 30rpx 0 24rpx 0; border-bottom: 1rpx solid #2A293E; padding-bottom: 16rpx; }

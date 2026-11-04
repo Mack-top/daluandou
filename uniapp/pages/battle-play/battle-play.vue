@@ -1,9 +1,8 @@
+<!-- componentized -->
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-title">战斗进行中</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="战斗进行中" :show-back="true" @back="onBack" />
+
     <view class="content">
       <!-- 战斗背景 -->
       <view class="battle-bg"></view>
@@ -38,14 +37,16 @@
       </view>
       <!-- 底部操作 -->
       <view class="bottom-control">
-        <button class="btn-auto" @tap="onAuto">自动战斗</button>
-        <button class="btn-skip" @tap="onSkip">跳过</button>
+        <base-button class="btn-auto" @tap="onAuto">自动战斗</base-button>
+        <base-button class="btn-skip" @tap="onSkip">跳过</base-button>
       </view>
     </view>
   </view>
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
 const myTeam = [
   { name: '青团', icon: '🍡', hp: 4500, hpPct: 90 },
@@ -70,9 +71,6 @@ const onSkip = () => {
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; position: relative; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: rgba(22,21,42,0.9); border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .content { padding-top: 88rpx; padding-bottom: 140rpx; box-sizing: border-box; height: 100vh; display: flex; flex-direction: column; }
 .battle-bg { flex: 1; background: radial-gradient(circle at center, rgba(42,41,62,0.6) 0%, #0F0E1D 100%); position: relative; overflow: hidden; }
 .side { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; padding: 40rpx 0; }

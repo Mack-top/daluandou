@@ -1,10 +1,8 @@
+<!-- componentized -->
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">战斗结果</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="战斗结果" :show-back="true" @back="onBack" />
+
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <view class="result-banner" :class="{victory: isVictory}">
@@ -24,8 +22,8 @@
           </view>
         </view>
         <view class="action-section">
-          <button class="btn-again" @tap="onAgain">再次挑战</button>
-          <button class="btn-back" @tap="onBack">返回</button>
+          <base-button class="btn-again" @tap="onAgain">再次挑战</base-button>
+          <base-button class="btn-back" @tap="onBack">返回</base-button>
         </view>
       </view>
     </scroll-view>
@@ -33,6 +31,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
 const isVictory = ref(true);
 const mvp = { name: '冬阴功', icon: '🍲', damage: 12500, heal: 0 };
@@ -49,10 +49,6 @@ const onAgain = () => {
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100%; }
 .result-banner { font-size: 56rpx; font-weight: 800; margin: 60rpx 0 30rpx 0; }

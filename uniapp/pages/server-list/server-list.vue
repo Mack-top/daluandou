@@ -1,11 +1,9 @@
+<!-- componentized -->
 <template>
   <view class="page">
     <!-- 自定义导航栏 -->
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">选择服务器</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="选择服务器" :show-back="true" @back="onBack" />
+
 
     <!-- 页面主体 -->
     <scroll-view class="scroll-content" scroll-y="true" show-scrollbar="false">
@@ -48,6 +46,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref, onLoad } from 'vue';
 import { useStore } from 'vuex';
 
@@ -113,37 +113,6 @@ const onBack = () => {
   min-height: 100vh;
   background-color: #0F0E1D;
   position: relative;
-}
-
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 88rpx;
-  display: flex;
-  align-items: center;
-  padding: 0 32rpx;
-  background-color: #16152A;
-  border-bottom: 1rpx solid #2A293E;
-  z-index: 100;
-  box-sizing: border-box;
-}
-
-.navbar-back {
-  font-size: 36rpx;
-  color: #FFFFFF;
-}
-
-.navbar-title {
-  font-size: 34rpx;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin-left: 40rpx;
-}
-
-.navbar-spacer {
-  flex: 1;
 }
 
 .scroll-content {

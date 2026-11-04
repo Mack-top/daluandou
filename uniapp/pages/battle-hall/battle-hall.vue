@@ -1,11 +1,9 @@
+<!-- componentized -->
 <template>
   <view class="page">
     <!-- 自定义导航栏 -->
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">主线关卡大厅</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="主线关卡大厅" :show-back="true" @back="onBack" />
+
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
@@ -17,8 +15,8 @@
             <text class="status-text">补给效率：{{ supplyEfficiency }}%</text>
           </view>
           <view class="idle-actions">
-            <button class="btn-idle" @tap="onStartIdle">开始挂机</button>
-            <button class="btn-idle" @tap="onCollectIdle">领取收益</button>
+            <base-button class="btn-idle" @tap="onStartIdle">开始挂机</base-button>
+            <base-button class="btn-idle" @tap="onCollectIdle">领取收益</base-button>
           </view>
         </view>
 
@@ -42,7 +40,7 @@
             <view class="stage-action">
               <text v-if="s.cleared" class="status-cleared">已通关</text>
               <text v-else-if="s.locked" class="status-locked">未解锁</text>
-              <button v-else class="btn-stage">挑战</button>
+              <base-button v-else class="btn-stage">挑战</base-button>
             </view>
           </view>
         </view>
@@ -53,6 +51,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
 
 const supplyEfficiency = ref(115);
@@ -87,14 +87,6 @@ const onStageTap = (s) => {
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background-color: #0F0E1D; position: relative; }
-.navbar {
-  position: fixed; top: 0; left: 0; right: 0; height: 88rpx;
-  display: flex; align-items: center; padding: 0 32rpx;
-  background-color: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box;
-}
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .idle-card {

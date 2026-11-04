@@ -1,10 +1,8 @@
+<!-- componentized -->
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">开服活动</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="开服活动" :show-back="true" @back="onBack" />
+
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <view class="section-title">开服限时活动</text>
@@ -18,7 +16,7 @@
             </view>
             <view class="activity-status">
               <text v-if="a.ended" class="status-ended">已结束</text>
-              <button v-else class="btn-go">前往</button>
+              <base-button v-else class="btn-go">前往</base-button>
             </view>
           </view>
         </view>
@@ -28,6 +26,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 const activities = [
   { name: '百抽献礼', desc: '累计召唤100抽，获5星SSR食灵', icon: '🎁', time: '剩余 6天 12小时', ended: false },
   { name: '主线通关奖励', desc: '通关主线2-4，获蓝色夏威夷·艾薇儿', icon: '🗺️', time: '剩余 6天 12小时', ended: false },
@@ -44,10 +44,6 @@ const onEnter = (a) => {
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .section-title { font-size: 32rpx; color: #FFFFFF; font-weight: 700; margin: 40rpx 0 24rpx 0; }

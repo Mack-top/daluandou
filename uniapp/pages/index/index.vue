@@ -27,9 +27,7 @@
       <text class="change-server" @tap="onChangeServer">点击换服</text>
 
       <!-- 开始游戏按钮 -->
-      <button class="btn-start" :disabled="!agreed" @tap="onStartGame">
-        开始游戏
-      </button>
+      <base-button btn-type="primary" :disabled="!agreed" @tap="onStartGame">开始游戏</base-button>
     </main-content>
 
     <!-- 底部：协议勾选 -->
@@ -63,6 +61,7 @@
 import { ref, onLoad } from 'vue';
 import { useStore } from 'vuex';
 import { guestLogin, fetchServerList } from '../../utils/api.js';
+import BaseButton from '@/pages/components/BaseButton.vue';
 
 const store = useStore();
 

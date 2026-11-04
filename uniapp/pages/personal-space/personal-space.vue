@@ -1,10 +1,8 @@
+<!-- componentized -->
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">个人空间</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="个人空间" :show-back="true" @back="onBack" />
+
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <!-- 个人主页 -->
@@ -17,7 +15,7 @@
             <text class="profile-power">战力 {{ profile.power }}</text>
           </view>
           <view class="profile-action">
-            <button class="btn-edit" @tap="onEdit">编辑资料</button>
+            <base-button class="btn-edit" @tap="onEdit">编辑资料</base-button>
           </view>
         </view>
         <!-- 收藏/勋章 -->
@@ -40,6 +38,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
 const avatar = ref('👤');
 const profile = { name: '食神小助手', id: '8821001', level: 42, power: 125000 };
@@ -56,10 +56,6 @@ const onRegion = () => uni.showToast({ title = '地区设置开发中', icon: 'n
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .profile-card { background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 24rpx; padding: 32rpx; margin-bottom: 30rpx; display: flex; justify-content: space-between; align-items: center; }

@@ -1,17 +1,15 @@
+<!-- componentized -->
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">藏宝阁</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="藏宝阁" :show-back="true" @back="onBack" />
+
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <!-- 刷新倒计时 -->
         <view class="refresh-card">
           <text class="refresh-label">商品刷新倒计时：</text>
           <text class="refresh-time">{{ countdown }}</text>
-          <button class="btn-refresh" @tap="onRefresh">手动刷新</button>
+          <base-button class="btn-refresh" @tap="onRefresh">手动刷新</base-button>
         </view>
         <!-- 商品列表 -->
         <view class="section-title">限时商品</text>
@@ -25,7 +23,7 @@
             </view>
             <view class="product-action">
               <text class="product-price">{{ p.price }}</text>
-              <button class="product-buy" @tap.stop="onBuy(p)">购买</button>
+              <base-button class="product-buy" @tap.stop="onBuy(p)">购买</base-button>
             </view>
           </view>
         </view>
@@ -35,6 +33,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
 const countdown = ref('04:12:30');
 const products = [
@@ -58,10 +58,6 @@ const onBuy = (p) => {
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .refresh-card { background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 24rpx; padding: 28rpx 32rpx; margin-bottom: 30rpx; display: flex; justify-content: space-between; align-items: center; }

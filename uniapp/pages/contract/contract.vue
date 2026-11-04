@@ -1,11 +1,9 @@
+<!-- componentized -->
 <template>
   <view class="page">
     <!-- 自定义导航栏 -->
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">契约特惠</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="契约特惠" :show-back="true" @back="onBack" />
+
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
@@ -22,7 +20,7 @@
           <text class="deal-title">契约特惠</text>
           <text class="deal-desc">旧之约 吃货卡包 · 超值基金</text>
           <view class="deal-price">灵晶 × 360</view>
-          <button class="deal-btn" @tap="onBuyContract">购买</button>
+          <base-button class="deal-btn" @tap="onBuyContract">购买</base-button>
         </view>
 
         <!-- 首充礼包 -->
@@ -32,7 +30,7 @@
           <text class="gift-rarity">5星SSR</text>
           <view class="gift-avatar">🧀</view>
           <text class="gift-desc">群攻爆发·官方力荐</text>
-          <button class="gift-btn" @tap="onBuyFirstCharge">首充</button>
+          <base-button class="gift-btn" @tap="onBuyFirstCharge">首充</base-button>
         </view>
 
         <!-- 三日礼遇 -->
@@ -49,7 +47,7 @@
         <view class="fund-card">
           <text class="fund-title">超值基金</text>
           <text class="fund-desc">投资灵晶，每日领取丰厚回报</text>
-          <button class="fund-btn" @tap="onBuyFund">立即购买</button>
+          <base-button class="fund-btn" @tap="onBuyFund">立即购买</base-button>
         </view>
 
       </view>
@@ -58,6 +56,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref, computed } from 'vue';
 
 const countdown = ref('3天 12:04:20');
@@ -81,14 +81,6 @@ const onClaimDay = (d) => {
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background-color: #0F0E1D; position: relative; }
-.navbar {
-  position: fixed; top: 0; left: 0; right: 0; height: 88rpx;
-  display: flex; align-items: center; padding: 0 32rpx;
-  background-color: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box;
-}
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .countdown {

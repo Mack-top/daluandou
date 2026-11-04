@@ -1,10 +1,8 @@
+<!-- componentized -->
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">世界BOSS</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="世界BOSS" :show-back="true" @back="onBack" />
+
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <!-- BOSS信息 -->
@@ -16,7 +14,7 @@
             <text class="boss-desc">{{ boss.desc }}</text>
           </view>
           <view class="boss-action">
-            <button class="btn-fight" @tap="onFight">挑战</button>
+            <base-button class="btn-fight" @tap="onFight">挑战</base-button>
           </view>
         </view>
         <!-- 倒计时 -->
@@ -40,6 +38,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
 const boss = { name: '远古食神', hp: '98%', desc: '全服协作挑战，造成伤害越高奖励越丰厚' };
 const countdown = ref('02:34:12');
@@ -56,10 +56,6 @@ const onFight = () => uni.showToast({ title = '世界BOSS挑战开发中', icon:
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .boss-card { background: linear-gradient(135deg, rgba(229,72,77,0.15) 0%, rgba(180,40,45,0.08) 100%); border: 1rpx solid rgba(229,72,77,0.3); border-radius: 24rpx; padding: 32rpx; margin-bottom: 30rpx; display: flex; justify-content: space-between; align-items: center; }

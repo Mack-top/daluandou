@@ -1,10 +1,8 @@
+<!-- componentized -->
 <template>
   <view class="page">
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">世界树</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="世界树" :show-back="true" @back="onBack" />
+
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
         <!-- 世界树主体 -->
@@ -20,7 +18,7 @@
         </view>
         <!-- 升级按钮 -->
         <view class="action-section">
-          <button class="btn-upgrade" @tap="onUpgrade">升级世界树</button>
+          <base-button class="btn-upgrade" @tap="onUpgrade">升级世界树</base-button>
         </view>
         <!-- 产出预览 -->
         <view class="section-title">当前产出加成</text>
@@ -36,6 +34,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
 const level = ref(2);
 const currentExp = ref(1500);
@@ -52,10 +52,6 @@ const onUpgrade = () => uni.showToast({ title: '世界树升级开发中', icon:
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background: #0F0E1D; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: 88rpx; display: flex; align-items: center; padding: 0 32rpx; background: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box; }
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .worldtree-card { background: linear-gradient(135deg, rgba(76,175,80,0.1) 0%, rgba(56,142,60,0.05) 100%); border: 1rpx solid rgba(76,175,80,0.3); border-radius: 24rpx; padding: 40rpx 32rpx; text-align: center; margin-bottom: 30rpx; }

@@ -1,11 +1,9 @@
+<!-- componentized -->
 <template>
   <view class="page">
     <!-- 自定义导航栏 -->
-    <view class="navbar">
-      <text class="navbar-back" @tap="onBack">◀</text>
-      <text class="navbar-title">等级礼包</text>
-      <view class="navbar-spacer"></view>
-    </view>
+        <custom-navbar title="等级礼包" :show-back="true" @back="onBack" />
+
 
     <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
       <view class="content">
@@ -38,7 +36,7 @@
             <view class="gift-action">
               <text v-if="g.claimed" class="status-claimed">已领取</text>
               <text v-else-if="g.locked" class="status-locked">锁定</text>
-              <button v-else class="btn-claim">领取</button>
+              <base-button v-else class="btn-claim">领取</base-button>
             </view>
           </view>
         </view>
@@ -49,6 +47,8 @@
 </template>
 
 <script setup>
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';
 
 const currentLevel = ref(5);
@@ -83,14 +83,6 @@ const onClaim = (g) => {
 
 <style scoped>
 .page { width: 100vw; min-height: 100vh; background-color: #0F0E1D; position: relative; }
-.navbar {
-  position: fixed; top: 0; left: 0; right: 0; height: 88rpx;
-  display: flex; align-items: center; padding: 0 32rpx;
-  background-color: #16152A; border-bottom: 1rpx solid #2A293E; z-index: 100; box-sizing: border-box;
-}
-.navbar-back { font-size: 36rpx; color: #FFFFFF; }
-.navbar-title { font-size: 34rpx; font-weight: 600; color: #FFFFFF; margin-left: 40rpx; }
-.navbar-spacer { flex: 1; }
 .scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
 .content { padding: 0 48rpx; box-sizing: border-box; }
 .level-header {
