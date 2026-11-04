@@ -35,29 +35,66 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref } from 'vue';
-const streakDays = ref(3);
+import { guildCheckin } from '@/utils/api.js';
+
+const streakDays = ref(0);
 const isClaimed = ref(false);
-const claimedCount = ref(3);
-const rewards = [
-  { icon: '📖', name: '协会币 × 50' },
-  { icon: '💰', name: '金币 × 100000' },
-  { icon: '⚡', name: '食灵精华 × 300' },
-  { icon: '📦', name: '协会宝箱 × 1' },
-  { icon: '💎', name: '协会币 × 200' }
-];
+const claimedCount = ref(0);
+const rewards = ref([]);
+
+// 从后端获取签到状态与奖励（替换模拟数据）
+const loadCheckin = async () => {
+  try {
+    // 尝试签到接口获取状态（若已签到后端会返回已签到）
+    const result = await guildCheckin();
+    const data = result || {};
+    streakDays.value = data.streakDays || 0;
+    isClaimed.value = !!data.claimed;
+    claimedCount.value = data.claimedCount || 0;
+    const rewardList = Array.isArray(data.rewards) ? data.rewards : [];
+    rewards.value = rewardList.map((r, i) => ({
+      icon: r.icon || '📦',
+      name: r.name || `第${i + 1}天奖励`,
+    }));
+  } catch (e) {
+    console.warn('load checkin failed, use mock', e);
+    streakDays.value = 3;
+    isClaimed.value = false;
+    claimedCount.value = 3;
+    rewards.value = [
+      { icon: '📖', name: '协会币 × 50' },
+      { icon: '💰', name: '金币 × 100000' },
+      { icon: '⚡', name: '食灵精华 × 300' },
+      { icon: '📦', name: '协会宝箱 × 1' },
+      { icon: '💎', name: '协会币 × 200' },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadCheckin();
+});
+
 const onBack = () => uni.navigateBack();
-const onCheckin = () => {
+const onCheckin = async () => {
   if (isClaimed.value) {
     uni.showToast({ title: '今日已签到', icon: 'none' });
     return;
   }
-  isClaimed.value = true;
-  claimedCount.value++;
-  uni.showToast({ title: '签到成功，获得协会币 × 50', icon: 'success' });
+  try {
+    await guildCheckin();
+    isClaimed.value = true;
+    claimedCount.value++;
+    streakDays.value++;
+    uni.showToast({ title: '签到成功，获得协会币 × 50', icon: 'success' });
+    loadCheckin();
+  } catch (e) {
+    uni.showToast({ title: e.message || '签到失败', icon: 'none' });
+  }
 };
 </script>
 

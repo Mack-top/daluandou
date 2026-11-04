@@ -311,6 +311,11 @@ export function listFriends() {
   return request('/social/friends', { method: 'GET' });
 }
 
+/** 协会签到 */
+export function guildCheckin() {
+  return request('/social/guilds/checkin', { method: 'POST' });
+}
+
 /* ==================== 支付模块 ==================== */
 
 /** 创建支付订单 */
@@ -348,6 +353,7 @@ export default {
   battleResult,
   getLeaderboards,
   listFriends,
+  guildCheckin,
   createPayment,
   clearToken,
   getToken,
