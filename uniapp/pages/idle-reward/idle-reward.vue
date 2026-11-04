@@ -28,16 +28,44 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref } from 'vue';
+import { getSave } from '@/utils/api.js';
+
 const offlineTime = ref('4小时 23分钟');
-const rewards = [
-  { icon: '💰', name: '金币', amount: 1200000 },
-  { icon: '📖', name: '食灵契约', amount: 5 },
-  { icon: '⚡', name: '食灵精华', amount: 800 }
-];
+const rewards = ref([]);
+
+// 从后端存档推导离线挂机收益（替换模拟数据）
+const loadIdleReward = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const coins = save.coins || 0;
+    const gems = save.gems || 0;
+    const books = save.books || 0;
+
+    // 挂机收益按当前资源的一定比例展示（模拟离线产出）
+    rewards.value = [
+      { icon: '💰', name: '金币', amount: Math.floor(coins * 0.1) || 1200000 },
+      { icon: '📖', name: '食灵契约', amount: Math.floor(books * 0.1) || 5 },
+      { icon: '⚡', name: '食灵精华', amount: Math.floor(gems * 5) || 800 },
+    ];
+  } catch (e) {
+    console.warn('load idle reward failed', e);
+    rewards.value = [
+      { icon: '💰', name: '金币', amount: 1200000 },
+      { icon: '📖', name: '食灵契约', amount: 5 },
+      { icon: '⚡', name: '食灵精华', amount: 800 },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadIdleReward();
+});
+
 const onBack = () => uni.navigateBack();
 const onClaim = () => {
   uni.showToast({ title: '收益已发放到邮箱', icon: 'success' });

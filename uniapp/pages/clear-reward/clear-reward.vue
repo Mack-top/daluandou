@@ -26,14 +26,49 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const rewards = [
-  { icon: '📖', name: '食灵契约', amount: 10 },
-  { icon: '💰', name: '金币', amount: 500000 },
-  { icon: '⚡', name: '食灵精华', amount: 2000 }
-];
+import { getSave } from '@/utils/api.js';
+
+const rewards = ref([]);
+
+// 从后端存档推导通关章节数与奖励（替换模拟数据）
+const loadClearReward = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const firstClears = Array.isArray(save.firstClears) ? save.firstClears : [];
+    const clearedCount = firstClears.length;
+
+    // 根据通关章节数生成奖励
+    const baseCoin = 50000 * clearedCount;
+    const baseGem = 10 * clearedCount;
+    const baseLeaf = 100 * clearedCount;
+
+    rewards.value = [
+      { icon: '📖', name: '食灵契约', amount: Math.max(1, clearedCount) },
+      { icon: '💰', name: '金币', amount: baseCoin },
+      { icon: '⚡', name: '食灵精华', amount: baseLeaf },
+    ];
+    if (clearedCount >= 3) {
+      rewards.value.push({ icon: '💎', name: '灵晶', amount: baseGem });
+    }
+  } catch (e) {
+    console.warn('load clear reward failed', e);
+    rewards.value = [
+      { icon: '📖', name: '食灵契约', amount: 10 },
+      { icon: '💰', name: '金币', amount: 500000 },
+      { icon: '⚡', name: '食灵精华', amount: 2000 },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadClearReward();
+});
+
 const onBack = () => uni.navigateBack();
 const onClaim = () => {
   uni.showToast({ title: '奖励已发放到邮箱', icon: 'success' });
