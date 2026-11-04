@@ -34,18 +34,44 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref } from 'vue';
-const level = ref(2);
-const currentExp = ref(1500);
-const totalExp = ref(3000);
-const progressPct = ref(50);
-const bonuses = [
+import { getSave } from '@/utils/api.js';
+
+const level = ref(1);
+const currentExp = ref(0);
+const totalExp = ref(1000);
+const progressPct = ref(0);
+const bonuses = ref([
   { name: '金币产出', value: '+10%' },
   { name: '食灵精华产出', value: '+10%' },
   { name: '挂机收益', value: '+15%' }
-];
+]);
+
+// 从后端存档获取世界树等级（替换模拟数据）
+const loadWorldtree = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const worldtreeLevel = save.worldtree || 1;
+    level.value = worldtreeLevel;
+    currentExp.value = worldtreeLevel * 1000;
+    totalExp.value = (worldtreeLevel + 1) * 1000;
+    progressPct.value = Math.min(100, Math.floor((currentExp.value / totalExp.value) * 100));
+  } catch (e) {
+    console.warn('load worldtree failed', e);
+    level.value = 2;
+    currentExp.value = 1500;
+    totalExp.value = 3000;
+    progressPct.value = 50;
+  }
+};
+
+onMounted(() => {
+  loadWorldtree();
+});
+
 const onBack = () => uni.navigateBack();
 const onUpgrade = () => uni.showToast({ title: '世界树升级开发中', icon: 'none' });
 </script>
