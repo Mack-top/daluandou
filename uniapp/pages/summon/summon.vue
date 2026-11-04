@@ -62,21 +62,60 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref } from 'vue';
 import { useStore } from 'vuex';
+import { getCatalog } from '@/utils/api.js';
 import { getCharacterAvatar, getStaticUrl } from '@/utils/resource.js';
 import { eventBus } from '@/utils/event-bus.js';
 
 const store = useStore();
 
 const activePool = ref(0);
-const pools = ref([
-  { id: 'qing', name: '普通召唤', desc: '消耗食灵契约召唤', cost: '食灵契约 × 1', rarity: 'SR', initial: 'Q' },
-  { id: 'blue-cheese', name: '高级召唤', desc: '消耗灵晶召唤，保底 SR', cost: '灵晶 × 50', rarity: 'SSR', initial: 'B' },
-  { id: 'tom-yum', name: '限时召唤', desc: 'UP 食灵出率提升', cost: '灵晶 × 100', rarity: 'SSR', initial: 'T' },
-]);
+const pools = ref([]);
+
+// 召唤卡池图标映射（按稀有度）
+const poolIcon = (rarity) => {
+  if (rarity === 'SSR') return '👑';
+  if (rarity === 'SR') return '🌟';
+  return '⭐';
+};
+
+// 从后端 catalog 获取角色作为召唤卡池（替换模拟数据）
+const loadPools = async () => {
+  try {
+    const result = await getCatalog();
+    const characters = result.characters || [];
+    pools.value = characters.map((c, idx) => ({
+      id: c.id,
+      name: c.name,
+      desc: `${c.title} · ${c.element} ${c.role}`,
+      cost: c.rarity === 'SSR' ? '灵晶 × 100' : '食灵契约 × 1',
+      rarity: c.rarity,
+      initial: c.name.charAt(0),
+      basePower: c.basePower,
+    }));
+    if (pools.value.length === 0) {
+      pools.value = [
+        { id: 'qing', name: '普通召唤', desc: '消耗食灵契约召唤', cost: '食灵契约 × 1', rarity: 'SR', initial: 'Q' },
+        { id: 'blue-cheese', name: '高级召唤', desc: '消耗灵晶召唤，保底 SR', cost: '灵晶 × 50', rarity: 'SSR', initial: 'B' },
+        { id: 'tom-yum', name: '限时召唤', desc: 'UP 食灵出率提升', cost: '灵晶 × 100', rarity: 'SSR', initial: 'T' },
+      ];
+    }
+  } catch (e) {
+    console.warn('load pools failed', e);
+    pools.value = [
+      { id: 'qing', name: '普通召唤', desc: '消耗食灵契约召唤', cost: '食灵契约 × 1', rarity: 'SR', initial: 'Q' },
+      { id: 'blue-cheese', name: '高级召唤', desc: '消耗灵晶召唤，保底 SR', cost: '灵晶 × 50', rarity: 'SSR', initial: 'B' },
+      { id: 'tom-yum', name: '限时召唤', desc: 'UP 食灵出率提升', cost: '灵晶 × 100', rarity: 'SSR', initial: 'T' },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadPools();
+});
 
 // 获取卡池头像路径（资源到位后自动加载真实图片）
 const getPoolAvatar = (characterId) => {
