@@ -28,16 +28,60 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const activities = [
-  { name: '百抽献礼', desc: '累计召唤100抽，获5星SSR食灵', icon: '🎁', time: '剩余 6天 12小时', ended: false },
-  { name: '主线通关奖励', desc: '通关主线2-4，获蓝色夏威夷·艾薇儿', icon: '🗺️', time: '剩余 6天 12小时', ended: false },
-  { name: '累计充值', desc: '累计充值达标，获丰厚返利', icon: '💰', time: '剩余 6天 12小时', ended: false },
-  { name: '新手七日登录', desc: '连续登录7日，获拉菲食灵', icon: '📅', time: '剩余 4天 8小时', ended: false },
-  { name: '首充双倍', desc: '首次充值获得双倍灵晶', icon: '💎', time: '已结束', ended: true }
-];
+import { listActivities } from '@/utils/api.js';
+
+const activities = ref([]);
+
+// 活动图标映射（按活动类型）
+const activityIcon = (type) => {
+  if (type === 'login') return '📅';
+  if (type === 'charge') return '💰';
+  if (type === 'collect') return '🎁';
+  return '📢';
+};
+
+// 从后端 /game/activities 获取活动列表（替换模拟数据）
+const loadActivities = async () => {
+  try {
+    const result = await listActivities();
+    const list = Array.isArray(result) ? result : (result.activities || []);
+    const now = Date.now();
+    activities.value = list.map((a) => {
+      const ended = a.endAt && new Date(a.endAt).getTime() < now;
+      return {
+        id: a.id,
+        name: a.name,
+        desc: a.type === 'login' ? '登录累计奖励' : (a.type === 'charge' ? '充值达标奖励' : '收集兑换奖励'),
+        icon: activityIcon(a.type),
+        time: ended ? '已结束' : '活动进行中',
+        ended,
+      };
+    });
+    if (activities.value.length === 0) {
+      activities.value = [
+        { name: '七日签到', desc: '登录累计奖励', icon: '📅', time: '活动进行中', ended: false },
+        { name: '充能狂欢', desc: '充值达标奖励', icon: '💰', time: '活动进行中', ended: false },
+        { name: '香料收集', desc: '收集兑换奖励', icon: '🎁', time: '活动进行中', ended: false },
+      ];
+    }
+  } catch (e) {
+    console.warn('load activities failed', e);
+    activities.value = [
+      { name: '七日签到', desc: '登录累计奖励', icon: '📅', time: '活动进行中', ended: false },
+      { name: '充能狂欢', desc: '充值达标奖励', icon: '💰', time: '活动进行中', ended: false },
+      { name: '香料收集', desc: '收集兑换奖励', icon: '🎁', time: '活动进行中', ended: false },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadActivities();
+});
+
 const onBack = () => uni.navigateBack();
 const onEnter = (a) => {
   if (a.ended) { uni.showToast({ title: '活动已结束', icon: 'none' }); return; }

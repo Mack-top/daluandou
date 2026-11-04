@@ -25,21 +25,61 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const activities = [
-  { name: '开服庆典', desc: '百抽献礼与主线通关奖励', icon: '🎉', time: '剩余 3天 12小时', tag: '火热进行中' },
-  { name: '七日之约', desc: '连续登录获取丰厚奖励', icon: '📅', time: '剩余 5天 4小时', tag: '火热进行中' },
-  { name: '食神记', desc: '街巷美食探索活动', icon: '🍜', time: '即将开启', tag: '敬请期待' },
-  { name: '世界BOSS', desc: '全服挑战强大世界BOSS', icon: '🐉', time: '即将开启', tag: '敬请期待' },
-  { name: '跨服竞技场', desc: '与全服玩家一较高下', icon: '⚔️', time: '即将开启', tag: '敬请期待' }
-];
+import { listActivities } from '@/utils/api.js';
+
+const activities = ref([]);
+
+const activityIcon = (name) => {
+  if (/七日|login/i.test(name)) return '📅';
+  if (/庆典|celebration/i.test(name)) return '🎉';
+  if (/充值|charge/i.test(name)) return '💰';
+  if (/收集|collect/i.test(name)) return '🎁';
+  return '📢';
+};
+
+const loadActivities = async () => {
+  try {
+    const result = await listActivities();
+    const list = Array.isArray(result) ? result : (result.activities || []);
+    const now = Date.now();
+    activities.value = list.map((a) => {
+      const ended = a.endAt && new Date(a.endAt).getTime() < now;
+      return {
+        id: a.id,
+        name: a.name,
+        desc: a.type === 'login' ? '登录累计奖励' : (a.type === 'charge' ? '充值达标奖励' : '收集兑换奖励'),
+        icon: activityIcon(a.name),
+        time: ended ? '已结束' : '活动进行中',
+        tag: ended ? '已结束' : '火热进行中',
+      };
+    });
+    if (activities.value.length === 0) {
+      activities.value = [
+        { name: '开服庆典', desc: '百抽献礼与主线通关奖励', icon: '🎉', time: '活动进行中', tag: '火热进行中' },
+        { name: '七日之约', desc: '连续登录获取丰厚奖励', icon: '📅', time: '活动进行中', tag: '火热进行中' },
+      ];
+    }
+  } catch (e) {
+    console.warn('load activities failed', e);
+    activities.value = [
+      { name: '开服庆典', desc: '百抽献礼与主线通关奖励', icon: '🎉', time: '活动进行中', tag: '火热进行中' },
+      { name: '七日之约', desc: '连续登录获取丰厚奖励', icon: '📅', time: '活动进行中', tag: '火热进行中' },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadActivities();
+});
+
 const onBack = () => uni.navigateBack();
 const onEnter = (a) => {
-  if (a.tag === '敬请期待') {
-    uni.showToast({ title: '活动即将开启，敬请期待', icon: 'none' });
-    return;
+  if (a.tag === '已结束') {
+    uni.showToast({ title: '活动已结束', icon: 'none' }); return;
   }
   uni.showToast({ title: `进入${a.name}`, icon: 'none' });
 };

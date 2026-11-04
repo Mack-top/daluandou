@@ -36,20 +36,45 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref } from 'vue';
-const donateItems = [
+import { getSave } from '@/utils/api.js';
+
+const donateItems = ref([
   { name: '金币', desc: '捐献 100 万金币', icon: '💰', guildCoin: 100, cost: 1000000 },
   { name: '食灵精华', desc: '捐献 5000 食灵精华', icon: '⚡', guildCoin: 200, cost: 5000 },
   { name: '食灵契约', desc: '捐献 10 张食灵契约', icon: '📖', guildCoin: 500, cost: 10 },
   { name: '灵晶', desc: '捐献 500 灵晶', icon: '💎', guildCoin: 1000, cost: 500 }
-];
-const todayContribution = ref(12500);
-const progressCurrent = ref(12500);
+]);
+const todayContribution = ref(0);
+const progressCurrent = ref(0);
 const progressTotal = ref(50000);
-const progressPct = ref(25);
+const progressPct = ref(0);
+
+// 从后端存档获取协会贡献数据（替换模拟数据）
+const loadContribution = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const social = save.social || {};
+    const contribution = social.contribution || 0;
+    todayContribution.value = contribution;
+    progressCurrent.value = contribution;
+    progressPct.value = Math.min(100, Math.floor((contribution / 50000) * 100));
+  } catch (e) {
+    console.warn('load contribution failed', e);
+    todayContribution.value = 12500;
+    progressCurrent.value = 12500;
+    progressPct.value = 25;
+  }
+};
+
+onMounted(() => {
+  loadContribution();
+});
+
 const onBack = () => uni.navigateBack();
 const onDonate = (d) => uni.showToast({ title: `捐献${d.name}成功，获得${d.guildCoin}协会币`, icon: 'success' });
 </script>

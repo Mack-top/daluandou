@@ -38,18 +38,54 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref } from 'vue';
-const collected = ref(12);
+import { getSave } from '@/utils/api.js';
+
+const collected = ref(0);
 const total = ref(20);
-const progressPct = ref(60);
-const milestones = [
-  { threshold: 5, rewards: ['食灵契约 × 5', '金币 × 100000'], claimed: true },
-  { threshold: 10, rewards: ['食灵契约 × 10', '食灵精华 × 1000'], claimed: true },
+const progressPct = ref(0);
+const milestones = ref([
+  { threshold: 5, rewards: ['食灵契约 × 5', '金币 × 100000'], claimed: false },
+  { threshold: 10, rewards: ['食灵契约 × 10', '食灵精华 × 1000'], claimed: false },
   { threshold: 15, rewards: ['食灵契约 × 20', '史诗装备碎片 × 5'], claimed: false },
   { threshold: 20, rewards: ['5星SSR食灵 × 1', '灵晶 × 500'], claimed: false }
-];
+]);
+
+// 从后端存档获取编年进度（替换模拟数据）
+const loadChronicle = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const chroniclePoints = save.chroniclePoints || 0;
+    const chronicleClaimed = Array.isArray(save.chronicleClaimed) ? save.chronicleClaimed : [];
+
+    collected.value = chroniclePoints;
+    progressPct.value = Math.min(100, Math.floor((chroniclePoints / 20) * 100));
+
+    // 根据 chronicleClaimed 标记已领取的里程碑
+    milestones.value = milestones.value.map((m) => ({
+      ...m,
+      claimed: chronicleClaimed.includes(m.threshold) || chronicleClaimed.includes(String(m.threshold)),
+    }));
+  } catch (e) {
+    console.warn('load chronicle failed', e);
+    collected.value = 12;
+    progressPct.value = 60;
+    milestones.value = [
+      { threshold: 5, rewards: ['食灵契约 × 5', '金币 × 100000'], claimed: true },
+      { threshold: 10, rewards: ['食灵契约 × 10', '食灵精华 × 1000'], claimed: true },
+      { threshold: 15, rewards: ['食灵契约 × 20', '史诗装备碎片 × 5'], claimed: false },
+      { threshold: 20, rewards: ['5星SSR食灵 × 1', '灵晶 × 500'], claimed: false },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadChronicle();
+});
+
 const onBack = () => uni.navigateBack();
 const onClaim = (m) => {
   m.claimed = true;

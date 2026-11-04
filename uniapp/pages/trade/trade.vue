@@ -35,15 +35,61 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const trades = [
-  { giveIcon: '💰', giveValue: '金币 × 100000', getIcon: '📖', getValue: '食灵契约 × 2', limit: 5, bought: 2 },
-  { giveIcon: '⚡', giveValue: '食灵精华 × 5000', getIcon: '📖', getValue: '食灵契约 × 1', limit: 10, bought: 5 },
-  { giveIcon: '💎', giveValue: '灵晶 × 100', getIcon: '📦', getValue: '每日宝箱 × 1', limit: 3, bought: 1 },
-  { giveIcon: '🍵', giveValue: '灵味原浆 × 100000', getIcon: '📖', getValue: '食灵契约 × 5', limit: 2, bought: 0 }
-];
+import { getMarket } from '@/utils/api.js';
+
+const trades = ref([]);
+
+// 兑换图标映射（按货币类型）
+const tradeIcon = (kind) => {
+  if (kind === 'coin') return '💰';
+  if (kind === 'gem') return '💎';
+  if (kind === 'book') return '📖';
+  if (kind === 'chest') return '📦';
+  if (kind === 'potion') return '🧪';
+  return '⚡';
+};
+
+// 从后端 /catalog/market 获取今日兑换列表（替换模拟数据）
+const loadMarket = async () => {
+  try {
+    const result = await getMarket();
+    const offers = result.offers || [];
+    trades.value = offers.map((o) => ({
+      id: o.id,
+      giveIcon: tradeIcon('coin'),
+      giveValue: `金币 × ${o.price || 0}`,
+      getIcon: tradeIcon(o.kind),
+      getValue: `${o.label || '物品'} × ${o.amount || 0}`,
+      limit: 5,
+      bought: 0,
+    }));
+    if (trades.value.length === 0) {
+      trades.value = [
+        { giveIcon: '💰', giveValue: '金币 × 100000', getIcon: '📖', getValue: '食灵契约 × 2', limit: 5, bought: 2 },
+        { giveIcon: '⚡', giveValue: '食灵精华 × 5000', getIcon: '📖', getValue: '食灵契约 × 1', limit: 10, bought: 5 },
+        { giveIcon: '💎', giveValue: '灵晶 × 100', getIcon: '📦', getValue: '每日宝箱 × 1', limit: 3, bought: 1 },
+        { giveIcon: '🍵', giveValue: '灵味原浆 × 100000', getIcon: '📖', getValue: '食灵契约 × 5', limit: 2, bought: 0 },
+      ];
+    }
+  } catch (e) {
+    console.warn('load market failed', e);
+    trades.value = [
+      { giveIcon: '💰', giveValue: '金币 × 100000', getIcon: '📖', getValue: '食灵契约 × 2', limit: 5, bought: 2 },
+      { giveIcon: '⚡', giveValue: '食灵精华 × 5000', getIcon: '📖', getValue: '食灵契约 × 1', limit: 10, bought: 5 },
+      { giveIcon: '💎', giveValue: '灵晶 × 100', getIcon: '📦', getValue: '每日宝箱 × 1', limit: 3, bought: 1 },
+      { giveIcon: '🍵', giveValue: '灵味原浆 × 100000', getIcon: '📖', getValue: '食灵契约 × 5', limit: 2, bought: 0 },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadMarket();
+});
+
 const onBack = () => uni.navigateBack();
 const onTrade = (t) => {
   if (t.bought >= t.limit) {
