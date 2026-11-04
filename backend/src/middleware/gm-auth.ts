@@ -14,7 +14,7 @@ type GmSession = { gmId: string; expiresAt: number };
 
 const sessions = new Map<string, GmSession>();
 /** 登录失败锁定：窗口内连续失败达到上限后，锁定该账号名一段时间。 */
-const loginFailures = new Map<string, { count: number; lockedUntil: number }>();
+const loginFailures = new Map<string, { count: number; lockedUntil: number; expiresAt: number }>();
 
 function sweepExpired(): void {
   const now = Date.now();
@@ -22,7 +22,7 @@ function sweepExpired(): void {
     if (session.expiresAt <= now) sessions.delete(token);
   }
   for (const [username, state] of loginFailures) {
-    if (state.lockedUntil !== 0 && state.lockedUntil <= now) loginFailures.delete(username);
+    if (state.expiresAt <= now) loginFailures.delete(username);
   }
 }
 
@@ -46,16 +46,19 @@ export function isLoginLocked(username: string): number {
   const state = loginFailures.get(username);
   if (!state) return 0;
   if (state.lockedUntil > Date.now()) return Math.ceil((state.lockedUntil - Date.now()) / 1000);
-  loginFailures.delete(username);
+  if (state.expiresAt <= Date.now()) loginFailures.delete(username);
   return 0;
 }
 
 export function recordLoginFailure(username: string): void {
-  const state = loginFailures.get(username) ?? { count: 0, lockedUntil: 0 };
+  const now = Date.now();
+  const previous = loginFailures.get(username);
+  const state = previous && previous.expiresAt > now ? previous : { count: 0, lockedUntil: 0, expiresAt: now + env.gmLoginLockMinutes * 60_000 };
   state.count += 1;
   if (state.count >= env.gmLoginMaxFailures) {
     state.lockedUntil = Date.now() + env.gmLoginLockMinutes * 60_000;
     state.count = 0;
+    state.expiresAt = state.lockedUntil;
   }
   loginFailures.set(username, state);
 }

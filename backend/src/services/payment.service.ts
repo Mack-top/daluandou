@@ -8,6 +8,7 @@ import { applyResourceDelta, getProgress, updateProgress } from '../repositories
 import { countPackPurchasesOn, insertShopPurchase } from '../repositories/economy.repository.js';
 import { findShopPackById } from '../repositories/catalog.repository.js';
 import {
+  countPendingOrders,
   findOrderById,
   findOrderByIdempotencyKey,
   insertOrder,
@@ -54,29 +55,31 @@ const orderView = (order: PaymentOrderRow): OrderView => ({
 
 /**
  * 下单：锁价快照（价格/礼包写入订单与签名）+ 幂等键。
- * 同一 clientToken 重复提交返回同一订单（existing=true）；日限购在下单时校验，
- * 避免「已支付但发放被限购拦截」的不可兑现状态。
+ * 同一 clientToken 重复提交返回同一订单（existing=true）；日限购包含待支付订单。
+ * 待支付名额跨日保留，只有确认网关订单关闭后才能释放，避免迟到付款无法兑现。
  */
 export function createOrder(
   playerId: string,
   input: { packId: string; clientToken: string },
 ): { orderId: string; amount: number; status: 'created'; existing: boolean } {
-  const existing = findOrderByIdempotencyKey(playerId, input.clientToken);
-  if (existing) {
-    if (existing.pack_id !== input.packId) throw conflict('幂等键已绑定其他礼包');
-    if (existing.status !== 'created') throw conflict('该订单已处理，请勿重复支付');
-    return { orderId: existing.id, amount: existing.amount, status: 'created', existing: true };
-  }
-  const pack = findShopPackById(input.packId);
-  if (!pack) throw notFound('礼包不存在');
-  if (pack.daily_limit > 0 && countPackPurchasesOn(playerId, pack.id, dayKey()) >= pack.daily_limit) {
-    throw conflict('该礼包今日购买次数已达上限');
-  }
-  const orderId = newId();
-  // 锁价签名：回调时校验订单未被篡改
-  const signature = sign(`order|${orderId}|${pack.id}|${pack.price}`);
-  insertOrder({ id: orderId, playerId, packId: pack.id, amount: pack.price, clientToken: input.clientToken, signature });
-  return { orderId, amount: pack.price, status: 'created', existing: false };
+  return transaction(() => {
+    const existing = findOrderByIdempotencyKey(playerId, input.clientToken);
+    if (existing) {
+      if (existing.pack_id !== input.packId) throw conflict('幂等键已绑定其他礼包');
+      if (existing.status !== 'created') throw conflict('该订单已处理，请勿重复支付');
+      return { orderId: existing.id, amount: existing.amount, status: 'created', existing: true };
+    }
+    const pack = findShopPackById(input.packId);
+    if (!pack) throw notFound('礼包不存在');
+    if (pack.daily_limit > 0 && countPackPurchasesOn(playerId, pack.id, dayKey()) + countPendingOrders(playerId, pack.id) >= pack.daily_limit) {
+      throw conflict('该礼包今日购买次数已达上限');
+    }
+    const orderId = newId();
+    // 锁价签名：回调时校验订单未被篡改
+    const signature = sign(`order|${orderId}|${pack.id}|${pack.price}`);
+    insertOrder({ id: orderId, playerId, packId: pack.id, amount: pack.price, clientToken: input.clientToken, signature });
+    return { orderId, amount: pack.price, status: 'created', existing: false };
+  });
 }
 
 export type GatewayCallbackPayload = {
@@ -177,6 +180,7 @@ export function handleGatewayCallback(payload: GatewayCallbackPayload): Callback
 
 /** 模拟网关支付：本地构造签名回调并走 handleGatewayCallback 同一入口（真实网关接入点即此处替换）。 */
 export function mockGatewayPay(playerId: string, orderId: string): { order: OrderView; save: ReturnType<typeof buildSave> } {
+  if (env.isProduction) throw forbidden('生产环境禁止模拟支付');
   const order = findOrderById(orderId);
   if (!order) throw notFound('订单不存在');
   if (order.player_id !== playerId) throw forbidden('无权操作该订单');

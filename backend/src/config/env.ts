@@ -33,6 +33,14 @@ function readList(name: string, fallback: string[]): string[] {
   return list.length ? list : fallback;
 }
 
+function paymentSecret(): string {
+  const secret = process.env.PAYMENT_SECRET;
+  if (process.env.NODE_ENV === 'production' && (!secret || secret.length < 32 || secret === 'dev-only-payment-secret')) {
+    throw new Error('生产环境必须配置至少 32 字符的 PAYMENT_SECRET');
+  }
+  return secret ?? 'dev-only-payment-secret';
+}
+
 export const env = {
   nodeEnv: process.env.NODE_ENV ?? 'development',
   get isProduction(): boolean {
@@ -45,7 +53,7 @@ export const env = {
   corsOrigins: readList('CORS_ORIGIN', ['http://127.0.0.1:5173', 'http://localhost:5173']),
   sessionTtlHours: readInt('SESSION_TTL_HOURS', 720),
   /** 支付回调 HMAC 签名密钥；生产环境必须显式配置。 */
-  paymentSecret: process.env.PAYMENT_SECRET ?? 'dev-only-payment-secret',
+  paymentSecret: paymentSecret(),
   /* ------------------------- GM 后台（v11） ------------------------- */
   /** GM 管理端点允许的来源 IP 白名单（Express req.ip 口径，::ffff: 前缀自动归一）。 */
   gmIpAllowlist: readList('GM_IP_ALLOWLIST', ['127.0.0.1', '::1']),

@@ -1,6 +1,8 @@
+import { env } from '../config/env.js';
+import { countPendingOrders } from '../repositories/payment.repository.js';
 import { transaction } from '../db/index.js';
 import { dayKey, nowIso } from '../lib/clock.js';
-import { conflict, notFound } from '../lib/errors.js';
+import { conflict, forbidden, notFound } from '../lib/errors.js';
 import { CURRENCY_LABEL, type Currency } from '../domain/types.js';
 import { WORLD_TREE_MAX, craftCost, craftYield, idleAccrual, worldtreeCost } from '../domain/power.js';
 import {
@@ -181,12 +183,13 @@ export function claimIdleRewards(playerId: string): { coins: number; potions: nu
  * 接入真实支付时，应改为「下单 → 支付回调 → 发放」并校验签名。
  */
 export function purchasePack(playerId: string, packId: string): { purchaseId: string; firstPurchase: boolean } {
+  if (env.isProduction) throw forbidden('生产环境禁止直接发放付费礼包');
   return transaction(() => {
     const pack = findShopPackById(packId);
     if (!pack) throw notFound('礼包不存在');
 
     const today = dayKey();
-    if (pack.daily_limit > 0 && countPackPurchasesOn(playerId, packId, today) >= pack.daily_limit) {
+    if (pack.daily_limit > 0 && countPackPurchasesOn(playerId, packId, today) + countPendingOrders(playerId, packId) >= pack.daily_limit) {
       throw conflict('该礼包今日购买次数已达上限');
     }
 

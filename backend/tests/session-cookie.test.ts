@@ -94,7 +94,7 @@ test('Cookie 会话轨道：签发/确权/CSRF 校验/登出清除，与 Bearer 
     const token = guest.body?.data?.token as string;
     assert.ok(token);
     const bearerPut = await call('/api/game/state/document', {
-      method: 'PUT', token, body: { document: { coins: 2 } },
+      method: 'PUT', token, body: { document: { coins: 2 }, version: 1 },
     });
     assert.equal(bearerPut.status, 200);
 
