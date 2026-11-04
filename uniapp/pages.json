@@ -12,6 +12,17 @@
       }
     },
     {
+      "path": "pages/protocol/protocol",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "用户协议",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
       "path": "pages/server-list/server-list",
       "style": {
         "navigationStyle": "custom",
@@ -38,6 +49,17 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "初识灵界",
+        "backgroundColor": "#0F0E1D",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": false,
+        "onReachBottomDistance": 50
+      }
+    },
+    {
+      "path": "pages/guide/guide",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "新手引导",
         "backgroundColor": "#0F0E1D",
         "backgroundTextStyle": "light",
         "enablePullDownRefresh": false,

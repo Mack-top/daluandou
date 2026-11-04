@@ -129,12 +129,12 @@ const toggleAgree = () => {
 
 // 查看用户协议
 const onUserProtocol = () => {
-  uni.navigateTo({ url: '/pages/protocol/protocol?type=user' });
+  uni.navigateTo({ url: '/pages/protocol/protocol?type=user&fromIndex=true' });
 };
 
 // 查看隐私保护指引
 const onPrivacyPolicy = () => {
-  uni.navigateTo({ url: '/pages/protocol/protocol?type=privacy' });
+  uni.navigateTo({ url: '/pages/protocol/protocol?type=privacy&fromIndex=true' });
 };
 
 onLoad(() => {
