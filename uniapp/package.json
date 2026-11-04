@@ -1,0 +1,22 @@
+{
+  "name": "food-fantasy-uniapp",
+  "version": "1.0.0",
+  "description": "美食大乱斗 - uniapp 前端项目，基于参考截图逐页还原",
+  "private": true,
+  "scripts": {
+    "dev:h5": "vite --mode h5",
+    "dev:mp-weixin": "vite --mode mp-weixin",
+    "build:h5": "vite build --mode h5",
+    "build:mp-weixin": "vite build --mode mp-weixin"
+  },
+  "dependencies": {
+    "@dcloudio/uni-components": "^3.0.0-3070320230222001",
+    "@dcloudio/uni-h5": "^3.0.0-3070320230222001",
+    "vue": "^3.3.4",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@dcloudio/vite-plugin-uni": "^3.0.0-3070320230222001",
+    "vite": "^4.5.0"
+  }
+}

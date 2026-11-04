@@ -1,0 +1,47 @@
+{
+  "name": "food-fantasy-uniapp",
+  "appid": "__UNI__xxxx",
+  "description": "美食大乱斗",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "mp-weixin": {
+    "appid": "",
+    "setting": {
+      "es6": true
+    }
+  },
+  "h5": {
+    "template": "index.html",
+    "router": {
+      "mode": "history",
+      "base": "/"
+    },
+    "async": {
+      "enable": true
+    },
+    "title": "美食大乱斗",
+    "meta": {
+      "viewport": "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    }
+  },
+  "app-plus": {
+    "splashscreen": {
+      "alwaysShowBeforeRender": true,
+      "waiting": true,
+      "autoclose": true,
+      "delay": 0,
+      "duration": 2000
+    },
+    "statusbar": {
+      "immersed": true,
+      "background": "#0F0E1D"
+    }
+  },
+  "vite": {
+    "plugins": []
+  },
+  "uniStatistics": {
+    "enable": false
+  }
+}

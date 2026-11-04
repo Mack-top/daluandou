@@ -1,0 +1,1192 @@
+# uniapp 页面组件化状态报告
+
+页面总数：305
+已组件化页面（使用至少1个组件）：8
+仍需工作页面：301
+
+## 已接入组件的页面
+
+- `pages/achievement/achievement.vue` — 使用：CustomNavbar, BaseButton, AvatarIcon；导入：⚠ 无导入
+- `pages/arena/arena.vue` — 使用：CustomNavbar, BaseButton；导入：⚠ 无导入
+- `pages/ascend/ascend.vue` — 使用：CustomNavbar, BaseButton, AvatarIcon；导入：⚠ 无导入
+- `pages/bag/bag.vue` — 使用：CustomNavbar, BaseButton, AvatarIcon；导入：⚠ 无导入
+- `pages/components/PageContainer.vue` — 使用：CustomNavbar；导入：⚠ 无导入
+- `pages/friend/friend.vue` — 使用：CustomNavbar, BaseButton, AvatarIcon；导入：⚠ 无导入
+- `pages/settings/settings.vue` — 使用：CustomNavbar；导入：⚠ 无导入
+- `pages/shop-home/shop-home.vue` — 使用：CustomNavbar, AvatarIcon；导入：⚠ 无导入
+
+## 仍需组件化改造的页面（按需求分类）
+
+### 1. 仍使用 inline navbar（需替换为 CustomNavbar）：288 个
+- `pages/activity-award/activity-award.vue`
+- `pages/activity-award-detail/activity-award-detail.vue`
+- `pages/activity-center/activity-center.vue`
+- `pages/activity-consumption/activity-consumption.vue`
+- `pages/activity-consumption-detail/activity-consumption-detail.vue`
+- `pages/activity-consumption-reward/activity-consumption-reward.vue`
+- `pages/activity-cumulative/activity-cumulative.vue`
+- `pages/activity-cumulative-detail/activity-cumulative-detail.vue`
+- `pages/activity-cumulative-reward/activity-cumulative-reward.vue`
+- `pages/activity-detail/activity-detail.vue`
+- `pages/activity-exchange/activity-exchange.vue`
+- `pages/activity-exchange-detail/activity-exchange-detail.vue`
+- `pages/activity-limited/activity-limited.vue`
+- `pages/activity-limited-detail/activity-limited-detail.vue`
+- `pages/activity-limited-reward/activity-limited-reward.vue`
+- `pages/activity-login/activity-login.vue`
+- `pages/activity-login-detail/activity-login-detail.vue`
+- `pages/activity-login-reward/activity-login-reward.vue`
+- `pages/activity-rank/activity-rank.vue`
+- `pages/activity-rank-detail/activity-rank-detail.vue`
+- `pages/activity-recharge/activity-recharge.vue`
+- `pages/activity-recharge-detail/activity-recharge-detail.vue`
+- `pages/activity-recharge-reward/activity-recharge-reward.vue`
+- `pages/activity-reward-detail/activity-reward-detail.vue`
+- `pages/ancient-tree/ancient-tree.vue`
+- `pages/ancient-tree-detail/ancient-tree-detail.vue`
+- `pages/ancient-tree-detail-page/ancient-tree-detail-page.vue`
+- `pages/ancient-tree-reward/ancient-tree-reward.vue`
+- `pages/ancient-tree-reward-page/ancient-tree-reward-page.vue`
+- `pages/arena-coin-shop/arena-coin-shop.vue`
+- `pages/arena-fight/arena-fight.vue`
+- `pages/arena-main/arena-main.vue`
+- `pages/arena-qual/arena-qual.vue`
+- `pages/arena-qual-detail/arena-qual-detail.vue`
+- `pages/arena-qual-main/arena-qual-main.vue`
+- `pages/arena-qual-rank/arena-qual-rank.vue`
+- `pages/arena-qual-rank-detail/arena-qual-rank-detail.vue`
+- `pages/arena-qual-reward/arena-qual-reward.vue`
+- `pages/arena-qual-reward-detail/arena-qual-reward-detail.vue`
+- `pages/arena-rank/arena-rank.vue`
+- `pages/arena-reward/arena-reward.vue`
+- `pages/arena-season/arena-season.vue`
+- `pages/artifact/artifact.vue`
+- `pages/artifact-detail/artifact-detail.vue`
+- `pages/artifact-upgrade/artifact-upgrade.vue`
+- `pages/assistant/assistant.vue`
+- `pages/astro-constellation/astro-constellation.vue`
+- `pages/astro-constellation-detail/astro-constellation-detail.vue`
+- `pages/astro-detail/astro-detail.vue`
+- `pages/astro-result/astro-result.vue`
+- `pages/astro-zodiac/astro-zodiac.vue`
+- `pages/astro-zodiac-detail/astro-zodiac-detail.vue`
+- `pages/astrology/astrology.vue`
+- `pages/battle-hall/battle-hall.vue`
+- `pages/battle-play/battle-play.vue`
+- `pages/battle-prep/battle-prep.vue`
+- `pages/battle-result/battle-result.vue`
+- `pages/battlepass/battlepass.vue`
+- `pages/battlepass-award/battlepass-award.vue`
+- `pages/battlepass-buy/battlepass-buy.vue`
+- `pages/battlepass-free/battlepass-free.vue`
+- `pages/battlepass-level/battlepass-level.vue`
+- `pages/battlepass-level-detail/battlepass-level-detail.vue`
+- `pages/battlepass-level-reward/battlepass-level-reward.vue`
+- `pages/battlepass-paid/battlepass-paid.vue`
+- `pages/battlepass-season/battlepass-season.vue`
+- `pages/battlepass-season-detail/battlepass-season-detail.vue`
+- `pages/battlepass-season-reward/battlepass-season-reward.vue`
+- `pages/battlepass-task/battlepass-task.vue`
+- `pages/bond/bond.vue`
+- `pages/bond-activate/bond-activate.vue`
+- `pages/bond-detail/bond-detail.vue`
+- `pages/boss-award/boss-award.vue`
+- `pages/boss-detail/boss-detail.vue`
+- `pages/boss-dmg/boss-dmg.vue`
+- `pages/boss-history/boss-history.vue`
+- `pages/boss-rank/boss-rank.vue`
+- `pages/bp-task/bp-task.vue`
+- `pages/celebration-mainline/celebration-mainline.vue`
+- `pages/celebration-summon/celebration-summon.vue`
+- `pages/chapter-detail/chapter-detail.vue`
+- `pages/char-awaken/char-awaken.vue`
+- `pages/char-constellation/char-constellation.vue`
+- `pages/char-detail/char-detail.vue`
+- `pages/char-evolve/char-evolve.vue`
+- `pages/char-skill/char-skill.vue`
+- `pages/char-skin/char-skin.vue`
+- `pages/chat/chat.vue`
+- `pages/chat-detail/chat-detail.vue`
+- `pages/chronicle/chronicle.vue`
+- `pages/chronicle-award/chronicle-award.vue`
+- `pages/chronicle-dish/chronicle-dish.vue`
+- `pages/chronicle-dish-detail/chronicle-dish-detail.vue`
+- `pages/chronicle-ingredient/chronicle-ingredient.vue`
+- `pages/chronicle-ingredient-detail/chronicle-ingredient-detail.vue`
+- `pages/chronicle-mat/chronicle-mat.vue`
+- `pages/chronicle-milestone/chronicle-milestone.vue`
+- `pages/chronicle-milestone-detail/chronicle-milestone-detail.vue`
+- `pages/chronicle-prog/chronicle-prog.vue`
+- `pages/clear-reward/clear-reward.vue`
+- `pages/collection/collection.vue`
+- `pages/contract/contract.vue`
+- `pages/create/create.vue`
+- `pages/cross-shop/cross-shop.vue`
+- `pages/cross-shop-extra/cross-shop-extra.vue`
+- `pages/cum-recharge/cum-recharge.vue`
+- `pages/daily/daily.vue`
+- `pages/daily-tier/daily-tier.vue`
+- `pages/dungeon-challenge/dungeon-challenge.vue`
+- `pages/dungeon-challenge-detail/dungeon-challenge-detail.vue`
+- `pages/dungeon-challenge-reward/dungeon-challenge-reward.vue`
+- `pages/dungeon-daily/dungeon-daily.vue`
+- `pages/dungeon-elite/dungeon-elite.vue`
+- `pages/dungeon-elite-detail/dungeon-elite-detail.vue`
+- `pages/dungeon-elite-reward/dungeon-elite-reward.vue`
+- `pages/dungeon-event/dungeon-event.vue`
+- `pages/dungeon-event-detail/dungeon-event-detail.vue`
+- `pages/dungeon-event-reward/dungeon-event-reward.vue`
+- `pages/dungeon-resource/dungeon-resource.vue`
+- `pages/dungeon-resource-detail/dungeon-resource-detail.vue`
+- `pages/dungeon-resource-reward/dungeon-resource-reward.vue`
+- `pages/dungeon-trial/dungeon-trial.vue`
+- `pages/dungeon-trial-detail/dungeon-trial-detail.vue`
+- `pages/dungeon-trial-reward/dungeon-trial-reward.vue`
+- `pages/equip-detail/equip-detail.vue`
+- `pages/events-open/events-open.vue`
+- `pages/first/first.vue`
+- `pages/first-detail/first-detail.vue`
+- `pages/friend-apply/friend-apply.vue`
+- `pages/friend-blacklist/friend-blacklist.vue`
+- `pages/friend-detail/friend-detail.vue`
+- `pages/friend-gift/friend-gift.vue`
+- `pages/fund/fund.vue`
+- `pages/fund-award/fund-award.vue`
+- `pages/fund-buy/fund-buy.vue`
+- `pages/fund-detail/fund-detail.vue`
+- `pages/fund-detail-page/fund-detail-page.vue`
+- `pages/fund-level/fund-level.vue`
+- `pages/fund-level-detail/fund-level-detail.vue`
+- `pages/fund-level-reward/fund-level-reward.vue`
+- `pages/fund-return/fund-return.vue`
+- `pages/fund-return-page/fund-return-page.vue`
+- `pages/fund-ui/fund-ui.vue`
+- `pages/gem-shop/gem-shop.vue`
+- `pages/guide/guide.vue`
+- `pages/guild-activity/guild-activity.vue`
+- `pages/guild-checkin/guild-checkin.vue`
+- `pages/guild-coin-shop/guild-coin-shop.vue`
+- `pages/guild-donate/guild-donate.vue`
+- `pages/guild-hall/guild-hall.vue`
+- `pages/guild-members/guild-members.vue`
+- `pages/guild-shop-detail/guild-shop-detail.vue`
+- `pages/guild-tech/guild-tech.vue`
+- `pages/guild-tech-detail/guild-tech-detail.vue`
+- `pages/guild-tech-detail-page/guild-tech-detail-page.vue`
+- `pages/guild-tech-upgrade/guild-tech-upgrade.vue`
+- `pages/guild-tech-upgrade-page/guild-tech-upgrade-page.vue`
+- `pages/guild-vault/guild-vault.vue`
+- `pages/guild-war/guild-war.vue`
+- `pages/guild-war-detail/guild-war-detail.vue`
+- `pages/guild-war-detail-page/guild-war-detail-page.vue`
+- `pages/guild-war-reward/guild-war-reward.vue`
+- `pages/guild-war-reward-page/guild-war-reward-page.vue`
+- `pages/halo/halo.vue`
+- `pages/halo-activate/halo-activate.vue`
+- `pages/halo-detail/halo-detail.vue`
+- `pages/hero/hero.vue`
+- `pages/honor-shop/honor-shop.vue`
+- `pages/idle-reward/idle-reward.vue`
+- `pages/level/level.vue`
+- `pages/level-up/level-up.vue`
+- `pages/limit-activity/limit-activity.vue`
+- `pages/limit-shop/limit-shop.vue`
+- `pages/limit-shop-extra/limit-shop-extra.vue`
+- `pages/mail/mail.vue`
+- `pages/mail-detail/mail-detail.vue`
+- `pages/mail-reward/mail-reward.vue`
+- `pages/mail-system/mail-system.vue`
+- `pages/manor/manor.vue`
+- `pages/month-card/month-card.vue`
+- `pages/month-card-benefit/month-card-benefit.vue`
+- `pages/month-card-benefit-page/month-card-benefit-page.vue`
+- `pages/month-card-buy/month-card-buy.vue`
+- `pages/month-card-detail/month-card-detail.vue`
+- `pages/month-card-detail-page/month-card-detail-page.vue`
+- `pages/notice/notice.vue`
+- `pages/personal-achievement/personal-achievement.vue`
+- `pages/personal-achievement-detail/personal-achievement-detail.vue`
+- `pages/personal-collection/personal-collection.vue`
+- `pages/personal-collection-detail/personal-collection-detail.vue`
+- `pages/personal-medal/personal-medal.vue`
+- `pages/personal-medal-detail/personal-medal-detail.vue`
+- `pages/personal-region/personal-region.vue`
+- `pages/personal-space/personal-space.vue`
+- `pages/personal-space-home/personal-space-home.vue`
+- `pages/personal-space-region/personal-space-region.vue`
+- `pages/personal-space-settings/personal-space-settings.vue`
+- `pages/player-detail/player-detail.vue`
+- `pages/protocol/protocol.vue`
+- `pages/quest-daily/quest-daily.vue`
+- `pages/ranking-arena/ranking-arena.vue`
+- `pages/ranking-collection/ranking-collection.vue`
+- `pages/ranking-guild/ranking-guild.vue`
+- `pages/ranking-hall/ranking-hall.vue`
+- `pages/ranking-level/ranking-level.vue`
+- `pages/ranking-mainline/ranking-mainline.vue`
+- `pages/ranking-power/ranking-power.vue`
+- `pages/recharge-cum/recharge-cum.vue`
+- `pages/recharge-cum-detail/recharge-cum-detail.vue`
+- `pages/recharge-cum-tier/recharge-cum-tier.vue`
+- `pages/recharge-daily/recharge-daily.vue`
+- `pages/recharge-daily-detail/recharge-daily-detail.vue`
+- `pages/recharge-daily-tier/recharge-daily-tier.vue`
+- `pages/recharge-first/recharge-first.vue`
+- `pages/recharge-first-detail/recharge-first-detail.vue`
+- `pages/recharge-first-double/recharge-first-double.vue`
+- `pages/recharge-first-double-page/recharge-first-double-page.vue`
+- `pages/recharge-tier/recharge-tier.vue`
+- `pages/record/record.vue`
+- `pages/resource-get/resource-get.vue`
+- `pages/server-list/server-list.vue`
+- `pages/settings-account/settings-account.vue`
+- `pages/settings-customer/settings-customer.vue`
+- `pages/settings-language/settings-language.vue`
+- `pages/settings-notify/settings-notify.vue`
+- `pages/seven/seven.vue`
+- `pages/seven-detail/seven-detail.vue`
+- `pages/seven-extra/seven-extra.vue`
+- `pages/shop-cross/shop-cross.vue`
+- `pages/shop-daily/shop-daily.vue`
+- `pages/shop-honor/shop-honor.vue`
+- `pages/shop-spice/shop-spice.vue`
+- `pages/shop-talent/shop-talent.vue`
+- `pages/shop-treasure/shop-treasure.vue`
+- `pages/shop-weekly/shop-weekly.vue`
+- `pages/signin/signin.vue`
+- `pages/signin-award/signin-award.vue`
+- `pages/signin-continuous/signin-continuous.vue`
+- `pages/signin-continuous-detail/signin-continuous-detail.vue`
+- `pages/signin-continuous-reward/signin-continuous-reward.vue`
+- `pages/signin-cumulative/signin-cumulative.vue`
+- `pages/signin-cumulative-detail/signin-cumulative-detail.vue`
+- `pages/signin-cumulative-reward/signin-cumulative-reward.vue`
+- `pages/signin-month/signin-month.vue`
+- `pages/signin-month-detail/signin-month-detail.vue`
+- `pages/signin-month-reward/signin-month-reward.vue`
+- `pages/signin-vip/signin-vip.vue`
+- `pages/signin-vip-detail/signin-vip-detail.vue`
+- `pages/signin-vip-reward/signin-vip-reward.vue`
+- `pages/skill-detail/skill-detail.vue`
+- `pages/skill-up/skill-up.vue`
+- `pages/skill-upgrade/skill-upgrade.vue`
+- `pages/speed-up/speed-up.vue`
+- `pages/summon/summon.vue`
+- `pages/team-detail/team-detail.vue`
+- `pages/team-recommend/team-recommend.vue`
+- `pages/tower/tower.vue`
+- `pages/tower-floor-detail/tower-floor-detail.vue`
+- `pages/tower-rank/tower-rank.vue`
+- `pages/tower-record/tower-record.vue`
+- `pages/tower-reward/tower-reward.vue`
+- `pages/tower-sweep/tower-sweep.vue`
+- `pages/trade/trade.vue`
+- `pages/trade-detail/trade-detail.vue`
+- `pages/trade-history/trade-history.vue`
+- `pages/trade-history-detail/trade-history-detail.vue`
+- `pages/trade-offer/trade-offer.vue`
+- `pages/trade-offer-detail/trade-offer-detail.vue`
+- `pages/trade-record/trade-record.vue`
+- `pages/tree-blessing/tree-blessing.vue`
+- `pages/tree-blessing-detail/tree-blessing-detail.vue`
+- `pages/tree-facility/tree-facility.vue`
+- `pages/tree-facility-detail/tree-facility-detail.vue`
+- `pages/tree-output/tree-output.vue`
+- `pages/tree-upgrade/tree-upgrade.vue`
+- `pages/week-card/week-card.vue`
+- `pages/week-card-benefit/week-card-benefit.vue`
+- `pages/week-card-benefit-page/week-card-benefit-page.vue`
+- `pages/week-card-buy/week-card-buy.vue`
+- `pages/week-card-detail/week-card-detail.vue`
+- `pages/week-card-detail-page/week-card-detail-page.vue`
+- `pages/world-boss/world-boss.vue`
+- `pages/world-boss-detail/world-boss-detail.vue`
+- `pages/world-boss-history/world-boss-history.vue`
+- `pages/world-boss-rank-detail/world-boss-rank-detail.vue`
+- `pages/world-boss-reward/world-boss-reward.vue`
+- `pages/world-map/world-map.vue`
+- `pages/worldtree/worldtree.vue`
+
+### 2. 仍使用原生 <button> 标签（需替换为 BaseButton）：276 个
+- `pages/activity-award/activity-award.vue`
+- `pages/activity-award-detail/activity-award-detail.vue`
+- `pages/activity-consumption/activity-consumption.vue`
+- `pages/activity-consumption-detail/activity-consumption-detail.vue`
+- `pages/activity-consumption-reward/activity-consumption-reward.vue`
+- `pages/activity-cumulative/activity-cumulative.vue`
+- `pages/activity-cumulative-detail/activity-cumulative-detail.vue`
+- `pages/activity-cumulative-reward/activity-cumulative-reward.vue`
+- `pages/activity-detail/activity-detail.vue`
+- `pages/activity-exchange/activity-exchange.vue`
+- `pages/activity-exchange-detail/activity-exchange-detail.vue`
+- `pages/activity-limited/activity-limited.vue`
+- `pages/activity-limited-detail/activity-limited-detail.vue`
+- `pages/activity-limited-reward/activity-limited-reward.vue`
+- `pages/activity-login/activity-login.vue`
+- `pages/activity-login-detail/activity-login-detail.vue`
+- `pages/activity-login-reward/activity-login-reward.vue`
+- `pages/activity-rank/activity-rank.vue`
+- `pages/activity-rank-detail/activity-rank-detail.vue`
+- `pages/activity-recharge/activity-recharge.vue`
+- `pages/activity-recharge-detail/activity-recharge-detail.vue`
+- `pages/activity-recharge-reward/activity-recharge-reward.vue`
+- `pages/activity-reward-detail/activity-reward-detail.vue`
+- `pages/ancient-tree/ancient-tree.vue`
+- `pages/ancient-tree-detail/ancient-tree-detail.vue`
+- `pages/ancient-tree-detail-page/ancient-tree-detail-page.vue`
+- `pages/ancient-tree-reward/ancient-tree-reward.vue`
+- `pages/ancient-tree-reward-page/ancient-tree-reward-page.vue`
+- `pages/arena-coin-shop/arena-coin-shop.vue`
+- `pages/arena-fight/arena-fight.vue`
+- `pages/arena-main/arena-main.vue`
+- `pages/arena-qual/arena-qual.vue`
+- `pages/arena-qual-detail/arena-qual-detail.vue`
+- `pages/arena-qual-main/arena-qual-main.vue`
+- `pages/arena-qual-rank/arena-qual-rank.vue`
+- `pages/arena-qual-rank-detail/arena-qual-rank-detail.vue`
+- `pages/arena-qual-reward/arena-qual-reward.vue`
+- `pages/arena-qual-reward-detail/arena-qual-reward-detail.vue`
+- `pages/arena-rank/arena-rank.vue`
+- `pages/arena-reward/arena-reward.vue`
+- `pages/arena-season/arena-season.vue`
+- `pages/artifact/artifact.vue`
+- `pages/artifact-detail/artifact-detail.vue`
+- `pages/artifact-upgrade/artifact-upgrade.vue`
+- `pages/assistant/assistant.vue`
+- `pages/astro-constellation/astro-constellation.vue`
+- `pages/astro-constellation-detail/astro-constellation-detail.vue`
+- `pages/astro-detail/astro-detail.vue`
+- `pages/astro-result/astro-result.vue`
+- `pages/astro-zodiac/astro-zodiac.vue`
+- `pages/astro-zodiac-detail/astro-zodiac-detail.vue`
+- `pages/astrology/astrology.vue`
+- `pages/battle-hall/battle-hall.vue`
+- `pages/battle-play/battle-play.vue`
+- `pages/battle-prep/battle-prep.vue`
+- `pages/battle-result/battle-result.vue`
+- `pages/battlepass/battlepass.vue`
+- `pages/battlepass-award/battlepass-award.vue`
+- `pages/battlepass-buy/battlepass-buy.vue`
+- `pages/battlepass-free/battlepass-free.vue`
+- `pages/battlepass-level/battlepass-level.vue`
+- `pages/battlepass-level-detail/battlepass-level-detail.vue`
+- `pages/battlepass-level-reward/battlepass-level-reward.vue`
+- `pages/battlepass-paid/battlepass-paid.vue`
+- `pages/battlepass-season/battlepass-season.vue`
+- `pages/battlepass-season-detail/battlepass-season-detail.vue`
+- `pages/battlepass-season-reward/battlepass-season-reward.vue`
+- `pages/battlepass-task/battlepass-task.vue`
+- `pages/bond/bond.vue`
+- `pages/bond-activate/bond-activate.vue`
+- `pages/bond-detail/bond-detail.vue`
+- `pages/boss-award/boss-award.vue`
+- `pages/boss-detail/boss-detail.vue`
+- `pages/boss-dmg/boss-dmg.vue`
+- `pages/boss-history/boss-history.vue`
+- `pages/boss-rank/boss-rank.vue`
+- `pages/bp-task/bp-task.vue`
+- `pages/celebration-mainline/celebration-mainline.vue`
+- `pages/celebration-summon/celebration-summon.vue`
+- `pages/chapter-detail/chapter-detail.vue`
+- `pages/char-awaken/char-awaken.vue`
+- `pages/char-constellation/char-constellation.vue`
+- `pages/char-detail/char-detail.vue`
+- `pages/char-evolve/char-evolve.vue`
+- `pages/char-skill/char-skill.vue`
+- `pages/char-skin/char-skin.vue`
+- `pages/chat/chat.vue`
+- `pages/chat-detail/chat-detail.vue`
+- `pages/chronicle/chronicle.vue`
+- `pages/chronicle-award/chronicle-award.vue`
+- `pages/chronicle-dish/chronicle-dish.vue`
+- `pages/chronicle-dish-detail/chronicle-dish-detail.vue`
+- `pages/chronicle-ingredient/chronicle-ingredient.vue`
+- `pages/chronicle-ingredient-detail/chronicle-ingredient-detail.vue`
+- `pages/chronicle-mat/chronicle-mat.vue`
+- `pages/chronicle-milestone/chronicle-milestone.vue`
+- `pages/chronicle-milestone-detail/chronicle-milestone-detail.vue`
+- `pages/chronicle-prog/chronicle-prog.vue`
+- `pages/clear-reward/clear-reward.vue`
+- `pages/components/BaseButton.vue`
+- `pages/contract/contract.vue`
+- `pages/create/create.vue`
+- `pages/cross-shop/cross-shop.vue`
+- `pages/cross-shop-extra/cross-shop-extra.vue`
+- `pages/cum-recharge/cum-recharge.vue`
+- `pages/daily/daily.vue`
+- `pages/daily-tier/daily-tier.vue`
+- `pages/dungeon-challenge/dungeon-challenge.vue`
+- `pages/dungeon-challenge-detail/dungeon-challenge-detail.vue`
+- `pages/dungeon-challenge-reward/dungeon-challenge-reward.vue`
+- `pages/dungeon-daily/dungeon-daily.vue`
+- `pages/dungeon-elite/dungeon-elite.vue`
+- `pages/dungeon-elite-detail/dungeon-elite-detail.vue`
+- `pages/dungeon-elite-reward/dungeon-elite-reward.vue`
+- `pages/dungeon-event/dungeon-event.vue`
+- `pages/dungeon-event-detail/dungeon-event-detail.vue`
+- `pages/dungeon-event-reward/dungeon-event-reward.vue`
+- `pages/dungeon-resource-detail/dungeon-resource-detail.vue`
+- `pages/dungeon-resource-reward/dungeon-resource-reward.vue`
+- `pages/dungeon-trial/dungeon-trial.vue`
+- `pages/dungeon-trial-detail/dungeon-trial-detail.vue`
+- `pages/dungeon-trial-reward/dungeon-trial-reward.vue`
+- `pages/equip-detail/equip-detail.vue`
+- `pages/events-open/events-open.vue`
+- `pages/first/first.vue`
+- `pages/first-detail/first-detail.vue`
+- `pages/friend-apply/friend-apply.vue`
+- `pages/friend-blacklist/friend-blacklist.vue`
+- `pages/friend-detail/friend-detail.vue`
+- `pages/friend-gift/friend-gift.vue`
+- `pages/fund/fund.vue`
+- `pages/fund-award/fund-award.vue`
+- `pages/fund-buy/fund-buy.vue`
+- `pages/fund-detail/fund-detail.vue`
+- `pages/fund-detail-page/fund-detail-page.vue`
+- `pages/fund-level/fund-level.vue`
+- `pages/fund-level-detail/fund-level-detail.vue`
+- `pages/fund-level-reward/fund-level-reward.vue`
+- `pages/fund-return/fund-return.vue`
+- `pages/fund-return-page/fund-return-page.vue`
+- `pages/fund-ui/fund-ui.vue`
+- `pages/gem-shop/gem-shop.vue`
+- `pages/guide/guide.vue`
+- `pages/guild-activity/guild-activity.vue`
+- `pages/guild-checkin/guild-checkin.vue`
+- `pages/guild-coin-shop/guild-coin-shop.vue`
+- `pages/guild-hall/guild-hall.vue`
+- `pages/guild-shop-detail/guild-shop-detail.vue`
+- `pages/guild-tech/guild-tech.vue`
+- `pages/guild-tech-detail/guild-tech-detail.vue`
+- `pages/guild-tech-detail-page/guild-tech-detail-page.vue`
+- `pages/guild-tech-upgrade/guild-tech-upgrade.vue`
+- `pages/guild-tech-upgrade-page/guild-tech-upgrade-page.vue`
+- `pages/guild-war/guild-war.vue`
+- `pages/guild-war-detail/guild-war-detail.vue`
+- `pages/guild-war-detail-page/guild-war-detail-page.vue`
+- `pages/guild-war-reward/guild-war-reward.vue`
+- `pages/guild-war-reward-page/guild-war-reward-page.vue`
+- `pages/halo/halo.vue`
+- `pages/halo-activate/halo-activate.vue`
+- `pages/halo-detail/halo-detail.vue`
+- `pages/hero/hero.vue`
+- `pages/honor-shop/honor-shop.vue`
+- `pages/idle-reward/idle-reward.vue`
+- `pages/index/index.vue`
+- `pages/level/level.vue`
+- `pages/level-up/level-up.vue`
+- `pages/limit-activity/limit-activity.vue`
+- `pages/limit-shop/limit-shop.vue`
+- `pages/limit-shop-extra/limit-shop-extra.vue`
+- `pages/mail/mail.vue`
+- `pages/mail-detail/mail-detail.vue`
+- `pages/mail-reward/mail-reward.vue`
+- `pages/mail-system/mail-system.vue`
+- `pages/manor/manor.vue`
+- `pages/month-card/month-card.vue`
+- `pages/month-card-benefit/month-card-benefit.vue`
+- `pages/month-card-benefit-page/month-card-benefit-page.vue`
+- `pages/month-card-buy/month-card-buy.vue`
+- `pages/month-card-detail/month-card-detail.vue`
+- `pages/month-card-detail-page/month-card-detail-page.vue`
+- `pages/notice/notice.vue`
+- `pages/personal-achievement/personal-achievement.vue`
+- `pages/personal-achievement-detail/personal-achievement-detail.vue`
+- `pages/personal-collection/personal-collection.vue`
+- `pages/personal-collection-detail/personal-collection-detail.vue`
+- `pages/personal-medal/personal-medal.vue`
+- `pages/personal-medal-detail/personal-medal-detail.vue`
+- `pages/personal-region/personal-region.vue`
+- `pages/personal-space/personal-space.vue`
+- `pages/personal-space-home/personal-space-home.vue`
+- `pages/personal-space-region/personal-space-region.vue`
+- `pages/personal-space-settings/personal-space-settings.vue`
+- `pages/player-detail/player-detail.vue`
+- `pages/protocol/protocol.vue`
+- `pages/quest-daily/quest-daily.vue`
+- `pages/ranking-arena/ranking-arena.vue`
+- `pages/ranking-collection/ranking-collection.vue`
+- `pages/ranking-guild/ranking-guild.vue`
+- `pages/ranking-level/ranking-level.vue`
+- `pages/ranking-mainline/ranking-mainline.vue`
+- `pages/ranking-power/ranking-power.vue`
+- `pages/recharge-cum/recharge-cum.vue`
+- `pages/recharge-cum-detail/recharge-cum-detail.vue`
+- `pages/recharge-cum-tier/recharge-cum-tier.vue`
+- `pages/recharge-daily/recharge-daily.vue`
+- `pages/recharge-daily-detail/recharge-daily-detail.vue`
+- `pages/recharge-daily-tier/recharge-daily-tier.vue`
+- `pages/recharge-first/recharge-first.vue`
+- `pages/recharge-first-detail/recharge-first-detail.vue`
+- `pages/recharge-first-double/recharge-first-double.vue`
+- `pages/recharge-first-double-page/recharge-first-double-page.vue`
+- `pages/recharge-tier/recharge-tier.vue`
+- `pages/settings-account/settings-account.vue`
+- `pages/settings-customer/settings-customer.vue`
+- `pages/settings-language/settings-language.vue`
+- `pages/settings-notify/settings-notify.vue`
+- `pages/seven/seven.vue`
+- `pages/seven-detail/seven-detail.vue`
+- `pages/seven-extra/seven-extra.vue`
+- `pages/shop-cross/shop-cross.vue`
+- `pages/shop-daily/shop-daily.vue`
+- `pages/shop-honor/shop-honor.vue`
+- `pages/shop-spice/shop-spice.vue`
+- `pages/shop-talent/shop-talent.vue`
+- `pages/shop-treasure/shop-treasure.vue`
+- `pages/shop-weekly/shop-weekly.vue`
+- `pages/signin/signin.vue`
+- `pages/signin-award/signin-award.vue`
+- `pages/signin-continuous/signin-continuous.vue`
+- `pages/signin-continuous-detail/signin-continuous-detail.vue`
+- `pages/signin-continuous-reward/signin-continuous-reward.vue`
+- `pages/signin-cumulative/signin-cumulative.vue`
+- `pages/signin-cumulative-detail/signin-cumulative-detail.vue`
+- `pages/signin-cumulative-reward/signin-cumulative-reward.vue`
+- `pages/signin-month/signin-month.vue`
+- `pages/signin-month-detail/signin-month-detail.vue`
+- `pages/signin-month-reward/signin-month-reward.vue`
+- `pages/signin-vip/signin-vip.vue`
+- `pages/signin-vip-detail/signin-vip-detail.vue`
+- `pages/signin-vip-reward/signin-vip-reward.vue`
+- `pages/skill-detail/skill-detail.vue`
+- `pages/skill-up/skill-up.vue`
+- `pages/skill-upgrade/skill-upgrade.vue`
+- `pages/speed-up/speed-up.vue`
+- `pages/summon/summon.vue`
+- `pages/tower/tower.vue`
+- `pages/tower-floor-detail/tower-floor-detail.vue`
+- `pages/tower-rank/tower-rank.vue`
+- `pages/tower-record/tower-record.vue`
+- `pages/tower-reward/tower-reward.vue`
+- `pages/tower-sweep/tower-sweep.vue`
+- `pages/trade-detail/trade-detail.vue`
+- `pages/trade-history/trade-history.vue`
+- `pages/trade-history-detail/trade-history-detail.vue`
+- `pages/trade-offer/trade-offer.vue`
+- `pages/trade-offer-detail/trade-offer-detail.vue`
+- `pages/trade-record/trade-record.vue`
+- `pages/tree-blessing/tree-blessing.vue`
+- `pages/tree-blessing-detail/tree-blessing-detail.vue`
+- `pages/tree-facility/tree-facility.vue`
+- `pages/tree-facility-detail/tree-facility-detail.vue`
+- `pages/tree-output/tree-output.vue`
+- `pages/tree-upgrade/tree-upgrade.vue`
+- `pages/week-card/week-card.vue`
+- `pages/week-card-benefit/week-card-benefit.vue`
+- `pages/week-card-benefit-page/week-card-benefit-page.vue`
+- `pages/week-card-buy/week-card-buy.vue`
+- `pages/week-card-detail/week-card-detail.vue`
+- `pages/week-card-detail-page/week-card-detail-page.vue`
+- `pages/world-boss/world-boss.vue`
+- `pages/world-boss-detail/world-boss-detail.vue`
+- `pages/world-boss-history/world-boss-history.vue`
+- `pages/world-boss-rank-detail/world-boss-rank-detail.vue`
+- `pages/world-boss-reward/world-boss-reward.vue`
+- `pages/worldtree/worldtree.vue`
+
+### 3. 仍使用 emoji 图标文本（需替换为 AvatarIcon）：298 个
+- `pages/achievement/achievement.vue` — emoji-文本
+- `pages/activity-award/activity-award.vue` — emoji-文本
+- `pages/activity-award-detail/activity-award-detail.vue` — emoji-文本
+- `pages/activity-center/activity-center.vue` — emoji-绑定, emoji-文本
+- `pages/activity-consumption/activity-consumption.vue` — emoji-文本
+- `pages/activity-consumption-detail/activity-consumption-detail.vue` — emoji-文本
+- `pages/activity-consumption-reward/activity-consumption-reward.vue` — emoji-文本
+- `pages/activity-cumulative/activity-cumulative.vue` — emoji-文本
+- `pages/activity-cumulative-detail/activity-cumulative-detail.vue` — emoji-文本
+- `pages/activity-cumulative-reward/activity-cumulative-reward.vue` — emoji-文本
+- `pages/activity-detail/activity-detail.vue` — emoji-文本
+- `pages/activity-exchange/activity-exchange.vue` — emoji-文本
+- `pages/activity-exchange-detail/activity-exchange-detail.vue` — emoji-文本
+- `pages/activity-limited/activity-limited.vue` — emoji-文本
+- `pages/activity-limited-detail/activity-limited-detail.vue` — emoji-文本
+- `pages/activity-limited-reward/activity-limited-reward.vue` — emoji-文本
+- `pages/activity-login/activity-login.vue` — emoji-文本
+- `pages/activity-login-detail/activity-login-detail.vue` — emoji-文本
+- `pages/activity-login-reward/activity-login-reward.vue` — emoji-文本
+- `pages/activity-rank/activity-rank.vue` — emoji-文本
+- `pages/activity-rank-detail/activity-rank-detail.vue` — emoji-文本
+- `pages/activity-recharge/activity-recharge.vue` — emoji-文本
+- `pages/activity-recharge-detail/activity-recharge-detail.vue` — emoji-文本
+- `pages/activity-recharge-reward/activity-recharge-reward.vue` — emoji-文本
+- `pages/activity-reward-detail/activity-reward-detail.vue` — emoji-文本
+- `pages/ancient-tree/ancient-tree.vue` — emoji-文本
+- `pages/ancient-tree-detail/ancient-tree-detail.vue` — emoji-文本
+- `pages/ancient-tree-detail-page/ancient-tree-detail-page.vue` — emoji-文本
+- `pages/ancient-tree-reward/ancient-tree-reward.vue` — emoji-文本
+- `pages/ancient-tree-reward-page/ancient-tree-reward-page.vue` — emoji-文本
+- `pages/arena-coin-shop/arena-coin-shop.vue` — emoji-文本
+- `pages/arena-fight/arena-fight.vue` — emoji-文本
+- `pages/arena-main/arena-main.vue` — emoji-文本
+- `pages/arena-qual/arena-qual.vue` — emoji-文本
+- `pages/arena-qual-detail/arena-qual-detail.vue` — emoji-文本
+- `pages/arena-qual-main/arena-qual-main.vue` — emoji-文本
+- `pages/arena-qual-rank/arena-qual-rank.vue` — emoji-文本
+- `pages/arena-qual-rank-detail/arena-qual-rank-detail.vue` — emoji-文本
+- `pages/arena-qual-reward/arena-qual-reward.vue` — emoji-文本
+- `pages/arena-qual-reward-detail/arena-qual-reward-detail.vue` — emoji-文本
+- `pages/arena-rank/arena-rank.vue` — emoji-文本
+- `pages/arena-reward/arena-reward.vue` — emoji-文本
+- `pages/arena-season/arena-season.vue` — emoji-文本
+- `pages/artifact/artifact.vue` — emoji-文本
+- `pages/artifact-detail/artifact-detail.vue` — emoji-文本
+- `pages/artifact-upgrade/artifact-upgrade.vue` — emoji-文本
+- `pages/ascend/ascend.vue` — emoji-文本
+- `pages/assistant/assistant.vue` — emoji-绑定, emoji-文本
+- `pages/astro-constellation/astro-constellation.vue` — emoji-文本
+- `pages/astro-constellation-detail/astro-constellation-detail.vue` — emoji-文本
+- `pages/astro-detail/astro-detail.vue` — emoji-文本
+- `pages/astro-result/astro-result.vue` — emoji-文本
+- `pages/astro-zodiac/astro-zodiac.vue` — emoji-文本
+- `pages/astro-zodiac-detail/astro-zodiac-detail.vue` — emoji-文本
+- `pages/astrology/astrology.vue` — emoji-文本
+- `pages/bag/bag.vue` — emoji-文本
+- `pages/battle-hall/battle-hall.vue` — emoji-文本
+- `pages/battle-play/battle-play.vue` — emoji-绑定
+- `pages/battle-prep/battle-prep.vue` — emoji-绑定, emoji-文本
+- `pages/battle-result/battle-result.vue` — emoji-绑定, emoji-文本
+- `pages/battlepass/battlepass.vue` — emoji-文本
+- `pages/battlepass-award/battlepass-award.vue` — emoji-文本
+- `pages/battlepass-buy/battlepass-buy.vue` — emoji-文本
+- `pages/battlepass-free/battlepass-free.vue` — emoji-文本
+- `pages/battlepass-level/battlepass-level.vue` — emoji-文本
+- `pages/battlepass-level-detail/battlepass-level-detail.vue` — emoji-文本
+- `pages/battlepass-level-reward/battlepass-level-reward.vue` — emoji-文本
+- `pages/battlepass-paid/battlepass-paid.vue` — emoji-文本
+- `pages/battlepass-season/battlepass-season.vue` — emoji-文本
+- `pages/battlepass-season-detail/battlepass-season-detail.vue` — emoji-文本
+- `pages/battlepass-season-reward/battlepass-season-reward.vue` — emoji-文本
+- `pages/battlepass-task/battlepass-task.vue` — emoji-文本
+- `pages/bond/bond.vue` — emoji-文本
+- `pages/bond-activate/bond-activate.vue` — emoji-文本
+- `pages/bond-detail/bond-detail.vue` — emoji-文本
+- `pages/boss-award/boss-award.vue` — emoji-文本
+- `pages/boss-detail/boss-detail.vue` — emoji-文本
+- `pages/boss-dmg/boss-dmg.vue` — emoji-文本
+- `pages/boss-history/boss-history.vue` — emoji-文本
+- `pages/boss-rank/boss-rank.vue` — emoji-文本
+- `pages/bp-task/bp-task.vue` — emoji-文本
+- `pages/celebration-mainline/celebration-mainline.vue` — emoji-文本
+- `pages/celebration-summon/celebration-summon.vue` — emoji-文本
+- `pages/chapter-detail/chapter-detail.vue` — emoji-绑定, emoji-文本
+- `pages/char-awaken/char-awaken.vue` — emoji-文本
+- `pages/char-constellation/char-constellation.vue` — emoji-文本
+- `pages/char-detail/char-detail.vue` — emoji-文本
+- `pages/char-evolve/char-evolve.vue` — emoji-文本
+- `pages/char-skill/char-skill.vue` — emoji-文本
+- `pages/char-skin/char-skin.vue` — emoji-文本
+- `pages/chat/chat.vue` — emoji-绑定, emoji-文本
+- `pages/chat-detail/chat-detail.vue` — emoji-文本
+- `pages/chronicle/chronicle.vue` — emoji-文本
+- `pages/chronicle-award/chronicle-award.vue` — emoji-文本
+- `pages/chronicle-dish/chronicle-dish.vue` — emoji-文本
+- `pages/chronicle-dish-detail/chronicle-dish-detail.vue` — emoji-文本
+- `pages/chronicle-ingredient/chronicle-ingredient.vue` — emoji-文本
+- `pages/chronicle-ingredient-detail/chronicle-ingredient-detail.vue` — emoji-文本
+- `pages/chronicle-mat/chronicle-mat.vue` — emoji-文本
+- `pages/chronicle-milestone/chronicle-milestone.vue` — emoji-文本
+- `pages/chronicle-milestone-detail/chronicle-milestone-detail.vue` — emoji-文本
+- `pages/chronicle-prog/chronicle-prog.vue` — emoji-文本
+- `pages/clear-reward/clear-reward.vue` — emoji-绑定, emoji-文本
+- `pages/collection/collection.vue` — emoji-文本
+- `pages/components/CustomNavbar.vue` — emoji-文本
+- `pages/components/ItemCard.vue` — emoji-文本
+- `pages/components/PageContainer.vue` — emoji-文本
+- `pages/contract/contract.vue` — emoji-文本
+- `pages/create/create.vue` — emoji-绑定, emoji-文本
+- `pages/cross-shop/cross-shop.vue` — emoji-文本
+- `pages/cross-shop-extra/cross-shop-extra.vue` — emoji-文本
+- `pages/cum-recharge/cum-recharge.vue` — emoji-文本
+- `pages/daily/daily.vue` — emoji-文本
+- `pages/daily-tier/daily-tier.vue` — emoji-文本
+- `pages/dungeon-challenge/dungeon-challenge.vue` — emoji-文本
+- `pages/dungeon-challenge-detail/dungeon-challenge-detail.vue` — emoji-文本
+- `pages/dungeon-challenge-reward/dungeon-challenge-reward.vue` — emoji-文本
+- `pages/dungeon-daily/dungeon-daily.vue` — emoji-绑定, emoji-文本
+- `pages/dungeon-elite/dungeon-elite.vue` — emoji-文本
+- `pages/dungeon-elite-detail/dungeon-elite-detail.vue` — emoji-文本
+- `pages/dungeon-elite-reward/dungeon-elite-reward.vue` — emoji-文本
+- `pages/dungeon-event/dungeon-event.vue` — emoji-文本
+- `pages/dungeon-event-detail/dungeon-event-detail.vue` — emoji-文本
+- `pages/dungeon-event-reward/dungeon-event-reward.vue` — emoji-文本
+- `pages/dungeon-resource/dungeon-resource.vue` — emoji-绑定, emoji-文本
+- `pages/dungeon-resource-detail/dungeon-resource-detail.vue` — emoji-文本
+- `pages/dungeon-resource-reward/dungeon-resource-reward.vue` — emoji-文本
+- `pages/dungeon-trial/dungeon-trial.vue` — emoji-文本
+- `pages/dungeon-trial-detail/dungeon-trial-detail.vue` — emoji-文本
+- `pages/dungeon-trial-reward/dungeon-trial-reward.vue` — emoji-文本
+- `pages/equip-detail/equip-detail.vue` — emoji-文本
+- `pages/events-open/events-open.vue` — emoji-绑定, emoji-文本
+- `pages/first/first.vue` — emoji-文本
+- `pages/first-detail/first-detail.vue` — emoji-文本
+- `pages/friend/friend.vue` — emoji-文本
+- `pages/friend-apply/friend-apply.vue` — emoji-绑定, emoji-文本
+- `pages/friend-blacklist/friend-blacklist.vue` — emoji-文本
+- `pages/friend-detail/friend-detail.vue` — emoji-文本
+- `pages/friend-gift/friend-gift.vue` — emoji-文本
+- `pages/fund/fund.vue` — emoji-文本
+- `pages/fund-award/fund-award.vue` — emoji-文本
+- `pages/fund-buy/fund-buy.vue` — emoji-文本
+- `pages/fund-detail/fund-detail.vue` — emoji-文本
+- `pages/fund-detail-page/fund-detail-page.vue` — emoji-文本
+- `pages/fund-level/fund-level.vue` — emoji-文本
+- `pages/fund-level-detail/fund-level-detail.vue` — emoji-文本
+- `pages/fund-level-reward/fund-level-reward.vue` — emoji-文本
+- `pages/fund-return/fund-return.vue` — emoji-文本
+- `pages/fund-return-page/fund-return-page.vue` — emoji-文本
+- `pages/fund-ui/fund-ui.vue` — emoji-文本
+- `pages/gem-shop/gem-shop.vue` — emoji-文本
+- `pages/guide/guide.vue` — emoji-文本
+- `pages/guild-activity/guild-activity.vue` — emoji-文本
+- `pages/guild-checkin/guild-checkin.vue` — emoji-绑定, emoji-文本
+- `pages/guild-coin-shop/guild-coin-shop.vue` — emoji-文本
+- `pages/guild-donate/guild-donate.vue` — emoji-绑定, emoji-文本
+- `pages/guild-hall/guild-hall.vue` — emoji-文本
+- `pages/guild-members/guild-members.vue` — emoji-绑定, emoji-文本
+- `pages/guild-shop-detail/guild-shop-detail.vue` — emoji-文本
+- `pages/guild-tech/guild-tech.vue` — emoji-文本
+- `pages/guild-tech-detail/guild-tech-detail.vue` — emoji-文本
+- `pages/guild-tech-detail-page/guild-tech-detail-page.vue` — emoji-文本
+- `pages/guild-tech-upgrade/guild-tech-upgrade.vue` — emoji-文本
+- `pages/guild-tech-upgrade-page/guild-tech-upgrade-page.vue` — emoji-文本
+- `pages/guild-vault/guild-vault.vue` — emoji-绑定, emoji-文本
+- `pages/guild-war/guild-war.vue` — emoji-文本
+- `pages/guild-war-detail/guild-war-detail.vue` — emoji-文本
+- `pages/guild-war-detail-page/guild-war-detail-page.vue` — emoji-文本
+- `pages/guild-war-reward/guild-war-reward.vue` — emoji-文本
+- `pages/guild-war-reward-page/guild-war-reward-page.vue` — emoji-文本
+- `pages/halo/halo.vue` — emoji-文本
+- `pages/halo-activate/halo-activate.vue` — emoji-文本
+- `pages/halo-detail/halo-detail.vue` — emoji-文本
+- `pages/hero/hero.vue` — emoji-绑定, emoji-文本
+- `pages/honor-shop/honor-shop.vue` — emoji-文本
+- `pages/idle-reward/idle-reward.vue` — emoji-绑定, emoji-文本
+- `pages/level/level.vue` — emoji-文本
+- `pages/level-up/level-up.vue` — emoji-绑定, emoji-文本
+- `pages/limit-activity/limit-activity.vue` — emoji-文本
+- `pages/limit-shop/limit-shop.vue` — emoji-文本
+- `pages/limit-shop-extra/limit-shop-extra.vue` — emoji-文本
+- `pages/lobby/lobby.vue` — emoji-绑定, emoji-文本
+- `pages/mail/mail.vue` — emoji-绑定, emoji-文本
+- `pages/mail-detail/mail-detail.vue` — emoji-文本
+- `pages/mail-reward/mail-reward.vue` — emoji-文本
+- `pages/mail-system/mail-system.vue` — emoji-文本
+- `pages/manor/manor.vue` — emoji-绑定, emoji-文本
+- `pages/month-card/month-card.vue` — emoji-文本
+- `pages/month-card-benefit/month-card-benefit.vue` — emoji-文本
+- `pages/month-card-benefit-page/month-card-benefit-page.vue` — emoji-文本
+- `pages/month-card-buy/month-card-buy.vue` — emoji-文本
+- `pages/month-card-detail/month-card-detail.vue` — emoji-文本
+- `pages/month-card-detail-page/month-card-detail-page.vue` — emoji-文本
+- `pages/notice/notice.vue` — emoji-文本
+- `pages/personal-achievement/personal-achievement.vue` — emoji-文本
+- `pages/personal-achievement-detail/personal-achievement-detail.vue` — emoji-文本
+- `pages/personal-collection/personal-collection.vue` — emoji-文本
+- `pages/personal-collection-detail/personal-collection-detail.vue` — emoji-文本
+- `pages/personal-medal/personal-medal.vue` — emoji-文本
+- `pages/personal-medal-detail/personal-medal-detail.vue` — emoji-文本
+- `pages/personal-region/personal-region.vue` — emoji-文本
+- `pages/personal-space/personal-space.vue` — emoji-绑定, emoji-文本
+- `pages/personal-space-home/personal-space-home.vue` — emoji-文本
+- `pages/personal-space-region/personal-space-region.vue` — emoji-文本
+- `pages/personal-space-settings/personal-space-settings.vue` — emoji-文本
+- `pages/player-detail/player-detail.vue` — emoji-绑定, emoji-文本
+- `pages/protocol/protocol.vue` — emoji-文本
+- `pages/quest-daily/quest-daily.vue` — emoji-文本
+- `pages/ranking-arena/ranking-arena.vue` — emoji-文本
+- `pages/ranking-collection/ranking-collection.vue` — emoji-文本
+- `pages/ranking-guild/ranking-guild.vue` — emoji-文本
+- `pages/ranking-hall/ranking-hall.vue` — emoji-文本
+- `pages/ranking-level/ranking-level.vue` — emoji-文本
+- `pages/ranking-mainline/ranking-mainline.vue` — emoji-文本
+- `pages/ranking-power/ranking-power.vue` — emoji-文本
+- `pages/recharge-cum/recharge-cum.vue` — emoji-文本
+- `pages/recharge-cum-detail/recharge-cum-detail.vue` — emoji-文本
+- `pages/recharge-cum-tier/recharge-cum-tier.vue` — emoji-文本
+- `pages/recharge-daily/recharge-daily.vue` — emoji-文本
+- `pages/recharge-daily-detail/recharge-daily-detail.vue` — emoji-文本
+- `pages/recharge-daily-tier/recharge-daily-tier.vue` — emoji-文本
+- `pages/recharge-first/recharge-first.vue` — emoji-文本
+- `pages/recharge-first-detail/recharge-first-detail.vue` — emoji-文本
+- `pages/recharge-first-double/recharge-first-double.vue` — emoji-文本
+- `pages/recharge-first-double-page/recharge-first-double-page.vue` — emoji-文本
+- `pages/recharge-tier/recharge-tier.vue` — emoji-文本
+- `pages/record/record.vue` — emoji-文本
+- `pages/resource-get/resource-get.vue` — emoji-绑定, emoji-文本
+- `pages/server-list/server-list.vue` — emoji-文本
+- `pages/settings/settings.vue` — emoji-文本
+- `pages/settings-account/settings-account.vue` — emoji-文本
+- `pages/settings-customer/settings-customer.vue` — emoji-文本
+- `pages/settings-language/settings-language.vue` — emoji-文本
+- `pages/settings-notify/settings-notify.vue` — emoji-文本
+- `pages/seven/seven.vue` — emoji-文本
+- `pages/seven-detail/seven-detail.vue` — emoji-文本
+- `pages/seven-extra/seven-extra.vue` — emoji-文本
+- `pages/shop-cross/shop-cross.vue` — emoji-文本
+- `pages/shop-daily/shop-daily.vue` — emoji-文本
+- `pages/shop-home/shop-home.vue` — emoji-文本
+- `pages/shop-honor/shop-honor.vue` — emoji-文本
+- `pages/shop-spice/shop-spice.vue` — emoji-绑定, emoji-文本
+- `pages/shop-talent/shop-talent.vue` — emoji-绑定, emoji-文本
+- `pages/shop-treasure/shop-treasure.vue` — emoji-绑定, emoji-文本
+- `pages/shop-weekly/shop-weekly.vue` — emoji-文本
+- `pages/signin/signin.vue` — emoji-文本
+- `pages/signin-award/signin-award.vue` — emoji-文本
+- `pages/signin-continuous/signin-continuous.vue` — emoji-文本
+- `pages/signin-continuous-detail/signin-continuous-detail.vue` — emoji-文本
+- `pages/signin-continuous-reward/signin-continuous-reward.vue` — emoji-文本
+- `pages/signin-cumulative/signin-cumulative.vue` — emoji-文本
+- `pages/signin-cumulative-detail/signin-cumulative-detail.vue` — emoji-文本
+- `pages/signin-cumulative-reward/signin-cumulative-reward.vue` — emoji-文本
+- `pages/signin-month/signin-month.vue` — emoji-文本
+- `pages/signin-month-detail/signin-month-detail.vue` — emoji-文本
+- `pages/signin-month-reward/signin-month-reward.vue` — emoji-文本
+- `pages/signin-vip/signin-vip.vue` — emoji-文本
+- `pages/signin-vip-detail/signin-vip-detail.vue` — emoji-文本
+- `pages/signin-vip-reward/signin-vip-reward.vue` — emoji-文本
+- `pages/skill-detail/skill-detail.vue` — emoji-文本
+- `pages/skill-up/skill-up.vue` — emoji-文本
+- `pages/skill-upgrade/skill-upgrade.vue` — emoji-文本
+- `pages/speed-up/speed-up.vue` — emoji-文本
+- `pages/summon/summon.vue` — emoji-文本
+- `pages/team-detail/team-detail.vue` — emoji-文本
+- `pages/team-recommend/team-recommend.vue` — emoji-文本
+- `pages/tower/tower.vue` — emoji-文本
+- `pages/tower-floor-detail/tower-floor-detail.vue` — emoji-文本
+- `pages/tower-rank/tower-rank.vue` — emoji-文本
+- `pages/tower-record/tower-record.vue` — emoji-文本
+- `pages/tower-reward/tower-reward.vue` — emoji-文本
+- `pages/tower-sweep/tower-sweep.vue` — emoji-文本
+- `pages/trade/trade.vue` — emoji-文本
+- `pages/trade-detail/trade-detail.vue` — emoji-文本
+- `pages/trade-history/trade-history.vue` — emoji-文本
+- `pages/trade-history-detail/trade-history-detail.vue` — emoji-文本
+- `pages/trade-offer/trade-offer.vue` — emoji-文本
+- `pages/trade-offer-detail/trade-offer-detail.vue` — emoji-文本
+- `pages/trade-record/trade-record.vue` — emoji-文本
+- `pages/tree-blessing/tree-blessing.vue` — emoji-文本
+- `pages/tree-blessing-detail/tree-blessing-detail.vue` — emoji-文本
+- `pages/tree-facility/tree-facility.vue` — emoji-文本
+- `pages/tree-facility-detail/tree-facility-detail.vue` — emoji-文本
+- `pages/tree-output/tree-output.vue` — emoji-文本
+- `pages/tree-upgrade/tree-upgrade.vue` — emoji-文本
+- `pages/week-card/week-card.vue` — emoji-文本
+- `pages/week-card-benefit/week-card-benefit.vue` — emoji-文本
+- `pages/week-card-benefit-page/week-card-benefit-page.vue` — emoji-文本
+- `pages/week-card-buy/week-card-buy.vue` — emoji-文本
+- `pages/week-card-detail/week-card-detail.vue` — emoji-文本
+- `pages/week-card-detail-page/week-card-detail-page.vue` — emoji-文本
+- `pages/world-boss/world-boss.vue` — emoji-文本
+- `pages/world-boss-detail/world-boss-detail.vue` — emoji-文本
+- `pages/world-boss-history/world-boss-history.vue` — emoji-文本
+- `pages/world-boss-rank-detail/world-boss-rank-detail.vue` — emoji-文本
+- `pages/world-boss-reward/world-boss-reward.vue` — emoji-文本
+- `pages/world-map/world-map.vue` — emoji-绑定, emoji-文本
+- `pages/worldtree/worldtree.vue` — emoji-文本
+
+### 4. 使用了组件但缺少 import 语句：8 个
+- `pages/achievement/achievement.vue` — 缺少：CustomNavbar, BaseButton, AvatarIcon
+- `pages/arena/arena.vue` — 缺少：CustomNavbar, BaseButton
+- `pages/ascend/ascend.vue` — 缺少：CustomNavbar, BaseButton, AvatarIcon
+- `pages/bag/bag.vue` — 缺少：CustomNavbar, BaseButton, AvatarIcon
+- `pages/components/PageContainer.vue` — 缺少：CustomNavbar
+- `pages/friend/friend.vue` — 缺少：CustomNavbar, BaseButton, AvatarIcon
+- `pages/settings/settings.vue` — 缺少：CustomNavbar
+- `pages/shop-home/shop-home.vue` — 缺少：CustomNavbar, AvatarIcon
+
+## 完全未使用任何组件的页面
+
+- `pages/activity-award/activity-award.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-award-detail/activity-award-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-center/activity-center.vue` — inline-navbar, emoji-icon, emoji-text
+- `pages/activity-consumption/activity-consumption.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-consumption-detail/activity-consumption-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-consumption-reward/activity-consumption-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-cumulative/activity-cumulative.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-cumulative-detail/activity-cumulative-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-cumulative-reward/activity-cumulative-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-detail/activity-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-exchange/activity-exchange.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-exchange-detail/activity-exchange-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-limited/activity-limited.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-limited-detail/activity-limited-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-limited-reward/activity-limited-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-login/activity-login.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-login-detail/activity-login-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-login-reward/activity-login-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-rank/activity-rank.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-rank-detail/activity-rank-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-recharge/activity-recharge.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-recharge-detail/activity-recharge-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-recharge-reward/activity-recharge-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/activity-reward-detail/activity-reward-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/ancient-tree/ancient-tree.vue` — inline-navbar, native-button, emoji-text
+- `pages/ancient-tree-detail/ancient-tree-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/ancient-tree-detail-page/ancient-tree-detail-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/ancient-tree-reward/ancient-tree-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/ancient-tree-reward-page/ancient-tree-reward-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-coin-shop/arena-coin-shop.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-fight/arena-fight.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-main/arena-main.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-qual/arena-qual.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-qual-detail/arena-qual-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-qual-main/arena-qual-main.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-qual-rank/arena-qual-rank.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-qual-rank-detail/arena-qual-rank-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-qual-reward/arena-qual-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-qual-reward-detail/arena-qual-reward-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-rank/arena-rank.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-reward/arena-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/arena-season/arena-season.vue` — inline-navbar, native-button, emoji-text
+- `pages/artifact/artifact.vue` — inline-navbar, native-button, emoji-text
+- `pages/artifact-detail/artifact-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/artifact-upgrade/artifact-upgrade.vue` — inline-navbar, native-button, emoji-text
+- `pages/assistant/assistant.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/astro-constellation/astro-constellation.vue` — inline-navbar, native-button, emoji-text
+- `pages/astro-constellation-detail/astro-constellation-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/astro-detail/astro-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/astro-result/astro-result.vue` — inline-navbar, native-button, emoji-text
+- `pages/astro-zodiac/astro-zodiac.vue` — inline-navbar, native-button, emoji-text
+- `pages/astro-zodiac-detail/astro-zodiac-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/astrology/astrology.vue` — inline-navbar, native-button, emoji-text
+- `pages/battle-hall/battle-hall.vue` — inline-navbar, native-button, emoji-text
+- `pages/battle-play/battle-play.vue` — inline-navbar, native-button, emoji-icon
+- `pages/battle-prep/battle-prep.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/battle-result/battle-result.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/battlepass/battlepass.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-award/battlepass-award.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-buy/battlepass-buy.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-free/battlepass-free.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-level/battlepass-level.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-level-detail/battlepass-level-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-level-reward/battlepass-level-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-paid/battlepass-paid.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-season/battlepass-season.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-season-detail/battlepass-season-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-season-reward/battlepass-season-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/battlepass-task/battlepass-task.vue` — inline-navbar, native-button, emoji-text
+- `pages/bond/bond.vue` — inline-navbar, native-button, emoji-text
+- `pages/bond-activate/bond-activate.vue` — inline-navbar, native-button, emoji-text
+- `pages/bond-detail/bond-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/boss-award/boss-award.vue` — inline-navbar, native-button, emoji-text
+- `pages/boss-detail/boss-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/boss-dmg/boss-dmg.vue` — inline-navbar, native-button, emoji-text
+- `pages/boss-history/boss-history.vue` — inline-navbar, native-button, emoji-text
+- `pages/boss-rank/boss-rank.vue` — inline-navbar, native-button, emoji-text
+- `pages/bp-task/bp-task.vue` — inline-navbar, native-button, emoji-text
+- `pages/celebration-mainline/celebration-mainline.vue` — inline-navbar, native-button, emoji-text
+- `pages/celebration-summon/celebration-summon.vue` — inline-navbar, native-button, emoji-text
+- `pages/chapter-detail/chapter-detail.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/char-awaken/char-awaken.vue` — inline-navbar, native-button, emoji-text
+- `pages/char-constellation/char-constellation.vue` — inline-navbar, native-button, emoji-text
+- `pages/char-detail/char-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/char-evolve/char-evolve.vue` — inline-navbar, native-button, emoji-text
+- `pages/char-skill/char-skill.vue` — inline-navbar, native-button, emoji-text
+- `pages/char-skin/char-skin.vue` — inline-navbar, native-button, emoji-text
+- `pages/chat/chat.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/chat-detail/chat-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/chronicle/chronicle.vue` — inline-navbar, native-button, emoji-text
+- `pages/chronicle-award/chronicle-award.vue` — inline-navbar, native-button, emoji-text
+- `pages/chronicle-dish/chronicle-dish.vue` — inline-navbar, native-button, emoji-text
+- `pages/chronicle-dish-detail/chronicle-dish-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/chronicle-ingredient/chronicle-ingredient.vue` — inline-navbar, native-button, emoji-text
+- `pages/chronicle-ingredient-detail/chronicle-ingredient-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/chronicle-mat/chronicle-mat.vue` — inline-navbar, native-button, emoji-text
+- `pages/chronicle-milestone/chronicle-milestone.vue` — inline-navbar, native-button, emoji-text
+- `pages/chronicle-milestone-detail/chronicle-milestone-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/chronicle-prog/chronicle-prog.vue` — inline-navbar, native-button, emoji-text
+- `pages/clear-reward/clear-reward.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/collection/collection.vue` — inline-navbar, emoji-text
+- `pages/components/BaseButton.vue` — native-button
+- `pages/components/CustomNavbar.vue` — emoji-text
+- `pages/components/ItemCard.vue` — emoji-text
+- `pages/contract/contract.vue` — inline-navbar, native-button, emoji-text
+- `pages/create/create.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/cross-shop/cross-shop.vue` — inline-navbar, native-button, emoji-text
+- `pages/cross-shop-extra/cross-shop-extra.vue` — inline-navbar, native-button, emoji-text
+- `pages/cum-recharge/cum-recharge.vue` — inline-navbar, native-button, emoji-text
+- `pages/daily/daily.vue` — inline-navbar, native-button, emoji-text
+- `pages/daily-tier/daily-tier.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-challenge/dungeon-challenge.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-challenge-detail/dungeon-challenge-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-challenge-reward/dungeon-challenge-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-daily/dungeon-daily.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/dungeon-elite/dungeon-elite.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-elite-detail/dungeon-elite-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-elite-reward/dungeon-elite-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-event/dungeon-event.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-event-detail/dungeon-event-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-event-reward/dungeon-event-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-resource/dungeon-resource.vue` — inline-navbar, emoji-icon, emoji-text
+- `pages/dungeon-resource-detail/dungeon-resource-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-resource-reward/dungeon-resource-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-trial/dungeon-trial.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-trial-detail/dungeon-trial-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/dungeon-trial-reward/dungeon-trial-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/equip-detail/equip-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/events-open/events-open.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/first/first.vue` — inline-navbar, native-button, emoji-text
+- `pages/first-detail/first-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/friend-apply/friend-apply.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/friend-blacklist/friend-blacklist.vue` — inline-navbar, native-button, emoji-text
+- `pages/friend-detail/friend-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/friend-gift/friend-gift.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund/fund.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund-award/fund-award.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund-buy/fund-buy.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund-detail/fund-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund-detail-page/fund-detail-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund-level/fund-level.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund-level-detail/fund-level-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund-level-reward/fund-level-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund-return/fund-return.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund-return-page/fund-return-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/fund-ui/fund-ui.vue` — inline-navbar, native-button, emoji-text
+- `pages/gem-shop/gem-shop.vue` — inline-navbar, native-button, emoji-text
+- `pages/guide/guide.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-activity/guild-activity.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-checkin/guild-checkin.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/guild-coin-shop/guild-coin-shop.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-donate/guild-donate.vue` — inline-navbar, emoji-icon, emoji-text
+- `pages/guild-hall/guild-hall.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-members/guild-members.vue` — inline-navbar, emoji-icon, emoji-text
+- `pages/guild-shop-detail/guild-shop-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-tech/guild-tech.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-tech-detail/guild-tech-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-tech-detail-page/guild-tech-detail-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-tech-upgrade/guild-tech-upgrade.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-tech-upgrade-page/guild-tech-upgrade-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-vault/guild-vault.vue` — inline-navbar, emoji-icon, emoji-text
+- `pages/guild-war/guild-war.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-war-detail/guild-war-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-war-detail-page/guild-war-detail-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-war-reward/guild-war-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/guild-war-reward-page/guild-war-reward-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/halo/halo.vue` — inline-navbar, native-button, emoji-text
+- `pages/halo-activate/halo-activate.vue` — inline-navbar, native-button, emoji-text
+- `pages/halo-detail/halo-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/hero/hero.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/honor-shop/honor-shop.vue` — inline-navbar, native-button, emoji-text
+- `pages/idle-reward/idle-reward.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/index/index.vue` — native-button
+- `pages/level/level.vue` — inline-navbar, native-button, emoji-text
+- `pages/level-up/level-up.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/limit-activity/limit-activity.vue` — inline-navbar, native-button, emoji-text
+- `pages/limit-shop/limit-shop.vue` — inline-navbar, native-button, emoji-text
+- `pages/limit-shop-extra/limit-shop-extra.vue` — inline-navbar, native-button, emoji-text
+- `pages/lobby/lobby.vue` — emoji-icon, emoji-text
+- `pages/mail/mail.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/mail-detail/mail-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/mail-reward/mail-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/mail-system/mail-system.vue` — inline-navbar, native-button, emoji-text
+- `pages/manor/manor.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/month-card/month-card.vue` — inline-navbar, native-button, emoji-text
+- `pages/month-card-benefit/month-card-benefit.vue` — inline-navbar, native-button, emoji-text
+- `pages/month-card-benefit-page/month-card-benefit-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/month-card-buy/month-card-buy.vue` — inline-navbar, native-button, emoji-text
+- `pages/month-card-detail/month-card-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/month-card-detail-page/month-card-detail-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/notice/notice.vue` — inline-navbar, native-button, emoji-text
+- `pages/personal-achievement/personal-achievement.vue` — inline-navbar, native-button, emoji-text
+- `pages/personal-achievement-detail/personal-achievement-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/personal-collection/personal-collection.vue` — inline-navbar, native-button, emoji-text
+- `pages/personal-collection-detail/personal-collection-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/personal-medal/personal-medal.vue` — inline-navbar, native-button, emoji-text
+- `pages/personal-medal-detail/personal-medal-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/personal-region/personal-region.vue` — inline-navbar, native-button, emoji-text
+- `pages/personal-space/personal-space.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/personal-space-home/personal-space-home.vue` — inline-navbar, native-button, emoji-text
+- `pages/personal-space-region/personal-space-region.vue` — inline-navbar, native-button, emoji-text
+- `pages/personal-space-settings/personal-space-settings.vue` — inline-navbar, native-button, emoji-text
+- `pages/player-detail/player-detail.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/protocol/protocol.vue` — inline-navbar, native-button, emoji-text
+- `pages/quest-daily/quest-daily.vue` — inline-navbar, native-button, emoji-text
+- `pages/ranking-arena/ranking-arena.vue` — inline-navbar, native-button, emoji-text
+- `pages/ranking-collection/ranking-collection.vue` — inline-navbar, native-button, emoji-text
+- `pages/ranking-guild/ranking-guild.vue` — inline-navbar, native-button, emoji-text
+- `pages/ranking-hall/ranking-hall.vue` — inline-navbar, emoji-text
+- `pages/ranking-level/ranking-level.vue` — inline-navbar, native-button, emoji-text
+- `pages/ranking-mainline/ranking-mainline.vue` — inline-navbar, native-button, emoji-text
+- `pages/ranking-power/ranking-power.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-cum/recharge-cum.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-cum-detail/recharge-cum-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-cum-tier/recharge-cum-tier.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-daily/recharge-daily.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-daily-detail/recharge-daily-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-daily-tier/recharge-daily-tier.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-first/recharge-first.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-first-detail/recharge-first-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-first-double/recharge-first-double.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-first-double-page/recharge-first-double-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/recharge-tier/recharge-tier.vue` — inline-navbar, native-button, emoji-text
+- `pages/record/record.vue` — inline-navbar, emoji-text
+- `pages/resource-get/resource-get.vue` — inline-navbar, emoji-icon, emoji-text
+- `pages/server-list/server-list.vue` — inline-navbar, emoji-text
+- `pages/settings-account/settings-account.vue` — inline-navbar, native-button, emoji-text
+- `pages/settings-customer/settings-customer.vue` — inline-navbar, native-button, emoji-text
+- `pages/settings-language/settings-language.vue` — inline-navbar, native-button, emoji-text
+- `pages/settings-notify/settings-notify.vue` — inline-navbar, native-button, emoji-text
+- `pages/seven/seven.vue` — inline-navbar, native-button, emoji-text
+- `pages/seven-detail/seven-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/seven-extra/seven-extra.vue` — inline-navbar, native-button, emoji-text
+- `pages/shop-cross/shop-cross.vue` — inline-navbar, native-button, emoji-text
+- `pages/shop-daily/shop-daily.vue` — inline-navbar, native-button, emoji-text
+- `pages/shop-honor/shop-honor.vue` — inline-navbar, native-button, emoji-text
+- `pages/shop-spice/shop-spice.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/shop-talent/shop-talent.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/shop-treasure/shop-treasure.vue` — inline-navbar, native-button, emoji-icon, emoji-text
+- `pages/shop-weekly/shop-weekly.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin/signin.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-award/signin-award.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-continuous/signin-continuous.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-continuous-detail/signin-continuous-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-continuous-reward/signin-continuous-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-cumulative/signin-cumulative.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-cumulative-detail/signin-cumulative-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-cumulative-reward/signin-cumulative-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-month/signin-month.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-month-detail/signin-month-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-month-reward/signin-month-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-vip/signin-vip.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-vip-detail/signin-vip-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/signin-vip-reward/signin-vip-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/skill-detail/skill-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/skill-up/skill-up.vue` — inline-navbar, native-button, emoji-text
+- `pages/skill-upgrade/skill-upgrade.vue` — inline-navbar, native-button, emoji-text
+- `pages/speed-up/speed-up.vue` — inline-navbar, native-button, emoji-text
+- `pages/summon/summon.vue` — inline-navbar, native-button, emoji-text
+- `pages/team-detail/team-detail.vue` — inline-navbar, emoji-text
+- `pages/team-recommend/team-recommend.vue` — inline-navbar, emoji-text
+- `pages/tower/tower.vue` — inline-navbar, native-button, emoji-text
+- `pages/tower-floor-detail/tower-floor-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/tower-rank/tower-rank.vue` — inline-navbar, native-button, emoji-text
+- `pages/tower-record/tower-record.vue` — inline-navbar, native-button, emoji-text
+- `pages/tower-reward/tower-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/tower-sweep/tower-sweep.vue` — inline-navbar, native-button, emoji-text
+- `pages/trade/trade.vue` — inline-navbar, emoji-text
+- `pages/trade-detail/trade-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/trade-history/trade-history.vue` — inline-navbar, native-button, emoji-text
+- `pages/trade-history-detail/trade-history-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/trade-offer/trade-offer.vue` — inline-navbar, native-button, emoji-text
+- `pages/trade-offer-detail/trade-offer-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/trade-record/trade-record.vue` — inline-navbar, native-button, emoji-text
+- `pages/tree-blessing/tree-blessing.vue` — inline-navbar, native-button, emoji-text
+- `pages/tree-blessing-detail/tree-blessing-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/tree-facility/tree-facility.vue` — inline-navbar, native-button, emoji-text
+- `pages/tree-facility-detail/tree-facility-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/tree-output/tree-output.vue` — inline-navbar, native-button, emoji-text
+- `pages/tree-upgrade/tree-upgrade.vue` — inline-navbar, native-button, emoji-text
+- `pages/week-card/week-card.vue` — inline-navbar, native-button, emoji-text
+- `pages/week-card-benefit/week-card-benefit.vue` — inline-navbar, native-button, emoji-text
+- `pages/week-card-benefit-page/week-card-benefit-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/week-card-buy/week-card-buy.vue` — inline-navbar, native-button, emoji-text
+- `pages/week-card-detail/week-card-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/week-card-detail-page/week-card-detail-page.vue` — inline-navbar, native-button, emoji-text
+- `pages/world-boss/world-boss.vue` — inline-navbar, native-button, emoji-text
+- `pages/world-boss-detail/world-boss-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/world-boss-history/world-boss-history.vue` — inline-navbar, native-button, emoji-text
+- `pages/world-boss-rank-detail/world-boss-rank-detail.vue` — inline-navbar, native-button, emoji-text
+- `pages/world-boss-reward/world-boss-reward.vue` — inline-navbar, native-button, emoji-text
+- `pages/world-map/world-map.vue` — inline-navbar, emoji-icon, emoji-text
+- `pages/worldtree/worldtree.vue` — inline-navbar, native-button, emoji-text

@@ -1,0 +1,101 @@
+<!-- componentized -->
+<template>
+  <view class="page">
+        <custom-navbar title="天赋商店" :show-back="true" @back="onBack" />
+
+    <scroll-view class="scroll" scroll-y="true" show-scrollbar="false">
+      <view class="content">
+        <view class="section-title">刻印道具</view>
+        <text class="section-sub">购买天赋刻印相关道具，提升食灵潜能</text>
+        <view class="product-list">
+          <view v-for="(p, i) in products" :key="i" class="product-card" :class="{locked: p.locked}">
+            <view class="product-icon-wrapper">
+              <avatar-icon :placeholder-char="p.icon" :size="'md'" :shape="'circle'" />
+            </view>
+            <view class="product-info">
+              <text class="product-name">{{ p.name }}</text>
+              <text class="product-desc">{{ p.desc }}</text>
+              <text v-if="p.locked" class="lock-text">主角 Lv.{{ p.level }} 解锁</text>
+            </view>
+            <view class="product-action">
+              <text class="product-price">{{ p.price }}</text>
+              <base-button v-if="!p.locked" class="product-buy" @tap.stop="onBuy(p)">购买</base-button>
+              <view v-else class="lock-btn">锁定</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import CustomNavbar from '@/pages/components/CustomNavbar.vue';
+import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
+import { listItems, getSave } from '@/utils/api.js';
+
+const products = ref([
+  { name: '基础刻印石', desc: '用于食灵基础天赋刻印', icon: '📜', price: '金币 × 100000', locked: false, level: 0 },
+  { name: '高级刻印石', desc: '用于食灵高级天赋刻印', icon: '📜', price: '灵晶 × 300', locked: false, level: 0 },
+  { name: '天赋重置卷', desc: '重置食灵天赋分配', icon: '🔄', price: '灵晶 × 800', locked: true, level: 30 },
+  { name: '天赋潜能果', desc: '永久提升食灵天赋上限', icon: '🍎', price: '灵晶 × 1500', locked: true, level: 50 }
+]);
+
+// 从后端存档/背包获取玩家资源与物品（替换模拟锁定逻辑）
+const loadShop = async () => {
+  try {
+    const saveResult = await getSave();
+    const save = saveResult.save || saveResult;
+    const gems = save.gems || 0;
+    const coins = save.coins || 0;
+
+    // 根据真实资源调整锁定/价格显示
+    products.value = products.value.map((p) => {
+      const priceNum = Number(String(p.price).replace(/\D/g, ''));
+      const isGem = p.price.includes('灵晶');
+      const isCoin = p.price.includes('金币');
+      const affordable = isGem ? gems >= priceNum : coins >= priceNum;
+      return { ...p, locked: p.locked || !affordable };
+    });
+  } catch (e) {
+    console.warn('load shop-talent failed', e);
+  }
+};
+
+onMounted(() => {
+  loadShop();
+});
+
+const onBack = () => uni.navigateBack();
+const onBuy = async (p) => {
+  if (p.locked) {
+    uni.showToast({ title: `主角 Lv.${p.level} 解锁`, icon: 'none' });
+    return;
+  }
+  uni.showToast({ title: `购买${p.name}`, icon: 'none' });
+};
+</script>
+
+<style scoped>
+.page { width: 100vw; min-height: 100vh; background: #0F0E1D; }
+.scroll { height: 100vh; padding-top: 88rpx; padding-bottom: 100rpx; box-sizing: border-box; }
+.content { padding: 0 48rpx; box-sizing: border-box; }
+.section-title { font-size: 32rpx; color: #FFFFFF; font-weight: 700; margin: 40rpx 0 12rpx 0; }
+.section-sub { font-size: 24rpx; color: #8A8A9E; margin-bottom: 30rpx; }
+.product-list { display: flex; flex-direction: column; gap: 16rpx; }
+.product-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
+.product-card.locked { opacity: 0.6; border-color: #2A293E; }
+.product-card:active { background: rgba(255,255,255,0.08); }
+.product-icon-wrapper { width: 40rpx; height: 40rpx; flex-shrink: 0; }
+.product-info { flex: 1; margin: 0 24rpx; }
+.product-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 4rpx; }
+.product-desc { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }
+.lock-text { font-size: 20rpx; color: #8A8A9E; }
+.product-action { display: flex; align-items: center; gap: 12rpx; flex-shrink: 0; }
+.product-price { font-size: 24rpx; color: #E0D3A1; font-weight: 700; margin-right: 12rpx; }
+.product-buy { width: 120rpx; height: 56rpx; line-height: 56rpx; background: linear-gradient(135deg, #E0D3A1 0%, #C9B87E 100%); color: #0F0E1D; font-size: 22rpx; font-weight: 700; border-radius: 28rpx; flex-shrink: 0; }
+.product-buy:active { transform: scale(0.96); opacity: 0.85; }
+.lock-btn { width: 120rpx; height: 56rpx; line-height: 56rpx; background: #2A293E; color: #8A8A9E; font-size: 22rpx; border-radius: 28rpx; flex-shrink: 0; }
+</style>

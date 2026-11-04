@@ -1,6 +1,8 @@
 node_modules/
 # ---- 构建产物 ----
 dist/
+# uniapp 构建辅助目录（与根目录 pages/ 重复，勿入库）
+uniapp/src/
 .artifacts/
 .gitee-publish/
 test-results/
