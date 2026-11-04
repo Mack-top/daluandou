@@ -137,7 +137,7 @@ export function putSaveDocument(
       return { document, version: 1, updatedAt: stamp };
     }
     const currentVersion = Number(existing.version);
-    if (expectedVersion !== undefined && expectedVersion !== currentVersion) {
+    if (expectedVersion !== currentVersion) {
       let serverDocument: unknown = null;
       try {
         serverDocument = JSON.parse(existing.document);

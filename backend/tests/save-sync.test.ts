@@ -118,6 +118,13 @@ test('版本递增与乐观锁冲突：409 携带服务端文档', async () => {
   assert.equal(second.body?.data?.version, 2);
   assert.equal(second.body?.data?.document?.coins, 50000);
 
+  // 已有存档时省略版本也必须冲突，不能覆盖云端。
+  const missing = await call('/api/game/state/document', {
+    method: 'PUT', token: account.token, body: { document: { coins: 999 } },
+  });
+  assert.equal(missing.status, 409);
+  assert.equal(missing.body?.error?.details?.version, 2);
+
   // 旧版本（模拟另一台设备）→ 409，并返回服务端当前文档
   const stale = await call('/api/game/state/document', {
     method: 'PUT', token: account.token, body: { document: { coins: 999 }, version: 1 },

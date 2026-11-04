@@ -65,3 +65,12 @@ export function markFailed(orderId: string, gatewayTxn: string | null): void {
     orderId,
   );
 }
+
+/** 未支付订单保留限购名额，直至支付或经网关确认关闭。 */
+export function countPendingOrders(playerId: string, packId: string): number {
+  const row = queryOne<{ total: number }>(
+    "SELECT COUNT(*) AS total FROM payment_orders WHERE player_id = ? AND pack_id = ? AND status = 'created'",
+    playerId, packId,
+  );
+  return Number(row?.total ?? 0);
+}

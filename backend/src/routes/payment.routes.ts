@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { env } from '../config/env.js';
+import { forbidden } from '../lib/errors.js';
 import { z } from 'zod';
 import { ok, parseBody } from '../lib/http.js';
 import { currentPlayer, requireAuth } from '../middleware/auth.js';
@@ -31,6 +33,7 @@ router.post('/orders', requireAuth, requireCsrf, (req, res) => {
 
 /** 模拟支付：本地构造签名回调并走真实回调入口（真实网关接入时移除此路由）。 */
 router.post('/orders/:orderId/mock-pay', requireAuth, requireCsrf, (req, res) => {
+  if (env.isProduction) throw forbidden('生产环境禁止模拟支付');
   const player = currentPlayer(req);
   const result = mockGatewayPay(player.id, String(req.params.orderId));
   ok(res, result);

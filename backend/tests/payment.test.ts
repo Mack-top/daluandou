@@ -4,16 +4,18 @@
 import { after, before, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import type { AddressInfo } from 'node:net';
-import { closeDatabase, connectDatabase, queryAll } from '../src/db/index.js';
+import { closeDatabase, connectDatabase, execute, queryAll } from '../src/db/index.js';
 import { runMigrations } from '../src/db/migrate.js';
 import { seedCatalog } from '../src/db/seed.js';
 import { createGuest } from '../src/services/auth.service.js';
 import { createOrder, getOrder, handleGatewayCallback, mockGatewayPay } from '../src/services/payment.service.js';
 import { getBalances, getProgress } from '../src/repositories/player.repository.js';
+import { purchasePack } from '../src/services/economy.service.js';
 import { env } from '../src/config/env.js';
 import { createApp } from '../src/app.js';
 
@@ -205,4 +207,52 @@ test('HTTP 边界：订单接口需认证，回调接口仅凭签名（无会话
   } finally {
     server.close();
   }
+});
+
+
+test('待支付订单预留限购名额，幂等重试不占额，失败后释放', () => {
+  const { player } = createGuest({ nickname: '限购测试' });
+  execute("UPDATE shop_pack_defs SET daily_limit = 1 WHERE id = 'gem-30'");
+  try {
+    const order = createOrder(player.id, { packId: 'gem-30', clientToken: tokenOf(1) });
+    assert.equal(createOrder(player.id, { packId: 'gem-30', clientToken: tokenOf(1) }).orderId, order.orderId);
+    assert.throws(() => createOrder(player.id, { packId: 'gem-30', clientToken: tokenOf(2) }), /上限/);
+    assert.throws(() => purchasePack(player.id, 'gem-30'), /上限/);
+    execute("UPDATE payment_orders SET status = 'failed' WHERE id = ?", order.orderId);
+    const next = createOrder(player.id, { packId: 'gem-30', clientToken: tokenOf(2) });
+    mockGatewayPay(player.id, next.orderId);
+    assert.throws(() => createOrder(player.id, { packId: 'gem-30', clientToken: tokenOf(3) }), /上限/);
+  } finally {
+    execute("UPDATE shop_pack_defs SET daily_limit = 0 WHERE id = 'gem-30'");
+  }
+});
+
+test('生产环境禁止模拟支付与直接发放付费礼包', () => {
+  const { player } = createGuest({ nickname: '生产测试' });
+  const order = createOrder(player.id, { packId: 'gem-30', clientToken: tokenOf(4) });
+  const mutableEnv = env as { nodeEnv: string };
+  const original = mutableEnv.nodeEnv;
+  mutableEnv.nodeEnv = 'production';
+  try {
+    assert.throws(() => mockGatewayPay(player.id, order.orderId), /禁止模拟支付/);
+    assert.throws(() => purchasePack(player.id, 'gem-30'), /禁止直接发放/);
+    assert.equal(getOrder(player.id, order.orderId).status, 'created');
+  } finally {
+    mutableEnv.nodeEnv = original;
+  }
+});
+
+
+test('生产环境拒绝缺失或过短的支付密钥', () => {
+  for (const secret of ['', 'dev-only-payment-secret', 'short']) {
+    const result = spawnSync(process.execPath, ['--import', 'tsx', '--input-type=module', '-e', "import './src/config/env.ts'"], {
+      cwd: process.cwd(), env: { ...process.env, NODE_ENV: 'production', PAYMENT_SECRET: secret }, encoding: 'utf8',
+    });
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /PAYMENT_SECRET/);
+  }
+  const result = spawnSync(process.execPath, ['--import', 'tsx', '--input-type=module', '-e', "import './src/config/env.ts'"], {
+    cwd: process.cwd(), env: { ...process.env, NODE_ENV: 'production', PAYMENT_SECRET: 'x'.repeat(32) }, encoding: 'utf8',
+  });
+  assert.equal(result.status, 0, result.stderr);
 });

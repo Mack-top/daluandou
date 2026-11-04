@@ -27,7 +27,7 @@ import { claimSystemMail, listSystemMailbox } from '../src/services/system-mail.
 import { getBalances } from '../src/repositories/player.repository.js';
 import { countItemQuantity } from '../src/repositories/item.repository.js';
 import { gmCan } from '../src/domain/gm-permissions.js';
-import { issueGmSession, requireGm, resetGmSessions } from '../src/middleware/gm-auth.js';
+import { issueGmSession, requireGm, resetGmSessions, isLoginLocked, recordLoginFailure, clearLoginFailures } from '../src/middleware/gm-auth.js';
 import type { GmAccountRow } from '../src/domain/types.js';
 import { ApiError } from '../src/lib/errors.js';
 
@@ -253,4 +253,29 @@ test('封禁原因必填', () => {
 test('会话状态可重置', () => {
   resetGmSessions();
   assert.ok(true);
+});
+
+
+test('GM 连续失败达到上限后锁定，过期和成功清除计数', () => {
+  const username = 'lock-regression';
+  resetGmSessions();
+  const originalNow = Date.now;
+  let now = originalNow();
+  Date.now = () => now;
+  try {
+    for (let i = 0; i < 5; i++) {
+      assert.equal(isLoginLocked(username), 0);
+      recordLoginFailure(username);
+    }
+    assert.ok(isLoginLocked(username) > 0);
+    now += 16 * 60_000;
+    assert.equal(isLoginLocked(username), 0);
+    recordLoginFailure(username);
+    clearLoginFailures(username);
+    for (let i = 0; i < 4; i++) recordLoginFailure(username);
+    assert.equal(isLoginLocked(username), 0);
+  } finally {
+    Date.now = originalNow;
+    resetGmSessions();
+  }
 });
