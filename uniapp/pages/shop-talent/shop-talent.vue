@@ -30,17 +30,52 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const products = [
+import { listItems, getSave } from '@/utils/api.js';
+
+const products = ref([
   { name: '基础刻印石', desc: '用于食灵基础天赋刻印', icon: '📜', price: '金币 × 100000', locked: false, level: 0 },
   { name: '高级刻印石', desc: '用于食灵高级天赋刻印', icon: '📜', price: '灵晶 × 300', locked: false, level: 0 },
   { name: '天赋重置卷', desc: '重置食灵天赋分配', icon: '🔄', price: '灵晶 × 800', locked: true, level: 30 },
   { name: '天赋潜能果', desc: '永久提升食灵天赋上限', icon: '🍎', price: '灵晶 × 1500', locked: true, level: 50 }
-];
+]);
+
+// 从后端存档/背包获取玩家资源与物品（替换模拟锁定逻辑）
+const loadShop = async () => {
+  try {
+    const saveResult = await getSave();
+    const save = saveResult.save || saveResult;
+    const gems = save.gems || 0;
+    const coins = save.coins || 0;
+
+    // 根据真实资源调整锁定/价格显示
+    products.value = products.value.map((p) => {
+      const priceNum = Number(String(p.price).replace(/\D/g, ''));
+      const isGem = p.price.includes('灵晶');
+      const isCoin = p.price.includes('金币');
+      const affordable = isGem ? gems >= priceNum : coins >= priceNum;
+      return { ...p, locked: p.locked || !affordable };
+    });
+  } catch (e) {
+    console.warn('load shop-talent failed', e);
+  }
+};
+
+onMounted(() => {
+  loadShop();
+});
+
 const onBack = () => uni.navigateBack();
-const onBuy = (p) => uni.showToast({ title: `购买${p.name}`, icon: 'none' });
+const onBuy = async (p) => {
+  if (p.locked) {
+    uni.showToast({ title: `主角 Lv.${p.level} 解锁`, icon: 'none' });
+    return;
+  }
+  uni.showToast({ title: `购买${p.name}`, icon: 'none' });
+};
 </script>
 
 <style scoped>

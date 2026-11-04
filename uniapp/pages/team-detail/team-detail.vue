@@ -19,13 +19,35 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-const cards = [
+import { getSave } from '@/utils/api.js';
+
+const cards = ref([
   { title: '圣器系统', desc: '为主角装备圣器，提升基础属性', effect: '攻击 +10%，生命 +10%' },
   { title: '光环系统', desc: '激活光环后为全队提供属性加成', effect: '全队速度 +5%' },
   { title: '羁绊系统', desc: '特定食灵组合激活羁绊，获得额外增益', effect: '火系羁绊：暴击率 +8%' }
-];
+]);
+const formation = ref([]);
+const owned = ref([]);
+
+// 从后端存档获取阵容与拥有角色（替换模拟数据）
+const loadTeam = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    formation.value = save.formation || [];
+    owned.value = save.characters || [];
+  } catch (e) {
+    console.warn('load team-detail failed', e);
+  }
+};
+
+onMounted(() => {
+  loadTeam();
+});
+
 const onBack = () => uni.navigateBack();
 </script>
 

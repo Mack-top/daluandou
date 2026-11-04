@@ -282,19 +282,31 @@ export function claimActivityTier(activityId, tier) {
 
 /* ==================== 战斗模块 ==================== */
 
-/** 战斗准备 */
+/** 战斗准备：获取待结算战斗与历史（供选关/回放用） */
 export function battlePrep() {
-  return request('/battles/prep', { method: 'GET' });
+  return request('/battles', { method: 'GET' }).then((data) => ({
+    battles: data.battles || [],
+  }));
 }
 
-/** 战斗进行 */
+/** 战斗进行：开战（后端生成种子并落库，结果不可伪造） */
 export function battlePlay(data) {
-  return request('/battles/play', { method: 'POST', data });
+  return request('/battles', {
+    method: 'POST',
+    data: { stageId: data.stageId },
+  });
 }
 
-/** 战斗结果 */
+/** 战斗结果：结算（以开战种子重算，返回胜负与奖励） */
 export function battleResult(data) {
-  return request('/battles/result', { method: 'POST', data });
+  return request(`/battles/${data.battleId}/settle`, { method: 'POST' });
+}
+
+/* ==================== 怪物/BOSS 模块 ==================== */
+
+/** 获取怪物/BOSS 定义 */
+export function getEnemies(kind = 'boss') {
+  return request(`/enemies?kind=${kind}`, { method: 'GET' }).then((data) => data.enemies || []);
 }
 
 /* ==================== 排行榜模块 ==================== */

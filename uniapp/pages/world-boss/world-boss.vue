@@ -40,19 +40,55 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref } from 'vue';
-const boss = { name: '远古食神', hp: '98%', desc: '全服协作挑战，造成伤害越高奖励越丰厚' };
+import { getEnemies, getLeaderboards } from '@/utils/api.js';
+
+const boss = ref({ name: '远古食神', hp: '98%', desc: '全服协作挑战，造成伤害越高奖励越丰厚' });
 const countdown = ref('02:34:12');
-const rankings = [
-  { name: '剑圣小助手', damage: 5200000, reward: '食灵契约 × 50' },
-  { name: '食神传说', damage: 4800000, reward: '食灵契约 × 40' },
-  { name: '深夜食堂', damage: 4100000, reward: '食灵契约 × 30' },
-  { name: '甜点魔法', damage: 3500000, reward: '食灵契约 × 20' },
-  { name: '灵界旅人', damage: 2900000, reward: '食灵契约 × 10' }
-];
+const rankings = ref([]);
+
+// 从后端获取 BOSS 定义与伤害排行榜（替换模拟数据）
+const loadWorldBoss = async () => {
+  try {
+    const [enemies, leaderboard] = await Promise.all([
+      getEnemies('boss'),
+      getLeaderboards(),
+    ]);
+    if (enemies && enemies.length > 0) {
+      const b = enemies[0];
+      boss.value = {
+        name: b.name || '远古食神',
+        hp: b.maxHp ? `${Math.floor((b.maxHp / (b.maxHp + 1000000)) * 100)}%` : '98%',
+        desc: b.desc || '全服协作挑战，造成伤害越高奖励越丰厚',
+      };
+    }
+    if (leaderboard && leaderboard.length > 0) {
+      rankings.value = leaderboard.slice(0, 5).map((entry) => ({
+        name: entry.playerName || entry.name || '未知玩家',
+        damage: entry.score || 0,
+        reward: '食灵契约 × 50',
+      }));
+    } else {
+      rankings.value = [
+        { name: '剑圣小助手', damage: 5200000, reward: '食灵契约 × 50' },
+        { name: '食神传说', damage: 4800000, reward: '食灵契约 × 40' },
+        { name: '深夜食堂', damage: 4100000, reward: '食灵契约 × 30' },
+        { name: '甜点魔法', damage: 3500000, reward: '食灵契约 × 20' },
+        { name: '灵界旅人', damage: 2900000, reward: '食灵契约 × 10' },
+      ];
+    }
+  } catch (e) {
+    console.warn('load world-boss failed', e);
+  }
+};
+
+onMounted(() => {
+  loadWorldBoss();
+});
+
 const onBack = () => uni.navigateBack();
 const onFight = () => uni.showToast({ title: '世界BOSS挑战开发中', icon: 'none' });
 </script>

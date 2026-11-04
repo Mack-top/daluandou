@@ -24,16 +24,39 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-const zodiacs = [
-  { name: '白羊座', effect: '攻击 +5%', active: true },
-  { name: '金牛座', effect: '生命 +5%', active: true },
+import { getSave } from '@/utils/api.js';
+
+const zodiacs = ref([
+  { name: '白羊座', effect: '攻击 +5%', active: false },
+  { name: '金牛座', effect: '生命 +5%', active: false },
   { name: '双子座', effect: '速度 +3%', active: false },
   { name: '巨蟹座', effect: '治疗效果 +5%', active: false },
   { name: '狮子座', effect: '暴击率 +3%', active: false },
   { name: '处女座', effect: '暴伤 +3%', active: false }
-];
+]);
+
+// 从后端存档获取占星节点（替换模拟数据）
+const loadAstrology = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const unlocked = save.astrology || [];
+    zodiacs.value = zodiacs.value.map((z, idx) => ({
+      ...z,
+      active: unlocked.includes(`zodiac-${idx + 1}`) || unlocked.includes(z.name),
+    }));
+  } catch (e) {
+    console.warn('load astrology failed', e);
+  }
+};
+
+onMounted(() => {
+  loadAstrology();
+});
+
 const onBack = () => uni.navigateBack();
 const onAstrology = () => uni.showToast({ title: '占星抽取开发中', icon: 'none' });
 </script>

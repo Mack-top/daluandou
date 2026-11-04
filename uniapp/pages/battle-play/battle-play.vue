@@ -49,28 +49,76 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref } from 'vue';
-const myTeam = [
-  { name: '青团', icon: '🍡', hp: 4500, hpPct: 90 },
-  { name: '蓝纹奶酪', icon: '🧀', hp: 3800, hpPct: 85 }
-];
-const enemyTeam = [
-  { name: '邪恶食神', icon: '👹', hp: 5200, hpPct: 95 },
-  { name: '封印使徒', icon: '👺', hp: 4100, hpPct: 70 }
-];
-const logs = ref([
-  '战斗开始！',
-  '青团 使用 治疗术，为队友恢复生命',
-  '冬阴功 发动 烈焰盛宴，对敌方造成伤害',
-  '敌方 邪恶食神 受到致命打击'
-]);
-const onAuto = () => uni.showToast({ title: '自动战斗已开启', icon: 'none' });
+import { battlePlay } from '@/utils/api.js';
+
+const CHAR_ICONS = { 青团: '🍡', '蓝纹奶酪': '🧀', '冬阴功': '🍲', 拉菲: '🍷', 咖喱: '🍛' };
+
+const myTeam = ref([]);
+const enemyTeam = ref([]);
+const logs = ref(['战斗准备中...']);
+const battleId = ref('');
+
+const iconOf = (name) => CHAR_ICONS[name] || '👤';
+
+// 从后端开战（替换模拟战斗数据）
+const startBattle = async () => {
+  try {
+    uni.showLoading({ title: '开战中...' });
+    const stageId = '1-1'; // 默认首关，可从页面参数传入
+    const result = await battlePlay({ stageId });
+    const battle = result.battle;
+    const units = battle.units || [];
+    const allies = units.filter((u) => u.side === 'ally');
+    const enemies = units.filter((u) => u.side === 'enemy');
+    myTeam.value = allies.map((u) => ({
+      name: u.name,
+      icon: iconOf(u.name),
+      hp: u.maxHp,
+      hpPct: 100,
+    }));
+    enemyTeam.value = enemies.map((u) => ({
+      name: u.name,
+      icon: iconOf(u.name),
+      hp: u.maxHp,
+      hpPct: 100,
+    }));
+    battleId.value = battle.id;
+    logs.value = [
+      `战斗开始！阶段：${battle.stageName || stageId}`,
+      `我方战力：${battle.power}，敌方战力：${battle.enemyPower}`,
+      '敌我双方已进入战斗位置',
+    ];
+    uni.hideLoading();
+  } catch (e) {
+    uni.hideLoading();
+    uni.showToast({ title: e.message || '开战失败', icon: 'none' });
+  }
+};
+
+onMounted(() => {
+  startBattle();
+});
+
+const onAuto = () => {
+  uni.showToast({ title: '自动战斗已开启', icon: 'none' });
+  // 自动跳转到结算页
+  setTimeout(() => onSkip(), 2000);
+};
 const onSkip = () => {
+  if (!battleId.value) {
+    uni.showToast({ title: '战斗数据未就绪', icon: 'none' });
+    return;
+  }
   uni.showLoading({ title: '计算结果中...' });
-  setTimeout(() => { uni.hideLoading(); uni.redirectTo({ url: '/pages/battle-result/battle-result' }); }, 1000);
+  uni.setStorageSync('battle_result_id', battleId.value);
+  setTimeout(() => {
+    uni.hideLoading();
+    uni.redirectTo({ url: '/pages/battle-result/battle-result' });
+  }, 1000);
 };
 </script>
 

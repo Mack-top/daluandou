@@ -35,20 +35,91 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref } from 'vue';
-const isVictory = ref(true);
-const mvp = { name: '冬阴功', icon: '🍲', damage: 12500, heal: 0 };
-const rewards = [
-  { icon: '📖', name: '食灵契约', amount: 5 },
-  { icon: '💰', name: '金币', amount: 300000 },
-  { icon: '⚡', name: '食灵精华', amount: 800 }
-];
+import { battleResult } from '@/utils/api.js';
+
+const CHAR_ICONS = { 青团: '🍡', '蓝纹奶酪': '🧀', '冬阴功': '🍲', 拉菲: '🍷', 咖喱: '🍛' };
+const iconOf = (name) => CHAR_ICONS[name] || '👤';
+
+const isVictory = ref(false);
+const mvp = ref({ name: '未知', icon: '👤', damage: 0, heal: 0 });
+const rewards = ref([]);
+const stageName = ref('');
+const rounds = ref(0);
+
+// 从后端结算战斗（替换模拟结果）
+const loadResult = async () => {
+  const id = uni.getStorageSync('battle_result_id');
+  if (!id) {
+    uni.showToast({ title: '未找到战斗记录', icon: 'none' });
+    setTimeout(() => uni.navigateBack(), 1500);
+    return;
+  }
+  try {
+    uni.showLoading({ title: '结算中...' });
+    const result = await battleResult({ battleId: id });
+    const battle = result.battle;
+    isVictory.value = battle.win === true;
+    stageName.value = battle.stageName || '未知关卡';
+    rounds.value = battle.rounds || 0;
+
+    // 奖励：后端返回的 rewards（含 exp、item、currency 等）
+    const rewardList = (result.rewards || []).map((r) => ({
+      icon: r.kind === 'exp' ? '✨' : r.kind === 'character' ? '📜' : r.kind === 'coin' ? '💰' : r.kind === 'gem' ? '💎' : r.kind === 'leaf' ? '⚡' : '📦',
+      name: r.label || r.kind,
+      amount: r.amount,
+    }));
+    rewards.value = rewardList;
+
+    // MVP：从回合中找出对敌方造成伤害最高的我方单位
+    const turns = battle.turns || [];
+    const damageMap = {};
+    const healMap = {};
+    for (const t of turns) {
+      if (t.kind === 'attack' || t.kind === 'skill') {
+        damageMap[t.actor] = (damageMap[t.actor] || 0) + t.amount;
+      } else if (t.kind === 'heal') {
+        healMap[t.actor] = (healMap[t.actor] || 0) + t.amount;
+      }
+    }
+    const myNames = (battle.units || [])
+      .filter((u) => u.side === 'ally')
+      .map((u) => u.name);
+    let bestName = myNames[0] || '未知';
+    let bestDmg = 0;
+    for (const name of myNames) {
+      const d = damageMap[name] || 0;
+      const h = healMap[name] || 0;
+      const total = d + h;
+      if (total > bestDmg) {
+        bestDmg = total;
+        bestName = name;
+      }
+    }
+    mvp.value = {
+      name: bestName,
+      icon: iconOf(bestName),
+      damage: damageMap[bestName] || 0,
+      heal: healMap[bestName] || 0,
+    };
+
+    uni.hideLoading();
+  } catch (e) {
+    uni.hideLoading();
+    uni.showToast({ title: e.message || '结算失败', icon: 'none' });
+  }
+};
+
+onMounted(() => {
+  loadResult();
+});
+
 const onBack = () => uni.navigateBack();
 const onAgain = () => {
-  uni.showToast({ title: '再次挑战开发中', icon: 'none' });
+  uni.redirectTo({ url: '/pages/battle-play/battle-play' });
 };
 </script>
 

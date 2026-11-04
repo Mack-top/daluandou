@@ -31,18 +31,40 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref } from 'vue';
-const oldLevel = ref(9);
-const newLevel = ref(10);
+import { getSave } from '@/utils/api.js';
+
+const oldLevel = ref(1);
+const newLevel = ref(1);
 const unlockFunc = ref('世界树功能已解锁');
-const levelRewards = [
+const levelRewards = ref([
   { icon: '📖', name: '食灵契约', amount: 10 },
   { icon: '💰', name: '金币', amount: 200000 },
   { icon: '⚡', name: '食灵精华', amount: 500 }
-];
+]);
+
+// 从后端存档获取经验与等级（替换模拟数据）
+const loadLevel = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const exp = save.expEarned || 0;
+    const level = Math.floor(exp / 1000) + 1;
+    newLevel.value = level;
+    oldLevel.value = Math.max(1, level - 1);
+    unlockFunc.value = level >= 2 ? '世界树功能已解锁' : '继续积累经验解锁更多功能';
+  } catch (e) {
+    console.warn('load level failed', e);
+  }
+};
+
+onMounted(() => {
+  loadLevel();
+});
+
 const onBack = () => uni.navigateBack();
 const onContinue = () => {
   uni.showToast({ title: '返回主城', icon: 'none' });

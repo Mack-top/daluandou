@@ -56,28 +56,44 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { onMounted } from 'vue';
+import { fetchAnnounce } from '@/utils/api.js';
 
-// 公告内容（与003图OCR识别内容一致，后续可替换为后端接口获取）
-const announceContent = [
+const announceContent = ref([
   '亲爱的命运之子：',
   '时空之门今日正式开启，欢迎来到灵界大陆！',
   '强大的食神，为何消失不见？封印的邪恶力量，为何重见天日？灵界大乱的背后，究竟隐藏了什么秘密？',
   '探寻神秘的灵界，揭示迷雾中的真相，穿越异世界的奇幻冒险之旅，已经正式起航！'
-];
+]);
 
-const rewardInfo = {
+const rewardInfo = ref({
   title: '【主线通关】',
   desc: '通关前期主线关卡，即可获得',
   name: '5星SSR群攻食灵：蓝色夏威夷·艾薇儿',
   detail: '助您在冒险之路上乘风破浪'
+});
+
+// 从后端 /catalog 获取公告（替换模拟数据）
+const loadNotice = async () => {
+  try {
+    const announcements = await fetchAnnounce();
+    if (announcements && announcements.length > 0) {
+      const latest = announcements[0];
+      announceContent.value = (latest.content || latest.body || '').split('\n').filter(Boolean) || announceContent.value;
+      if (latest.title) {
+        const titleEl = document.querySelector('.announce-title');
+        if (titleEl) titleEl.textContent = latest.title;
+      }
+    }
+  } catch (e) {
+    console.warn('load notice failed', e);
+  }
 };
 
 onMounted(() => {
-  // 页面加载时可在此获取后端公告列表
-  // uni.request({ url: '/api/announce/latest', ... })
+  loadNotice();
 });
 
 // 返回上一页

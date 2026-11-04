@@ -26,16 +26,43 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const sources = [
+import { listItems } from '@/utils/api.js';
+
+const sources = ref([
   { name: '主线副本', desc: '通关主线关卡获得大量资源', icon: '🗺️' },
   { name: '日常委托', desc: '完成每日任务获取基础资源', icon: '📋' },
   { name: '挂机收益', desc: '时光屋自动累积离线收益', icon: '⏳' },
   { name: '商店兑换', desc: '使用代币在集市兑换资源', icon: '🏪' },
   { name: '邮件附件', desc: '领取系统发送的奖励邮件', icon: '📬' }
-];
+]);
+
+// 从后端 /game/items 获取背包资源（替换模拟数据）
+const loadResources = async () => {
+  try {
+    const result = await listItems();
+    const items = result.items || [];
+    if (items.length > 0) {
+      // 将背包物品作为可获取资源展示在列表前
+      const itemSources = items.slice(0, 3).map((item) => ({
+        name: item.name || item.template_id || '未知资源',
+        desc: `背包拥有：${item.amount || item.count || 0}`,
+        icon: '📦',
+      }));
+      sources.value = [...itemSources, ...sources.value];
+    }
+  } catch (e) {
+    console.warn('load resources failed', e);
+  }
+};
+
+onMounted(() => {
+  loadResources();
+});
+
 const onBack = () => uni.navigateBack();
 const onGo = (s) => uni.showToast({ title: `前往${s.name}`, icon: 'none' });
 </script>

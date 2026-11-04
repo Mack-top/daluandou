@@ -36,23 +36,56 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref } from 'vue';
-const currentFloor = ref(12);
+import { getSave } from '@/utils/api.js';
+
+const currentFloor = ref(1);
 const totalFloors = ref(100);
-const progressPct = ref(12);
-const floors = [
-  { floor: 1, name: '新手试炼', desc: '基础怪物，适合新手', rewards: ['食灵契约 × 5', '金币 × 10000'], cleared: true, locked: false, current: false },
-  { floor: 5, name: '初级迷宫', desc: '少量精英怪物', rewards: ['食灵契约 × 10', '食灵精华 × 500'], cleared: true, locked: false, current: false },
-  { floor: 10, name: '中级迷宫', desc: '精英怪物与首领', rewards: ['食灵契约 × 20', '升星石 × 3'], cleared: true, locked: false, current: false },
-  { floor: 12, name: '高级迷宫', desc: '强力首领守卫', rewards: ['食灵契约 × 30', '史诗装备碎片 × 5'], cleared: false, locked: false, current: true },
+const progressPct = ref(0);
+const floors = ref([
+  { floor: 1, name: '新手试炼', desc: '基础怪物，适合新手', rewards: ['食灵契约 × 5', '金币 × 10000'], cleared: false, locked: false, current: true },
+  { floor: 5, name: '初级迷宫', desc: '少量精英怪物', rewards: ['食灵契约 × 10', '食灵精华 × 500'], cleared: false, locked: true, current: false },
+  { floor: 10, name: '中级迷宫', desc: '精英怪物与首领', rewards: ['食灵契约 × 20', '升星石 × 3'], cleared: false, locked: true, current: false },
   { floor: 15, name: '专家迷宫', desc: '顶级怪物，挑战极限', rewards: ['食灵契约 × 50', '5星食灵碎片 × 10'], cleared: false, locked: true, current: false }
-];
+]);
+
+// 从后端存档获取已通关关卡与战斗胜利数（替换模拟进度）
+const loadTower = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const firstClears = save.firstClears || [];
+    const battleWins = save.battleWins || 0;
+    const clearedCount = Math.min(firstClears.length, floors.value.length);
+    // 根据已通关数设置塔层状态
+    floors.value = floors.value.map((f, idx) => ({
+      ...f,
+      cleared: idx < clearedCount,
+      locked: idx > clearedCount,
+      current: idx === clearedCount,
+    }));
+    currentFloor.value = clearedCount + 1;
+    totalFloors.value = 100;
+    progressPct.value = Math.floor((clearedCount / floors.value.length) * 100);
+    // 战斗胜利数也反映进度
+    if (battleWins > clearedCount) {
+      progressPct.value = Math.min(100, Math.floor((battleWins / 10) * 100));
+    }
+  } catch (e) {
+    console.warn('load tower failed', e);
+  }
+};
+
+onMounted(() => {
+  loadTower();
+});
+
 const onBack = () => uni.navigateBack();
 const onFloor = (f) => {
   if (f.locked) { uni.showToast({ title: '塔层未解锁', icon: 'none' }); return; }
-    uni.showToast({ title: f.name, icon: 'none' });
+  uni.showToast({ title: f.name, icon: 'none' });
 };
 </script>
 
