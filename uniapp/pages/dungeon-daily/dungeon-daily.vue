@@ -29,16 +29,65 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const dungeons = [
-  { name: '经验副本', desc: '获得大量主角经验', icon: '📚', cost: 10, locked: false, cleared: false },
-  { name: '金币副本', desc: '获得大量金币', icon: '💰', cost: 10, locked: false, cleared: true },
-  { name: '食灵精华副本', desc: '获得食灵精华', icon: '⚡', cost: 15, locked: false, cleared: false },
-  { name: '升星石副本', desc: '获得升星石', icon: '💎', cost: 20, locked: true, cleared: false },
-  { name: '装备碎片副本', desc: '获得随机装备碎片', icon: '📦', cost: 20, locked: true, cleared: false }
-];
+import { getCatalog } from '@/utils/api.js';
+
+const dungeons = ref([]);
+
+// 副本图标映射（按章节/名称）
+const dungeonIcon = (name) => {
+  if (/经验|exp/i.test(name)) return '📚';
+  if (/金币|coin/i.test(name)) return '💰';
+  if (/精华|leaf/i.test(name)) return '⚡';
+  if (/升星|star/i.test(name)) return '💎';
+  if (/装备|equip/i.test(name)) return '📦';
+  return '⚔️';
+};
+
+// 从后端 catalog 获取副本列表（替换模拟数据）
+const loadDungeons = async () => {
+  try {
+    const result = await getCatalog();
+    const stages = result.stages || [];
+    dungeons.value = stages.map((s, idx) => {
+      const rewards = Array.isArray(s.rewards) ? s.rewards : [];
+      const rewardLabel = rewards.length > 0 ? `${rewards[0].label || '奖励'} × ${rewards[0].amount || 0}` : '';
+      return {
+        id: s.id,
+        name: s.name,
+        desc: `${s.chapter} · 建议战力 ${s.suggestedPower} ${rewardLabel}`.trim(),
+        icon: dungeonIcon(s.name),
+        cost: 10 + idx * 5,
+        locked: idx > 2,
+        cleared: idx === 0,
+      };
+    });
+    if (dungeons.value.length === 0) {
+      dungeons.value = [
+        { name: '经验副本', desc: '获得大量主角经验', icon: '📚', cost: 10, locked: false, cleared: false },
+        { name: '金币副本', desc: '获得大量金币', icon: '💰', cost: 10, locked: false, cleared: true },
+        { name: '食灵精华副本', desc: '获得食灵精华', icon: '⚡', cost: 15, locked: false, cleared: false },
+      ];
+    }
+  } catch (e) {
+    console.warn('load dungeons failed', e);
+    dungeons.value = [
+      { name: '经验副本', desc: '获得大量主角经验', icon: '📚', cost: 10, locked: false, cleared: false },
+      { name: '金币副本', desc: '获得大量金币', icon: '💰', cost: 10, locked: false, cleared: true },
+      { name: '食灵精华副本', desc: '获得食灵精华', icon: '⚡', cost: 15, locked: false, cleared: false },
+      { name: '升星石副本', desc: '获得升星石', icon: '💎', cost: 20, locked: true, cleared: false },
+      { name: '装备碎片副本', desc: '获得随机装备碎片', icon: '📦', cost: 20, locked: true, cleared: false },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadDungeons();
+});
+
 const onBack = () => uni.navigateBack();
 const onEnter = (d) => {
   if (d.locked) { uni.showToast({ title: '副本未解锁', icon: 'none' }); return; }

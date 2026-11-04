@@ -40,17 +40,43 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
+import { getSave } from '@/utils/api.js';
 
-const achievements = [
-  { name: '初出茅庐', desc: '通关主线第1章', icon: '🌱', points: 10, unlocked: true, claimed: false },
-  { name: '崭露头角', desc: '通关主线第3章', icon: '⭐', points: 20, unlocked: true, claimed: false },
-  { name: '召唤师', desc: '进行10次召唤', icon: '📜', points: 15, unlocked: true, claimed: true },
-  { name: '收藏家', desc: '收集5位食灵', icon: '📖', points: 25, unlocked: false, claimed: false },
-  { name: '主宰者', desc: '通关主线第10章', icon: '👑', points: 50, unlocked: false, claimed: false }
-];
+const achievements = ref([]);
+
+// 从后端存档推导成就状态（替换模拟数据）
+const loadAchievements = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const firstClears = Array.isArray(save.firstClears) ? save.firstClears : [];
+    const characters = Array.isArray(save.characters) ? save.characters : [];
+    const packsOpened = save.packsOpened || 0;
+    const battleWins = save.battleWins || 0;
+
+    const maxChapter = firstClears.length;
+
+    achievements.value = [
+      { name: '初出茅庐', desc: '通关主线第1章', icon: '🌱', points: 10, unlocked: maxChapter >= 1, claimed: false },
+      { name: '崭露头角', desc: '通关主线第3章', icon: '⭐', points: 20, unlocked: maxChapter >= 3, claimed: false },
+      { name: '召唤师', desc: '进行10次召唤', icon: '📜', points: 15, unlocked: packsOpened >= 10, claimed: false },
+      { name: '收藏家', desc: '收集5位食灵', icon: '📖', points: 25, unlocked: characters.length >= 5, claimed: false },
+      { name: '主宰者', desc: '通关主线第10章', icon: '👑', points: 50, unlocked: maxChapter >= 10, claimed: false },
+    ];
+  } catch (e) {
+    console.warn('load achievements failed', e);
+    achievements.value = [];
+  }
+};
+
+onMounted(() => {
+  loadAchievements();
+});
+
 const onBack = () => uni.navigateBack();
 const onClaim = (a) => {
   if (a.claimed) { uni.showToast({ title: '已领取', icon: 'none' }); return; }

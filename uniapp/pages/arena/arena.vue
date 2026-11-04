@@ -39,21 +39,55 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref } from 'vue';
+import { getLeaderboards } from '@/utils/api.js';
 
 const currentRank = ref('白银 I');
-const points = ref(1450);
-const challengeUsed = ref(2);
+const points = ref(0);
+const challengeUsed = ref(0);
 const challengeLimit = ref(5);
-const opponents = [
-  { name: '剑圣小助手', server: '美食17服', power: 125000 },
-  { name: '食神传说', server: '美食1服', power: 158000 },
-  { name: '深夜食堂', server: '美食2服', power: 98000 },
-  { name: '甜点魔法', server: '美食3服', power: 112000 },
-  { name: '灵界旅人', server: '美食5服', power: 134000 }
-];
+const opponents = ref([]);
+
+// 从后端获取排行榜（替换模拟对手列表）
+const loadLeaderboards = async () => {
+  try {
+    const result = await getLeaderboards();
+    const lbs = Array.isArray(result) ? result : (result.leaderboards || []);
+    // 取战力榜作为对手列表
+    const powerLb = lbs.find((l) => l.metric === 'power') || lbs[0];
+    const entries = Array.isArray(powerLb.entries) ? powerLb.entries : [];
+    opponents.value = entries.map((e, i) => ({
+      name: e.playerName || `玩家${i + 1}`,
+      server: `美食${e.serverId || 17}服`,
+      power: e.score || 100000,
+    }));
+    if (opponents.value.length === 0) {
+      opponents.value = [
+        { name: '剑圣小助手', server: '美食17服', power: 125000 },
+        { name: '食神传说', server: '美食1服', power: 158000 },
+        { name: '深夜食堂', server: '美食2服', power: 98000 },
+        { name: '甜点魔法', server: '美食3服', power: 112000 },
+        { name: '灵界旅人', server: '美食5服', power: 134000 }
+      ];
+    }
+  } catch (e) {
+    console.warn('load leaderboards failed', e);
+    opponents.value = [
+      { name: '剑圣小助手', server: '美食17服', power: 125000 },
+      { name: '食神传说', server: '美食1服', power: 158000 },
+      { name: '深夜食堂', server: '美食2服', power: 98000 },
+      { name: '甜点魔法', server: '美食3服', power: 112000 },
+      { name: '灵界旅人', server: '美食5服', power: 134000 }
+    ];
+  }
+};
+
+onMounted(() => {
+  loadLeaderboards();
+});
+
 const onBack = () => uni.navigateBack();
 const onChallenge = (o) => {
   if (challengeUsed.value >= challengeLimit) {

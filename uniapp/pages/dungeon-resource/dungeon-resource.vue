@@ -27,16 +27,65 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const resources = [
-  { name: '金币矿脉', desc: '掉落大量金币', icon: '💰', drops: '金币 × 大量' },
-  { name: '食灵精华矿', desc: '掉落食灵精华', icon: '⚡', drops: '食灵精华 × 中量' },
-  { name: '升星石矿', desc: '掉落升星石', icon: '💎', drops: '升星石 × 少量' },
-  { name: '装备碎片矿', desc: '掉落随机装备碎片', icon: '📦', drops: '装备碎片 × 随机' },
-  { name: '经验药水矿', desc: '掉落经验药水', icon: '🧪', drops: '经验药水 × 中量' }
-];
+import { getCatalog } from '@/utils/api.js';
+
+const resources = ref([]);
+
+// 资源副本图标映射（按掉落奖励类型）
+const resourceIcon = (rewards) => {
+  const kinds = rewards.map((r) => r.kind);
+  if (kinds.includes('coin')) return '💰';
+  if (kinds.includes('leaf')) return '⚡';
+  if (kinds.includes('gem')) return '💎';
+  if (kinds.includes('book')) return '📖';
+  if (kinds.includes('potion')) return '🧪';
+  return '📦';
+};
+
+// 从后端 catalog 获取资源副本列表（替换模拟数据）
+const loadResources = async () => {
+  try {
+    const result = await getCatalog();
+    const stages = result.stages || [];
+    resources.value = stages.map((s, idx) => {
+      const rewards = Array.isArray(s.rewards) ? s.rewards : [];
+      const drops = rewards.map((r) => `${r.label || '奖励'} × ${r.amount || 0}`).join('、') || '未知奖励';
+      return {
+        id: s.id,
+        name: s.name,
+        desc: `${s.chapter} · 建议战力 ${s.suggestedPower}`,
+        icon: resourceIcon(rewards),
+        drops,
+        cost: 10 + idx * 5,
+      };
+    });
+    if (resources.value.length === 0) {
+      resources.value = [
+        { name: '金币矿脉', desc: '第一章 · 建议战力 7000', icon: '💰', drops: '金币 × 10000' },
+        { name: '食灵精华矿', desc: '第一章 · 建议战力 16000', icon: '⚡', drops: '食灵精华 × 40' },
+        { name: '升星石矿', desc: '第二章 · 建议战力 28000', icon: '💎', drops: '升星石 × 少量' },
+      ];
+    }
+  } catch (e) {
+    console.warn('load resources failed', e);
+    resources.value = [
+      { name: '金币矿脉', desc: '掉落大量金币', icon: '💰', drops: '金币 × 大量' },
+      { name: '食灵精华矿', desc: '掉落食灵精华', icon: '⚡', drops: '食灵精华 × 中量' },
+      { name: '升星石矿', desc: '掉落升星石', icon: '💎', drops: '升星石 × 少量' },
+      { name: '装备碎片矿', desc: '掉落随机装备碎片', icon: '📦', drops: '装备碎片 × 随机' },
+      { name: '经验药水矿', desc: '掉落经验药水', icon: '🧪', drops: '经验药水 × 中量' },
+    ];
+  }
+};
+
+onMounted(() => {
+  loadResources();
+});
+
 const onBack = () => uni.navigateBack();
 const onEnter = (r) => uni.showToast({ title: `进入${r.name}`, icon: 'none' });
 </script>
