@@ -37,25 +37,48 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const quests = [
-  { name: '食灵召唤', desc: '今日召唤1次食灵', progress: '0/1', reward: '金币 × 50000', completed: false },
-  { name: '领取每日礼遇', desc: '在每日充值中领取任意档位奖励', progress: '0/1', reward: '灵晶 × 20', completed: false },
-  { name: '七日之约', desc: '今日领取1次登录赠礼', progress: '1/1', reward: '食灵精华 × 50', completed: true },
-  { name: '灶火不熄', desc: '今日取得2场战斗胜利', progress: '1/2', reward: '食灵精华 × 60', completed: false },
-  { name: '赶集的清晨', desc: '今日在集市兑换1次', progress: '0/1', reward: '食灵精华 × 80', completed: false }
-];
-const chests = [
+import { listQuests } from '@/utils/api.js';
+
+const quests = ref([]);
+const chests = ref([
   { threshold: 50, active: true, claimed: false },
   { threshold: 100, active: false, claimed: false },
   { threshold: 150, active: false, claimed: false },
   { threshold: 200, active: false, claimed: false }
-];
+]);
+
+// 从后端获取任务列表（替换模拟数据）
+const loadQuests = async () => {
+  try {
+    const result = await listQuests();
+    const list = Array.isArray(result) ? result : (result.quests || []);
+    quests.value = list.map((q) => ({
+      id: q.id,
+      name: q.name,
+      desc: q.detail || '',
+      progress: `${q.progress || 0}/${q.target || 1}`,
+      reward: q.rewards?.[0] ? `${q.rewards[0].label || ''} × ${q.rewards[0].amount || 0}` : '',
+      completed: !!q.claimed,
+      claimable: !!q.claimable,
+    }));
+  } catch (e) {
+    console.warn('load quests failed', e);
+    quests.value = [];
+  }
+};
+
+onMounted(() => {
+  loadQuests();
+});
+
 const onBack = () => uni.navigateBack();
 const onClaim = (q) => {
   if (q.completed) { uni.showToast({ title: '奖励已领取', icon: 'none' }); return; }
+  if (!q.claimable) { uni.showToast({ title: '任务尚未完成', icon: 'none' }); return; }
   uni.showToast({ title: '前往完成任务', icon: 'none' });
 };
 </script>

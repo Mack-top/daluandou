@@ -94,6 +94,7 @@ import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
+import { getSave } from '@/utils/api.js';
 import { getCharacterAvatar, getItemIcon, getStaticUrl } from '@/utils/resource.js';
 import { eventBus } from '@/utils/event-bus.js';
 
@@ -102,19 +103,19 @@ const store = useStore();
 // 页面参数（通过 navigateTo 传递）
 const characterId = ref('');
 const characterName = ref('主角');
-const characterLevel = ref(15);
-const heroPower = ref(67136);
+const characterLevel = ref(1);
+const heroPower = ref(0);
 const fromSummon = ref(false);
 const summonMessage = ref('');
 
 const pageTitle = computed(() => characterName.value || '主角');
 
-const attr = ref({ hp: 12500, atk: 3400, def: 1800, spd: 220 });
+const attr = ref({ hp: 0, atk: 0, def: 0, spd: 0 });
 
 const equipSlots = ref([
   { slot: '武器', item: null },
-  { slot: '头盔', item: { name: '星夜头饰', desc: '防御+50', icon: '👑', iconId: 'helmet_starlight' } },
-  { slot: '衣服', item: { name: '灵界法袍', desc: '生命+500', icon: '👕', iconId: 'robe_spirit' } },
+  { slot: '头盔', item: null },
+  { slot: '衣服', item: null },
   { slot: '饰品', item: null },
 ]);
 
@@ -137,6 +138,54 @@ const equipUpdateUnsubscribe = eventBus.on('equipment-updated', (data) => {
   uni.showToast({ title: `装备已更新：${data.name}`, icon: 'none' });
 });
 
+// 从后端存档映射玩家数据到页面
+const loadPlayerData = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const profile = save.profile || {};
+
+    // 角色名：优先用存档中的第一个角色，否则用 profile 名
+    const firstChar = Array.isArray(save.characters) && save.characters.length > 0
+      ? save.characters[0]
+      : (profile.name || '主角');
+    characterName.value = firstChar;
+    characterId.value = firstChar;
+
+    // 等级与战力（简化推导）
+    characterLevel.value = save.stars?.[firstChar] || 1;
+    heroPower.value = Math.floor((save.coins || 0) / 100) + (save.gems || 0) * 10 + (save.characters?.length || 0) * 5000;
+
+    // 属性面板（简化推导）
+    attr.value = {
+      hp: 10000 + (save.coins || 0) / 5,
+      atk: 2000 + (save.gems || 0) * 50,
+      def: 1000 + (save.books || 0) * 20,
+      spd: 200 + (save.leaves || 0),
+    };
+
+    // 装备栏：从 save.equipment 映射
+    const equipment = Array.isArray(save.equipment) ? save.equipment : [];
+    const slotNames = ['武器', '头盔', '衣服', '饰品'];
+    slotNames.forEach((slotName, i) => {
+      const equipItem = equipment.find((e) => e && e.slot === slotName);
+      if (equipItem) {
+        equipSlots.value[i] = {
+          slot: slotName,
+          item: {
+            name: equipItem.name || '未知装备',
+            desc: equipItem.desc || '',
+            icon: equipItem.icon,
+            iconId: equipItem.iconId,
+          },
+        };
+      }
+    });
+  } catch (e) {
+    console.warn('load hero player data failed', e);
+  }
+};
+
 onLoad((options) => {
   // 接收页面跳转参数
   if (options.characterId) {
@@ -158,6 +207,9 @@ onLoad((options) => {
     characterName.value = store.state.currentCharacter.name;
     characterId.value = store.state.currentCharacter.id;
   }
+
+  // 加载后端存档数据
+  loadPlayerData();
 });
 
 onUnmounted(() => {

@@ -63,15 +63,40 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import { getSave } from '@/utils/api.js';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
+
+const store = useStore();
 
 const playerName = ref('命运之子');
 const power = ref(0);
-const gems = ref(50000);
-const books = ref(100);
-const leaves = ref(300);
+const gems = ref(0);
+const books = ref(0);
+const leaves = ref(0);
 const showGuide = ref(true);
+
+// 从后端获取玩家存档数据（替换模拟资源）
+const loadPlayerData = async () => {
+  try {
+    const result = await getSave();
+    const save = result.save || result;
+    const profile = save.profile || {};
+    playerName.value = profile.name || '命运之子';
+    // 战力简化估算：基于角色数量与资源
+    power.value = (save.characters?.length || 0) * 10000 + Math.floor(save.coins / 1000);
+    gems.value = save.gems ?? 0;
+    books.value = save.books ?? 0;
+    leaves.value = save.leaves ?? 0;
+  } catch (e) {
+    console.warn('load player data failed', e);
+  }
+};
+
+onMounted(() => {
+  loadPlayerData();
+});
 const guideIndex = ref(0);
 const activeTab = ref('lobby');
 

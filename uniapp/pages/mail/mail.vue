@@ -34,20 +34,51 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-const mails = [
-  { title: '欢迎邮件', desc: '欢迎来到美食大乱斗，祝您游戏愉快！', icon: '📬', time: '2024-01-15 10:00', read: true, hasAttachment: false },
-  { title: '系统奖励', desc: '您获得了新手礼包奖励，请查收附件。', icon: '🎁', time: '2024-01-15 09:30', read: false, hasAttachment: true },
-  { title: '任务奖励', desc: '恭喜完成每日任务，奖励已发放。', icon: '✅', time: '2024-01-14 20:15', read: true, hasAttachment: false },
-  { title: '协会邀请', desc: '您收到了来自"美食之巅"协会的入会邀请。', icon: '🏛️', time: '2024-01-14 18:00', read: false, hasAttachment: false },
-  { title: '维护补偿', desc: '因服务器维护，向全服玩家发放补偿奖励。', icon: '🔧', time: '2024-01-13 14:00', read: false, hasAttachment: true }
-];
+import { listMail } from '@/utils/api.js';
+
+const mails = ref([]);
+
+// 邮件图标映射（按发件人/类型，资源到位后可替换为真实图片）
+const iconFor = (sender) => {
+  const s = (sender || '').toLowerCase();
+  if (s.includes('运营') || s.includes('维护')) return '🔧';
+  if (s.includes('协会') || s.includes('青团')) return '🏛️';
+  if (s.includes('竞技场') || s.includes('排行')) return '🏆';
+  return '📬';
+};
+
+// 从后端获取邮件列表（替换模拟数据）
+const loadMail = async () => {
+  try {
+    const result = await listMail();
+    const list = Array.isArray(result) ? result : (result.mails || []);
+    mails.value = list.map((m) => ({
+      id: m.id,
+      title: m.title,
+      desc: m.excerpt || '',
+      icon: iconFor(m.sender),
+      time: m.time,
+      read: !!m.read,
+      hasAttachment: !m.claimed && (m.rewards && m.rewards.length > 0),
+      rewards: m.rewards || [],
+    }));
+  } catch (e) {
+    console.warn('load mail failed', e);
+    mails.value = [];
+  }
+};
+
+onMounted(() => {
+  loadMail();
+});
+
 const onBack = () => uni.navigateBack();
 const onOpen = (m) => {
   if (!m.read) {
-    m.read = true;
     uni.showToast({ title: `查看${m.title}`, icon: 'none' });
   }
   if (m.hasAttachment) {

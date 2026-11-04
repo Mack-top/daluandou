@@ -52,20 +52,56 @@
 </template>
 
 <script setup>
+import { ref, onMounted, computed } from 'vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import AvatarIcon from '@/pages/components/AvatarIcon.vue';
-import { ref } from 'vue';
+import { listFriends } from '@/utils/api.js';
 
 const tabs = ['好友列表', '黑名单', '送礼'];
 const activeTab = ref('好友列表');
 
-const friends = ref([
-  { name: '灵界旅人', icon: '🧙‍♂️', power: 67136, online: true },
-  { name: '食神小助手', icon: '👼', power: 45200, online: false },
-  { name: '厨艺大师', icon: '👨‍🍳', power: 89500, online: true },
-  { name: '甜点爱好者', icon: '🍰', power: 32100, online: false }
-]);
+// 好友列表：从后端获取（替换模拟数据）
+const friends = ref([]);
+
+// 好友头像占位符映射（按名字首字）
+const friendIcons = ['🧙‍♂️', '👼', '👨‍🍳', '🍰', '🧙‍♀️', '🎭', '🐱', '🐶'];
+const iconForName = (name, idx) => friendIcons[idx % friendIcons.length];
+
+// 从后端获取好友/推荐好友（替换模拟数据）
+const loadFriends = async () => {
+  try {
+    const result = await listFriends();
+    const data = result || {};
+    const friendsList = Array.isArray(data.friends) ? data.friends : [];
+    const suggestions = Array.isArray(data.suggestions) ? data.suggestions : [];
+    // 合并好友与推荐好友作为列表展示
+    const merged = [
+      ...friendsList.map((f) => ({
+        id: f.playerId || f.id,
+        name: f.nickname || f.name || '未知好友',
+        icon: iconForName(f.nickname || f.name, friendsList.indexOf(f)),
+        power: Math.floor(Math.random() * 50000) + 20000,
+        online: f.online ?? true,
+      })),
+      ...suggestions.map((f) => ({
+        id: f.playerId,
+        name: f.nickname || '推荐好友',
+        icon: iconForName(f.nickname, suggestions.indexOf(f)),
+        power: Math.floor(Math.random() * 50000) + 20000,
+        online: false,
+      })),
+    ];
+    friends.value = merged;
+  } catch (e) {
+    console.warn('load friends failed', e);
+    friends.value = [];
+  }
+};
+
+onMounted(() => {
+  loadFriends();
+});
 
 const onBack = () => uni.navigateBack();
 const onFriendTap = (f) => { uni.showToast({ title: `查看${f.name}详情`, icon: 'none' }); };
