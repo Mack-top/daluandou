@@ -8,7 +8,9 @@
         <view class="section-title">开服限时活动</text>
         <view class="activity-list">
           <view v-for="(a, i) in activities" :key="i" class="activity-card" :class="{ended: a.ended}" @tap="onEnter(a)">
-            <view class="activity-icon">{{ a.icon }}</text>
+            <view class="activity-icon-wrapper">
+              <avatar-icon :placeholder-char="a.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="activity-info">
               <text class="activity-name">{{ a.name }}</text>
               <text class="activity-desc">{{ a.desc }}</text>
@@ -28,6 +30,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 const activities = [
   { name: '百抽献礼', desc: '累计召唤100抽，获5星SSR食灵', icon: '🎁', time: '剩余 6天 12小时', ended: false },
   { name: '主线通关奖励', desc: '通关主线2-4，获蓝色夏威夷·艾薇儿', icon: '🗺️', time: '剩余 6天 12小时', ended: false },
@@ -51,7 +54,7 @@ const onEnter = (a) => {
 .activity-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
 .activity-card.ended { opacity: 0.6; border-color: #2A293E; }
 .activity-card:active { background: rgba(255,255,255,0.08); }
-.activity-icon { font-size: 48rpx; flex-shrink: 0; }
+.activity-icon-wrapper { width: 48rpx; height: 48rpx; flex-shrink: 0; }
 .activity-info { flex: 1; margin: 0 24rpx; }
 .activity-name { font-size: 28rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 6rpx; }
 .activity-desc { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }

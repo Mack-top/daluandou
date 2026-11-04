@@ -11,13 +11,17 @@
         <view class="section-title">战斗结算</text>
         <view class="mvp-card">
           <text class="mvp-label">MVP</text>
-          <view class="mvp-avatar">{{ mvp.icon }}</text>
+          <view class="mvp-avatar-wrapper">
+            <avatar-icon :placeholder-char="mvp.icon" :size="'md'" :shape="'circle'" />
+          </view>
           <text class="mvp-name">{{ mvp.name }}</text>
           <text class="mvp-damage">伤害 {{ mvp.damage }} / 治疗 {{ mvp.heal }}</text>
         </view>
         <view class="reward-list">
           <view v-for="(r, i) in rewards" :key="i" class="reward-item">
-            <text class="reward-icon">{{ r.icon }}</text>
+            <view class="reward-icon-wrapper">
+              <avatar-icon :placeholder-char="r.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <text class="reward-name">{{ r.name }} × {{ r.amount }}</text>
           </view>
         </view>
@@ -33,6 +37,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 const isVictory = ref(true);
 const mvp = { name: '冬阴功', icon: '🍲', damage: 12500, heal: 0 };
@@ -57,12 +62,12 @@ const onAgain = () => {
 .section-title { font-size: 32rpx; color: #FFFFFF; font-weight: 700; margin-bottom: 24rpx; }
 .mvp-card { background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 24rpx; padding: 32rpx; text-align: center; margin-bottom: 30rpx; width: 640rpx; }
 .mvp-label { font-size: 24rpx; color: #E0D3A1; margin-bottom: 12rpx; display: block; }
-.mvp-avatar { font-size: 64rpx; margin-bottom: 10rpx; }
+.mvp-avatar-wrapper { width: 64rpx; height: 64rpx; flex-shrink: 0; margin-bottom: 10rpx; }
 .mvp-name { font-size: 30rpx; color: #FFFFFF; font-weight: 700; margin-bottom: 8rpx; }
 .mvp-damage { font-size: 24rpx; color: #B8B8C8; }
 .reward-list { display: flex; flex-direction: column; gap: 14rpx; width: 100%; max-width: 640rpx; margin-bottom: 40rpx; }
 .reward-item { display: flex; align-items: center; gap: 16rpx; font-size: 26rpx; color: #FFFFFF; }
-.reward-icon { font-size: 32rpx; flex-shrink: 0; }
+.reward-icon-wrapper { width: 32rpx; height: 32rpx; flex-shrink: 0; }
 .reward-name { color: #E0D3A1; font-weight: 600; }
 .action-section { width: 100%; display: flex; gap: 20rpx; }
 .btn-again, .btn-back {

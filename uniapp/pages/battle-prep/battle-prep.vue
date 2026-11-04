@@ -9,8 +9,12 @@
         <view class="team-grid">
           <view v-for="(s, i) in slots" :key="i" class="slot-card" @tap="onSelectSlot(i)">
             <view class="slot-pos">{{ s.pos }}</text>
-            <view v-if="s.member" class="slot-member">{{ s.member.icon }}</text>
-            <view v-else class="slot-empty">+</text>
+            <view v-if="s.member" class="slot-member-wrapper">
+              <avatar-icon :placeholder-char="s.member.icon" :size="'md'" :shape="'circle'" />
+            </view>
+            <view v-else class="slot-empty-wrapper">
+              <avatar-icon :placeholder-char="'+'" :size="'md'" :shape="'circle'" />
+            </view>
             <text class="slot-name">{{ s.member ? s.member.name : '空位' }}</text>
           </view>
         </view>
@@ -25,6 +29,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 const slots = ref([
   { pos: '1号位', member: { name: '青团', icon: '🍡' } },
@@ -50,8 +55,8 @@ const onStartBattle = () => {
 .slot-card { background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10rpx; }
 .slot-card:active { background: rgba(255,255,255,0.08); }
 .slot-pos { font-size: 22rpx; color: #8A8A9E; margin-bottom: 8rpx; }
-.slot-member { font-size: 48rpx; margin-bottom: 6rpx; }
-.slot-empty { font-size: 48rpx; color: #2A293E; }
+.slot-member-wrapper { width: 48rpx; height: 48rpx; flex-shrink: 0; margin-bottom: 6rpx; }
+.slot-empty-wrapper { width: 48rpx; height: 48rpx; flex-shrink: 0; margin-bottom: 6rpx; }
 .slot-name { font-size: 24rpx; color: #FFFFFF; }
 .action-section { text-align: center; }
 .btn-start { width: 600rpx; height: 96rpx; line-height: 96rpx; background: linear-gradient(135deg, #E0D3A1 0%, #C9B87E 100%); color: #0F0E1D; font-size: 34rpx; font-weight: 700; border-radius: 48rpx; box-shadow: 0 8rpx 24rpx rgba(224,211,161,0.3); }

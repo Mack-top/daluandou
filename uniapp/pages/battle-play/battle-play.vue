@@ -11,7 +11,9 @@
         <text class="side-label">我方</text>
         <view class="member-row">
           <view v-for="(m, i) in myTeam" :key="i" class="battle-member">
-            <text class="member-icon">{{ m.icon }}</text>
+            <view class="member-icon-wrapper">
+              <avatar-icon :placeholder-char="m.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="hp-bar"><view class="hp-fill" :style="{ width: m.hpPct + '%' }"></view></view>
             <text class="member-hp">{{ m.hp }}</text>
           </view>
@@ -22,7 +24,9 @@
         <text class="side-label">敌方</text>
         <view class="member-row">
           <view v-for="(m, i) in enemyTeam" :key="i" class="battle-member">
-            <text class="member-icon">{{ m.icon }}</text>
+            <view class="member-icon-wrapper">
+              <avatar-icon :placeholder-char="m.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="hp-bar"><view class="hp-fill" :style="{ width: m.hpPct + '%' }"></view></view>
             <text class="member-hp">{{ m.hp }}</text>
           </view>
@@ -47,6 +51,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 const myTeam = [
   { name: '青团', icon: '🍡', hp: 4500, hpPct: 90 },
@@ -79,7 +84,7 @@ const onSkip = () => {
 .side-label { font-size: 24rpx; color: #8A8A9E; margin-bottom: 16rpx; }
 .member-row { display: flex; gap: 30rpx; }
 .battle-member { display: flex; flex-direction: column; align-items: center; gap: 8rpx; }
-.member-icon { font-size: 56rpx; }
+.member-icon-wrapper { width: 56rpx; height: 56rpx; flex-shrink: 0; }
 .hp-bar { width: 120rpx; height: 10rpx; background: #2A293E; border-radius: 5rpx; overflow: hidden; }
 .hp-fill { height: 100%; background: #4CAF50; border-radius: 5rpx; transition: width 0.5s; }
 .member-hp { font-size: 20rpx; color: #B8B8C8; }

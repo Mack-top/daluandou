@@ -8,7 +8,9 @@
         <view class="section-title">限时活动</text>
         <view class="activity-list">
           <view v-for="(a, i) in activities" :key="i" class="activity-card" @tap="onEnter(a)">
-            <view class="activity-icon">{{ a.icon }}</text>
+            <view class="activity-icon-wrapper">
+              <avatar-icon :placeholder-char="a.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="activity-info">
               <text class="activity-name">{{ a.name }}</text>
               <text class="activity-desc">{{ a.desc }}</text>
@@ -25,6 +27,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 const activities = [
   { name: '开服庆典', desc: '百抽献礼与主线通关奖励', icon: '🎉', time: '剩余 3天 12小时', tag: '火热进行中' },
   { name: '七日之约', desc: '连续登录获取丰厚奖励', icon: '📅', time: '剩余 5天 4小时', tag: '火热进行中' },
@@ -50,7 +53,7 @@ const onEnter = (a) => {
 .activity-list { display: flex; flex-direction: column; gap: 16rpx; }
 .activity-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
 .activity-card:active { background: rgba(255,255,255,0.08); }
-.activity-icon { font-size: 48rpx; flex-shrink: 0; }
+.activity-icon-wrapper { width: 64rpx; height: 64rpx; flex-shrink: 0; }
 .activity-info { flex: 1; margin: 0 24rpx; }
 .activity-name { font-size: 28rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 6rpx; }
 .activity-desc { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }

@@ -41,7 +41,9 @@
               :class="{selected: selectedGender === g.value}"
               @tap="selectedGender = g.value"
             >
-              <view class="gender-icon">{{ g.icon }}</view>
+              <view class="gender-icon-wrapper">
+                <avatar-icon :placeholder-char="g.icon" :size="'md'" :shape="'circle'" />
+              </view>
               <text class="gender-label">{{ g.label }}</text>
             </view>
           </view>
@@ -60,11 +62,15 @@
             >
               <view class="avatar-wrap">
                 <view class="avatar-bg" :style="{backgroundColor: a.color}"></view>
-                <text class="avatar-icon">{{ a.icon }}</text>
+                <view class="avatar-icon-wrapper">
+                  <avatar-icon :placeholder-char="a.icon" :size="'md'" :shape="'circle'" />
+                </view>
               </view>
               <text class="avatar-name">{{ a.name }}</text>
               <text class="avatar-desc">{{ a.desc }}</text>
-              <view v-if="selectedAvatarId === a.id" class="avatar-check">✓</view>
+              <view v-if="selectedAvatarId === a.id" class="avatar-check-wrapper">
+                <avatar-icon :placeholder-char="'✓'" :size="'sm'" :shape="'circle'" />
+              </view>
             </view>
           </view>
         </view>
@@ -88,7 +94,8 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
-import { ref } from 'vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
+import { ref, computed } from 'vue';
 
 const playerName = ref('');
 const selectedGender = ref('male');
@@ -168,7 +175,7 @@ const onBack = () => {
   background: rgba(255,255,255,0.04); flex: 1;
 }
 .gender-item.selected { border-color: #E0D3A1; background: rgba(224,211,161,0.1); }
-.gender-icon { font-size: 48rpx; }
+.gender-icon-wrapper { width: 48rpx; height: 48rpx; flex-shrink: 0; }
 .gender-label { font-size: 28rpx; color: #FFFFFF; }
 .avatar-grid { display: flex; flex-wrap: wrap; gap: 24rpx; }
 .avatar-item {
@@ -179,10 +186,10 @@ const onBack = () => {
 .avatar-item.selected { border-color: #E0D3A1; background: rgba(224,211,161,0.1); }
 .avatar-wrap { width: 110rpx; height: 110rpx; border-radius: 55rpx; display: flex; align-items: center; justify-content: center; margin-bottom: 4rpx; }
 .avatar-bg { width: 100%; height: 100%; border-radius: 55rpx; display: flex; align-items: center; justify-content: center; font-size: 56rpx; }
-.avatar-icon { font-size: 56rpx; }
+.avatar-icon-wrapper { width: 56rpx; height: 56rpx; flex-shrink: 0; }
 .avatar-name { font-size: 28rpx; color: #FFFFFF; font-weight: 600; }
 .avatar-desc { font-size: 22rpx; color: #8A8A9E; }
-.avatar-check { position: absolute; top: 12rpx; right: 12rpx; font-size: 32rpx; color: #E0D3A1; font-weight: 700; }
+.avatar-check-wrapper { position: absolute; top: 12rpx; right: 12rpx; width: 32rpx; height: 32rpx; flex-shrink: 0; }
 .confirm-section { margin-top: 60rpx; }
 .btn-confirm {
   width: 600rpx; height: 96rpx; line-height: 96rpx;

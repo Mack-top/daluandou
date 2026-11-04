@@ -15,7 +15,9 @@
         <view class="section-title">灵晶礼包</text>
         <view class="product-list">
           <view v-for="(p, i) in products" :key="i" class="product-card" :class="{first: p.first}">
-            <view class="product-icon">💎</text>
+            <view class="product-icon-wrapper">
+              <avatar-icon placeholder-char="💎" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="product-info">
               <text class="product-name">{{ p.name }}</text>
               <text class="product-desc">{{ p.desc }}</text>
@@ -38,6 +40,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 const gems = ref(100);
 const products = [
@@ -66,7 +69,7 @@ const onBuy = (p) => uni.showToast({ title: `购买${p.name}`, icon: 'none' });
 .product-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
 .product-card.first { border-color: #E0D3A1; background: rgba(224,211,161,0.1); }
 .product-card:active { background: rgba(255,255,255,0.08); }
-.product-icon { font-size: 40rpx; flex-shrink: 0; }
+.product-icon-wrapper { width: 40rpx; height: 40rpx; flex-shrink: 0; }
 .product-info { flex: 1; margin: 0 24rpx; }
 .product-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 4rpx; }
 .product-desc { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }

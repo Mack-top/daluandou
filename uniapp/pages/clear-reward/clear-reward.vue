@@ -10,7 +10,9 @@
           <text class="result-desc">恭喜通关主线关卡，获得以下奖励</text>
           <view class="reward-list">
             <view v-for="(r, i) in rewards" :key="i" class="reward-item">
-              <text class="reward-icon">{{ r.icon }}</text>
+              <view class="reward-icon-wrapper">
+                <avatar-icon :placeholder-char="r.icon" :size="'md'" :shape="'circle'" />
+              </view>
               <text class="reward-name">{{ r.name }} × {{ r.amount }}</text>
             </view>
           </view>
@@ -26,6 +28,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 const rewards = [
   { icon: '📖', name: '食灵契约', amount: 10 },
   { icon: '💰', name: '金币', amount: 500000 },
@@ -47,7 +50,7 @@ const onClaim = () => {
 .result-desc { font-size: 26rpx; color: #B8B8C8; margin-bottom: 30rpx; }
 .reward-list { display: flex; flex-direction: column; gap: 16rpx; margin-bottom: 30rpx; }
 .reward-item { display: flex; align-items: center; gap: 16rpx; font-size: 26rpx; color: #FFFFFF; }
-.reward-icon { font-size: 32rpx; flex-shrink: 0; }
+.reward-icon-wrapper { width: 32rpx; height: 32rpx; flex-shrink: 0; }
 .reward-name { color: #E0D3A1; font-weight: 600; }
 .action-section { width: 100%; }
 .btn-claim { width: 600rpx; height: 96rpx; line-height: 96rpx; background: linear-gradient(135deg, #E0D3A1 0%, #C9B87E 100%); color: #0F0E1D; font-size: 34rpx; font-weight: 700; border-radius: 48rpx; box-shadow: 0 8rpx 24rpx rgba(224,211,161,0.3); }

@@ -8,7 +8,9 @@
         <view class="section-title">稀有商品</text>
         <view class="product-list">
           <view v-for="(p, i) in products" :key="i" class="product-card">
-            <view class="product-icon">{{ p.icon }}</text>
+            <view class="product-icon-wrapper">
+              <avatar-icon :placeholder-char="p.icon" :size="'md'" :shape="'square'" />
+            </view>
             <view class="product-info">
               <text class="product-name">{{ p.name }}</text>
               <text class="product-rarity">{{ p.rarity }}</text>
@@ -28,6 +30,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 const products = [
   { name: '食灵契约大礼包', rarity: '传说', desc: '必出 5 星食灵', icon: '📦', price: '灵晶 × 5000' },
   { name: '史诗装备宝箱', rarity: '史诗', desc: '开启获得随机史诗装备', icon: '📦', price: '灵晶 × 1200' },
@@ -46,7 +49,7 @@ const onBuy = (p) => uni.showToast({ title: `购买${p.name}`, icon: 'none' });
 .product-list { display: flex; flex-direction: column; gap: 16rpx; }
 .product-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
 .product-card:active { background: rgba(255,255,255,0.08); }
-.product-icon { font-size: 40rpx; flex-shrink: 0; }
+.product-icon-wrapper { width: 56rpx; height: 56rpx; flex-shrink: 0; }
 .product-info { flex: 1; margin: 0 24rpx; }
 .product-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 4rpx; }
 .product-rarity { font-size: 22rpx; color: #E0D3A1; font-weight: 600; margin-bottom: 6rpx; display: block; }

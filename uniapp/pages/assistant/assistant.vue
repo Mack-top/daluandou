@@ -21,8 +21,8 @@
             :class="{selected: selectedId === a.id, using: a.using}"
             @tap="() => onSelect(a)"
           >
-            <view class="assistant-avatar">
-              <text class="avatar-icon">{{ a.icon }}</text>
+            <view class="assistant-avatar-wrapper">
+              <avatar-icon :placeholder-char="a.icon" :size="'md'" :shape="'circle'" />
               <view v-if="a.using" class="using-badge">使用中</view>
             </view>
             <view class="assistant-info">
@@ -30,7 +30,9 @@
               <text class="assistant-desc">{{ a.desc }}</text>
             </view>
             <view class="assistant-action">
-              <view v-if="selectedId === a.id" class="check-mark">✓</view>
+              <view v-if="selectedId === a.id" class="check-mark-wrapper">
+                <avatar-icon :placeholder-char="'✓'" :size="'sm'" :shape="'circle'" />
+              </view>
               <base-button v-else class="btn-select" @tap.stop="onSelect(a)">选择</base-button>
             </view>
           </view>
@@ -55,6 +57,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 
 const selectedId = ref(null);
@@ -106,12 +109,12 @@ const onConfirm = () => {
 .assistant-card:active { background: rgba(255,255,255,0.08); }
 .assistant-card.selected { border-color: #E0D3A1; background: rgba(224,211,161,0.1); }
 .assistant-card.using { border-color: #4CAF50; background: rgba(76,175,80,0.08); }
-.assistant-avatar {
+.assistant-avatar-wrapper {
   position: relative; width: 90rpx; height: 90rpx; border-radius: 45rpx;
   background: #1A192E; border: 1rpx solid #2A293E;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.avatar-icon { font-size: 44rpx; }
+.check-mark-wrapper { width: 40rpx; height: 40rpx; flex-shrink: 0; }
 .using-badge {
   position: absolute; bottom: 4rpx; right: 4rpx;
   font-size: 18rpx; color: #0F0E1D; background: #4CAF50;

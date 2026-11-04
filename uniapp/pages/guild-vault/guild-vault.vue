@@ -1,3 +1,4 @@
+<!-- emoji-replaced -->
 <!-- componentized -->
 <template>
   <view class="page">
@@ -9,9 +10,15 @@
         <view class="vault-balance">
           <text class="balance-title">协会宝库余额</text>
           <view class="balance-row">
-            <text class="balance-item"><text class="balance-icon">💰</text><text class="balance-value">{{ vault.gold }}</text></text>
-            <text class="balance-item"><text class="balance-icon">📖</text><text class="balance-value">{{ vault.contract }}</text></text>
-            <text class="balance-item"><text class="balance-icon">⚡</text><text class="balance-value">{{ vault.essence }}</text></text>
+            <text class="balance-item"><view class="balance-icon-wrapper">
+  <avatar-icon placeholder-char="💰" :size="'md'" :shape="'circle'" />
+</view><text class="balance-value">{{ vault.gold }}</text></text>
+            <text class="balance-item"><view class="balance-icon-wrapper">
+  <avatar-icon placeholder-char="📖" :size="'md'" :shape="'circle'" />
+</view><text class="balance-value">{{ vault.contract }}</text></text>
+            <text class="balance-item"><view class="balance-icon-wrapper">
+  <avatar-icon placeholder-char="⚡" :size="'md'" :shape="'circle'" />
+</view><text class="balance-value">{{ vault.essence }}</text></text>
           </view>
         </view>
         <!-- 兑换商品 -->
@@ -35,6 +42,7 @@
 </template>
 
 <script setup>
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 const vault = { gold: 5200000, contract: 850, essence: 45000 };

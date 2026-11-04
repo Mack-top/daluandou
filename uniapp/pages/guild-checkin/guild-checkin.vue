@@ -1,3 +1,4 @@
+<!-- emoji-replaced -->
 <!-- componentized -->
 <template>
   <view class="page">
@@ -20,7 +21,9 @@
           <view v-for="(r, i) in rewards" :key="i" class="reward-card" :class="{claimed: i < claimedCount, today: i === streakDays}">
             <text class="reward-day">第{{ i + 1 }}天</text>
             <view class="reward-item">
-              <text class="reward-icon">{{ r.icon }}</text>
+              <view class="reward-icon-wrapper">
+  <avatar-icon :placeholder-char="r.icon" :size="'md'" :shape="'circle'" />
+</view>
               <text class="reward-name">{{ r.name }}</text>
             </view>
             <view v-if="i < claimedCount" class="reward-done">已领取</view>
@@ -32,6 +35,7 @@
 </template>
 
 <script setup>
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';

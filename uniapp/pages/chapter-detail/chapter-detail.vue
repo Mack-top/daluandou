@@ -22,7 +22,9 @@
             :key="i"
             class="reward-card"
           >
-            <text class="reward-icon">{{ r.icon }}</text>
+            <view class="reward-icon-wrapper">
+              <avatar-icon :placeholder-char="r.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <text class="reward-name">{{ r.name }}</text>
             <text class="reward-desc">{{ r.desc }}</text>
           </view>
@@ -41,6 +43,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 
 const currentChapter = ref({ name: '封印之地', desc: '古老封印沉睡之处，蕴含强大的食灵力量' });
@@ -76,7 +79,7 @@ const onGo = () => {
   background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E;
   border-radius: 20rpx; padding: 28rpx 20rpx; text-align: center;
 }
-.reward-icon { font-size: 44rpx; }
+.reward-icon-wrapper { width: 44rpx; height: 44rpx; flex-shrink: 0; }
 .reward-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; }
 .reward-desc { font-size: 22rpx; color: #8A8A9E; }
 .action-section { text-align: center; }

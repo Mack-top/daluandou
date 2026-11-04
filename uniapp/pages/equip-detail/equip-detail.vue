@@ -9,7 +9,9 @@
           <!-- 装备图标：美术资源接入，资源到位后自动显示真实图片 -->
           <view class="equip-icon-container">
             <image class="equip-icon" :src="getItemIcon(iconId)" mode="aspectFill" v-if="iconId" />
-            <view class="avatar-placeholder" v-if="!iconId">{{ equipIcon }}</view>
+            <view class="avatar-placeholder-wrapper" v-if="!iconId">
+              <avatar-icon :placeholder-char="equipIcon" :size="'md'" :shape="'circle'" />
+            </view>
           </view>
           <view class="equip-info">
             <text class="equip-name">{{ equipName }}</text>
@@ -43,6 +45,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref, onLoad, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 import { getItemIcon, getStaticUrl } from '@/utils/resource.js';
@@ -128,11 +131,10 @@ const onDecompose = () => uni.showToast({ title: '分解开发中', icon: 'none'
 .equip-icon {
   width: 100%; height: 100%; object-fit: cover; display: block;
 }
-.avatar-placeholder {
+.avatar-placeholder-wrapper {
   width: 100%; height: 100%; border-radius: 50rpx;
   background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
   display: flex; align-items: center; justify-content: center;
-  font-size: 56rpx; font-weight: 700; color: #E0D3A1;
 }
 .equip-info { flex: 1; }
 .equip-name { font-size: 34rpx; color: #E0D3A1; font-weight: 700; margin-bottom: 8rpx; }

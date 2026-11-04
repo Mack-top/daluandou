@@ -34,7 +34,7 @@
               <text class="stage-name">{{ s.name }}</text>
               <text class="stage-desc">{{ s.desc }}</text>
               <view class="stage-stars">
-                <text v-for="(star, j) in s.stars" :key="j" class="star">{{ star }}</text>
+                <avatar-icon v-for="(star, j) in s.stars" :key="j" :placeholder-char="star" :size="'xs'" :shape="'circle'" class="star-icon" />
               </view>
             </view>
             <view class="stage-action">
@@ -53,6 +53,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 
 const supplyEfficiency = ref(115);
@@ -118,8 +119,8 @@ const onStageTap = (s) => {
 .stage-name { font-size: 28rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 6rpx; }
 .stage-desc { font-size: 22rpx; color: #8A8A9E; margin-bottom: 10rpx; }
 .stage-stars { display: flex; gap: 6rpx; }
-.star { font-size: 22rpx; }
-.star:not(:first-child) { color: #2A293E; }
+.star-icon { width: 24rpx; height: 24rpx; flex-shrink: 0; }
+.star-icon:not(:first-child) { margin-left: 4rpx; }
 .stage-action { display: flex; align-items: center; gap: 12rpx; }
 .status-cleared { font-size: 24rpx; color: #4CAF50; font-weight: 600; }
 .status-locked { font-size: 24rpx; color: #8A8A9E; font-weight: 600; }

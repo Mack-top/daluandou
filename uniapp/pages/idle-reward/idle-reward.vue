@@ -1,3 +1,4 @@
+<!-- emoji-replaced -->
 <!-- componentized -->
 <template>
   <view class="page">
@@ -12,7 +13,9 @@
         </view>
         <view class="reward-list">
           <view v-for="(r, i) in rewards" :key="i" class="reward-item">
-            <text class="reward-icon">{{ r.icon }}</text>
+            <view class="reward-icon-wrapper">
+  <avatar-icon :placeholder-char="r.icon" :size="'md'" :shape="'circle'" />
+</view>
             <text class="reward-name">{{ r.name }} × {{ r.amount }}</text>
           </view>
         </view>
@@ -25,6 +28,7 @@
 </template>
 
 <script setup>
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';

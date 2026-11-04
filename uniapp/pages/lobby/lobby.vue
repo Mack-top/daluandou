@@ -7,9 +7,9 @@
         <text class="player-power">战力 {{ power }}</text>
       </view>
       <view class="res-bar">
-        <view class="res-item"><text class="res-icon">💎</text><text class="res-num">{{ gems }}</text></view>
-        <view class="res-item"><text class="res-icon">📖</text><text class="res-num">{{ books }}</text></view>
-        <view class="res-item"><text class="res-icon">🍂</text><text class="res-num">{{ leaves }}</text></view>
+        <view class="res-item"><avatar-icon placeholder-char="💎" :size="'sm'" :shape="'circle'" /><text class="res-num">{{ gems }}</text></view>
+        <view class="res-item"><avatar-icon placeholder-char="📖" :size="'sm'" :shape="'circle'" /><text class="res-num">{{ books }}</text></view>
+        <view class="res-item"><avatar-icon placeholder-char="🍂" :size="'sm'" :shape="'circle'" /><text class="res-num">{{ leaves }}</text></view>
       </view>
     </view>
 
@@ -30,7 +30,7 @@
         <!-- 左侧功能栏 -->
         <view class="rail left-rail">
           <view class="rail-item" v-for="item in leftItems" :key="item.id" @tap="onLeftTap(item)">
-            <text class="rail-icon">{{ item.icon }}</text>
+            <avatar-icon :placeholder-char="item.icon" :size="'md'" :shape="'circle'" />
             <text class="rail-label">{{ item.label }}</text>
           </view>
         </view>
@@ -38,7 +38,7 @@
         <!-- 右侧功能栏 -->
         <view class="rail right-rail">
           <view class="rail-item" v-for="item in rightItems" :key="item.id" @tap="onRightTap(item)">
-            <text class="rail-icon">{{ item.icon }}</text>
+            <avatar-icon :placeholder-char="item.icon" :size="'md'" :shape="'circle'" />
             <text class="rail-label">{{ item.label }}</text>
           </view>
         </view>
@@ -52,7 +52,7 @@
             :class="{active: activeTab === tab.id}"
             @tap="activeTab = tab.id"
           >
-            <text class="nav-icon">{{ tab.icon }}</text>
+            <avatar-icon :placeholder-char="tab.icon" :size="'md'" :shape="'circle'" />
             <text class="nav-label">{{ tab.label }}</text>
           </view>
         </view>
@@ -64,6 +64,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 
 const playerName = ref('命运之子');
 const power = ref(0);
@@ -139,7 +140,6 @@ const onRightTap = (item) => {
 .player-power { font-size: 24rpx; color: #E0D3A1; }
 .res-bar { display: flex; gap: 24rpx; }
 .res-item { display: flex; align-items: center; gap: 8rpx; background: rgba(255,255,255,0.06); padding: 6rpx 16rpx; border-radius: 20rpx; border: 1rpx solid #2A293E; }
-.res-icon { font-size: 26rpx; }
 .res-num { font-size: 26rpx; color: #FFFFFF; }
 .main-scroll { height: 100vh; padding-top: 100rpx; padding-bottom: 120rpx; box-sizing: border-box; }
 .main-content { padding: 0 32rpx; box-sizing: border-box; min-height: 100%; display: flex; flex-direction: column; gap: 30rpx; }
@@ -165,7 +165,6 @@ const onRightTap = (item) => {
   background: rgba(255,255,255,0.04);
 }
 .rail-item:active { background: rgba(255,255,255,0.08); }
-.rail-icon { font-size: 32rpx; }
 .rail-label { font-size: 20rpx; color: #B8B8C8; white-space: nowrap; }
 .bottom-nav {
   position: fixed; bottom: 0; left: 0; right: 0; height: 100rpx;

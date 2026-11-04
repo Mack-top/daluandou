@@ -8,7 +8,9 @@
         <view class="section-title">每日可挑战副本</text>
         <view class="dungeon-list">
           <view v-for="(d, i) in dungeons" :key="i" class="dungeon-card" :class="{locked: d.locked, cleared: d.cleared}" @tap="onEnter(d)">
-            <view class="dungeon-icon">{{ d.icon }}</text>
+            <view class="dungeon-icon-wrapper">
+              <avatar-icon :placeholder-char="d.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="dungeon-info">
               <text class="dungeon-name">{{ d.name }}</text>
               <text class="dungeon-desc">{{ d.desc }}</text>
@@ -29,6 +31,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 const dungeons = [
   { name: '经验副本', desc: '获得大量主角经验', icon: '📚', cost: 10, locked: false, cleared: false },
   { name: '金币副本', desc: '获得大量金币', icon: '💰', cost: 10, locked: false, cleared: true },
@@ -53,7 +56,7 @@ const onEnter = (d) => {
 .dungeon-card.locked { opacity: 0.6; border-color: #2A293E; }
 .dungeon-card.cleared { border-color: #4CAF50; background: rgba(76,175,80,0.08); opacity: 0.85; }
 .dungeon-card:active { background: rgba(255,255,255,0.08); }
-.dungeon-icon { font-size: 48rpx; flex-shrink: 0; }
+.dungeon-icon-wrapper { width: 48rpx; height: 48rpx; flex-shrink: 0; }
 .dungeon-info { flex: 1; margin: 0 24rpx; }
 .dungeon-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 6rpx; }
 .dungeon-desc { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }

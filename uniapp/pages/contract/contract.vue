@@ -28,7 +28,9 @@
         <view class="gift-card">
           <text class="gift-name">蓝纹奶酪</text>
           <text class="gift-rarity">5星SSR</text>
-          <view class="gift-avatar">🧀</view>
+          <view class="gift-avatar-wrapper">
+            <avatar-icon placeholder-char="🧀" :size="'md'" :shape="'circle'" />
+          </view>
           <text class="gift-desc">群攻爆发·官方力荐</text>
           <base-button class="gift-btn" @tap="onBuyFirstCharge">首充</base-button>
         </view>
@@ -58,6 +60,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref, computed } from 'vue';
 
 const countdown = ref('3天 12:04:20');
@@ -114,7 +117,7 @@ const onClaimDay = (d) => {
   background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E;
   border-radius: 24rpx; padding: 32rpx; margin-bottom: 20rpx;
 }
-.gift-avatar { font-size: 64rpx; }
+.gift-avatar-wrapper { width: 64rpx; height: 64rpx; flex-shrink: 0; }
 .gift-info { flex: 1; }
 .gift-name { font-size: 32rpx; color: #FFFFFF; font-weight: 700; }
 .gift-rarity { font-size: 26rpx; color: #E0D3A1; margin-top: 6rpx; }

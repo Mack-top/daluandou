@@ -1,3 +1,4 @@
+<!-- emoji-replaced -->
 <!-- componentized -->
 <template>
   <view class="page">
@@ -13,7 +14,9 @@
           <text class="gift-tag">萌新首充</text>
           <text class="gift-title">首充赠礼</text>
           <text class="gift-desc">蓝纹奶酪 / 三日礼遇</text>
-          <view class="gift-avatar">🧀</view>
+          <view class="gift-avatar-wrapper">
+  <avatar-icon placeholder-char="🧀" :size="'md'" :shape="'circle'" />
+</view>
           <text class="gift-char">蓝纹奶酪</text>
           <text class="gift-rarity">5星SSR · 水 · 法术</text>
           <view class="gift-rewards">
@@ -45,6 +48,7 @@
 </template>
 
 <script setup>
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 import { ref } from 'vue';

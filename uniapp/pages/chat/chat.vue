@@ -12,7 +12,9 @@
       <scroll-view class="msg-scroll" scroll-y="true" show-scrollbar="false">
         <view class="msg-list">
           <view v-for="(m, i) in messages" :key="i" class="msg-item" :class="{self: m.self, system: m.type === 'system'}">
-            <view class="msg-avatar">{{ m.icon }}</text>
+            <view class="msg-avatar-wrapper">
+              <avatar-icon :placeholder-char="m.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="msg-content">
               <text v-if="!m.self" class="msg-name">{{ m.name }}</text>
               <text class="msg-text">{{ m.text }}</text>
@@ -35,6 +37,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import { ref } from 'vue';
 const tabs = ['世界', '协会', '私聊'];
 const activeTab = ref(0);
@@ -63,7 +66,7 @@ const onSend = () => {
 .msg-item { display: flex; gap: 12rpx; align-items: flex-start; }
 .msg-item.self { flex-direction: row-reverse; }
 .msg-item.system { justify-content: center; }
-.msg-avatar { font-size: 36rpx; flex-shrink: 0; }
+.msg-avatar-wrapper { width: 36rpx; height: 36rpx; flex-shrink: 0; }
 .msg-content { max-width: 70%; }
 .msg-item.self .msg-content { text-align: right; }
 .msg-item.system .msg-content { text-align: center; }

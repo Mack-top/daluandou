@@ -8,13 +8,17 @@
         <view class="section-title">资源获取副本</text>
         <view class="resource-list">
           <view v-for="(r, i) in resources" :key="i" class="resource-card" @tap="onEnter(r)">
-            <view class="resource-icon">{{ r.icon }}</text>
+            <view class="resource-icon-wrapper">
+              <avatar-icon :placeholder-char="r.icon" :size="'md'" :shape="'circle'" />
+            </view>
             <view class="resource-info">
               <text class="resource-name">{{ r.name }}</text>
               <text class="resource-desc">{{ r.desc }}</text>
               <text class="resource-drops">{{ r.drops }}</text>
             </view>
-            <view class="resource-arrow">▶</view>
+            <view class="resource-arrow-wrapper">
+              <avatar-icon placeholder-char="▶" :size="'sm'" :shape="'circle'" />
+            </view>
           </view>
         </view>
       </view>
@@ -25,6 +29,7 @@
 <script setup>
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 const resources = [
   { name: '金币矿脉', desc: '掉落大量金币', icon: '💰', drops: '金币 × 大量' },
   { name: '食灵精华矿', desc: '掉落食灵精华', icon: '⚡', drops: '食灵精华 × 中量' },
@@ -44,10 +49,10 @@ const onEnter = (r) => uni.showToast({ title = `进入${r.name}`, icon: 'none' }
 .resource-list { display: flex; flex-direction: column; gap: 16rpx; }
 .resource-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1rpx solid #2A293E; border-radius: 20rpx; padding: 24rpx 32rpx; }
 .resource-card:active { background: rgba(255,255,255,0.08); }
-.resource-icon { font-size: 48rpx; flex-shrink: 0; }
+.resource-icon-wrapper { width: 48rpx; height: 48rpx; flex-shrink: 0; }
 .resource-info { flex: 1; margin: 0 24rpx; }
 .resource-name { font-size: 26rpx; color: #FFFFFF; font-weight: 600; margin-bottom: 6rpx; }
 .resource-desc { font-size: 22rpx; color: #8A8A9E; margin-bottom: 6rpx; }
 .resource-drops { font-size: 22rpx; color: #E0D3A1; font-weight: 600; }
-.resource-arrow { font-size: 24rpx; color: #E0D3A1; flex-shrink: 0; }
+.resource-arrow-wrapper { width: 24rpx; height: 24rpx; flex-shrink: 0; }
 </style>

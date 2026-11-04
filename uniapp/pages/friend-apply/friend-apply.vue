@@ -1,3 +1,4 @@
+<!-- emoji-replaced -->
 <!-- componentized -->
 <template>
   <view class="page">
@@ -21,7 +22,9 @@
           </view>
         </view>
         <view v-if="applies.length === 0" class="empty-state">
-          <text class="empty-icon">📭</text>
+          <view class="empty-icon-wrapper">
+  <avatar-icon placeholder-char="📭" :size="'md'" :shape="'circle'" />
+</view>
           <text class="empty-text">暂无好友申请</text>
         </view>
       </view>
@@ -30,6 +33,7 @@
 </template>
 
 <script setup>
+import AvatarIcon from '@/pages/components/AvatarIcon.vue';
 import CustomNavbar from '@/pages/components/CustomNavbar.vue';
 import BaseButton from '@/pages/components/BaseButton.vue';
 const applies = [
@@ -69,5 +73,7 @@ const onReject = (a) => {
 .btn-accept:active, .btn-reject:active { background: rgba(255,255,255,0.12); }
 .empty-state { display: flex; flex-direction: column; align-items: center; gap: 16rpx; margin-top: 100rpx; text-align: center; }
 .empty-icon { font-size: 64rpx; }
+..empty-icon-wrapper { width: 64rpx; height: 64rpx; flex-shrink: 0; }
+
 .empty-text { font-size: 28rpx; color: #8A8A9E; }
 </style>
