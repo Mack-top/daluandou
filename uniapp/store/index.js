@@ -10,6 +10,7 @@ import {
 
 const STORAGE_KEY = 'food_fantasy_user';
 const TOKEN_KEY = 'food_fantasy_token';
+const PAGE_COMM_KEY = 'food_fantasy_page_comm';
 
 const loadAuth = () => {
   try {
@@ -45,6 +46,12 @@ export default createStore({
     selectedServer: null,
     isLoggedIn: !!uni.getStorageSync(TOKEN_KEY),
     save: null,
+    // 页面间通信状态
+    currentCharacter: null,    // 当前选中的角色（用于页面间传递）
+    currentEquipment: null,    // 当前选中的装备
+    currentItem: null,         // 当前选中的物品
+    pageParams: {},            // 页面跳转参数缓存
+    commHistory: [],           // 页面间通信历史记录（调试用）
   },
   mutations: {
     SET_USER(state, user) {
@@ -82,6 +89,46 @@ export default createStore({
     },
     SET_SAVE(state, save) {
       state.save = save;
+    },
+    // 页面间通信 mutations
+    SET_CURRENT_CHARACTER(state, character) {
+      state.currentCharacter = character;
+      uni.setStorageSync(PAGE_COMM_KEY, JSON.stringify({
+        currentCharacter: state.currentCharacter,
+        currentEquipment: state.currentEquipment,
+        currentItem: state.currentItem,
+      }));
+    },
+    SET_CURRENT_EQUIPMENT(state, equipment) {
+      state.currentEquipment = equipment;
+      uni.setStorageSync(PAGE_COMM_KEY, JSON.stringify({
+        currentCharacter: state.currentCharacter,
+        currentEquipment: state.currentEquipment,
+        currentItem: state.currentItem,
+      }));
+    },
+    SET_CURRENT_ITEM(state, item) {
+      state.currentItem = item;
+      uni.setStorageSync(PAGE_COMM_KEY, JSON.stringify({
+        currentCharacter: state.currentCharacter,
+        currentEquipment: state.currentEquipment,
+        currentItem: state.currentItem,
+      }));
+    },
+    SET_PAGE_PARAMS(state, { page, params }) {
+      state.pageParams[page] = params;
+    },
+    CLEAR_PAGE_PARAMS(state, page) {
+      delete state.pageParams[page];
+    },
+    ADD_COMM_HISTORY(state, record) {
+      state.commHistory.unshift({
+        ...record,
+        timestamp: new Date().toISOString(),
+      });
+      if (state.commHistory.length > 50) {
+        state.commHistory.pop();
+      }
     },
   },
   actions: {
@@ -171,6 +218,53 @@ export default createStore({
       const result = await getSave();
       commit('SET_SAVE', result.save || result);
       return result;
+    },
+
+    // 页面间通信 actions
+    // 设置当前选中角色（供其他页面读取，如装备详情、角色详情）
+    async setCurrentCharacter({ commit }, character) {
+      commit('SET_CURRENT_CHARACTER', character);
+      commit('ADD_COMM_HISTORY', {
+        type: 'setCurrentCharacter',
+        data: character,
+      });
+    },
+    // 设置当前选中装备
+    async setCurrentEquipment({ commit }, equipment) {
+      commit('SET_CURRENT_EQUIPMENT', equipment);
+      commit('ADD_COMM_HISTORY', {
+        type: 'setCurrentEquipment',
+        data: equipment,
+      });
+    },
+    // 设置当前选中物品
+    async setCurrentItem({ commit }, item) {
+      commit('SET_CURRENT_ITEM', item);
+      commit('ADD_COMM_HISTORY', {
+        type: 'setCurrentItem',
+        data: item,
+      });
+    },
+    // 清除页面间通信状态
+    async clearPageComm({ commit }) {
+      commit('SET_CURRENT_CHARACTER', null);
+      commit('SET_CURRENT_EQUIPMENT', null);
+      commit('SET_CURRENT_ITEM', null);
+      uni.removeStorageSync(PAGE_COMM_KEY);
+    },
+    // 恢复页面间通信状态（页面 onLoad 时调用）
+    async restorePageComm({ commit }) {
+      try {
+        const raw = uni.getStorageSync(PAGE_COMM_KEY);
+        if (raw) {
+          const data = JSON.parse(raw);
+          if (data.currentCharacter) commit('SET_CURRENT_CHARACTER', data.currentCharacter);
+          if (data.currentEquipment) commit('SET_CURRENT_EQUIPMENT', data.currentEquipment);
+          if (data.currentItem) commit('SET_CURRENT_ITEM', data.currentItem);
+        }
+      } catch (e) {
+        console.warn('restore page comm failed', e);
+      }
     },
   },
   getters: {
